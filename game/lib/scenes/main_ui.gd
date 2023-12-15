@@ -1,6 +1,7 @@
 class_name MainUI extends Control
 
 @export var player:Player
+@export var camera_pivot:IsometricCameraPivot
 
 @onready var label_saving:Label = $LabelSaving
 @onready var time_saving:Timer = $LabelSaving/Timer
@@ -16,9 +17,12 @@ class_name MainUI extends Control
 @onready var panel_item = $HUD/PanelTool
 @onready var panel_oxygen = $HUD/Oxygen
 @onready var value_oxygen = $HUD/Oxygen
+@onready var compass = $HUD/Compass
 @onready var menu = $Menu
 @onready var hud = $HUD
 @onready var blur = $Blur
+
+const compass_rotation = [ 0.0, -90.0, -180.0, -270.0 ]
 
 var _displayed_node:Node
 var _restart_timer_notif:bool = false
@@ -36,11 +40,13 @@ func _ready():
 	panel_oxygen.visible = false
 	GameState.connect("saving_start", _on_saving_start)
 	GameState.connect("saving_end", _on_saving_end)
+	camera_pivot.camera.connect("view_rotate", _on_camera_view_rotate)
 	player.interactions.connect("display_info", _on_display_info)
 	player.interactions.connect("hide_info", hide_info)
 	#player.connect("update_oxygen", update_oxygen)
 	Input.connect("joy_connection_changed", _on_joypad_connection_changed)
 	set_shortcuts()
+	_on_camera_view_rotate(GameState.camera.view)
 
 func set_shortcuts():
 	panel_item.set_shortcuts()
@@ -66,6 +72,9 @@ func _input(event):
 			inventory_open()
 		elif  Input.is_action_just_released("unuse"):
 			GameState.item_unuse()
+
+func _on_camera_view_rotate(view:int):
+	compass.rotation_degrees = compass_rotation[view]
 
 func pause_game():
 	if (not timer_notif.is_stopped()):
@@ -95,7 +104,7 @@ func menu_close(_dummy=null):
 func npc_talk(_char:InteractiveCharacter, phrase:String, answers:Array):
 	if (_talk_screen != null and _talk_screen.trading): return
 	if (_talk_screen == null):
-		_talk_screen = Tools.load_screen(self, Tools.SCREEN_NPC_TALK)
+		_talk_screen = Tools.load_dialog(self, Tools.SCREEN_NPC_TALK)
 		_talk_screen.open(_char)
 	_talk_screen.talk(phrase, answers)
 
@@ -107,7 +116,7 @@ func npc_end_talk():
 func npc_trade(_char:InteractiveCharacter):
 	if (_talk_screen.trading): return
 	_talk_screen.trading = true
-	_trade_screen = Tools.load_screen(self, Tools.SCREEN_NPC_TRADE)
+	_trade_screen = Tools.load_dialog(self, Tools.SCREEN_NPC_TRADE)
 	_trade_screen.open(_char, npc_trade_end)
 
 func npc_trade_end():
@@ -119,7 +128,7 @@ func storage_open(node:Storage, on_storage_close:Callable):
 	dlg.open(node, on_storage_close)
 
 func inventory_open():
-	var dlg = Tools.load_screen(self, Tools.SCREEN_INVENTORY, menu_close)
+	var dlg = Tools.load_dialog(self, Tools.SCREEN_INVENTORY, menu_close)
 	dlg.open()
 
 func load_savegame_open():
@@ -135,8 +144,7 @@ func savegame_open():
 	dlg.open("Save game", StateSaver.get_last_savegame(), _on_savegame_input)
 
 func display_keymaps():
-	var dlg = Tools.load_screen(self, Tools.SCREEN_CONTROLLER, menu_close)
-	dlg.open()
+	Tools.load_dialog(self, Tools.DIALOG_CONTROLLER, menu_close).open()
 
 func display_notification(message:String):
 	timer_notif.stop()

@@ -378,7 +378,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.0444002, 2)
 mesh = SubResource("ArrayMesh_pffuo")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="House4_Flooor_out"]
+[node name="StaticBody3D" type="StaticBody3D" parent="House4_Flooor_out" groups=["stairs"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="House4_Flooor_out/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_5b8ig")
@@ -398,13 +398,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.0444002, 2)
 mesh = SubResource("ArrayMesh_vjge0")
 skeleton = NodePath("")
 
-[node name="House4_Roof" type="MeshInstance3D" parent="." groups=["roof"]]
+[node name="House4_Roof" type="MeshInstance3D" parent="." groups=["96YC6"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 7, -1)
+visible = false
 mesh = SubResource("ArrayMesh_2hisl")
 skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="House4_Roof"]
 collision_layer = 2
+collision_mask = 0
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="House4_Roof/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -6.9556, 3)
@@ -421,12 +423,12 @@ shape = SubResource("ConcavePolygonShape3D_5hdi2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -6.9556, 3)
 shape = SubResource("ConcavePolygonShape3D_34wig")
 
-[node name="House4_Wall" type="MeshInstance3D" parent="."]
+[node name="House4_Wall" type="MeshInstance3D" parent="." groups=["96YC6"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.0444002, 2)
 mesh = SubResource("ArrayMesh_1wole")
 skeleton = NodePath("")
 
-[node name="House4_Wall_in" type="MeshInstance3D" parent="."]
+[node name="House4_Wall_in" type="MeshInstance3D" parent="." groups=["96YC6"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.0444002, 2)
 mesh = SubResource("ArrayMesh_fsl6g")
 skeleton = NodePath("")

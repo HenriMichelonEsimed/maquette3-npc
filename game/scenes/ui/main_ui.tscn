@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b873fs2lbtp6t"]
+[gd_scene load_steps=16 format=3 uid="uid://b873fs2lbtp6t"]
 
 [ext_resource type="Script" path="res://lib/scenes/main_ui.gd" id="1_ghhs3"]
 [ext_resource type="FontFile" uid="uid://cave61j52xeuh" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="1_ni5mw"]
@@ -10,6 +10,7 @@
 [ext_resource type="StyleBox" uid="uid://37edqfqkfson" path="res://assets/styles/notif_label.tres" id="7_esqke"]
 [ext_resource type="StyleBox" uid="uid://dkldklw6dth8q" path="res://assets/styles/menu_button_hover.tres" id="8_5gish"]
 [ext_resource type="PackedScene" uid="uid://r3fibn5pmeaq" path="res://scenes/ui/tool_panel.tscn" id="8_qxtma"]
+[ext_resource type="Texture2D" uid="uid://cchdrpgcvbdw2" path="res://assets/textures/compass.png" id="9_sflov"]
 [ext_resource type="Texture2D" uid="uid://cw8xc1ad8lbdr" path="res://assets/textures/controllers/buttons/keyboard/menu.png" id="10_pjl1y"]
 [ext_resource type="Texture2D" uid="uid://d38v6t3jpc62s" path="res://assets/textures/white.png" id="12_qnr10"]
 
@@ -199,6 +200,19 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("2_ur2r2")
 icon_name = "lungs"
+
+[node name="Compass" type="TextureRect" parent="HUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -107.0
+offset_bottom = 106.0
+grow_horizontal = 0
+pivot_offset = Vector2(53, 53)
+texture = ExtResource("9_sflov")
+expand_mode = 2
+stretch_mode = 4
 
 [node name="MenuClose" type="TextureRect" parent="."]
 process_mode = 4

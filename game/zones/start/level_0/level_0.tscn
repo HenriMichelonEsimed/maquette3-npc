@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://0326gqgjjtkv"]
+[gd_scene load_steps=12 format=3 uid="uid://0326gqgjjtkv"]
 
 [ext_resource type="Script" path="res://lib/nodes/zone.gd" id="1_3tay3"]
 [ext_resource type="Terrain3DStorage" uid="uid://cnsgaqun838mp" path="res://zones/start/level_0/terrain_3d_storage.tres" id="1_30e3t"]
@@ -6,6 +6,8 @@
 [ext_resource type="Terrain3DTextureList" uid="uid://cj1kghcesgolx" path="res://assets/textures/terrain/grass_1.tres" id="3_hkils"]
 [ext_resource type="Script" path="res://lib/nodes/spawn_point.gd" id="4_t10wc"]
 [ext_resource type="PackedScene" uid="uid://8exssb37mmo0" path="res://models/houses/house_4.tscn" id="6_mymwc"]
+[ext_resource type="PackedScene" uid="uid://cj08ptyc2qkgf" path="res://models/props/props_table_square_6.tscn" id="7_7wiix"]
+[ext_resource type="PackedScene" uid="uid://bg0r0oavteps7" path="res://models/props/props_bench_3.tscn" id="8_ae1di"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_amooi"]
 sky_horizon_color = Color(0.629583, 0.6635, 0.649265, 1)
@@ -40,4 +42,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 520.394, 0, 551.296)
 script = ExtResource("4_t10wc")
 
 [node name="House_4" parent="." instance=ExtResource("6_mymwc")]
-transform = Transform3D(0.158382, 0, -0.987378, 0, 1, 0, 0.987378, 0, 0.158382, 534.128, -0.05, 519.121)
+transform = Transform3D(0.158382, 0, -0.987378, 0, 1, 0, 0.987378, 0, 0.158382, 534.128, 0, 519.121)
+
+[node name="Props_Table_Square_6" parent="House_4" instance=ExtResource("7_7wiix")]
+transform = Transform3D(0.999999, 0, 1.49012e-08, 0, 1, 0, -1.49012e-08, 0, 0.999999, 1.18359, 0, -1.31555)
+
+[node name="Props_Bench_3" parent="House_4" instance=ExtResource("8_ae1di")]
+transform = Transform3D(0.992271, 0, 0.124086, 0, 1, 0, -0.124086, 0, 0.992271, 1.1283, 0, -0.308197)
+
+[node name="Props_Bench_4" parent="House_4" instance=ExtResource("8_ae1di")]
+transform = Transform3D(0.999796, 0, -0.0201571, 0, 1, 0, 0.0201571, 0, 0.999796, 1.04828, 0, -2.35141)

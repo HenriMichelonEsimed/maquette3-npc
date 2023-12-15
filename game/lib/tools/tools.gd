@@ -8,10 +8,10 @@ const DIALOG_INPUT = "input"
 const DIALOG_CONFIRM = "confirm"
 const DIALOG_ALERT = "alert"
 const DIALOG_PLAYER_SETUP = "player_setup"
+const DIALOG_CONTROLLER = "controller"
 
 const SCREEN_INVENTORY = "inventory"
 const SCREEN_TERMINAL = "terminal"
-const SCREEN_CONTROLLER = "controller"
 const SCREEN_GAMEOVER = "gameover"
 const SCREEN_NPC_TALK = "talk"
 const SCREEN_NPC_TRADE = "trade"
@@ -70,13 +70,6 @@ static func preload_zone_status(zone_name:String) -> ResourceLoader.ThreadLoadSt
 
 static func load_dialog(parent:Node, dialog:String, on_close = null) -> Dialog:
 	var scene = load("res://scenes/ui/" + dialog + "_dialog.tscn").instantiate()
-	parent.add_child(scene)
-	if (on_close != null): 
-		scene._on_close = on_close
-	return scene
-
-static func load_screen(parent:Node, screen:String, on_close = null) -> Dialog:
-	var scene = load("res://scenes/ui/" + screen + "_screen.tscn").instantiate()
 	parent.add_child(scene)
 	if (on_close != null): 
 		scene._on_close = on_close

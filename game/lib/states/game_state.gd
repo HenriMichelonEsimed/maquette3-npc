@@ -9,6 +9,7 @@ var player_state:PlayerState
 var inventory:ItemsCollection
 var settings:SettingsState
 var quests:QuestsManager
+var camera:CameraState
 
 var player:Player
 var ui:MainUI
@@ -24,12 +25,15 @@ var oxygen:float = 100.0
 func _ready():
 	_on_joypad_connection_changed(0, 0)
 	Input.connect("joy_connection_changed", _on_joypad_connection_changed)
+	GameState.prepare_game(true)
+	GameState.load_game()
 
 func new_game():
 	player_state = PlayerState.new()
 	inventory = ItemsCollection.new()
 	settings = SettingsState.new()
 	quests = QuestsManager.new()
+	camera = CameraState.new()
 	StateSaver.reset_path()
 	var os_lang = OS.get_locale_language()
 	for lang in Settings.langs:
@@ -54,6 +58,7 @@ func save_game(savegame = null):
 	else:
 		player_state.current_item_type = Item.ItemType.ITEM_UNKNOWN
 	StateSaver.saveState(player_state)
+	StateSaver.saveState(camera)
 	StateSaver.saveState(InventoryState.new(inventory))
 	StateSaver.saveState(settings)
 	StateSaver.saveState(QuestsState.new(quests))
@@ -65,6 +70,7 @@ func load_game(savegame = null):
 	loading_start.emit()
 	StateSaver.set_path(savegame)
 	StateSaver.loadState(player_state)
+	StateSaver.loadState(camera)
 	if (player_state.current_item_type != Item.ItemType.ITEM_UNKNOWN):
 		current_item = Tools.load_item(player_state.current_item_type, player_state.current_item_key)
 	StateSaver.loadState(InventoryState.new(inventory))

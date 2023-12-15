@@ -11,8 +11,6 @@ var _previous_zone:Zone
 var _last_spawnpoint:String
 
 func _ready():
-	GameState.prepare_game(true)
-	GameState.load_game()
 	GameState.player = player
 	GameState.ui = ui
 	NotificationManager.connect("new_notification", GameState.ui.display_notification)
@@ -77,10 +75,6 @@ func _spawn_player(spawnpoint_key:String):
 			break
 	_last_spawnpoint = spawnpoint_key
 
-func _on_new_message():
-	ui.on_message()
-	NotificationManager.notif("You have unread messages !")
-
 func _on_storage_open(node:Storage):
 	GameState.ui.storage_open(node, _on_storage_close)
 
@@ -100,33 +94,3 @@ func _on_usable_unlock(success:bool):
 #		GameState.pause_game()
 #		Tools.load_screen(self, Tools.SCREEN_GAMEOVER).open()
 
-var last_collider = null
-var last_collider_mesh = []
-@onready var rayCast = $CameraPivot/Camera/RayCast
-func _process(delta):
-	rayCast.force_raycast_update()
-	if (rayCast.is_colliding()):
-		var collider:Node3D = rayCast.get_collider().get_parent()
-		_reset_camera_collider()
-		if (collider != null) and collider.is_in_group("roof") and (last_collider != collider):
-			_set_camera_collider(collider)
-			last_collider = collider
-
-func _set_camera_collider(collider):
-	var child_mesh = collider
-	var mesh = child_mesh.mesh
-	for i in range(0, mesh.get_surface_count()):
-		var mat = mesh.surface_get_material(i).duplicate(0)
-		if (mat is StandardMaterial3D):
-			mat.albedo_color.a = 0.5
-			mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-			child_mesh.set_surface_override_material(i, mat)
-			last_collider_mesh.push_back(child_mesh)
-
-func _reset_camera_collider():
-	if (last_collider != null):
-		for mesh in last_collider_mesh:
-			for i in range(0, mesh.mesh.get_surface_count()):
-				mesh.set_surface_override_material(i, null)
-		last_collider = null
-		last_collider_mesh.clear()

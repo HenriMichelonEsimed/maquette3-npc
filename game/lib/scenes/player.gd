@@ -3,8 +3,7 @@ class_name Player extends CharacterBody3D
 signal start_moving()
 signal stop_moving()
 
-@export var camera:IsometricCamera
-@export var view_pivot:Node3D
+@export var camera_pivot:Node3D
 
 @onready var interactions = $Interactions
 
@@ -13,6 +12,7 @@ const running_speed:float = 14.0
 const walking_jump_impulse:float = 20.0
 
 var anim:AnimationPlayer
+var camera:IsometricCamera
 
 # for move_and_slide()
 var speed:float = 0.0
@@ -36,6 +36,8 @@ const directions = {
 
 func _ready():
 	anim = $Character.get_node("AnimationPlayer")
+	camera = camera_pivot.get_node("Camera")
+	camera.connect("view_rotate", _on_view_rotate)
 	
 func _process(_delta):
 	if Input.is_action_pressed("player_moveto"):
@@ -69,7 +71,7 @@ func _physics_process(delta):
 					var collision = get_slide_collision(index)
 					var collider = collision.get_collider()
 					if collider.is_in_group("stairs"):
-						velocity.y = 8
+						velocity.y = 5
 			elif not on_floor:
 				velocity.y = velocity.y - (fall_acceleration * 2 * delta)
 			move_to_previous_position = position
@@ -79,8 +81,8 @@ func _physics_process(delta):
 				return
 			if !anim.is_playing():
 				anim.play()
-			view_pivot.position = position
-			view_pivot.position.y += 1.5
+			camera_pivot.position = position
+			camera_pivot.position.y += 1.5
 			return
 		
 	var no_jump = false
@@ -116,7 +118,7 @@ func _physics_process(delta):
 			if collider == null:
 				continue
 			if collider.is_in_group("stairs"):
-				target_velocity.y = 8
+				target_velocity.y = 5
 				no_jump = true
 			elif collider.is_in_group("ladders") and Input.is_action_pressed("player_jump"):
 				target_velocity.y = 12
@@ -137,8 +139,8 @@ func _physics_process(delta):
 	velocity = target_velocity
 	move_and_slide()
 	if direction != Vector3.ZERO:
-		view_pivot.position = position
-		view_pivot.position.y += 1.5
+		camera_pivot.position = position
+		camera_pivot.position.y += 1.5
 		if (!signaled) :
 			start_moving.emit()
 			signaled = true
@@ -149,6 +151,7 @@ func move(pos:Vector3, rot:Vector3):
 
 func move_to(target:Vector2):
 	var ray_query = PhysicsRayQueryParameters3D.new()
+	ray_query.collision_mask = 0x1
 	ray_query.from = camera.project_ray_origin(target)
 	ray_query.to = ray_query.from + camera.project_ray_normal(target) * 1000
 	var iray = get_world_3d().direct_space_state.intersect_ray(ray_query)

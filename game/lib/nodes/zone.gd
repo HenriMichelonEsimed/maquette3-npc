@@ -10,7 +10,7 @@ func _init(_state:ZoneState=null):
 		state = _state.new(self)
 
 func _ready():
-	for node:Node in find_children("Roof*", "", true, true):
+	for node:Node in find_children("*_Roof", "", true, true):
 		node.visible = true
 	if (state == null) : 
 		state = ZoneState.new(zone_name, self)
