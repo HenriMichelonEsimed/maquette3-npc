@@ -1,0 +1,20 @@
+[gd_resource type="StandardMaterial3D" load_steps=7 format=3 uid="uid://cj05l7mj26q3b"]
+
+[ext_resource type="Texture2D" uid="uid://h87d1wkkir48" path="res://assets/textures/architecture/Planks023B/Planks023B_1K-JPG_Color.jpg" id="1_y0g62"]
+[ext_resource type="Texture2D" uid="uid://c4s41b3v3aahw" path="res://assets/textures/architecture/Planks023B/Planks023B_1K-JPG_AmbientOcclusion.jpg" id="2_wq5ty"]
+[ext_resource type="Texture2D" uid="uid://bf238mvxjc53f" path="res://assets/textures/architecture/Planks023B/Planks023B_1K-JPG_Displacement.jpg" id="3_3q4r8"]
+[ext_resource type="Texture2D" uid="uid://rr1wtctd6c7u" path="res://assets/textures/architecture/Planks023B/Planks023B_1K-JPG_Metalness.jpg" id="4_4mmue"]
+[ext_resource type="Texture2D" uid="uid://b8u21vlagctla" path="res://assets/textures/architecture/Planks023B/Planks023B_1K-JPG_NormalGL.jpg" id="5_pfo8c"]
+[ext_resource type="Texture2D" uid="uid://djtio2d6mboaq" path="res://assets/textures/architecture/Planks023B/Planks023B_1K-JPG_Roughness.jpg" id="6_perea"]
+
+[resource]
+albedo_texture = ExtResource("1_y0g62")
+metallic = 1.0
+metallic_texture = ExtResource("4_4mmue")
+roughness_texture = ExtResource("6_perea")
+normal_enabled = true
+normal_texture = ExtResource("5_pfo8c")
+ao_enabled = true
+ao_texture = ExtResource("2_wq5ty")
+heightmap_enabled = true
+heightmap_texture = ExtResource("3_3q4r8")

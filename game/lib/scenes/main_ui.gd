@@ -206,7 +206,8 @@ func _on_button_quit_pressed():
 func _on_save_before_quit_confirm(save:bool):
 	if (save): 
 		GameState.save_game()
-	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
+	#get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
+	get_tree().quit()
 
 func _on_timer_notif_timeout():
 	label_notif.visible = false

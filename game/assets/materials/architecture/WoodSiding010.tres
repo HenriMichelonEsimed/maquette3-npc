@@ -1,0 +1,18 @@
+[gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://c4xlc6cnk56ab"]
+
+[ext_resource type="Texture2D" uid="uid://bjuhsf1rpjcwa" path="res://assets/textures/architecture/WoodSiding010/WoodSiding010_1K-JPG_Color.jpg" id="1_ai01f"]
+[ext_resource type="Texture2D" uid="uid://wmy2m8owjapg" path="res://assets/textures/architecture/WoodSiding010/WoodSiding010_1K-JPG_AmbientOcclusion.jpg" id="2_rqot7"]
+[ext_resource type="Texture2D" uid="uid://c7td5pdud2bft" path="res://assets/textures/architecture/WoodSiding010/WoodSiding010_1K-JPG_Displacement.jpg" id="3_ipfoy"]
+[ext_resource type="Texture2D" uid="uid://uyaa156b4rqv" path="res://assets/textures/architecture/WoodSiding010/WoodSiding010_1K-JPG_NormalGL.jpg" id="4_ygba7"]
+[ext_resource type="Texture2D" uid="uid://brjyvpbi6cvrd" path="res://assets/textures/architecture/WoodSiding010/WoodSiding010_1K-JPG_Roughness.jpg" id="5_1b0hm"]
+
+[resource]
+albedo_texture = ExtResource("1_ai01f")
+metallic_specular = 0.0
+roughness_texture = ExtResource("5_1b0hm")
+normal_enabled = true
+normal_texture = ExtResource("4_ygba7")
+ao_enabled = true
+ao_texture = ExtResource("2_rqot7")
+heightmap_enabled = true
+heightmap_texture = ExtResource("3_ipfoy")

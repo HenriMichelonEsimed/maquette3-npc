@@ -5,15 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://bygi7i8djxa7k" path="res://scenes/interactions.tscn" id="3_0h8y3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k8wjv"]
-size = Vector3(0.655029, 1.80127, 1.14618)
+size = Vector3(0.608642, 1.80127, 0.644699)
 
 [node name="Player" type="CharacterBody3D"]
+collision_mask = 3
 script = ExtResource("1_q3dva")
 
 [node name="Character" parent="." instance=ExtResource("2_jd0ni")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0147705, 0.89917, -0.0326843)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00842277, 0.89917, -0.016487)
 shape = SubResource("BoxShape3D_k8wjv")
 
 [node name="Interactions" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_0h8y3")]

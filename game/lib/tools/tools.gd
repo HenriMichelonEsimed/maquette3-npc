@@ -69,7 +69,7 @@ static func preload_zone_status(zone_name:String) -> ResourceLoader.ThreadLoadSt
 	return ResourceLoader.load_threaded_get_status(zone_path)
 
 static func load_dialog(parent:Node, dialog:String, on_close = null) -> Dialog:
-	var scene = load("res://scenes/ui/dialogs/" + dialog + "_dialog.tscn").instantiate()
+	var scene = load("res://scenes/ui/" + dialog + "_dialog.tscn").instantiate()
 	parent.add_child(scene)
 	if (on_close != null): 
 		scene._on_close = on_close

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://lib/main.gd" id="1_t852q"]
 [ext_resource type="Script" path="res://lib/camera.gd" id="2_fh3fr"]
 [ext_resource type="PackedScene" uid="uid://cfxsejwlekels" path="res://scenes/player.tscn" id="4_tan7v"]
-[ext_resource type="PackedScene" uid="uid://cc25hf7gi6i13" path="res://scenes/ui/main_ui.tscn" id="5_n75tm"]
+[ext_resource type="PackedScene" uid="uid://b873fs2lbtp6t" path="res://scenes/ui/main_ui.tscn" id="5_n75tm"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_t852q")
@@ -11,7 +11,7 @@ script = ExtResource("1_t852q")
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 130.104)
 
-[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+[node name="Camera" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(0.857841, -0.184665, 0.479592, 0, 0.933211, 0.359329, -0.513916, -0.308247, 0.800546, 39.3981, 9.20962, -78.5039)
 projection = 1
 current = true
@@ -20,9 +20,16 @@ script = ExtResource("2_fh3fr")
 camera_pivot_path = NodePath("..")
 object_to_follow_path = NodePath("../../Player")
 
+[node name="RayCastToRoofs" type="RayCast3D" parent="CameraPivot/Camera"]
+target_position = Vector3(0, 0, -100)
+collision_mask = 2
+
+[node name="RayCastToWorld" type="RayCast3D" parent="CameraPivot/Camera"]
+target_position = Vector3(0, 0, -100)
+
 [node name="Player" parent="." node_paths=PackedStringArray("camera", "view_pivot") instance=ExtResource("4_tan7v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.66821, 0, 15.7788)
-camera = NodePath("../CameraPivot/Camera3D")
+camera = NodePath("../CameraPivot/Camera")
 view_pivot = NodePath("../CameraPivot")
 
 [node name="MainUI" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_n75tm")]

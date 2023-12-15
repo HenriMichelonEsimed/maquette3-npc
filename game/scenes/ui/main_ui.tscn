@@ -9,7 +9,7 @@
 [ext_resource type="Shader" path="res://assets/shaders/blur.gdshader" id="7_4jbex"]
 [ext_resource type="StyleBox" uid="uid://37edqfqkfson" path="res://assets/styles/notif_label.tres" id="7_esqke"]
 [ext_resource type="StyleBox" uid="uid://dkldklw6dth8q" path="res://assets/styles/menu_button_hover.tres" id="8_5gish"]
-[ext_resource type="PackedScene" path="res://scenes/ui/tool_panel.tscn" id="8_qxtma"]
+[ext_resource type="PackedScene" uid="uid://r3fibn5pmeaq" path="res://scenes/ui/tool_panel.tscn" id="8_qxtma"]
 [ext_resource type="Texture2D" uid="uid://cw8xc1ad8lbdr" path="res://assets/textures/controllers/buttons/keyboard/menu.png" id="10_pjl1y"]
 [ext_resource type="Texture2D" uid="uid://d38v6t3jpc62s" path="res://assets/textures/white.png" id="12_qnr10"]
 

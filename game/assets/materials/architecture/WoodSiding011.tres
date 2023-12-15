@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://7nmyonm8cmtn"]
+
+[ext_resource type="Texture2D" uid="uid://duycjx2vlee3x" path="res://assets/textures/architecture/WoodSiding011/WoodSiding011_1K-JPG_Color.jpg" id="1_4cp0b"]
+[ext_resource type="Texture2D" uid="uid://dk2p0y01d2uwq" path="res://assets/textures/architecture/WoodSiding011/WoodSiding011_1K-JPG_Displacement.jpg" id="2_kh2a3"]
+[ext_resource type="Texture2D" uid="uid://d3af42jb4hdma" path="res://assets/textures/architecture/WoodSiding011/WoodSiding011_1K-JPG_NormalGL.jpg" id="3_612au"]
+
+[resource]
+albedo_texture = ExtResource("1_4cp0b")
+normal_enabled = true
+normal_texture = ExtResource("3_612au")
+heightmap_enabled = true
+heightmap_texture = ExtResource("2_kh2a3")

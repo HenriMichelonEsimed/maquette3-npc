@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://0326gqgjjtkv"]
+[gd_scene load_steps=10 format=3 uid="uid://0326gqgjjtkv"]
 
 [ext_resource type="Script" path="res://lib/nodes/zone.gd" id="1_3tay3"]
 [ext_resource type="Terrain3DStorage" uid="uid://cnsgaqun838mp" path="res://zones/start/level_0/terrain_3d_storage.tres" id="1_30e3t"]
 [ext_resource type="Terrain3DMaterial" uid="uid://bh2je3jcyw70l" path="res://assets/materials/terrain/grass_1.tres" id="2_6mkug"]
 [ext_resource type="Terrain3DTextureList" uid="uid://cj1kghcesgolx" path="res://assets/textures/terrain/grass_1.tres" id="3_hkils"]
 [ext_resource type="Script" path="res://lib/nodes/spawn_point.gd" id="4_t10wc"]
+[ext_resource type="PackedScene" uid="uid://8exssb37mmo0" path="res://models/houses/house_4.tscn" id="6_mymwc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_amooi"]
 sky_horizon_color = Color(0.629583, 0.6635, 0.649265, 1)
@@ -35,5 +36,8 @@ material = ExtResource("2_6mkug")
 texture_list = ExtResource("3_hkils")
 
 [node name="SpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -111.768, 0, 745.525)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 520.394, 0, 551.296)
 script = ExtResource("4_t10wc")
+
+[node name="House_4" parent="." instance=ExtResource("6_mymwc")]
+transform = Transform3D(0.158382, 0, -0.987378, 0, 1, 0, 0.987378, 0, 0.158382, 534.128, -0.05, 519.121)
