@@ -1,0 +1,86 @@
+﻿clés;en;fr
+Inventory;Inventory;Inventaire
+Quests;Quests;Quêtes
+Drop;Drop;Lâcher
+Hello !;Hello !;Salut !
+Bye;Bye;Au revoir
+Weigth : %.2f;Weigth : %.2f;Poids : %.2f
+How many ?;How many ?;Combien ?
+Cancel;Cancel;Annuler
+Tools;Tools;Outils
+Clothes;Clothes;Vêtements
+Consumables;Consumables;Consommables
+Miscellaneous;Miscellaneous;Divers
+Quests;Quests;Quêtes
+Settings;Settings;Paramètres
+Language;Language;Langue
+English;English;Anglais
+French;French;Français
+Apply;Apply;Appliquer
+Load;Load;Charger
+Load a saved game;Load a saved game;Charger une sauvegarde
+[Auto save];[Auto save];[Sauvegarde auto]
+Last save;Last save;Dernière sauvegarde
+Save ?;Save ?;Sauvegarder ?
+Save game before exiting ?;Save game before exiting ?;Sauvegarder avant de sortir ?
+Yes;Yes;Oui
+No;No;Non
+Trading;Trading;Commerce
+Buy;Buy;Acheter
+Unit price : %.2f;Unit price : %.2f;Prix unitaire : %.2f
+Inventory : %d credits;Inventory : %d credits;Inventaire : %d crédits
+Inventory : %d credit;Inventory : %d credit;Inventaire : %d crédit
+Ok;Ok;Ok
+You don't have enough credits;You don't have enough credits;Vous n'avez pas assez de crédits
+%d (%d credits);%d (%d credits);%d (%d crédits)
+my saved game;my saved game;ma sauvegarde
+Save;Save;Enregistrer
+Save game;Save game;Sauvegarder
+Overwrite existing save?;Overwrite existing save?;Ecraser la sauvegarde existante ?
+Delete;Delete;Supprimer
+Delete ?;Delete ?;Supprimer ?
+Delete saved game ' %s' ?;Delete saved game ' %s' ?;Supprimer la sauvegarde '%s' ?
+Nice to meet you;Nice to meet you;Enchanté de vous rencontrer
+Thank you;Thank you;Merci
+ok;ok;ok
+Hello;Hello;Salut
+Nevermind;Nevermind;Laissez tomber
+Let's talk;Let's talk;Autre chose…
+Nice. Bye;Nice. Bye;Bien. Au revoir
+Ok, bye;Ok, bye;Ok, au revoir
+[Give %s];[Give %s];[Donner %s]
+Crafting;Crafting;Artisanat
+Nothing happens with '%s';Nothing happens with '%s';Rien ne se passe avec '%s'
+Use;Use;Utiliser
+Craft;Craft;Artisanat
+Remove;Remove;Supprimer
+Make;Make;Fabriquer
+Close;Close;Fermer
+Transfer all;Transfer all;Tout transférer
+Transfer;Transfer;Transférer
+Load;Load;Charger
+Menu;Menu;Menu
+Smartphone;Smartphone;Téléphone
+Controls;Controls;Contrôles
+Quit;Quit;Quitter
+Notifications;Notifications;Notifications
+"Joypad and keyboard
+vertical axis";"Joypad and keyboard
+vertical axis";"Axe vertical
+manette et clavier"
+Normal;Normal;Normal
+Inverted;Inverted;Inversé
+"Mouse
+vertical axis";"Mouse
+vertical axis";"Axe vertical
+souris"
+Loading...;Loading...;Chargement...
+Continue;Continue;Continuer
+New game;New game;Nouvelle partie
+Controls;Controls;Contrôles
+Player;Player;Player
+Player creation;Player creation;Création du personnage
+Your name :;Your name :;Votre nom :
+Character :;Character :;Personnage :
+YOU_DIED_M;You died !;Vous êtes mort !
+YOU_DIED_F;You died !;Vous êtes morte !

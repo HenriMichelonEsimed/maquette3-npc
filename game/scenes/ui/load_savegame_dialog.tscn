@@ -1,0 +1,129 @@
+[gd_scene load_steps=4 format=3 uid="uid://citcmiumdco4f"]
+
+[ext_resource type="Script" path="res://lib/scenes/load_savegame_dialog.gd" id="1_61a8w"]
+[ext_resource type="FontFile" uid="uid://cave61j52xeuh" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_h8cpk"]
+[ext_resource type="Script" path="res://addons/fontawesome/FontAwesomeButton.gd" id="4_rai2m"]
+
+
+[node name="LoadSavegameDialog" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -285.5
+offset_top = -286.5
+offset_right = 285.5
+offset_bottom = 286.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_61a8w")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Content" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Content"]
+layout_mode = 2
+
+[node name="Top" type="HBoxContainer" parent="Panel/Content/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/Content/VBoxContainer/Top"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Load a saved game"
+horizontal_alignment = 1
+
+[node name="ButtonCancel" type="Button" parent="Panel/Content/VBoxContainer/Top"]
+layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Close"
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../ListSavegames")
+focus_next = NodePath("../../ListSavegames")
+focus_previous = NodePath("../../Bottom/ButtonDelete")
+theme_override_fonts/font = ExtResource("2_h8cpk")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("4_rai2m")
+icon_size = 32
+icon_name = "xmark"
+
+[node name="ListSavegames" type="ItemList" parent="Panel/Content/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../Bottom/ButtonLoad")
+focus_previous = NodePath("../Top/ButtonCancel")
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+allow_search = false
+
+[node name="Bottom" type="HBoxContainer" parent="Panel/Content/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ButtonDelete" type="Button" parent="Panel/Content/VBoxContainer/Bottom"]
+layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Delete"
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../ListSavegames")
+focus_neighbor_right = NodePath("../ButtonLoad")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../../Top/ButtonCancel")
+focus_previous = NodePath("../ButtonLoad")
+theme_override_fonts/font = ExtResource("2_h8cpk")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("4_rai2m")
+icon_size = 32
+icon_name = "trash"
+
+[node name="ButtonLoad" type="Button" parent="Panel/Content/VBoxContainer/Bottom"]
+layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Load"
+focus_neighbor_left = NodePath("../ButtonDelete")
+focus_neighbor_top = NodePath("../../ListSavegames")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../ButtonDelete")
+focus_previous = NodePath("../../ListSavegames")
+theme_override_fonts/font = ExtResource("2_h8cpk")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("4_rai2m")
+icon_size = 32
+icon_name = "upload"
+
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
+[connection signal="pressed" from="Panel/Content/VBoxContainer/Top/ButtonCancel" to="." method="close"]
+[connection signal="item_clicked" from="Panel/Content/VBoxContainer/ListSavegames" to="." method="_on_list_savegames_item_clicked"]
+[connection signal="item_selected" from="Panel/Content/VBoxContainer/ListSavegames" to="." method="_on_list_savegames_item_selected"]
+[connection signal="pressed" from="Panel/Content/VBoxContainer/Bottom/ButtonDelete" to="." method="_on_button_delete_pressed"]
+[connection signal="pressed" from="Panel/Content/VBoxContainer/Bottom/ButtonLoad" to="." method="_on_button_load_pressed"]

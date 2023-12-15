@@ -1,0 +1,20 @@
+[gd_resource type="Terrain3DTextureList" load_steps=7 format=3 uid="uid://cj1kghcesgolx"]
+
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/Ground037_albedo_height.dds" id="1_awlom"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/Ground037_normal_roughness.dds" id="2_qc6me"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/Gravel032_albedo_height.dds" id="3_45bm6"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/Gravel032_normal_roughness.dds" id="4_hvp0x"]
+
+[sub_resource type="Terrain3DTexture" id="Terrain3DTexture_xr84q"]
+name = "Ground037"
+albedo_texture = ExtResource("1_awlom")
+normal_texture = ExtResource("2_qc6me")
+
+[sub_resource type="Terrain3DTexture" id="Terrain3DTexture_2ekjx"]
+name = "Gravel032"
+texture_id = 1
+albedo_texture = ExtResource("3_45bm6")
+normal_texture = ExtResource("4_hvp0x")
+
+[resource]
+textures = Array[Terrain3DTexture]([SubResource("Terrain3DTexture_xr84q"), SubResource("Terrain3DTexture_2ekjx")])

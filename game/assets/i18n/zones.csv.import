@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://baah1ed5e6oru"
+
+[deps]
+
+files=["res://assets/i18n/zones.fr.translation"]
+
+source_file="res://assets/i18n/zones.csv"
+dest_files=["res://assets/i18n/zones.fr.translation"]
+
+[params]
+
+compress=true
+delimiter=1

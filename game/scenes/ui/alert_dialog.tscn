@@ -1,0 +1,100 @@
+[gd_scene load_steps=5 format=3 uid="uid://0ejc2aywk8wn"]
+
+[ext_resource type="Script" path="res://lib/scenes/alert_dialog.gd" id="1_gpx26"]
+[ext_resource type="FontFile" uid="uid://cave61j52xeuh" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_hbjlj"]
+[ext_resource type="StyleBox" uid="uid://b4xwlntny7fi3" path="res://assets/styles/big_label.tres" id="2_hjru8"]
+[ext_resource type="Script" path="res://addons/fontawesome/FontAwesomeButton.gd" id="4_mmsq2"]
+
+
+[node name="AlertDialog" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -285.5
+offset_top = -286.5
+offset_right = 285.5
+offset_bottom = 286.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gpx26")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(500, 150)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -75.0
+offset_right = 250.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Content" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Content"]
+layout_mode = 2
+
+[node name="Top" type="HBoxContainer" parent="Panel/Content/VBoxContainer"]
+custom_minimum_size = Vector2(0, -1)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/Content/VBoxContainer/Top"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "XXX"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Panel/Content/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_styles/normal = ExtResource("2_hjru8")
+text = "XXX"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bottom" type="HBoxContainer" parent="Panel/Content/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ButtonOk" type="Button" parent="Panel/Content/VBoxContainer/Bottom"]
+layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Ok"
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+theme_override_fonts/font = ExtResource("2_hbjlj")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("4_mmsq2")
+icon_size = 32
+icon_name = "check"
+
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
+[connection signal="pressed" from="Panel/Content/VBoxContainer/Bottom/ButtonOk" to="." method="close"]

@@ -1,0 +1,22 @@
+[gd_resource type="Terrain3DMaterial" load_steps=3 format=3 uid="uid://bh2je3jcyw70l"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_63pvv"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_iw6ck"]
+generate_mipmaps = false
+seamless = true
+noise = SubResource("FastNoiseLite_63pvv")
+
+[resource]
+_shader_parameters = {
+"blend_sharpness": 0.87,
+"height_blending": true,
+"noise_scale": 0.1,
+"noise_texture": SubResource("NoiseTexture2D_iw6ck"),
+"world_noise_blend_far": 1.0,
+"world_noise_blend_near": 0.5,
+"world_noise_height": 300.0,
+"world_noise_scale": 2.0
+}
+world_noise_enabled = true

@@ -1,0 +1,132 @@
+[gd_scene load_steps=5 format=3 uid="uid://ciyed3m337gr6"]
+
+[ext_resource type="Script" path="res://lib/scenes/confirm_dialog.gd" id="1_tlf1k"]
+[ext_resource type="FontFile" uid="uid://cave61j52xeuh" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_v75pw"]
+[ext_resource type="StyleBox" uid="uid://b4xwlntny7fi3" path="res://assets/styles/big_label.tres" id="4_qx4hb"]
+[ext_resource type="Script" path="res://addons/fontawesome/FontAwesomeButton.gd" id="4_sedxr"]
+
+[node name="ConfirmDialog" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -285.5
+offset_top = -286.5
+offset_right = 285.5
+offset_bottom = 286.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tlf1k")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(500, 150)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -274.0
+offset_top = -89.0
+offset_right = 274.0
+offset_bottom = 89.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Content" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Content"]
+layout_mode = 2
+
+[node name="Top" type="HBoxContainer" parent="Panel/Content/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/Content/VBoxContainer/Top"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "XXX"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonCancel" type="Button" parent="Panel/Content/VBoxContainer/Top"]
+layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Cancel"
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../Bottom/ButtonYes")
+focus_next = NodePath("../../Bottom/ButtonYes")
+focus_previous = NodePath("../../Bottom/ButtonNo")
+theme_override_fonts/font = ExtResource("2_v75pw")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("4_sedxr")
+icon_size = 32
+icon_name = "xmark"
+
+[node name="Label" type="Label" parent="Panel/Content/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_styles/normal = ExtResource("4_qx4hb")
+text = "XXX"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bottom" type="HBoxContainer" parent="Panel/Content/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ButtonYes" type="Button" parent="Panel/Content/VBoxContainer/Bottom"]
+layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Yes"
+focus_neighbor_left = NodePath("../ButtonNo")
+focus_neighbor_top = NodePath("../../Top/ButtonCancel")
+focus_neighbor_right = NodePath("../ButtonNo")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../ButtonNo")
+focus_previous = NodePath("../../Top/ButtonCancel")
+theme_override_fonts/font = ExtResource("2_v75pw")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("4_sedxr")
+icon_size = 32
+icon_name = "check"
+
+[node name="ButtonNo" type="Button" parent="Panel/Content/VBoxContainer/Bottom"]
+layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "No"
+focus_neighbor_left = NodePath("../ButtonYes")
+focus_neighbor_top = NodePath("../../Top/ButtonCancel")
+focus_neighbor_right = NodePath("../ButtonYes")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../../Top/ButtonCancel")
+focus_previous = NodePath("../ButtonYes")
+theme_override_fonts/font = ExtResource("2_v75pw")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("4_sedxr")
+icon_size = 32
+icon_name = "ban"
+
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
+[connection signal="pressed" from="Panel/Content/VBoxContainer/Top/ButtonCancel" to="." method="close"]
+[connection signal="pressed" from="Panel/Content/VBoxContainer/Bottom/ButtonYes" to="." method="_on_button_yes_pressed"]
+[connection signal="pressed" from="Panel/Content/VBoxContainer/Bottom/ButtonNo" to="." method="_on_button_no_pressed"]

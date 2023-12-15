@@ -1,0 +1,184 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwigwdhvn3w7o"]
+
+[ext_resource type="Script" path="res://lib/scenes/items_transfert_dialog.gd" id="1_b1cra"]
+[ext_resource type="FontFile" uid="uid://cave61j52xeuh" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_xy6rd"]
+[ext_resource type="Script" path="res://addons/fontawesome/FontAwesomeButton.gd" id="4_r3gtb"]
+
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3xv2i"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="ItemsTransfertDialog" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -285.5
+offset_top = -286.5
+offset_right = 285.5
+offset_bottom = 286.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b1cra")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Content" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Content/VBoxContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Content/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ButtonClose" type="Button" parent="Content/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Close"
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../Lists/Buttons/ButtonAll")
+focus_next = NodePath("../../Lists/Left/ListContainer")
+focus_previous = NodePath("../../Lists/Right/ListInventory")
+theme_override_fonts/font = ExtResource("2_xy6rd")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("4_r3gtb")
+icon_size = 32
+icon_name = "xmark"
+
+[node name="Lists" type="HBoxContainer" parent="Content/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Left" type="VBoxContainer" parent="Content/VBoxContainer/Lists"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Content/VBoxContainer/Lists/Left"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="ListContainer" type="ItemList" parent="Content/VBoxContainer/Lists/Left"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath("../../Right/ListInventory")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../../Buttons/ButtonAll")
+focus_previous = NodePath("../../../HBoxContainer/ButtonClose")
+
+[node name="Buttons" type="VBoxContainer" parent="Content/VBoxContainer/Lists"]
+layout_mode = 2
+
+[node name="ButtonAll" type="Button" parent="Content/VBoxContainer/Lists/Buttons"]
+layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "T"
+focus_neighbor_left = NodePath("../../Left/ListContainer")
+focus_neighbor_top = NodePath("../../../HBoxContainer/ButtonClose")
+focus_neighbor_right = NodePath("../../Right/ListInventory")
+focus_neighbor_bottom = NodePath("../Middle")
+focus_next = NodePath("../Middle")
+focus_previous = NodePath("../../Left/ListContainer")
+theme_override_fonts/font = ExtResource("2_xy6rd")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("4_r3gtb")
+icon_size = 32
+icon_name = "angles-right"
+
+[node name="Middle" type="PanelContainer" parent="Content/VBoxContainer/Lists/Buttons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxFlat_3xv2i")
+
+[node name="ButtonDrop" type="Button" parent="Content/VBoxContainer/Lists/Buttons/Middle"]
+layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Transfer"
+focus_neighbor_left = NodePath("../../../Left/ListContainer")
+focus_neighbor_top = NodePath("../../ButtonAll")
+focus_neighbor_right = NodePath("../../../Right/ListInventory")
+focus_neighbor_bottom = NodePath("../../ButtonAll")
+focus_next = NodePath("../../../Right/ListInventory")
+focus_previous = NodePath("..")
+theme_override_fonts/font = ExtResource("2_xy6rd")
+theme_override_font_sizes/font_size = 16
+text = ""
+script = ExtResource("4_r3gtb")
+icon_name = "angle-left"
+
+[node name="ButtonPick" type="Button" parent="Content/VBoxContainer/Lists/Buttons/Middle"]
+layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Transfer"
+focus_neighbor_left = NodePath("../../../Left/ListContainer")
+focus_neighbor_top = NodePath("../../ButtonAll")
+focus_neighbor_right = NodePath("../../../Right/ListInventory")
+focus_neighbor_bottom = NodePath("../../ButtonAll")
+focus_next = NodePath("../../../Right/ListInventory")
+focus_previous = NodePath("..")
+theme_override_fonts/font = ExtResource("2_xy6rd")
+theme_override_font_sizes/font_size = 16
+text = ""
+script = ExtResource("4_r3gtb")
+icon_name = "angle-right"
+
+[node name="Right" type="VBoxContainer" parent="Content/VBoxContainer/Lists"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Content/VBoxContainer/Lists/Right"]
+layout_mode = 2
+text = "Inventory"
+horizontal_alignment = 1
+
+[node name="ListInventory" type="ItemList" parent="Content/VBoxContainer/Lists/Right"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_neighbor_left = NodePath("../../Left/ListContainer")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../../../HBoxContainer/ButtonClose")
+focus_previous = NodePath("../../Buttons/ButtonAll")
+
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
+[connection signal="pressed" from="Content/VBoxContainer/HBoxContainer/ButtonClose" to="." method="close"]
+[connection signal="child_exiting_tree" from="Content/VBoxContainer/Lists/Left/ListContainer" to="." method="_on_list_container_child_exiting_tree"]
+[connection signal="focus_entered" from="Content/VBoxContainer/Lists/Left/ListContainer" to="." method="_on_list_container_focus_entered"]
+[connection signal="ready" from="Content/VBoxContainer/Lists/Left/ListContainer" to="." method="_on_list_container_ready"]
+[connection signal="pressed" from="Content/VBoxContainer/Lists/Buttons/ButtonAll" to="." method="_on_button_all_pressed"]
+[connection signal="pressed" from="Content/VBoxContainer/Lists/Buttons/Middle/ButtonDrop" to="." method="_transfert"]
+[connection signal="pressed" from="Content/VBoxContainer/Lists/Buttons/Middle/ButtonPick" to="." method="_transfert"]
+[connection signal="focus_entered" from="Content/VBoxContainer/Lists/Right/ListInventory" to="." method="_on_list_inventory_focus_entered"]

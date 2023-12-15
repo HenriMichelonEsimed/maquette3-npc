@@ -1,0 +1,210 @@
+[gd_scene load_steps=8 format=3 uid="uid://cd26byrdddw8w"]
+
+[ext_resource type="Script" path="res://lib/scenes/settings_dialog.gd" id="1_xw1kv"]
+[ext_resource type="FontFile" uid="uid://cave61j52xeuh" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_8qfac"]
+[ext_resource type="Script" path="res://addons/fontawesome/FontAwesomeButton.gd" id="3_6a7vi"]
+[ext_resource type="Texture2D" uid="uid://cqev6dyrcil3u" path="res://assets/i18n/flags/en_US.png" id="5_ixg0v"]
+[ext_resource type="Texture2D" uid="uid://d1ofj5irt7sgg" path="res://assets/i18n/flags/fr.png" id="6_3fah8"]
+
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_inncu"]
+content_margin_top = 4.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f4iul"]
+bg_color = Color(0, 0, 0, 0.568627)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="ParametersScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -285.5
+offset_top = -286.5
+offset_right = 285.5
+offset_bottom = 286.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xw1kv")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Borders" type="MarginContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Content" type="VBoxContainer" parent="Background/Borders"]
+layout_mode = 2
+
+[node name="Top" type="HBoxContainer" parent="Background/Borders/Content"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Background/Borders/Content/Top"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Background/Borders/Content/Top"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_inncu")
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="ButtonClose" type="Button" parent="Background/Borders/Content/Top"]
+layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Close"
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../Panel/Borders/Settings/i18n/OptionButton")
+focus_next = NodePath("../../Panel/Borders/Settings/i18n/OptionButton")
+focus_previous = NodePath("../../Panel/Borders/Settings/Bottom/ButtonSave")
+theme_override_fonts/font = ExtResource("2_8qfac")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("3_6a7vi")
+icon_size = 32
+icon_name = "xmark"
+
+[node name="Panel" type="Panel" parent="Background/Borders/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_f4iul")
+
+[node name="Borders" type="MarginContainer" parent="Background/Borders/Content/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Settings" type="VBoxContainer" parent="Background/Borders/Content/Panel/Borders"]
+layout_mode = 2
+
+[node name="i18n" type="HBoxContainer" parent="Background/Borders/Content/Panel/Borders/Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Background/Borders/Content/Panel/Borders/Settings/i18n"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Language"
+
+[node name="OptionButton" type="OptionButton" parent="Background/Borders/Content/Panel/Borders/Settings/i18n"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../../../../Top/ButtonClose")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../yaxis/OptionButton")
+focus_next = NodePath("../../yaxis/OptionButton")
+focus_previous = NodePath("../../../../../Top/ButtonClose")
+item_count = 2
+popup/item_0/text = "English (US)"
+popup/item_0/icon = ExtResource("5_ixg0v")
+popup/item_0/id = 1
+popup/item_1/text = "French"
+popup/item_1/icon = ExtResource("6_3fah8")
+popup/item_1/id = 0
+
+[node name="yaxis" type="HBoxContainer" parent="Background/Borders/Content/Panel/Borders/Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Background/Borders/Content/Panel/Borders/Settings/yaxis"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Joypad and keyboard
+vertical axis"
+
+[node name="OptionButton" type="OptionButton" parent="Background/Borders/Content/Panel/Borders/Settings/yaxis"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../i18n/OptionButton")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../myaxis/OptionButton")
+focus_next = NodePath("../../myaxis/OptionButton")
+focus_previous = NodePath("../../i18n/OptionButton")
+item_count = 2
+popup/item_0/text = "Normal"
+popup/item_0/id = 0
+popup/item_1/text = "Inverted"
+popup/item_1/id = 1
+
+[node name="myaxis" type="HBoxContainer" parent="Background/Borders/Content/Panel/Borders/Settings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Background/Borders/Content/Panel/Borders/Settings/myaxis"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Mouse
+vertical axis"
+
+[node name="OptionButton" type="OptionButton" parent="Background/Borders/Content/Panel/Borders/Settings/myaxis"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../yaxis/OptionButton")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../Bottom/ButtonSave")
+focus_next = NodePath("../../Bottom/ButtonSave")
+focus_previous = NodePath("../../yaxis/Label")
+item_count = 2
+popup/item_0/text = "Normal"
+popup/item_0/id = 0
+popup/item_1/text = "Inverted"
+popup/item_1/id = 1
+
+[node name="Control" type="Control" parent="Background/Borders/Content/Panel/Borders/Settings"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Bottom" type="HBoxContainer" parent="Background/Borders/Content/Panel/Borders/Settings"]
+layout_mode = 2
+alignment = 2
+
+[node name="ButtonSave" type="Button" parent="Background/Borders/Content/Panel/Borders/Settings/Bottom"]
+layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Apply"
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../myaxis/OptionButton")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../../../../../Top/ButtonClose")
+focus_previous = NodePath("../../myaxis/OptionButton")
+theme_override_fonts/font = ExtResource("2_8qfac")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("3_6a7vi")
+icon_size = 32
+icon_name = "check"
+
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
+[connection signal="pressed" from="Background/Borders/Content/Top/ButtonClose" to="." method="close"]
+[connection signal="pressed" from="Background/Borders/Content/Panel/Borders/Settings/Bottom/ButtonSave" to="." method="_on_button_save_pressed"]

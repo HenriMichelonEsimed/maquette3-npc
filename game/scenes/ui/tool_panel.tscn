@@ -1,0 +1,96 @@
+[gd_scene load_steps=6 format=3 uid="uid://r3fibn5pmeaq"]
+
+[ext_resource type="Script" path="res://lib/scenes/tool_panel.gd" id="1_4a67e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_na1ij"]
+bg_color = Color(0, 0, 0, 0.313726)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_right = 32
+
+[sub_resource type="Environment" id="Environment_ghn0y"]
+background_mode = 1
+background_color = Color(1, 1, 1, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="World3D" id="World3D_1egif"]
+environment = SubResource("Environment_ghn0y")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wb7bd"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+
+[node name="PanelTool" type="Panel"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -141.0
+offset_right = 161.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_na1ij")
+script = ExtResource("1_4a67e")
+
+[node name="ViewContent" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -140.0
+offset_right = 140.0
+grow_vertical = 0
+
+[node name="3DView" type="SubViewport" parent="ViewContent"]
+own_world_3d = true
+world_3d = SubResource("World3D_1egif")
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(140, 140)
+render_target_update_mode = 4
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="ViewContent/3DView"]
+transform = Transform3D(1, -8.35189e-23, -4.37114e-08, 4.37114e-08, 1.91069e-15, 1, 0, -1, 1.91069e-15, 0, 1, 0)
+light_energy = 2.0
+
+[node name="Camera3D" type="Camera3D" parent="ViewContent/3DView"]
+transform = Transform3D(1, 0, -4.37114e-08, 4.37114e-08, 1.91069e-15, 1, 0, -1, 1.91069e-15, 0, 1, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="ViewContent/3DView"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.05133, 0)
+size = Vector3(100, 0.1, 100)
+material = SubResource("StandardMaterial3D_wb7bd")
+
+[node name="InsertPoint" type="Node3D" parent="ViewContent/3DView"]
+transform = Transform3D(0.866025, -0.5, 0, 0.433013, 0.75, 0.5, -0.25, -0.433013, 0.866025, 0, 0, 0)
+
+[node name="LabelTool" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -56.0
+offset_top = -11.0
+offset_right = 56.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 8
+text = "XX"
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 1
+justification_flags = 161
+
+[node name="IconUnuse" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -46.0
+offset_top = 6.0
+offset_right = -6.0
+offset_bottom = 46.0
+grow_horizontal = 0

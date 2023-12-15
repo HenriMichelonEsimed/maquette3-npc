@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c7k8a8afx86n6"
+
+[deps]
+
+files=["res://assets/i18n/quest_main_dialogs.fr.translation"]
+
+source_file="res://assets/i18n/quest_main_dialogs.csv"
+dest_files=["res://assets/i18n/quest_main_dialogs.fr.translation"]
+
+[params]
+
+compress=true
+delimiter=1
