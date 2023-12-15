@@ -4,7 +4,6 @@
 [ext_resource type="FontFile" uid="uid://cave61j52xeuh" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_h8cpk"]
 [ext_resource type="Script" path="res://addons/fontawesome/FontAwesomeButton.gd" id="4_rai2m"]
 
-
 [node name="LoadSavegameDialog" type="Control"]
 layout_mode = 3
 anchors_preset = 8

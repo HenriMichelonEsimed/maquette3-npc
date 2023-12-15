@@ -1,9 +1,11 @@
 extends Dialog
 
 @onready var button_yes = $Panel/Content/VBoxContainer/Bottom/ButtonYes
+@onready var icon_yes = $Panel/Content/VBoxContainer/Bottom/IconYes
+@onready var icon_no = $Panel/Content/VBoxContainer/Bottom/IconNo
 @onready var button_no = $Panel/Content/VBoxContainer/Bottom/ButtonNo
-@onready var button_cancel = $Panel/Content/VBoxContainer/Top/ButtonCancel
-@onready var label_title = $Panel/Content/VBoxContainer/Top/Label
+@onready var button_cancel = $Panel/Content/VBoxContainer/HBoxContainer/IconCancel
+@onready var label_title = $Panel/Content/VBoxContainer/LabelTitle
 @onready var label_message = $Panel/Content/VBoxContainer/Label
 
 var _on_confirm:Callable
@@ -26,9 +28,9 @@ func open(title:String, text:String, on_confirm):
 	button_yes.grab_focus()
 
 func set_shortcuts():
-	Tools.set_shortcut_icon(button_yes, Tools.SHORTCUT_ACCEPT)
+	Tools.set_shortcut_icon(icon_yes, Tools.SHORTCUT_ACCEPT)
 	Tools.set_shortcut_icon(button_cancel, Tools.SHORTCUT_CANCEL)
-	Tools.set_shortcut_icon(button_no, Tools.SHORTCUT_DECLINE)
+	Tools.set_shortcut_icon(icon_no, Tools.SHORTCUT_DECLINE)
 
 func _on_button_yes_pressed():
 	close()

@@ -2,7 +2,7 @@ extends Dialog
 
 signal input(text)
 
-@onready var label_title = $Panel/Content/VBoxContainer/Top/Label
+@onready var label_title = $Panel/Content/VBoxContainer/Label
 @onready var edit:LineEdit = $Panel/Content/VBoxContainer/Edit
 @onready var button_cancel = $Panel/Content/VBoxContainer/Top/ButtonCancel
 @onready var button_ok = $Panel/Content/VBoxContainer/Bottom/ButtonOk

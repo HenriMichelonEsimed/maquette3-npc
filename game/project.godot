@@ -30,6 +30,11 @@ window/size/mode=3
 
 enabled=PackedStringArray("res://addons/fontawesome/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
 
+[gui]
+
+theme/custom="res://assets/styles/theme.tres"
+theme/custom_font="res://assets/fonts/Goudy Mediaeval Regular.ttf"
+
 [input]
 
 quit={

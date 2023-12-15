@@ -1,16 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://b873fs2lbtp6t"]
+[gd_scene load_steps=14 format=3 uid="uid://b873fs2lbtp6t"]
 
 [ext_resource type="Script" path="res://lib/scenes/main_ui.gd" id="1_ghhs3"]
 [ext_resource type="FontFile" uid="uid://cave61j52xeuh" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="1_ni5mw"]
 [ext_resource type="Script" path="res://addons/fontawesome/FontAwesome.gd" id="2_ur2r2"]
-[ext_resource type="StyleBox" uid="uid://nrorpnbiv20c" path="res://assets/styles/info_label.tres" id="4_rpld4"]
 [ext_resource type="Script" path="res://addons/fontawesome/FontAwesomeButton.gd" id="5_utbrf"]
-[ext_resource type="StyleBox" uid="uid://cxtrro0p5q00e" path="res://assets/styles/menu_button.tres" id="5_vw41v"]
 [ext_resource type="Shader" path="res://assets/shaders/blur.gdshader" id="7_4jbex"]
-[ext_resource type="StyleBox" uid="uid://37edqfqkfson" path="res://assets/styles/notif_label.tres" id="7_esqke"]
-[ext_resource type="StyleBox" uid="uid://dkldklw6dth8q" path="res://assets/styles/menu_button_hover.tres" id="8_5gish"]
 [ext_resource type="PackedScene" uid="uid://r3fibn5pmeaq" path="res://scenes/ui/tool_panel.tscn" id="8_qxtma"]
 [ext_resource type="Texture2D" uid="uid://cchdrpgcvbdw2" path="res://assets/textures/compass.png" id="9_sflov"]
+[ext_resource type="StyleBox" uid="uid://1y3d708ad6uj" path="res://assets/styles/square_button.tres" id="9_uk6oi"]
+[ext_resource type="StyleBox" uid="uid://cfbg1xb3p382n" path="res://assets/styles/square_button_hover.tres" id="10_my1vo"]
 [ext_resource type="Texture2D" uid="uid://cw8xc1ad8lbdr" path="res://assets/textures/controllers/buttons/keyboard/menu.png" id="10_pjl1y"]
 [ext_resource type="Texture2D" uid="uid://d38v6t3jpc62s" path="res://assets/textures/white.png" id="12_qnr10"]
 
@@ -20,10 +18,10 @@ shader_parameter/amount = 2.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qmmbd"]
 bg_color = Color(0.188235, 0.639216, 0.901961, 0.501961)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
@@ -72,7 +70,7 @@ grow_vertical = 0
 auto_translate = false
 localize_numeral_system = false
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 16
+theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("1_ni5mw")
 theme_override_font_sizes/font_size = 48
 text = ""
@@ -112,7 +110,6 @@ theme_override_constants/shadow_offset_y = 1
 theme_override_constants/outline_size = 1
 theme_override_constants/shadow_outline_size = 2
 theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = ExtResource("7_esqke")
 text = "Notif"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -147,7 +144,6 @@ theme_override_constants/shadow_offset_y = 1
 theme_override_constants/outline_size = 1
 theme_override_constants/shadow_outline_size = 2
 theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = ExtResource("4_rpld4")
 text = "Infos"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -192,7 +188,8 @@ rotation = 1.5708
 auto_translate = false
 localize_numeral_system = false
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 16
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 8
 theme_override_fonts/font = ExtResource("1_ni5mw")
 theme_override_font_sizes/font_size = 16
 text = ""
@@ -250,16 +247,20 @@ custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 localize_numeral_system = false
 focus_neighbor_bottom = NodePath("../../SubMenu/ButtonSave")
+focus_next = NodePath("../../SubMenu/ButtonSave")
 focus_previous = NodePath("../../SubMenu/ButtonQuit")
 theme_override_fonts/font = ExtResource("1_ni5mw")
-theme_override_font_sizes/font_size = 48
-theme_override_styles/normal = ExtResource("5_vw41v")
-theme_override_styles/hover = ExtResource("8_5gish")
-theme_override_styles/pressed = ExtResource("8_5gish")
-theme_override_styles/focus = ExtResource("8_5gish")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("9_uk6oi")
+theme_override_styles/hover = ExtResource("10_my1vo")
+theme_override_styles/pressed = ExtResource("10_my1vo")
+theme_override_styles/disabled = ExtResource("9_uk6oi")
+theme_override_styles/focus = ExtResource("10_my1vo")
 text = ""
+icon_alignment = 1
+vertical_icon_alignment = 2
 script = ExtResource("5_utbrf")
-icon_size = 48
+icon_size = 40
 icon_name = "toolbox"
 
 [node name="SubMenu" type="HBoxContainer" parent="Menu"]
@@ -276,15 +277,16 @@ focus_neighbor_top = NodePath("../../MainMenu/ButtonInventory")
 focus_neighbor_right = NodePath("../ButtonLoad")
 focus_neighbor_bottom = NodePath(".")
 focus_next = NodePath("../ButtonLoad")
+focus_previous = NodePath("../../MainMenu/ButtonInventory")
 theme_override_fonts/font = ExtResource("1_ni5mw")
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = ExtResource("5_vw41v")
-theme_override_styles/hover = ExtResource("8_5gish")
-theme_override_styles/pressed = ExtResource("8_5gish")
-theme_override_styles/focus = ExtResource("8_5gish")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("9_uk6oi")
+theme_override_styles/hover = ExtResource("10_my1vo")
+theme_override_styles/pressed = ExtResource("10_my1vo")
+theme_override_styles/focus = ExtResource("10_my1vo")
 text = ""
 script = ExtResource("5_utbrf")
-icon_size = 40
+icon_size = 32
 icon_name = "download"
 
 [node name="ButtonLoad" type="Button" parent="Menu/SubMenu"]
@@ -298,14 +300,14 @@ focus_neighbor_bottom = NodePath(".")
 focus_next = NodePath("../ButtonSettings")
 focus_previous = NodePath("../ButtonSave")
 theme_override_fonts/font = ExtResource("1_ni5mw")
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = ExtResource("5_vw41v")
-theme_override_styles/hover = ExtResource("8_5gish")
-theme_override_styles/pressed = ExtResource("8_5gish")
-theme_override_styles/focus = ExtResource("8_5gish")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("9_uk6oi")
+theme_override_styles/hover = ExtResource("10_my1vo")
+theme_override_styles/pressed = ExtResource("10_my1vo")
+theme_override_styles/focus = ExtResource("10_my1vo")
 text = ""
 script = ExtResource("5_utbrf")
-icon_size = 40
+icon_size = 32
 icon_name = "upload"
 
 [node name="ButtonSettings" type="Button" parent="Menu/SubMenu"]
@@ -319,14 +321,14 @@ focus_neighbor_bottom = NodePath(".")
 focus_next = NodePath("../ButtonKeymaps")
 focus_previous = NodePath("../ButtonLoad")
 theme_override_fonts/font = ExtResource("1_ni5mw")
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = ExtResource("5_vw41v")
-theme_override_styles/hover = ExtResource("8_5gish")
-theme_override_styles/pressed = ExtResource("8_5gish")
-theme_override_styles/focus = ExtResource("8_5gish")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("9_uk6oi")
+theme_override_styles/hover = ExtResource("10_my1vo")
+theme_override_styles/pressed = ExtResource("10_my1vo")
+theme_override_styles/focus = ExtResource("10_my1vo")
 text = ""
 script = ExtResource("5_utbrf")
-icon_size = 40
+icon_size = 32
 icon_name = "sliders"
 
 [node name="ButtonKeymaps" type="Button" parent="Menu/SubMenu"]
@@ -339,14 +341,14 @@ focus_neighbor_bottom = NodePath(".")
 focus_next = NodePath("../ButtonQuit")
 focus_previous = NodePath("../ButtonSettings")
 theme_override_fonts/font = ExtResource("1_ni5mw")
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = ExtResource("5_vw41v")
-theme_override_styles/hover = ExtResource("8_5gish")
-theme_override_styles/pressed = ExtResource("8_5gish")
-theme_override_styles/focus = ExtResource("8_5gish")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("9_uk6oi")
+theme_override_styles/hover = ExtResource("10_my1vo")
+theme_override_styles/pressed = ExtResource("10_my1vo")
+theme_override_styles/focus = ExtResource("10_my1vo")
 text = ""
 script = ExtResource("5_utbrf")
-icon_size = 40
+icon_size = 32
 icon_name = "keyboard"
 
 [node name="ButtonQuit" type="Button" parent="Menu/SubMenu"]
@@ -359,14 +361,14 @@ focus_neighbor_bottom = NodePath(".")
 focus_next = NodePath("../../MainMenu/ButtonInventory")
 focus_previous = NodePath("../ButtonKeymaps")
 theme_override_fonts/font = ExtResource("1_ni5mw")
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = ExtResource("5_vw41v")
-theme_override_styles/hover = ExtResource("8_5gish")
-theme_override_styles/pressed = ExtResource("8_5gish")
-theme_override_styles/focus = ExtResource("8_5gish")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("9_uk6oi")
+theme_override_styles/hover = ExtResource("10_my1vo")
+theme_override_styles/pressed = ExtResource("10_my1vo")
+theme_override_styles/focus = ExtResource("10_my1vo")
 text = ""
 script = ExtResource("5_utbrf")
-icon_size = 40
+icon_size = 32
 icon_name = "person-walking-arrow-right"
 
 [connection signal="timeout" from="LabelSaving/Timer" to="." method="_on_saving_timer_timeout"]

@@ -1,10 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://0ejc2aywk8wn"]
 
 [ext_resource type="Script" path="res://lib/scenes/alert_dialog.gd" id="1_gpx26"]
-[ext_resource type="FontFile" uid="uid://cave61j52xeuh" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_hbjlj"]
-[ext_resource type="StyleBox" uid="uid://b4xwlntny7fi3" path="res://assets/styles/big_label.tres" id="2_hjru8"]
-[ext_resource type="Script" path="res://addons/fontawesome/FontAwesomeButton.gd" id="4_mmsq2"]
-
+[ext_resource type="Texture2D" uid="uid://b8fwu4onh5stj" path="res://assets/textures/ui/check_normal.png" id="2_el27f"]
+[ext_resource type="Texture2D" uid="uid://xyuqx5onvrj3" path="res://assets/textures/ui/check_hover.png" id="3_ck6ya"]
+[ext_resource type="Texture2D" uid="uid://dwqv403k23djy" path="res://assets/textures/ui/check_disabled.png" id="4_t3576"]
 
 [node name="AlertDialog" type="Control"]
 layout_mode = 3
@@ -69,7 +68,6 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 size_flags_vertical = 6
-theme_override_styles/normal = ExtResource("2_hjru8")
 text = "XXX"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -78,22 +76,16 @@ vertical_alignment = 1
 layout_mode = 2
 alignment = 1
 
-[node name="ButtonOk" type="Button" parent="Panel/Content/VBoxContainer/Bottom"]
+[node name="IconOk" type="TextureRect" parent="Panel/Content/VBoxContainer/Bottom"]
 layout_mode = 2
-localize_numeral_system = false
-tooltip_text = "Ok"
-focus_neighbor_left = NodePath(".")
-focus_neighbor_top = NodePath(".")
-focus_neighbor_right = NodePath(".")
-focus_neighbor_bottom = NodePath(".")
-focus_next = NodePath(".")
-focus_previous = NodePath(".")
-theme_override_fonts/font = ExtResource("2_hbjlj")
-theme_override_font_sizes/font_size = 32
-text = ""
-script = ExtResource("4_mmsq2")
-icon_size = 32
-icon_name = "check"
+
+[node name="ButtonOk" type="TextureButton" parent="Panel/Content/VBoxContainer/Bottom"]
+layout_mode = 2
+texture_normal = ExtResource("2_el27f")
+texture_pressed = ExtResource("3_ck6ya")
+texture_hover = ExtResource("3_ck6ya")
+texture_disabled = ExtResource("4_t3576")
+texture_focused = ExtResource("3_ck6ya")
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]

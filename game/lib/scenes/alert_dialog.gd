@@ -1,6 +1,7 @@
 extends Dialog
 
 @onready var button_ok:Button = $Panel/Content/VBoxContainer/Bottom/ButtonOk
+@onready var icon_ok:TextureRect = $Panel/Content/VBoxContainer/Bottom/IconOk
 @onready var title:Label = $Panel/Content/VBoxContainer/Top/Label
 @onready var message:Label = $Panel/Content/VBoxContainer/Label
 
@@ -17,4 +18,4 @@ func open(_title:String, _message:String, _free=true):
 	button_ok.grab_focus()
 
 func set_shortcuts():
-	Tools.set_shortcut_icon(button_ok, Tools.SHORTCUT_ACCEPT)
+	Tools.set_shortcut_icon(icon_ok, Tools.SHORTCUT_ACCEPT)
