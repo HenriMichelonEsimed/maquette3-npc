@@ -144,6 +144,10 @@ view_down={
 ]
 }
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [internationalization]
 
 locale/translations=PackedStringArray("res://assets/i18n/items.fr.translation", "res://assets/i18n/main.en.translation", "res://assets/i18n/main.fr.translation", "res://assets/i18n/quest_main.fr.translation", "res://assets/i18n/quest_main_dialogs.fr.translation", "res://assets/i18n/zones.fr.translation")
@@ -165,7 +169,6 @@ locale/translations=PackedStringArray("res://assets/i18n/items.fr.translation", 
 
 [rendering]
 
-renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
-anti_aliasing/quality/msaa_3d=1
+anti_aliasing/quality/msaa_3d=2
 anti_aliasing/quality/screen_space_aa=1

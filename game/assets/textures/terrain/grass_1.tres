@@ -1,30 +1,31 @@
-[gd_resource type="Terrain3DTextureList" load_steps=10 format=3 uid="uid://cj1kghcesgolx"]
+[gd_resource type="Terrain3DTextureList" load_steps=10 format=3 uid="uid://bgeuxwtfr5iw4"]
 
-[ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/Ground037_albedo_height.dds" id="1_awlom"]
-[ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/Ground037_normal_roughness.dds" id="2_qc6me"]
-[ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/Gravel032_albedo_height.dds" id="3_45bm6"]
-[ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/Gravel032_normal_roughness.dds" id="4_hvp0x"]
-[ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/PavingStones131_albedo_height.dds" id="5_7alrw"]
-[ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/PavingStones131_normal_roughness.dds" id="6_qnyys"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/Ground037_albedo_height.dds" id="1_sg0pq"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/Ground037_normal_roughness.dds" id="2_sptu6"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/Gravel032_albedo_height.dds" id="3_s6ggt"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/Gravel032_normal_roughness.dds" id="4_7pvme"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/PavingStones131_albedo_height.dds" id="5_e1ksy"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/PavingStones131_normal_roughness.dds" id="6_qs0pr"]
 
 [sub_resource type="Terrain3DTexture" id="Terrain3DTexture_xr84q"]
 name = "Ground037"
-albedo_texture = ExtResource("1_awlom")
-normal_texture = ExtResource("2_qc6me")
+albedo_texture = ExtResource("1_sg0pq")
+normal_texture = ExtResource("2_sptu6")
 uv_rotation = 0.5
 
 [sub_resource type="Terrain3DTexture" id="Terrain3DTexture_2ekjx"]
 name = "Gravel032"
 texture_id = 1
-albedo_texture = ExtResource("3_45bm6")
-normal_texture = ExtResource("4_hvp0x")
+albedo_texture = ExtResource("3_s6ggt")
+normal_texture = ExtResource("4_7pvme")
 uv_scale = 0.2
 uv_rotation = 0.25
 
 [sub_resource type="Terrain3DTexture" id="Terrain3DTexture_s3p74"]
+name = "PavingStones131"
 texture_id = 2
-albedo_texture = ExtResource("5_7alrw")
-normal_texture = ExtResource("6_qnyys")
+albedo_texture = ExtResource("5_e1ksy")
+normal_texture = ExtResource("6_qs0pr")
 uv_scale = 0.4
 uv_rotation = 1.0
 

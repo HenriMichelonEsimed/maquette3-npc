@@ -45,6 +45,10 @@ func _process(_delta):
 	elif Input.is_action_just_released("player_moveto"):
 		stop_move_to()
 
+func _unhandled_input(event):
+	if (event is InputEventScreenTouch) and (event.pressed):
+		move_to(event.position)
+
 func _physics_process(delta):
 	var on_floor = is_on_floor_only() 
 	if (move_to_target != null):

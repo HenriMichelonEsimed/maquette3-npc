@@ -4,7 +4,6 @@
 [ext_resource type="FontFile" uid="uid://cave61j52xeuh" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_xy6rd"]
 [ext_resource type="Script" path="res://addons/fontawesome/FontAwesomeButton.gd" id="4_r3gtb"]
 
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3xv2i"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
