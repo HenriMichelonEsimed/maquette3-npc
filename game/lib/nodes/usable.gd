@@ -29,9 +29,9 @@ func _ready():
 	if (sound != null):
 		audio = AudioStreamPlayer3D.new()
 		audio.stream = sound
-		audio.max_distance = 5
-		audio.bus = "Effects"
-		audio.volume_db = 35
+		#audio.max_distance = 5
+		audio.bus = Consts.AUDIO_BUS_EFFECTS
+		audio.volume_db = Consts.AUDIO_VOLUME_EFFECTS
 		add_child(audio)
 
 func _check_item_use(message_locked:String, message_unlocked:String, tools_to_use:Array) -> bool:

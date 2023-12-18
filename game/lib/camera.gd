@@ -117,10 +117,10 @@ func _set_camera_collider(collider:Node3D, alpha:float):
 	var mesh = child_mesh.mesh
 	for i in range(0, mesh.get_surface_count()):
 		var mat = mesh.surface_get_material(0).duplicate(0)
-		mat.albedo_color.a = alpha
-		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		child_mesh.set_surface_override_material(i, mat)
-		last_collider_mesh.push_back(child_mesh)
+		if (mat is ShaderMaterial):
+				mat.set_shader_parameter("alpha", alpha)
+				child_mesh.set_surface_override_material(i, mat)
+				last_collider_mesh.push_back(child_mesh)
 
 func _reset_camera_collider():
 	if (last_collider != null):

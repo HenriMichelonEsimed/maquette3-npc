@@ -1,39 +1,44 @@
-[gd_scene load_steps=12 format=3 uid="uid://0326gqgjjtkv"]
+[gd_scene load_steps=14 format=3 uid="uid://0326gqgjjtkv"]
 
 [ext_resource type="Script" path="res://lib/nodes/zone.gd" id="1_3tay3"]
 [ext_resource type="Terrain3DMaterial" uid="uid://bh2je3jcyw70l" path="res://assets/materials/terrain/grass_1.tres" id="2_6mkug"]
-[ext_resource type="Terrain3DStorage" uid="uid://bdhcxlnuwbkom" path="res://zones/start/level_0/new_terrain_3d_storage.res" id="2_anqla"]
+[ext_resource type="Terrain3DStorage" uid="uid://ddi65i8xp6j8g" path="res://zones/start/level_0/terrain_3d_storage.res" id="2_cyd0x"]
 [ext_resource type="Terrain3DTextureList" uid="uid://cj1kghcesgolx" path="res://assets/textures/terrain/grass_1.tres" id="3_hkils"]
 [ext_resource type="Script" path="res://lib/nodes/spawn_point.gd" id="4_t10wc"]
 [ext_resource type="PackedScene" uid="uid://8exssb37mmo0" path="res://models/houses/house_4.tscn" id="6_mymwc"]
 [ext_resource type="PackedScene" uid="uid://cj08ptyc2qkgf" path="res://models/props/props_table_square_6.tscn" id="7_7wiix"]
 [ext_resource type="PackedScene" uid="uid://bg0r0oavteps7" path="res://models/props/props_bench_3.tscn" id="8_ae1di"]
+[ext_resource type="PackedScene" uid="uid://nw1j8fieurje" path="res://models/props/props_chair_1.tscn" id="9_qf2kj"]
+[ext_resource type="PackedScene" uid="uid://i31tj4mbtwam" path="res://models/props/candle_stick_1.tscn" id="10_olhy4"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_amooi"]
-sky_horizon_color = Color(0.629583, 0.6635, 0.649265, 1)
-ground_bottom_color = Color(0.133333, 0.2, 0.0470588, 1)
-ground_horizon_color = Color(0.629583, 0.6635, 0.649265, 1)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_whqtd"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
-[sub_resource type="Sky" id="Sky_3ftu3"]
-sky_material = SubResource("ProceduralSkyMaterial_amooi")
+[sub_resource type="Sky" id="Sky_25gs6"]
+sky_material = SubResource("ProceduralSkyMaterial_whqtd")
 
-[sub_resource type="Environment" id="Environment_o5rfs"]
+[sub_resource type="Environment" id="Environment_7k2up"]
 background_mode = 2
-sky = SubResource("Sky_3ftu3")
+sky = SubResource("Sky_25gs6")
 tonemap_mode = 2
+ssao_enabled = true
+sdfgi_enabled = true
 glow_enabled = true
 
 [node name="Level0" type="Node3D"]
 script = ExtResource("1_3tay3")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_o5rfs")
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.917158, 0.0956773, 0.386867, 0.158518, 0.978238, 0.133873, -0.36564, 0.184108, -0.912366, 0, 114.01, 0)
+transform = Transform3D(-0.233445, 0.779622, -0.581113, 0, 0.597625, 0.801776, 0.97237, 0.187171, -0.139513, 0, 0, 0)
+light_color = Color(0.811765, 0.811765, 0.811765, 1)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7k2up")
 
 [node name="Terrain3D" type="Terrain3D" parent="."]
-storage = ExtResource("2_anqla")
+storage = ExtResource("2_cyd0x")
 material = ExtResource("2_6mkug")
 texture_list = ExtResource("3_hkils")
 
@@ -52,3 +57,12 @@ transform = Transform3D(0.992271, 0, 0.124086, 0, 1, 0, -0.124086, 0, 0.992271, 
 
 [node name="Props_Bench_4" parent="House_4" instance=ExtResource("8_ae1di")]
 transform = Transform3D(0.999796, 0, -0.0201571, 0, 1, 0, 0.0201571, 0, 0.999796, 1.04828, 0, -2.35141)
+
+[node name="Props_Chair_1" parent="House_4" instance=ExtResource("9_qf2kj")]
+transform = Transform3D(0.90744, 0, 0.420181, 0, 1, 0, -0.420181, 0, 0.90744, -0.572571, 0, -1.20389)
+
+[node name="Props_Chair_2" parent="House_4" instance=ExtResource("9_qf2kj")]
+transform = Transform3D(0.226533, 0, -0.974003, 0, 1, 0, 0.974003, 0, 0.226533, 2.70306, 0, -1.50186)
+
+[node name="candle_stick_1" parent="." instance=ExtResource("10_olhy4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 535.445, 1.04663, 519.312)

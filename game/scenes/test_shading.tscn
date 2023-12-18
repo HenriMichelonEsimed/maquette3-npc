@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://vufx2ryqto14"]
+
+[ext_resource type="PackedScene" uid="uid://d1ermqbxnym0c" path="res://models/HouseAndPropsPack/Scenes/Houses/house_3.tscn" id="1_5c85h"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d6pok"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_4ba7e"]
+sky_material = SubResource("ProceduralSkyMaterial_d6pok")
+
+[sub_resource type="Environment" id="Environment_5g4d4"]
+background_mode = 2
+sky = SubResource("Sky_4ba7e")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="TestShading" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5g4d4")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+size = Vector3(1000, 0.1, 1000)
+
+[node name="House_3" parent="." instance=ExtResource("1_5c85h")]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://b873fs2lbtp6t"]
+[gd_scene load_steps=15 format=3 uid="uid://b873fs2lbtp6t"]
 
 [ext_resource type="Script" path="res://lib/scenes/main_ui.gd" id="1_ghhs3"]
 [ext_resource type="FontFile" uid="uid://cave61j52xeuh" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="1_ni5mw"]
 [ext_resource type="Script" path="res://addons/fontawesome/FontAwesome.gd" id="2_ur2r2"]
 [ext_resource type="Script" path="res://addons/fontawesome/FontAwesomeButton.gd" id="5_utbrf"]
+[ext_resource type="StyleBox" uid="uid://47euwrbfa4s2" path="res://assets/styles/info_label.tres" id="6_2hh53"]
 [ext_resource type="Shader" path="res://assets/shaders/blur.gdshader" id="7_4jbex"]
 [ext_resource type="PackedScene" uid="uid://r3fibn5pmeaq" path="res://scenes/ui/tool_panel.tscn" id="8_qxtma"]
 [ext_resource type="Texture2D" uid="uid://cchdrpgcvbdw2" path="res://assets/textures/compass.png" id="9_sflov"]
@@ -95,6 +96,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LabelNotification" type="Label" parent="HUD"]
+custom_minimum_size = Vector2(280, 0)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -110,6 +112,7 @@ theme_override_constants/shadow_offset_y = 1
 theme_override_constants/outline_size = 1
 theme_override_constants/shadow_outline_size = 2
 theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = ExtResource("6_2hh53")
 text = "Notif"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -125,6 +128,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="LabelInfo" type="Label" parent="HUD"]
+custom_minimum_size = Vector2(280, 0)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -144,16 +148,21 @@ theme_override_constants/shadow_offset_y = 1
 theme_override_constants/outline_size = 1
 theme_override_constants/shadow_outline_size = 2
 theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = ExtResource("6_2hh53")
 text = "Infos"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Icon" type="TextureRect" parent="HUD/LabelInfo"]
-layout_mode = 0
-offset_left = -5.0
-offset_top = 5.0
-offset_right = 33.0
-offset_bottom = 42.0
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = -18.0
+offset_right = 70.0
+offset_bottom = 19.0
+grow_vertical = 2
 
 [node name="PanelTool" parent="HUD" instance=ExtResource("8_qxtma")]
 layout_mode = 1

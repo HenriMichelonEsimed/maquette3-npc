@@ -155,9 +155,17 @@ locale/translations=PackedStringArray("res://assets/i18n/items.fr.translation", 
 3d_render/layer_3="player"
 3d_physics/layer_1="world"
 3d_physics/layer_2="roofs"
+3d_physics/layer_3="item"
+3d_physics/layer_4="usable"
+3d_physics/layer_5="trigger"
+3d_physics/layer_6="character"
+3d_physics/layer_7="moveable props"
+3d_physics/layer_8="water"
+3d_physics/layer_10="player"
 
 [rendering]
 
+renderer/rendering_method="mobile"
 textures/vram_compression/import_etc2_astc=true
 anti_aliasing/quality/msaa_3d=1
 anti_aliasing/quality/screen_space_aa=1

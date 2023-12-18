@@ -188,19 +188,13 @@ func update_oxygen():
 	else:
 		panel_oxygen.visible = false
 
-func _label_info_position():
-	#label_info.position = crosshair.position
-	#label_info.position.y += 30
-	#label_info.position.x += 40
-	pass
-	
 func _on_display_info(node:Node3D):
 	_displayed_node = node
 	var label:String = tr(str(_displayed_node))
 	if (label.is_empty()): 
 		label = str(node)
+	label_info.position = camera_pivot.camera.unproject_position(node.global_position)
 	label_info.text = label
-	_label_info_position()
 	label_info.visible = true
 
 func hide_info():

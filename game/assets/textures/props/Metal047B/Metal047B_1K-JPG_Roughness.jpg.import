@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dc6p0k0eabew3"
-path.s3tc="res://.godot/imported/BASE COLOR_TrimProps.png-20b971952fecb3fc3db8fcc5159124f3.s3tc.ctex"
-path.etc2="res://.godot/imported/BASE COLOR_TrimProps.png-20b971952fecb3fc3db8fcc5159124f3.etc2.ctex"
+uid="uid://cqku5hxy23x6g"
+path.s3tc="res://.godot/imported/Metal047B_1K-JPG_Roughness.jpg-a31ba56a04e614488c0522f77fbc11cb.s3tc.ctex"
+path.etc2="res://.godot/imported/Metal047B_1K-JPG_Roughness.jpg-a31ba56a04e614488c0522f77fbc11cb.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://models/HouseAndPropsPack/Textures/TrimProps/BASE COLOR_TrimProps.png"
-dest_files=["res://.godot/imported/BASE COLOR_TrimProps.png-20b971952fecb3fc3db8fcc5159124f3.s3tc.ctex", "res://.godot/imported/BASE COLOR_TrimProps.png-20b971952fecb3fc3db8fcc5159124f3.etc2.ctex"]
+source_file="res://assets/textures/props/Metal047B/Metal047B_1K-JPG_Roughness.jpg"
+dest_files=["res://.godot/imported/Metal047B_1K-JPG_Roughness.jpg-a31ba56a04e614488c0522f77fbc11cb.s3tc.ctex", "res://.godot/imported/Metal047B_1K-JPG_Roughness.jpg-a31ba56a04e614488c0522f77fbc11cb.etc2.ctex"]
 
 [params]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ivcv7ha5o1qk"]
 
-[ext_resource type="Material" uid="uid://oy0hs84vtoji" path="res://Assets/LoafbrrAssets/HouseAndPropsPack/Material/Trim_Props.material" id="1_edcpw"]
+[ext_resource type="Material" uid="uid://oy0hs84vtoji" path="res://assets/materials/props/Trim_Props.material" id="1_edcpw"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_h4l3s"]
 _surfaces = [{

@@ -1,10 +1,13 @@
-[gd_scene load_steps=27 format=3 uid="uid://8exssb37mmo0"]
+[gd_scene load_steps=30 format=3 uid="uid://8exssb37mmo0"]
 
 [ext_resource type="Material" uid="uid://0j2ge6ftyhb5" path="res://assets/materials/architecture/Planks037A.tres" id="3_4mtgp"]
+[ext_resource type="Material" uid="uid://h88nel3i3vvl" path="res://assets/materials/architecture/WoodSiding010_.tres" id="3_buo4v"]
 [ext_resource type="Material" uid="uid://cj05l7mj26q3b" path="res://assets/materials/architecture/Planks023B.tres" id="4_e7oak"]
-[ext_resource type="Material" uid="uid://c4xlc6cnk56ab" path="res://assets/materials/architecture/WoodSiding010.tres" id="5_xrgb2"]
-[ext_resource type="Material" uid="uid://c8e1dkq4vy1v1" path="res://models/HouseAndPropsPack/Material/Glass.material" id="6_6e8pk"]
-[ext_resource type="Material" uid="uid://7nmyonm8cmtn" path="res://assets/materials/architecture/WoodSiding011.tres" id="6_t7tlj"]
+[ext_resource type="Material" uid="uid://c6k6wwoml0xci" path="res://assets/materials/architecture/Planks023B_.tres" id="4_j2jge"]
+[ext_resource type="Material" uid="uid://w36iyiv2joqk" path="res://assets/materials/architecture/WoodSiding011_.tres" id="5_d2uue"]
+[ext_resource type="Material" uid="uid://cserma4al0pjw" path="res://assets/materials/windows_glasses_1.tres" id="5_e62n8"]
+[ext_resource type="PackedScene" uid="uid://drd7j1wr2svyx" path="res://models/doors/door_normal_1.tscn" id="6_b7mto"]
+[ext_resource type="Material" uid="uid://c0yaqio3u81th" path="res://assets/materials/architecture/Planks037A_.tres" id="7_qq4lu"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ujmqi"]
 _surfaces = [{
@@ -120,7 +123,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 24,
 "index_data": PackedByteArray(3, 0, 0, 0, 2, 0, 3, 0, 1, 0, 0, 0, 6, 0, 4, 0, 7, 0, 6, 0, 5, 0, 4, 0, 8, 0, 15, 0, 14, 0, 8, 0, 9, 0, 15, 0, 13, 0, 10, 0, 12, 0, 13, 0, 11, 0, 10, 0),
-"material": ExtResource("4_e7oak"),
+"material": ExtResource("3_4mtgp"),
 "name": "Wall_Outer",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -155,7 +158,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 96,
 "index_data": PackedByteArray(0, 0, 6, 0, 2, 0, 0, 0, 4, 0, 6, 0, 5, 0, 14, 0, 7, 0, 5, 0, 12, 0, 14, 0, 13, 0, 11, 0, 15, 0, 13, 0, 9, 0, 11, 0, 8, 0, 3, 0, 10, 0, 8, 0, 1, 0, 3, 0, 16, 0, 22, 0, 18, 0, 16, 0, 20, 0, 22, 0, 21, 0, 30, 0, 23, 0, 21, 0, 28, 0, 30, 0, 29, 0, 27, 0, 31, 0, 29, 0, 25, 0, 27, 0, 24, 0, 19, 0, 26, 0, 24, 0, 17, 0, 19, 0, 33, 0, 39, 0, 35, 0, 33, 0, 37, 0, 39, 0, 36, 0, 47, 0, 38, 0, 36, 0, 45, 0, 47, 0, 44, 0, 42, 0, 46, 0, 44, 0, 40, 0, 42, 0, 41, 0, 34, 0, 43, 0, 41, 0, 32, 0, 34, 0, 49, 0, 55, 0, 51, 0, 49, 0, 53, 0, 55, 0, 52, 0, 63, 0, 54, 0, 52, 0, 61, 0, 63, 0, 60, 0, 58, 0, 62, 0, 60, 0, 56, 0, 58, 0, 57, 0, 50, 0, 59, 0, 57, 0, 48, 0, 50, 0),
-"material": ExtResource("4_e7oak"),
+"material": ExtResource("4_j2jge"),
 "name": "Trim_Wood",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -207,7 +210,7 @@ _surfaces = [{
 "format": 34359742495,
 "index_count": 96,
 "index_data": PackedByteArray(18, 0, 15, 0, 5, 0, 15, 0, 21, 0, 12, 0, 6, 0, 15, 0, 18, 0, 15, 0, 6, 0, 21, 0, 17, 0, 1, 0, 16, 0, 17, 0, 3, 0, 1, 0, 9, 0, 14, 0, 11, 0, 9, 0, 48, 0, 14, 0, 19, 0, 10, 0, 20, 0, 19, 0, 8, 0, 10, 0, 4, 0, 47, 0, 2, 0, 4, 0, 13, 0, 47, 0, 28, 0, 23, 0, 26, 0, 28, 0, 30, 0, 23, 0, 38, 0, 43, 0, 58, 0, 38, 0, 40, 0, 43, 0, 37, 0, 29, 0, 32, 0, 37, 0, 34, 0, 29, 0, 39, 0, 25, 0, 42, 0, 39, 0, 27, 0, 25, 0, 57, 0, 36, 0, 31, 0, 57, 0, 55, 0, 36, 0, 53, 0, 59, 0, 51, 0, 53, 0, 56, 0, 59, 0, 54, 0, 33, 0, 35, 0, 54, 0, 52, 0, 33, 0, 49, 0, 46, 0, 7, 0, 46, 0, 50, 0, 0, 0, 45, 0, 46, 0, 49, 0, 46, 0, 45, 0, 50, 0, 24, 0, 44, 0, 41, 0, 24, 0, 22, 0, 44, 0),
-"material": ExtResource("5_xrgb2"),
+"material": ExtResource("3_buo4v"),
 "name": "Roof",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -219,7 +222,7 @@ _surfaces = [{
 "format": 34359742495,
 "index_count": 12,
 "index_data": PackedByteArray(6, 0, 0, 0, 1, 0, 6, 0, 4, 0, 0, 0, 5, 0, 2, 0, 3, 0, 5, 0, 7, 0, 2, 0),
-"material": ExtResource("4_e7oak"),
+"material": ExtResource("4_j2jge"),
 "name": "WoodDeck",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -295,7 +298,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 81,
 "index_data": PackedByteArray(9, 0, 17, 0, 11, 0, 7, 0, 5, 0, 1, 0, 7, 0, 10, 0, 5, 0, 11, 0, 8, 0, 9, 0, 11, 0, 4, 0, 8, 0, 6, 0, 8, 0, 3, 0, 6, 0, 10, 0, 8, 0, 15, 0, 12, 0, 18, 0, 15, 0, 13, 0, 12, 0, 12, 0, 16, 0, 18, 0, 27, 0, 19, 0, 29, 0, 27, 0, 22, 0, 19, 0, 27, 0, 25, 0, 21, 0, 27, 0, 30, 0, 25, 0, 28, 0, 31, 0, 24, 0, 31, 0, 29, 0, 20, 0, 31, 0, 28, 0, 29, 0, 26, 0, 28, 0, 23, 0, 26, 0, 30, 0, 28, 0, 34, 0, 33, 0, 35, 0, 34, 0, 32, 0, 33, 0, 37, 0, 40, 0, 36, 0, 40, 0, 39, 0, 38, 0, 40, 0, 37, 0, 39, 0, 0, 0, 14, 0, 16, 0, 7, 0, 17, 0, 9, 0, 7, 0, 2, 0, 17, 0),
-"material": ExtResource("6_t7tlj"),
+"material": ExtResource("5_d2uue"),
 "name": "Wall_Outer",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -319,7 +322,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 24,
 "index_data": PackedByteArray(2, 0, 7, 0, 3, 0, 2, 0, 6, 0, 7, 0, 4, 0, 1, 0, 5, 0, 4, 0, 0, 0, 1, 0, 10, 0, 15, 0, 11, 0, 10, 0, 14, 0, 15, 0, 12, 0, 9, 0, 13, 0, 12, 0, 8, 0, 9, 0),
-"material": ExtResource("6_6e8pk"),
+"material": ExtResource("5_e62n8"),
 "name": "Glass",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -351,7 +354,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 78,
 "index_data": PackedByteArray(6, 0, 8, 0, 14, 0, 4, 0, 2, 0, 7, 0, 4, 0, 11, 0, 2, 0, 8, 0, 5, 0, 1, 0, 8, 0, 6, 0, 5, 0, 3, 0, 5, 0, 7, 0, 3, 0, 0, 0, 5, 0, 12, 0, 9, 0, 10, 0, 12, 0, 15, 0, 9, 0, 9, 0, 15, 0, 13, 0, 24, 0, 16, 0, 19, 0, 24, 0, 26, 0, 16, 0, 24, 0, 22, 0, 27, 0, 24, 0, 18, 0, 22, 0, 23, 0, 25, 0, 27, 0, 23, 0, 20, 0, 25, 0, 28, 0, 25, 0, 21, 0, 25, 0, 17, 0, 26, 0, 25, 0, 28, 0, 17, 0, 31, 0, 30, 0, 29, 0, 31, 0, 32, 0, 30, 0, 36, 0, 37, 0, 35, 0, 37, 0, 34, 0, 33, 0, 37, 0, 36, 0, 34, 0, 4, 0, 14, 0, 11, 0, 4, 0, 6, 0, 14, 0),
-"material": ExtResource("3_4mtgp"),
+"material": ExtResource("7_qq4lu"),
 "name": "Wall_Interior",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -384,7 +387,7 @@ skeleton = NodePath("")
 shape = SubResource("ConcavePolygonShape3D_5b8ig")
 
 [node name="House4_Foundation" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.0444002, -4)
+transform = Transform3D(1.01, 0, 0, 0, 1.01, 0, 0, 0, 1.01, 2, 0.044, -4)
 mesh = SubResource("ArrayMesh_wsc4o")
 skeleton = NodePath("")
 
@@ -424,11 +427,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -6.9556, 3)
 shape = SubResource("ConcavePolygonShape3D_34wig")
 
 [node name="House4_Wall" type="MeshInstance3D" parent="." groups=["96YC6"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.0444002, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.044, 2)
 mesh = SubResource("ArrayMesh_1wole")
 skeleton = NodePath("")
 
 [node name="House4_Wall_in" type="MeshInstance3D" parent="." groups=["96YC6"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.0444002, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.044, 2)
 mesh = SubResource("ArrayMesh_fsl6g")
 skeleton = NodePath("")
+
+[node name="DoorNormal1" parent="." instance=ExtResource("6_b7mto")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.36494, 0.0944002, 1.92747)

@@ -19,5 +19,5 @@ player = NodePath("../Player")
 camera_pivot = NodePath("../CameraPivot")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer3D" parent="."]
-volume_db = 10.0
+volume_db = 50.0
 bus = &"Effects"
