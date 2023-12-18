@@ -32,7 +32,7 @@ const SHORTCUT_USE = "use"
 const SHORTCUT_ALL = "all"
 const SHORTCUT_ACCEPT = "accept"
 
-const ITEMS_PATH = [ 'tools', 'consum', 'misc', 'quest']
+const ITEMS_PATH = [ 'weapons', 'tools', 'consum', 'misc', 'quest']
 
 static func load_shortcut_icon(name:String):
 	var controller = CONTROLLER_KEYBOARD

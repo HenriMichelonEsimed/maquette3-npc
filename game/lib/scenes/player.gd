@@ -13,6 +13,8 @@ const walking_jump_impulse:float = 20.0
 
 var anim:AnimationPlayer
 var camera:IsometricCamera
+var character:Node3D
+var attach_item:Node3D
 
 # for move_and_slide()
 var speed:float = 0.0
@@ -35,19 +37,17 @@ const directions = {
 }
 
 func _ready():
+	character = get_node("Character")
 	anim = $Character.get_node("AnimationPlayer")
 	camera = camera_pivot.get_node("Camera")
 	camera.connect("view_rotate", _on_view_rotate)
+	attach_item = character.get_node("RootNode/Skeleton3D/HandAttachment/AttachmentPoint")
 	
 func _process(_delta):
 	if Input.is_action_pressed("player_moveto"):
 		move_to(get_viewport().get_mouse_position())
 	elif Input.is_action_just_released("player_moveto"):
 		stop_move_to()
-
-func _unhandled_input(event):
-	if (event is InputEventScreenTouch) and (event.pressed):
-		move_to(event.position)
 
 func _physics_process(delta):
 	var on_floor = is_on_floor_only() 
@@ -175,3 +175,9 @@ func _look_at(node:Node3D):
 
 func _on_view_rotate(view:int):
 	current_view = view
+
+func handle_item():
+	attach_item.add_child(GameState.current_item)
+
+func unhandle_item():
+	attach_item.remove_child(GameState.current_item)

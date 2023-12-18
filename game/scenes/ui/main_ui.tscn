@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b873fs2lbtp6t"]
+[gd_scene load_steps=15 format=3 uid="uid://b873fs2lbtp6t"]
 
 [ext_resource type="Script" path="res://lib/scenes/main_ui.gd" id="1_ghhs3"]
 [ext_resource type="FontFile" uid="uid://cave61j52xeuh" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="1_ni5mw"]
@@ -32,9 +32,6 @@ expand_margin_left = 4.0
 expand_margin_top = 4.0
 expand_margin_right = 4.0
 expand_margin_bottom = 4.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wioo7"]
-bg_color = Color(0, 0, 0, 0.478431)
 
 [node name="MainUI" type="Control"]
 process_mode = 3
@@ -383,15 +380,6 @@ script = ExtResource("5_utbrf")
 icon_size = 32
 icon_name = "person-walking-arrow-right"
 
-[node name="Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 23.0
-offset_top = 109.0
-offset_right = 198.0
-offset_bottom = 221.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_wioo7")
-text = "QUIT"
-
 [connection signal="timeout" from="LabelSaving/Timer" to="." method="_on_saving_timer_timeout"]
 [connection signal="timeout" from="HUD/LabelNotification/Timer" to="." method="_on_timer_notif_timeout"]
 [connection signal="pressed" from="Menu/MainMenu/ButtonInventory" to="." method="inventory_open"]
@@ -400,4 +388,3 @@ text = "QUIT"
 [connection signal="pressed" from="Menu/SubMenu/ButtonSettings" to="." method="settings_open"]
 [connection signal="pressed" from="Menu/SubMenu/ButtonKeymaps" to="." method="display_keymaps"]
 [connection signal="pressed" from="Menu/SubMenu/ButtonQuit" to="." method="_on_button_quit_pressed"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

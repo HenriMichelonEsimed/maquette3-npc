@@ -46,7 +46,6 @@ environment = SubResource("Environment_7k2up")
 storage = ExtResource("2_cyd0x")
 material = ExtResource("2_6mkug")
 texture_list = ExtResource("3_hkils")
-debug_level = 1
 
 [node name="SpawnPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 527.995, 0, 518.207)
@@ -56,25 +55,25 @@ script = ExtResource("4_t10wc")
 transform = Transform3D(0.158382, 0, -0.987378, 0, 1, 0, 0.987378, 0, 0.158382, 534.128, 0, 519.121)
 
 [node name="Props_Table_Square_6" parent="House_4" instance=ExtResource("7_7wiix")]
-transform = Transform3D(0.999999, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 0.999999, -1.73981, 0, -1.78436)
+transform = Transform3D(0.999999, 0, 4.47035e-08, 0, 1, 0, -4.47035e-08, 0, 0.999999, -1.66705, 0, -2.23816)
 
 [node name="Props_Bench_3" parent="House_4" instance=ExtResource("8_ae1di")]
-transform = Transform3D(0.992271, 0, 0.124086, 0, 1, 0, -0.124086, 0, 0.992271, -1.79492, 0, -0.77713)
+transform = Transform3D(0.992271, 0, 0.124086, 0, 1, 0, -0.124086, 0, 0.992271, -1.72198, 0, -1.23102)
 
 [node name="Props_Bench_4" parent="House_4" instance=ExtResource("8_ae1di")]
-transform = Transform3D(0.999796, 0, -0.0201571, 0, 1, 0, 0.0201571, 0, 0.999796, -1.87518, 0, -2.82016)
+transform = Transform3D(0.999796, 0, -0.0201571, 0, 1, 0, 0.0201571, 0, 0.999796, -1.80237, 0, -3.27396)
 
 [node name="Props_Chair_1" parent="House_4" instance=ExtResource("9_qf2kj")]
-transform = Transform3D(0.90744, 0, 0.420181, 0, 1, 0, -0.420181, 0, 0.90744, -3.49597, 0, -1.67282)
+transform = Transform3D(0.90744, 0, 0.420181, 0, 1, 0, -0.420181, 0, 0.90744, -3.42316, 0, -2.12674)
 
 [node name="Props_Chair_2" parent="House_4" instance=ExtResource("9_qf2kj")]
-transform = Transform3D(0.226533, 0, -0.974003, 0, 1, 0, 0.974003, 0, 0.226533, -0.220276, 0, -1.97079)
+transform = Transform3D(0.226533, 0, -0.974003, 0, 1, 0, 0.974003, 0, 0.226533, -0.1474, 0, -2.42471)
 
 [node name="candle_stick_1" parent="House_4" instance=ExtResource("10_olhy4")]
-transform = Transform3D(0.158382, 0, 0.987377, 0, 1, 0, -0.987377, 0, 0.158382, -1.36737, 1.04663, -1.7439)
+transform = Transform3D(0.158382, 0, 0.987377, 0, 1, 0, -0.987377, 0, 0.158382, -1.29462, 1.04663, -2.19778)
 
 [node name="candle_stick_2" parent="House_4" instance=ExtResource("10_olhy4")]
-transform = Transform3D(0.158382, 0, 0.987376, 0, 1, 0, -0.987376, 0, 0.158382, 2.12555, 0.59, -3.59656)
+transform = Transform3D(0.158382, 0, 0.987375, 0, 1, 0, -0.987375, 0, 0.158382, 2.1142, 0.603489, -3.52576)
 
 [node name="Props_Stool_1" parent="House_4" instance=ExtResource("12_qtfy5")]
 transform = Transform3D(0.0509414, 0, 0.998701, 0, 1, 0, -0.998701, 0, 0.0509414, 2.13232, 0, -3.52792)
@@ -83,10 +82,10 @@ transform = Transform3D(0.0509414, 0, 0.998701, 0, 1, 0, -0.998701, 0, 0.0509414
 transform = Transform3D(0.999759, 0, -0.0219369, 0, 1, 0, 0.0219369, 0, 0.999759, 3.12164, 0, -2.42111)
 
 [node name="plate_1" parent="House_4" instance=ExtResource("13_uu1cy")]
-transform = Transform3D(0.158382, 0, 0.987378, 0, 1, 0, -0.987378, 0, 0.158382, -2.04083, 1.047, -2.15005)
+transform = Transform3D(0.158382, 0, 0.987378, 0, 1, 0, -0.987378, 0, 0.158382, -1.96802, 1.047, -2.60397)
 
 [node name="plate_2" parent="House_4" instance=ExtResource("13_uu1cy")]
-transform = Transform3D(0.158382, 0, 0.987378, 0, 1, 0, -0.987378, 0, 0.158382, -1.1723, 1.047, -2.24451)
+transform = Transform3D(0.158382, 0, 0.987378, 0, 1, 0, -0.987378, 0, 0.158382, -1.09949, 1.047, -2.69843)
 
 [node name="bread_1" parent="House_4" instance=ExtResource("14_8ad0s")]
 transform = Transform3D(0.783834, 0, 0.62097, 0, 1, 0, -0.62097, 0, 0.783834, -1.82526, 1.04788, -1.7883)

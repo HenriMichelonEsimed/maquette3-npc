@@ -24,6 +24,7 @@ func _ready():
 	_change_zone(GameState.player_state.zone_name)
 	if (GameState.player_state.position != Vector3.ZERO):
 		player.move(GameState.player_state.position, GameState.player_state.rotation)
+	GameState.item_use(Tools.load_item(Item.ItemType.ITEM_WEAPONS, "long_blade_1"))
 	GameState.game_started = true
 
 func _change_zone(zone_name:String, spawnpoint_key:String="default"):

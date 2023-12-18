@@ -230,6 +230,5 @@ func _on_save_before_quit_confirm(save:bool):
 func _on_timer_notif_timeout():
 	label_notif.visible = false
 
-
 func _on_button_pressed():
 	get_tree().quit()

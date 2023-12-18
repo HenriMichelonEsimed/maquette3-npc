@@ -22,6 +22,10 @@ StateSaver="*res://lib/tools/state_saver.gd"
 GameState="*res://lib/states/game_state.gd"
 NotificationManager="*res://lib/tools/notification_manager.gd"
 
+[debug]
+
+shapes/collision/shape_color=Color(0, 0.6, 0.701961, 0.717647)
+
 [display]
 
 window/size/mode=3
