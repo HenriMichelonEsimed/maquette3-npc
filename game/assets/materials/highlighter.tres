@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://lelxekyd7rt8"]
+
+[ext_resource type="Shader" path="res://assets/shaders/highlighter.gdshader" id="1_arjgp"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_arjgp")
+shader_parameter/shine_color = Color(1, 1, 1, 0.615686)
+shader_parameter/cycle_interval = 4.0
+shader_parameter/shine_speed = 1.0
+shader_parameter/shine_width = 10.0

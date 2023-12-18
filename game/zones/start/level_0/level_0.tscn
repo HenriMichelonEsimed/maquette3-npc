@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://0326gqgjjtkv"]
+[gd_scene load_steps=19 format=3 uid="uid://0326gqgjjtkv"]
 
 [ext_resource type="Script" path="res://lib/nodes/zone.gd" id="1_3tay3"]
 [ext_resource type="Terrain3DMaterial" uid="uid://bh2je3jcyw70l" path="res://assets/materials/terrain/grass_1.tres" id="2_6mkug"]
@@ -10,6 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://bg0r0oavteps7" path="res://models/props/props_bench_3.tscn" id="8_ae1di"]
 [ext_resource type="PackedScene" uid="uid://nw1j8fieurje" path="res://models/props/props_chair_1.tscn" id="9_qf2kj"]
 [ext_resource type="PackedScene" uid="uid://i31tj4mbtwam" path="res://models/props/candle_stick_1.tscn" id="10_olhy4"]
+[ext_resource type="PackedScene" uid="uid://b3ml54ccl4q2q" path="res://models/props/bed_single_matress_1.tscn" id="12_46tgf"]
+[ext_resource type="PackedScene" uid="uid://brkyr72h4sr45" path="res://models/props/props_stool_1.tscn" id="12_qtfy5"]
+[ext_resource type="PackedScene" uid="uid://vl2uhbpvfq5d" path="res://models/props/plate_1.tscn" id="13_uu1cy"]
+[ext_resource type="PackedScene" uid="uid://do305lqtul3bk" path="res://models/items/consum/bread_1.tscn" id="14_8ad0s"]
+[ext_resource type="PackedScene" uid="uid://08mjxh8sadly" path="res://models/props/props_shelf_8.tscn" id="15_mcf0m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_whqtd"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -50,19 +55,40 @@ script = ExtResource("4_t10wc")
 transform = Transform3D(0.158382, 0, -0.987378, 0, 1, 0, 0.987378, 0, 0.158382, 534.128, 0, 519.121)
 
 [node name="Props_Table_Square_6" parent="House_4" instance=ExtResource("7_7wiix")]
-transform = Transform3D(0.999999, 0, 1.49012e-08, 0, 1, 0, -1.49012e-08, 0, 0.999999, 1.18359, 0, -1.31555)
+transform = Transform3D(0.999999, 0, 2.98023e-08, 0, 1, 0, -2.98023e-08, 0, 0.999999, -1.73981, 0, -1.78436)
 
 [node name="Props_Bench_3" parent="House_4" instance=ExtResource("8_ae1di")]
-transform = Transform3D(0.992271, 0, 0.124086, 0, 1, 0, -0.124086, 0, 0.992271, 1.1283, 0, -0.308197)
+transform = Transform3D(0.992271, 0, 0.124086, 0, 1, 0, -0.124086, 0, 0.992271, -1.79492, 0, -0.77713)
 
 [node name="Props_Bench_4" parent="House_4" instance=ExtResource("8_ae1di")]
-transform = Transform3D(0.999796, 0, -0.0201571, 0, 1, 0, 0.0201571, 0, 0.999796, 1.04828, 0, -2.35141)
+transform = Transform3D(0.999796, 0, -0.0201571, 0, 1, 0, 0.0201571, 0, 0.999796, -1.87518, 0, -2.82016)
 
 [node name="Props_Chair_1" parent="House_4" instance=ExtResource("9_qf2kj")]
-transform = Transform3D(0.90744, 0, 0.420181, 0, 1, 0, -0.420181, 0, 0.90744, -0.572571, 0, -1.20389)
+transform = Transform3D(0.90744, 0, 0.420181, 0, 1, 0, -0.420181, 0, 0.90744, -3.49597, 0, -1.67282)
 
 [node name="Props_Chair_2" parent="House_4" instance=ExtResource("9_qf2kj")]
-transform = Transform3D(0.226533, 0, -0.974003, 0, 1, 0, 0.974003, 0, 0.226533, 2.70306, 0, -1.50186)
+transform = Transform3D(0.226533, 0, -0.974003, 0, 1, 0, 0.974003, 0, 0.226533, -0.220276, 0, -1.97079)
 
-[node name="candle_stick_1" parent="." instance=ExtResource("10_olhy4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 535.445, 1.04663, 519.312)
+[node name="candle_stick_1" parent="House_4" instance=ExtResource("10_olhy4")]
+transform = Transform3D(0.158382, 0, 0.987377, 0, 1, 0, -0.987377, 0, 0.158382, -1.36737, 1.04663, -1.7439)
+
+[node name="candle_stick_2" parent="House_4" instance=ExtResource("10_olhy4")]
+transform = Transform3D(0.158382, 0, 0.987376, 0, 1, 0, -0.987376, 0, 0.158382, 2.12555, 0.59, -3.59656)
+
+[node name="Props_Stool_1" parent="House_4" instance=ExtResource("12_qtfy5")]
+transform = Transform3D(0.0509414, 0, 0.998701, 0, 1, 0, -0.998701, 0, 0.0509414, 2.13232, 0, -3.52792)
+
+[node name="bed_single_matress_1" parent="House_4" instance=ExtResource("12_46tgf")]
+transform = Transform3D(0.999759, 0, -0.0219369, 0, 1, 0, 0.0219369, 0, 0.999759, 3.12164, 0, -2.42111)
+
+[node name="plate_1" parent="House_4" instance=ExtResource("13_uu1cy")]
+transform = Transform3D(0.158382, 0, 0.987378, 0, 1, 0, -0.987378, 0, 0.158382, -2.04083, 1.047, -2.15005)
+
+[node name="plate_2" parent="House_4" instance=ExtResource("13_uu1cy")]
+transform = Transform3D(0.158382, 0, 0.987378, 0, 1, 0, -0.987378, 0, 0.158382, -1.1723, 1.047, -2.24451)
+
+[node name="bread_1" parent="House_4" instance=ExtResource("14_8ad0s")]
+transform = Transform3D(0.783834, 0, 0.62097, 0, 1, 0, -0.62097, 0, 0.783834, -1.82526, 1.04788, -1.7883)
+
+[node name="Props_Shelf_8" parent="House_4" instance=ExtResource("15_mcf0m")]
+transform = Transform3D(0.999619, 0, 0.0275902, 0, 1, 0, -0.0275902, 0, 0.999619, 1.75787, 0, 1.62506)

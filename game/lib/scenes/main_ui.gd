@@ -2,6 +2,7 @@ class_name MainUI extends Control
 
 @export var player:Player
 @export var camera_pivot:IsometricCameraPivot
+@export var  highlighter_material:Material
 
 @onready var label_saving:Label = $LabelSaving
 @onready var time_saving:Timer = $LabelSaving/Timer
@@ -28,6 +29,8 @@ var _displayed_node:Node
 var _restart_timer_notif:bool = false
 var _talk_screen:Dialog
 var _trade_screen:Dialog
+var _highlighted_mesh:MeshInstance3D
+var _highlighted_mat:Material
 
 func _ready():
 	blur.visible = false
@@ -196,10 +199,23 @@ func _on_display_info(node:Node3D):
 	label_info.position = camera_pivot.camera.unproject_position(node.global_position)
 	label_info.text = label
 	label_info.visible = true
+	var meshes = node.find_children("", "MeshInstance3D")
+	if (not meshes.is_empty()):
+		var mesh = meshes[0]
+		var mat = mesh.get_surface_override_material (0)
+		if (mat != null):
+			_highlighted_mat = mat
+			_highlighted_mesh = mesh
+			mat = mat.duplicate(0)
+			mat.next_pass = highlighter_material
+			mesh.set_surface_override_material(0, mat)
 
 func hide_info():
 	label_info.visible = false
 	label_info.text = ''
+	if (_highlighted_mesh != null):
+		_highlighted_mesh.set_surface_override_material(0, _highlighted_mat)
+		_highlighted_mesh = null
 
 func _on_button_quit_pressed():
 	var dlg = Tools.load_dialog(self, Tools.DIALOG_CONFIRM, menu_close)

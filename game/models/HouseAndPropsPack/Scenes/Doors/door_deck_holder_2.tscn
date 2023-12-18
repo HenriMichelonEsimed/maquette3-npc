@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cwcviofqkefag"]
 
-[ext_resource type="Material" uid="uid://cr35py5yx8oiv" path="res://Assets/LoafbrrAssets/HouseAndPropsPack/Material/Doors.material" id="1_ohtbj"]
+[ext_resource type="Material" uid="uid://cr35py5yx8oiv" path="res://assets/materials/props/Doors.material" id="1_ohtbj"]
 [ext_resource type="Script" path="res://Assets/LoafbrrAssets/HouseAndPropsPack/Script/DoorOpen.gd" id="1_vqwxd"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_jyaf3"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://cl4kbrot0uwb3"]
 
 [ext_resource type="Script" path="res://Assets/LoafbrrAssets/HouseAndPropsPack/Script/DoorOpen.gd" id="1_dbqu1"]
-[ext_resource type="Material" uid="uid://cr35py5yx8oiv" path="res://Assets/LoafbrrAssets/HouseAndPropsPack/Material/Doors.material" id="1_du5pt"]
+[ext_resource type="Material" uid="uid://cr35py5yx8oiv" path="res://assets/materials/props/Doors.material" id="1_du5pt"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_1k32k"]
 _surfaces = [{

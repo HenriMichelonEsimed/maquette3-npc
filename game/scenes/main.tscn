@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwxq715pl6q4l"]
+[gd_scene load_steps=6 format=3 uid="uid://dwxq715pl6q4l"]
 
 [ext_resource type="Script" path="res://lib/main.gd" id="1_t852q"]
 [ext_resource type="PackedScene" uid="uid://cdr3cai8xl20l" path="res://scenes/isometric_camera.tscn" id="2_sqsh1"]
 [ext_resource type="PackedScene" uid="uid://cfxsejwlekels" path="res://scenes/player.tscn" id="4_tan7v"]
 [ext_resource type="PackedScene" uid="uid://b873fs2lbtp6t" path="res://scenes/ui/main_ui.tscn" id="5_n75tm"]
+[ext_resource type="Material" uid="uid://lelxekyd7rt8" path="res://assets/materials/highlighter.tres" id="5_nt6im"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_t852q")
@@ -17,6 +18,7 @@ camera_pivot = NodePath("../CameraPivot")
 [node name="MainUI" parent="." node_paths=PackedStringArray("player", "camera_pivot") instance=ExtResource("5_n75tm")]
 player = NodePath("../Player")
 camera_pivot = NodePath("../CameraPivot")
+highlighter_material = ExtResource("5_nt6im")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer3D" parent="."]
 volume_db = 50.0

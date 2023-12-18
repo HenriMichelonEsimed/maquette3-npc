@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dddga7i3ntabg"
-path.s3tc="res://.godot/imported/Doors_Diffuse.png-13ac8a1ff9fb196086b594eea9d6c013.s3tc.ctex"
-path.etc2="res://.godot/imported/Doors_Diffuse.png-13ac8a1ff9fb196086b594eea9d6c013.etc2.ctex"
+path.s3tc="res://.godot/imported/Doors_Diffuse.png-c37ac0954f48abf235d25e1283f8e958.s3tc.ctex"
+path.etc2="res://.godot/imported/Doors_Diffuse.png-c37ac0954f48abf235d25e1283f8e958.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://models/HouseAndPropsPack/Textures/Doors/Doors_Diffuse.png"
-dest_files=["res://.godot/imported/Doors_Diffuse.png-13ac8a1ff9fb196086b594eea9d6c013.s3tc.ctex", "res://.godot/imported/Doors_Diffuse.png-13ac8a1ff9fb196086b594eea9d6c013.etc2.ctex"]
+source_file="res://assets/textures/props/Doors/Doors_Diffuse.png"
+dest_files=["res://.godot/imported/Doors_Diffuse.png-c37ac0954f48abf235d25e1283f8e958.s3tc.ctex", "res://.godot/imported/Doors_Diffuse.png-c37ac0954f48abf235d25e1283f8e958.etc2.ctex"]
 
 [params]
 

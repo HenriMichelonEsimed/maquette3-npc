@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://5cr4kaqxnk7y"]
 
 [ext_resource type="Script" path="res://Assets/LoafbrrAssets/HouseAndPropsPack/Script/DoorOpen.gd" id="1_k6r2q"]
-[ext_resource type="Material" uid="uid://cr35py5yx8oiv" path="res://Assets/LoafbrrAssets/HouseAndPropsPack/Material/Doors.material" id="1_qyew1"]
+[ext_resource type="Material" uid="uid://cr35py5yx8oiv" path="res://assets/materials/props/Doors.material" id="1_qyew1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_skmq8"]
 size = Vector3(2.514, 2.4, 3.5)
