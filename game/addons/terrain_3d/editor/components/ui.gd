@@ -11,11 +11,14 @@ const COLOR_RAISE := Color.WHITE
 const COLOR_LOWER := Color.BLACK
 const COLOR_SMOOTH := Color(0.5, 0, .1)
 const COLOR_EXPAND := Color.ORANGE
-const COLOR_REDUCE := Color.PURPLE
+const COLOR_REDUCE := Color.BLUE_VIOLET
 const COLOR_FLATTEN := Color(0., 0.32, .4)
 const COLOR_PAINT := Color.FOREST_GREEN
 const COLOR_SPRAY := Color.SEA_GREEN
 const COLOR_ROUGHNESS := Color.ROYAL_BLUE
+const COLOR_AUTOSHADER := Color.DODGER_BLUE
+const COLOR_HOLES := Color.BLACK
+const COLOR_NAVIGATION := Color.REBECCA_PURPLE
 const COLOR_PICK_COLOR := Color.WHITE
 const COLOR_PICK_HEIGHT := Color.DARK_RED
 const COLOR_PICK_ROUGH := Color.ROYAL_BLUE
@@ -75,17 +78,17 @@ func _exit_tree() -> void:
 
 func set_visible(p_visible: bool) -> void:
 	visible = p_visible
-	toolbar.set_visible(p_visible)
+	toolbar.set_visible(p_visible and plugin.terrain)
 	terrain_tools.set_visible(p_visible)
 	
-	if p_visible:
+	if p_visible and plugin.terrain:
 		p_visible = plugin.editor.get_tool() != Terrain3DEditor.REGION
-	toolbar_settings.set_visible(p_visible)
+	toolbar_settings.set_visible(p_visible and plugin.terrain)
 	update_decal()
 
 
 func _on_tool_changed(p_tool: Terrain3DEditor.Tool, p_operation: Terrain3DEditor.Operation) -> void:
-	if not visible:
+	if not visible or not plugin.terrain:
 		return
 
 	if plugin.editor:
@@ -103,6 +106,7 @@ func _on_tool_changed(p_tool: Terrain3DEditor.Tool, p_operation: Terrain3DEditor
 			to_hide.push_back("roughness")
 			to_hide.push_back("roughness picker")
 			to_hide.push_back("slope")
+			to_hide.push_back("enable")
 			if p_operation != Terrain3DEditor.REPLACE:
 				to_hide.push_back("height")
 				to_hide.push_back("height picker")
@@ -115,6 +119,7 @@ func _on_tool_changed(p_tool: Terrain3DEditor.Tool, p_operation: Terrain3DEditor
 			to_hide.push_back("roughness")
 			to_hide.push_back("roughness picker")
 			to_hide.push_back("slope")
+			to_hide.push_back("enable")
 			if p_operation == Terrain3DEditor.REPLACE:
 				to_hide.push_back("opacity")
 
@@ -124,6 +129,7 @@ func _on_tool_changed(p_tool: Terrain3DEditor.Tool, p_operation: Terrain3DEditor
 			to_hide.push_back("roughness")
 			to_hide.push_back("roughness picker")
 			to_hide.push_back("slope")
+			to_hide.push_back("enable")
 
 		elif p_tool == Terrain3DEditor.ROUGHNESS:
 			to_hide.push_back("height")
@@ -131,6 +137,17 @@ func _on_tool_changed(p_tool: Terrain3DEditor.Tool, p_operation: Terrain3DEditor
 			to_hide.push_back("color")
 			to_hide.push_back("color picker")
 			to_hide.push_back("slope")
+			to_hide.push_back("enable")
+	
+		elif p_tool in [ Terrain3DEditor.AUTOSHADER, Terrain3DEditor.HOLES, Terrain3DEditor.NAVIGATION ]:
+			to_hide.push_back("height")
+			to_hide.push_back("height picker")
+			to_hide.push_back("color")
+			to_hide.push_back("color picker")
+			to_hide.push_back("roughness")
+			to_hide.push_back("roughness picker")
+			to_hide.push_back("slope")
+			to_hide.push_back("opacity")
 
 		toolbar_settings.hide_settings(to_hide)
 
@@ -140,15 +157,16 @@ func _on_tool_changed(p_tool: Terrain3DEditor.Tool, p_operation: Terrain3DEditor
 
 
 func _on_setting_changed() -> void:
-	if not visible:
+	if not visible or not plugin.terrain:
 		return
 	brush_data = {
 		"size": int(toolbar_settings.get_setting("size")),
 		"opacity": toolbar_settings.get_setting("opacity") / 100.0,
 		"height": toolbar_settings.get_setting("height"),
+		"texture_index": plugin.texture_dock.get_selected_index(),
 		"color": toolbar_settings.get_setting("color"),
 		"roughness": toolbar_settings.get_setting("roughness"),
-		"texture_index": plugin.texture_dock.get_selected_index(),
+		"enable": toolbar_settings.get_setting("enable"),
 		"automatic_regions": toolbar_settings.get_setting("automatic_regions"),
 		"align_to_view": toolbar_settings.get_setting("align_to_view"),
 		"show_cursor_while_painting": toolbar_settings.get_setting("show_cursor_while_painting"),
@@ -158,6 +176,7 @@ func _on_setting_changed() -> void:
 	var brush_imgs: Array = toolbar_settings.get_setting("brush")
 	brush_data["image"] = brush_imgs[0]
 	brush_data["texture"] = brush_imgs[1]
+	
 	update_decal()
 	plugin.editor.set_brush_data(brush_data)
 
@@ -165,6 +184,7 @@ func _on_setting_changed() -> void:
 func update_decal() -> void:
 	var mouse_buttons: int = Input.get_mouse_button_mask()
 	if not visible or \
+			not plugin.terrain or \
 			brush_data.is_empty() or \
 			mouse_buttons & MOUSE_BUTTON_RIGHT or \
 			(mouse_buttons & MOUSE_BUTTON_LEFT and not brush_data["show_cursor_while_painting"]) or \
@@ -181,7 +201,7 @@ func update_decal() -> void:
 	if brush_data["align_to_view"]:
 		var cam: Camera3D = plugin.terrain.get_camera();
 		if (cam):
-			decal.rotation.y =cam.rotation.y
+			decal.rotation.y = cam.rotation.y
 	else:
 		decal.rotation.y = 0
 
@@ -196,6 +216,7 @@ func update_decal() -> void:
 				decal.modulate = COLOR_PICK_COLOR
 			Terrain3DEditor.ROUGHNESS:
 				decal.modulate = COLOR_PICK_ROUGH
+		decal.modulate.a = 1.0
 	else:
 		decal.texture_albedo = brush_data["texture"]		
 		match plugin.editor.get_tool():
@@ -215,31 +236,44 @@ func update_decal() -> void:
 						decal.modulate = COLOR_SMOOTH
 					_:
 						decal.modulate = Color.WHITE
+				decal.modulate.a = max(.3, brush_data["opacity"])
 			Terrain3DEditor.TEXTURE:
 				match plugin.editor.get_operation():
-					Terrain3DEditor.ADD:
-						decal.modulate = COLOR_SPRAY
 					Terrain3DEditor.REPLACE:
 						decal.modulate = COLOR_PAINT
+						decal.modulate.a = 1.0
+					Terrain3DEditor.ADD:
+						decal.modulate = COLOR_SPRAY
+						decal.modulate.a = max(.3, brush_data["opacity"])
 					_:
 						decal.modulate = Color.WHITE
 			Terrain3DEditor.COLOR:
 				decal.modulate = brush_data["color"].srgb_to_linear()*.5
+				decal.modulate.a = max(.3, brush_data["opacity"])
 			Terrain3DEditor.ROUGHNESS:
 				decal.modulate = COLOR_ROUGHNESS
+				decal.modulate.a = max(.3, brush_data["opacity"])
+			Terrain3DEditor.AUTOSHADER:
+				decal.modulate = COLOR_AUTOSHADER
+				decal.modulate.a = 1.0
+			Terrain3DEditor.HOLES:
+				decal.modulate = COLOR_HOLES
+				decal.modulate.a = 1.0
+			Terrain3DEditor.NAVIGATION:
+				decal.modulate = COLOR_NAVIGATION
+				decal.modulate.a = 1.0
 			_:
 				decal.modulate = Color.WHITE
-
-	decal.modulate.a = max(.3, brush_data["opacity"])
+				decal.modulate.a = max(.3, brush_data["opacity"])
 	decal.albedo_mix = 1.0
 	decal_timer.start()
 
 
-func set_decal_rotation(rot: float) -> void:
-	decal.rotation.y = rot
+func set_decal_rotation(p_rot: float) -> void:
+	decal.rotation.y = p_rot
 
 
-func _on_picking(type: int, callback: Callable) -> void:
-	picking = type
-	picking_callback = callback
+func _on_picking(p_type: int, p_callback: Callable) -> void:
+	picking = p_type
+	picking_callback = p_callback
 	update_decal()
