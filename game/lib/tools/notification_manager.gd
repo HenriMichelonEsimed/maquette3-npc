@@ -15,4 +15,3 @@ func hit(enemy:EnemyCharacter, weapon:ItemWeapon, damage_points:int, label_info_
 
 func xp(xp:int):
 	xp_gain.emit(xp)
-	

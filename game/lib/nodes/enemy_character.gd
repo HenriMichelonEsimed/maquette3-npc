@@ -19,10 +19,12 @@ var anim_state:AnimationNodeStateMachinePlayback
 var label_info:Label
 var collision_height:float = 0.0
 var hit_points:int
+var xp:int
 var anim_die_name:String
 
 func _ready():
 	hit_points = hit_points_start.roll()
+	xp = hit_points
 	set_collision_layer_value(Consts.LAYER_ENEMY_CHARACTER, true)
 	if (anim_tree != null):
 		anim_state = anim_tree["parameters/playback"]
@@ -59,6 +61,7 @@ func hit(hit_by:ItemWeapon):
 	if (anim_state != null):
 		anim_state.travel(ANIM_HIT if hit_points > 0 else ANIM_DIE)
 	if (hit_points <= 0):
+		NotificationManager.xp(xp)
 		label_info.queue_free()
 		set_collision_layer_value(Consts.LAYER_ENEMY_CHARACTER, false)
 

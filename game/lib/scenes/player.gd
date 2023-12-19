@@ -47,6 +47,8 @@ var hit_allowed:bool = false
 var running:bool = false
 # attack animation state node
 var anim_attack:AnimationNodeAnimation
+# approx height
+var height = 1.7
 
 const directions = {
 	"forward" : 	[  { 'x':  1, 'z': -1 },  { 'x':  1, 'z':  1 },  { 'x': -1, 'z':  1 },  { 'x': -1, 'z': -1 } ],

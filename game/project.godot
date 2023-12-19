@@ -22,6 +22,10 @@ StateSaver="*res://lib/tools/state_saver.gd"
 GameState="*res://lib/states/game_state.gd"
 NotificationManager="*res://lib/tools/notification_manager.gd"
 
+[display]
+
+window/size/mode=3
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/fontawesome/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")

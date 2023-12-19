@@ -44,6 +44,7 @@ func _ready():
 	panel_oxygen.visible = false
 	NotificationManager.connect("new_notification",display_notification)
 	NotificationManager.connect("new_hit", display_new_hit)
+	NotificationManager.connect("xp_gain", display_xp_gain)
 	GameState.connect("saving_start", _on_saving_start)
 	GameState.connect("saving_end", _on_saving_end)
 	camera_pivot.camera.connect("view_rotate", _on_camera_view_rotate)
@@ -170,12 +171,21 @@ func display_notification(message:String):
 	timer_notif.start()
 
 func display_new_hit(enemy:EnemyCharacter, weapons:ItemWeapon, damage_points:int, label_info_position:Vector2):
+	display_moving_notification( "%s damages to %s with %s" % [damage_points, enemy, weapons], 50, label_info_position)
+	
+func display_xp_gain(xp:int):
+	var pos3d = GameState.player.global_position
+	pos3d.y += GameState.player.height
+	var pos = camera_pivot.camera.unproject_position(pos3d)
+	display_moving_notification( "+%d XP" % xp, 100, pos)
+
+func display_moving_notification(text:String, cooldown:int, label_info_position:Vector2):
 	var label = Label.new()
-	label.text = "%s damages to %s with %s" % [damage_points, enemy, weapons]
+	label.text = text
 	label.position = label_info_position
 	label.position.y -= label.size.y
 	label.position.x -= label.size.x / 2
-	label.set_meta("count", 50)
+	label.set_meta("count", cooldown)
 	_hits.push_back(label)
 	add_child(label)
 
