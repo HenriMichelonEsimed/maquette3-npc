@@ -11,7 +11,9 @@ const walking_speed:float = 7.0
 const running_speed:float = 14.0
 const walking_jump_impulse:float = 20.0
 
-var anim:AnimationPlayer
+#var anim:AnimationPlayer
+var anim_state:AnimationNodeStateMachinePlayback
+var anim_tree:AnimationTree
 var camera:IsometricCamera
 var character:Node3D
 var attach_item:Node3D
@@ -29,6 +31,9 @@ var current_view:int = 0
 # player movement signaled
 var signaled:bool = false
 
+# action animation playing
+var action:bool = false
+
 const directions = {
 	"forward" : 	[  { 'x':  1, 'z': -1 },  { 'x':  1, 'z':  1 },  { 'x': -1, 'z':  1 },  { 'x': -1, 'z': -1 } ],
 	"left" : 		[  { 'x': -1, 'z': -1 },  { 'x':  1, 'z': -1 },  { 'x':  1, 'z':  1 },  { 'x': -1, 'z':  1 } ],
@@ -38,17 +43,31 @@ const directions = {
 
 func _ready():
 	character = get_node("Character")
-	anim = $Character.get_node("AnimationPlayer")
+	anim_tree = $Character.get_node("AnimationTree")
+	anim_state = anim_tree["parameters/playback"]
+	anim_tree.connect("animation_finished", _on_animation_finished)
 	camera = camera_pivot.get_node("Camera")
 	camera.connect("view_rotate", _on_view_rotate)
 	attach_item = character.get_node("RootNode/Skeleton3D/HandAttachment/AttachmentPoint")
-	
+
 func _process(_delta):
-	if Input.is_action_pressed("player_moveto"):
+	if Input.is_action_just_pressed("use"):
+		move_to_target = null
+		print(anim_state.get_current_node() )
+		anim_state.travel("default_sword_slash")
+		#anim.play(Consts.ANIM_SWORD_SLASH_1)
+		action = true
+	if (action):
+		return
+	elif Input.is_action_pressed("player_moveto"):
 		move_to(get_viewport().get_mouse_position())
 	elif Input.is_action_just_released("player_moveto"):
 		stop_move_to()
-
+	
+func _on_animation_finished(anim:String):
+	action = false
+	pass
+	
 func _physics_process(delta):
 	var on_floor = is_on_floor_only() 
 	if (move_to_target != null):
@@ -62,12 +81,13 @@ func _physics_process(delta):
 				stop_move_to()
 				return
 			if Input.is_action_pressed("modifier"):
-				if (anim.current_animation != Consts.ANIM_RUNNING):
+				#if (anim.current_animation != Consts.ANIM_RUNNING):
 					speed = running_speed
-					anim.play(Consts.ANIM_RUNNING)
+					#anim.play(Consts.ANIM_RUNNING)
 			else:
 				speed = walking_speed
-				anim.play(Consts.ANIM_WALKING)
+				anim_state.travel("default_walking")
+				#anim.play(Consts.ANIM_WALKING)
 			velocity = -transform.basis.z * speed
 			
 			if (move_to_target.y > position.y):
@@ -83,8 +103,8 @@ func _physics_process(delta):
 			if (position.distance_to(move_to_previous_position) < 0.001):
 				stop_move_to()
 				return
-			if !anim.is_playing():
-				anim.play()
+			#if !anim.is_playing():
+			#	anim.play()
 			camera_pivot.position = position
 			camera_pivot.position.y += 1.5
 			return
@@ -107,15 +127,15 @@ func _physics_process(delta):
 		direction = direction.normalized()
 		look_at(position + direction, Vector3.UP)
 		if Input.is_action_pressed("modifier"):
-			if (anim.current_animation != Consts.ANIM_RUNNING):
+			#if (anim.current_animation != Consts.ANIM_RUNNING):
 				speed = running_speed
-				anim.play(Consts.ANIM_RUNNING)
+				#anim.play(Consts.ANIM_RUNNING)
 		else:
 			speed = walking_speed
-			if (anim.current_animation != Consts.ANIM_WALKING):
-				anim.play(Consts.ANIM_WALKING)
-		if !anim.is_playing():
-			anim.play()
+			#if (anim.current_animation != Consts.ANIM_WALKING):
+			#	anim.play(Consts.ANIM_WALKING)
+		#if !anim.is_playing():
+		#	anim.play()
 		for index in range(get_slide_collision_count()):
 			var collision = get_slide_collision(index)
 			var collider = collision.get_collider()
@@ -131,7 +151,10 @@ func _physics_process(delta):
 		target_velocity.y = 0
 		signaled = false
 		stop_moving.emit()
-		anim.play(Consts.ANIM_STANDING)
+		anim_state.travel("default_standing_idle")
+		#if (not action):
+		#	anim.play(Consts.ANIM_STANDING)
+	
 	target_velocity.x = direction.x * speed
 	target_velocity.z = direction.z * speed
 	
@@ -139,7 +162,7 @@ func _physics_process(delta):
 		target_velocity.y = target_velocity.y - (fall_acceleration * delta)
 	if on_floor and Input.is_action_just_pressed("player_jump") and !no_jump:
 		target_velocity.y = walking_jump_impulse
-		anim.play(Consts.ANIM_JUMPING)
+		#anim.play(Consts.ANIM_JUMPING)
 	velocity = target_velocity
 	move_and_slide()
 	if direction != Vector3.ZERO:
@@ -166,7 +189,7 @@ func stop_move_to():
 	if (move_to_target != null):
 		move_to_target = null
 		velocity = Vector3.ZERO
-		anim.play(Consts.ANIM_STANDING)
+		#anim.play(Consts.ANIM_STANDING)
 
 func _look_at(node:Node3D):
 	var pos = node.global_position
