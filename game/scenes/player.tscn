@@ -24,12 +24,14 @@ animation = &"default/walking"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_65n61"]
 xfade_time = 0.1
+advance_mode = 0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jr2xr"]
 xfade_time = 0.1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4qdvx"]
 xfade_time = 0.1
+advance_mode = 0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_icesk"]
 xfade_time = 0.2
@@ -44,6 +46,7 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bcruw"]
 xfade_time = 0.1
+advance_mode = 0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_33hqf"]
 xfade_time = 0.1
@@ -53,9 +56,11 @@ xfade_time = 0.1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2btob"]
 xfade_time = 0.1
+advance_mode = 0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6gppk"]
 xfade_time = 0.2
+advance_mode = 0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3eneh"]
 xfade_time = 0.2
@@ -100,3 +105,10 @@ libraries = {
 }
 tree_root = SubResource("AnimationNodeStateMachine_eam0s")
 anim_player = NodePath("../AnimationPlayer")
+
+[node name="TimerAttack" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="TimerAttack" to="." method="_on_timer_attack_timeout"]

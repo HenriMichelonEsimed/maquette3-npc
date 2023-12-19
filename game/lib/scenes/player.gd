@@ -8,12 +8,14 @@ const ANIM_WALKING = "walk"
 const ANIM_RUNNING = "run"
 const ANIM_ATTACK= "attack"
 const ANIM_SWORD_SLASH = "default/sword_slash_1_v%d"
+const ATTACK_COOLDOWN:Array[float] = [ 0.3333, 0.6333, 0.6333, 1.3333, 1.3333, 2, 2, 2.6667 ]
 
 @export var camera_pivot:Node3D
 
 @onready var interactions = $Interactions
 @onready var anim_player:AnimationPlayer = $AnimationPlayer 
 @onready var anim_tree:AnimationTree = $AnimationTree
+@onready var timer_attack:Timer = $TimerAttack
 
 const walking_speed:float = 7.0
 const running_speed:float = 14.0
@@ -38,9 +40,9 @@ var current_view:int = 0
 var signaled:bool = false
 
 # action animation playing
-var action:bool = false
-# hit during action
-var action_hit:bool = false
+var attack_cooldown:bool = false
+# one hit only allowed during attack cooldown
+var hit_allowed:bool = false
 # running animation playing
 var running:bool = false
 # attack animation state node
@@ -56,30 +58,25 @@ const directions = {
 func _ready():
 	character = get_node("Character")
 	anim_state = anim_tree["parameters/playback"]
-	anim_tree.connect("animation_finished", _on_animation_finished)
 	camera = camera_pivot.get_node("Camera")
 	camera.connect("view_rotate", _on_view_rotate)
 	attach_item = character.get_node("RootNode/Skeleton3D/HandAttachment/AttachmentPoint")
 	anim_attack =  anim_tree.get_tree_root().get_node("attack")
 
 func _process(_delta):
-	if Input.is_action_just_pressed("use") and (not action):
+	if Input.is_action_just_pressed("use") and (not attack_cooldown):
 		move_to_target = null
 		running = false
-		action = true
-		action_hit = false
+		attack_cooldown = true
+		hit_allowed = true
 		anim_state.travel(ANIM_ATTACK)
-	if (action):
-		return
+		timer_attack.start()
+	if (attack_cooldown): return
 	if Input.is_action_pressed("player_moveto"):
 		move_to(get_viewport().get_mouse_position())
 	elif Input.is_action_just_released("player_moveto"):
 		stop_move_to()
-	
-func _on_animation_finished(anim:String):
-	action = false
-	pass
-	
+
 func _physics_process(delta):
 	var on_floor = is_on_floor_only() 
 	if (move_to_target != null):
@@ -102,7 +99,6 @@ func _physics_process(delta):
 				speed = walking_speed
 				anim_state.travel(ANIM_WALKING)
 			velocity = -transform.basis.z * speed
-			
 			if (move_to_target.y > position.y):
 				for index in range(get_slide_collision_count()):
 					var collision = get_slide_collision(index)
@@ -122,7 +118,7 @@ func _physics_process(delta):
 		
 	var no_jump = false
 	var direction = Vector3.ZERO
-	if (not action):
+	if (not attack_cooldown):
 		if Input.is_action_pressed("player_right"):
 			direction.x += directions["right"][current_view].x
 			direction.z += directions["right"][current_view].z
@@ -162,8 +158,6 @@ func _physics_process(delta):
 			signaled = false
 			stop_moving.emit()
 			anim_state.travel("idle")
-			#if (not action):
-			#	anim.play(Consts.ANIM_STANDING)
 	
 	target_velocity.x = direction.x * speed
 	target_velocity.z = direction.z * speed
@@ -212,6 +206,7 @@ func handle_item():
 	attach_item.add_child(GameState.current_item)
 	if (GameState.current_item is ItemWeapon):
 		anim_attack.animation = ANIM_SWORD_SLASH % GameState.current_item.speed
+		timer_attack.wait_time = ATTACK_COOLDOWN[GameState.current_item.speed-1]
 	if (GameState.current_item.use_area != null):
 		GameState.current_item.use_area.connect("body_entered", _on_item_hit)
 
@@ -221,7 +216,10 @@ func unhandle_item():
 	attach_item.remove_child(GameState.current_item)
 
 func _on_item_hit(node:Node3D):
-	if (not action) or (action_hit): return
-	action_hit = true
-	if (node is EnemyCharacter):
-		node.hit(GameState.current_item)
+	if (hit_allowed):
+		hit_allowed = false
+		if (node is EnemyCharacter):
+			node.hit(GameState.current_item)
+
+func _on_timer_attack_timeout():
+	attack_cooldown = false
