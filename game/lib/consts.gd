@@ -14,11 +14,3 @@ enum {
 
 const AUDIO_VOLUME_EFFECTS = 10
 const AUDIO_BUS_EFFECTS = "Effects"
-
-const ANIM_STANDING = "default/standing_idle"
-const ANIM_WALKING = "default/walking"
-const ANIM_SWIMMING = "default/swimming"
-const ANIM_RUNNING = "default/running"
-const ANIM_JUMPING = "default/jumping"
-const ANIM_CROUCHED_WALKING = "default/crouched_walking"
-const ANIM_SWORD_SLASH_1 = "default/sword_slash"

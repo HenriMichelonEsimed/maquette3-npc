@@ -1,11 +1,53 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfxsejwlekels"]
+[gd_scene load_steps=17 format=3 uid="uid://cfxsejwlekels"]
 
 [ext_resource type="Script" path="res://lib/scenes/player.gd" id="1_q3dva"]
 [ext_resource type="PackedScene" uid="uid://feuv31qq1vnp" path="res://scenes/characters/player_1.tscn" id="2_jd0ni"]
 [ext_resource type="PackedScene" uid="uid://bygi7i8djxa7k" path="res://scenes/interactions.tscn" id="3_0h8y3"]
+[ext_resource type="AnimationLibrary" uid="uid://b5m6srwk404r6" path="res://assets/animations/default.res" id="4_m24mr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k8wjv"]
 size = Vector3(0.608642, 1.80127, 0.644699)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2nq3j"]
+animation = &"default/standing_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wbdxh"]
+animation = &"default/sword_slash"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j3w3d"]
+animation = &"default/walking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8sxfj"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_65n61"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jr2xr"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4qdvx"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_icesk"]
+xfade_time = 0.2
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c0vmp"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h2ey5"]
+xfade_time = 0.2
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_eam0s"]
+states/Start/position = Vector2(162, 55)
+states/idle/node = SubResource("AnimationNodeAnimation_2nq3j")
+states/idle/position = Vector2(386, 64)
+states/sword_slash/node = SubResource("AnimationNodeAnimation_wbdxh")
+states/sword_slash/position = Vector2(243, 214)
+states/walk/node = SubResource("AnimationNodeAnimation_j3w3d")
+states/walk/position = Vector2(609, 191)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_8sxfj"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_65n61"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_jr2xr"), "idle", "sword_slash", SubResource("AnimationNodeStateMachineTransition_4qdvx"), "sword_slash", "idle", SubResource("AnimationNodeStateMachineTransition_icesk"), "walk", "sword_slash", SubResource("AnimationNodeStateMachineTransition_c0vmp"), "sword_slash", "walk", SubResource("AnimationNodeStateMachineTransition_h2ey5")]
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 5
@@ -20,3 +62,17 @@ shape = SubResource("BoxShape3D_k8wjv")
 
 [node name="Interactions" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_0h8y3")]
 player = NodePath("..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Character")
+libraries = {
+"default": ExtResource("4_m24mr")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Character")
+libraries = {
+"default": ExtResource("4_m24mr")
+}
+tree_root = SubResource("AnimationNodeStateMachine_eam0s")
+anim_player = NodePath("../AnimationPlayer")

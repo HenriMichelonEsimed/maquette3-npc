@@ -3,17 +3,21 @@ class_name Player extends CharacterBody3D
 signal start_moving()
 signal stop_moving()
 
+const ANIM_STANDING = "idle"
+const ANIM_WALKING = "walk"
+const ANIM_SWORD_SLASH = "sword_slash"
+
 @export var camera_pivot:Node3D
 
 @onready var interactions = $Interactions
+@onready var anim_player:AnimationPlayer = $AnimationPlayer 
+@onready var anim_tree:AnimationTree = $AnimationTree
 
 const walking_speed:float = 7.0
 const running_speed:float = 14.0
 const walking_jump_impulse:float = 20.0
 
-#var anim:AnimationPlayer
 var anim_state:AnimationNodeStateMachinePlayback
-var anim_tree:AnimationTree
 var camera:IsometricCamera
 var character:Node3D
 var attach_item:Node3D
@@ -43,7 +47,6 @@ const directions = {
 
 func _ready():
 	character = get_node("Character")
-	anim_tree = $Character.get_node("AnimationTree")
 	anim_state = anim_tree["parameters/playback"]
 	anim_tree.connect("animation_finished", _on_animation_finished)
 	camera = camera_pivot.get_node("Camera")
@@ -54,8 +57,7 @@ func _process(_delta):
 	if Input.is_action_just_pressed("use"):
 		move_to_target = null
 		print(anim_state.get_current_node() )
-		anim_state.travel("default_sword_slash")
-		#anim.play(Consts.ANIM_SWORD_SLASH_1)
+		anim_state.travel(ANIM_SWORD_SLASH)
 		action = true
 	if (action):
 		return
@@ -86,8 +88,7 @@ func _physics_process(delta):
 					#anim.play(Consts.ANIM_RUNNING)
 			else:
 				speed = walking_speed
-				anim_state.travel("default_walking")
-				#anim.play(Consts.ANIM_WALKING)
+				anim_state.travel(ANIM_WALKING)
 			velocity = -transform.basis.z * speed
 			
 			if (move_to_target.y > position.y):
@@ -103,57 +104,53 @@ func _physics_process(delta):
 			if (position.distance_to(move_to_previous_position) < 0.001):
 				stop_move_to()
 				return
-			#if !anim.is_playing():
-			#	anim.play()
 			camera_pivot.position = position
 			camera_pivot.position.y += 1.5
 			return
 		
 	var no_jump = false
 	var direction = Vector3.ZERO
-	if Input.is_action_pressed("player_right"):
-		direction.x += directions["right"][current_view].x
-		direction.z += directions["right"][current_view].z
-	if Input.is_action_pressed("player_left"):
-		direction.x += directions["left"][current_view].x
-		direction.z += directions["left"][current_view].z
-	if Input.is_action_pressed("player_backward"):
-		direction.x += directions["backward"][current_view].x
-		direction.z += directions["backward"][current_view].z
-	if Input.is_action_pressed("player_forward"):
-		direction.x += directions["forward"][current_view].x
-		direction.z += directions["forward"][current_view].z
-	if direction != Vector3.ZERO:
-		direction = direction.normalized()
-		look_at(position + direction, Vector3.UP)
-		if Input.is_action_pressed("modifier"):
-			#if (anim.current_animation != Consts.ANIM_RUNNING):
-				speed = running_speed
-				#anim.play(Consts.ANIM_RUNNING)
+	if (not action):
+		if Input.is_action_pressed("player_right"):
+			direction.x += directions["right"][current_view].x
+			direction.z += directions["right"][current_view].z
+		if Input.is_action_pressed("player_left"):
+			direction.x += directions["left"][current_view].x
+			direction.z += directions["left"][current_view].z
+		if Input.is_action_pressed("player_backward"):
+			direction.x += directions["backward"][current_view].x
+			direction.z += directions["backward"][current_view].z
+		if Input.is_action_pressed("player_forward"):
+			direction.x += directions["forward"][current_view].x
+			direction.z += directions["forward"][current_view].z
+		if direction != Vector3.ZERO:
+			direction = direction.normalized()
+			look_at(position + direction, Vector3.UP)
+			if Input.is_action_pressed("modifier"):
+				#if (anim.current_animation != Consts.ANIM_RUNNING):
+					speed = running_speed
+					#anim.play(Consts.ANIM_RUNNING)
+			else:
+				speed = walking_speed
+			anim_state.travel(ANIM_WALKING)
+			for index in range(get_slide_collision_count()):
+				var collision = get_slide_collision(index)
+				var collider = collision.get_collider()
+				if collider == null:
+					continue
+				if collider.is_in_group("stairs"):
+					target_velocity.y = 5
+					no_jump = true
+				elif collider.is_in_group("ladders") and Input.is_action_pressed("player_jump"):
+					target_velocity.y = 12
+					no_jump = true
 		else:
-			speed = walking_speed
-			#if (anim.current_animation != Consts.ANIM_WALKING):
-			#	anim.play(Consts.ANIM_WALKING)
-		#if !anim.is_playing():
-		#	anim.play()
-		for index in range(get_slide_collision_count()):
-			var collision = get_slide_collision(index)
-			var collider = collision.get_collider()
-			if collider == null:
-				continue
-			if collider.is_in_group("stairs"):
-				target_velocity.y = 5
-				no_jump = true
-			elif collider.is_in_group("ladders") and Input.is_action_pressed("player_jump"):
-				target_velocity.y = 12
-				no_jump = true
-	else:
-		target_velocity.y = 0
-		signaled = false
-		stop_moving.emit()
-		anim_state.travel("default_standing_idle")
-		#if (not action):
-		#	anim.play(Consts.ANIM_STANDING)
+			target_velocity.y = 0
+			signaled = false
+			stop_moving.emit()
+			anim_state.travel("idle")
+			#if (not action):
+			#	anim.play(Consts.ANIM_STANDING)
 	
 	target_velocity.x = direction.x * speed
 	target_velocity.z = direction.z * speed

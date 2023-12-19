@@ -28,7 +28,6 @@ background_mode = 2
 sky = SubResource("Sky_25gs6")
 tonemap_mode = 2
 ssao_enabled = true
-sdfgi_enabled = true
 glow_enabled = true
 
 [node name="Level0" type="Node3D"]
