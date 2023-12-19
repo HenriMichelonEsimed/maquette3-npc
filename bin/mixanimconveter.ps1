@@ -26,7 +26,7 @@ foreach ($ligne in $contenu) {
                 }
             }
             $r += ")"
-            $result += $r + "`n"
+            $result += $r.replace('E', 'e') + "`n"
          }
         Default {
             $result += $_ + "`n"

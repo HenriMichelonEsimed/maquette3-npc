@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://0326gqgjjtkv"]
+[gd_scene load_steps=20 format=3 uid="uid://0326gqgjjtkv"]
 
 [ext_resource type="Script" path="res://lib/nodes/zone.gd" id="1_3tay3"]
 [ext_resource type="Terrain3DMaterial" uid="uid://bh2je3jcyw70l" path="res://assets/materials/terrain/grass_1.tres" id="2_6mkug"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://vl2uhbpvfq5d" path="res://models/props/plate_1.tscn" id="13_uu1cy"]
 [ext_resource type="PackedScene" uid="uid://do305lqtul3bk" path="res://models/items/consum/bread_1.tscn" id="14_8ad0s"]
 [ext_resource type="PackedScene" uid="uid://08mjxh8sadly" path="res://models/props/props_shelf_8.tscn" id="15_mcf0m"]
+[ext_resource type="PackedScene" uid="uid://bf7krp07f51ww" path="res://scenes/characters/undead_1.tscn" id="16_2kkjh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_whqtd"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -91,3 +92,6 @@ transform = Transform3D(0.783834, 0, 0.62097, 0, 1, 0, -0.62097, 0, 0.783834, -1
 
 [node name="Props_Shelf_8" parent="House_4" instance=ExtResource("15_mcf0m")]
 transform = Transform3D(0.999619, 0, 0.0275902, 0, 1, 0, -0.0275902, 0, 0.999619, 1.75787, 0, 1.62506)
+
+[node name="Undead1" parent="." instance=ExtResource("16_2kkjh")]
+transform = Transform3D(-0.841907, 0, 0.539623, 0, 1, 0, -0.539623, 0, -0.841907, 524.522, 0, 512.671)

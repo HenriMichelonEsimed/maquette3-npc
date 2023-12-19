@@ -22,10 +22,6 @@ StateSaver="*res://lib/tools/state_saver.gd"
 GameState="*res://lib/states/game_state.gd"
 NotificationManager="*res://lib/tools/notification_manager.gd"
 
-[debug]
-
-shapes/collision/shape_color=Color(0, 0.6, 0.701961, 0.717647)
-
 [display]
 
 window/size/mode=3
@@ -166,9 +162,10 @@ locale/translations=PackedStringArray("res://assets/i18n/items.fr.translation", 
 3d_physics/layer_3="item"
 3d_physics/layer_4="usable"
 3d_physics/layer_5="trigger"
-3d_physics/layer_6="character"
+3d_physics/layer_6="interactive character"
 3d_physics/layer_7="moveable props"
 3d_physics/layer_8="water"
+3d_physics/layer_9="enemy character"
 3d_physics/layer_10="player"
 
 [rendering]

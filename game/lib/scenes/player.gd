@@ -38,6 +38,9 @@ var signaled:bool = false
 
 # action animation playing
 var action:bool = false
+# hit during action
+var action_hit:bool = false
+# running animation playing
 var running:bool = false
 
 const directions = {
@@ -56,10 +59,11 @@ func _ready():
 	attach_item = character.get_node("RootNode/Skeleton3D/HandAttachment/AttachmentPoint")
 
 func _process(_delta):
-	if Input.is_action_just_pressed("use"):
+	if Input.is_action_just_pressed("use") and (not action):
 		move_to_target = null
 		running = false
 		action = true
+		action_hit = false
 		anim_state.travel(ANIM_SWORD_SLASH)
 	if (action):
 		return
@@ -191,7 +195,6 @@ func stop_move_to():
 	if (move_to_target != null):
 		move_to_target = null
 		velocity = Vector3.ZERO
-		#anim.play(Consts.ANIM_STANDING)
 
 func _look_at(node:Node3D):
 	var pos = node.global_position
@@ -203,6 +206,16 @@ func _on_view_rotate(view:int):
 
 func handle_item():
 	attach_item.add_child(GameState.current_item)
+	if (GameState.current_item.use_area != null):
+		GameState.current_item.use_area.connect("body_entered", _on_item_hit)
 
 func unhandle_item():
+	if (GameState.current_item.use_area != null):
+		GameState.current_item.use_area.disconnect("body_entered", _on_item_hit)
 	attach_item.remove_child(GameState.current_item)
+
+func _on_item_hit(node:Node3D):
+	if (not action) or (action_hit): return
+	action_hit = true
+	if (node is EnemyCharacter):
+		node.hit(GameState.current_item)

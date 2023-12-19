@@ -32,7 +32,7 @@ func _init(disc = ["Hello !", [["Bye", _end, true]] ], it = [], gen_chance = 0):
 					items.new(item[0], item[1], qty)
 
 func _ready():
-	set_collision_layer_value(Consts.LAYER_CHARACTER, true)
+	set_collision_layer_value(Consts.LAYER_INTERACTIVE_CHARACTER, true)
 
 func interact(new_disc=null):
 	GameState.player.look_at_char(self)

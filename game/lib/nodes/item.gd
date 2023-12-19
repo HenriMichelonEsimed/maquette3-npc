@@ -15,6 +15,7 @@ enum ItemType {
 @export var type:ItemType
 @export var preview_scale:float = 1.0
 var original_rotation:Vector3
+var use_area:Area3D
 
 func _ready():
 	label = tr(label)
@@ -22,6 +23,11 @@ func _ready():
 	set_collision_mask_value(Consts.LAYER_WORLD, true)
 	original_rotation = rotation
 	enable()
+	use_area = get_node("Area3D")
+	if (use_area != null):
+		use_area.set_collision_layer_value(Consts.LAYER_WORLD, false)
+		use_area.set_collision_mask_value(Consts.LAYER_ENEMY_CHARACTER, true)
+		use_area.set_collision_mask_value(Consts.LAYER_WORLD, false)
 
 func use():
 	disable()
