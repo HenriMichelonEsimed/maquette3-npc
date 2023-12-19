@@ -160,7 +160,6 @@ data = PackedVector3Array(0.1626, 0.8831, -13.9526, -0.0771, 0.488, 11.6575, -0.
 [node name="long_blade_1" type="StaticBody3D" node_paths=PackedStringArray("damage")]
 script = ExtResource("1_l3ajb")
 damage = NodePath("Damages")
-speed = 6
 key = "long_blade_1"
 label = "Long sword"
 price = 10.0

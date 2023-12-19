@@ -29,6 +29,9 @@ func _ready():
 	label_info.add_theme_font_size_override("font_size", 14)
 	label_info.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	add_child(label_info)
+	
+func _to_string():
+	return label
 
 func _process(_delta):
 	display_info()
@@ -46,4 +49,6 @@ func hit(hit_by:ItemWeapon):
 		anim_state.travel("hit")
 	var damage_points = min(hit_by.damage.roll(), hit_points)
 	hit_points -= damage_points
-	NotificationManager.hit(self, hit_by, damage_points, label_info.position )
+	var pos = label_info.position
+	pos.x += label_info.size.x / 2
+	NotificationManager.hit(self, hit_by, damage_points, pos)

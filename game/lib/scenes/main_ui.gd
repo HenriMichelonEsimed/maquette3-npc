@@ -31,6 +31,7 @@ var _talk_screen:Dialog
 var _trade_screen:Dialog
 var _highlighted_mesh:MeshInstance3D
 var _highlighted_mat:Material
+var _hits:Array[Label] = []
 
 func _ready():
 	blur.visible = false
@@ -42,7 +43,7 @@ func _ready():
 	icon_menu_close.visible = false
 	panel_oxygen.visible = false
 	NotificationManager.connect("new_notification",display_notification)
-	NotificationManager.connect("new_hit",display_notification)
+	NotificationManager.connect("new_hit", display_new_hit)
 	GameState.connect("saving_start", _on_saving_start)
 	GameState.connect("saving_end", _on_saving_end)
 	camera_pivot.camera.connect("view_rotate", _on_camera_view_rotate)
@@ -77,6 +78,17 @@ func _input(event):
 			inventory_open()
 		elif  Input.is_action_just_released("unuse"):
 			GameState.item_unuse()
+
+func _physics_process(delta):
+	for label in _hits:
+		var count = label.get_meta("count")
+		count -= 1
+		if (count == 0):
+			_hits.erase(label)
+			label.queue_free()
+		else:
+			label.set_meta("count", count)
+			label.position.y -= 1
 
 func _on_camera_view_rotate(view:int):
 	compass.rotation_degrees = compass_rotation[view]
@@ -156,6 +168,16 @@ func display_notification(message:String):
 	label_notif.text = message
 	label_notif.visible = true
 	timer_notif.start()
+
+func display_new_hit(enemy:EnemyCharacter, weapons:ItemWeapon, damage_points:int, label_info_position:Vector2):
+	var label = Label.new()
+	label.text = "%s damages to %s with %s" % [damage_points, enemy, weapons]
+	label.position = label_info_position
+	label.position.y -= label.size.y
+	label.position.x -= label.size.x / 2
+	label.set_meta("count", 50)
+	_hits.push_back(label)
+	add_child(label)
 
 func _on_load_savegame(savegame:String):
 	menu.visible = false
