@@ -177,7 +177,7 @@ func display_xp_gain(xp:int):
 	var pos3d = GameState.player.global_position
 	pos3d.y += GameState.player.height
 	var pos = camera_pivot.camera.unproject_position(pos3d)
-	display_moving_notification( "+%d XP" % xp, 100, pos)
+	display_moving_notification( "+%d XP" % xp, 150, pos)
 
 func display_moving_notification(text:String, cooldown:int, label_info_position:Vector2):
 	var label = Label.new()

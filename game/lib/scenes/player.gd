@@ -6,7 +6,8 @@ signal stop_moving()
 const ANIM_STANDING = "idle"
 const ANIM_WALKING = "walk"
 const ANIM_RUNNING = "run"
-const ANIM_ATTACK= "attack"
+const ANIM_ATTACKING= "attack"
+const ANIM_USING= "use"
 const ANIM_SWORD_SLASH = "default/sword_slash_1_v%d"
 const ATTACK_COOLDOWN:Array[float] = [ 0.3333, 0.6333, 0.6333, 1.3333, 1.3333, 2, 2, 2.6667 ]
 
@@ -15,7 +16,7 @@ const ATTACK_COOLDOWN:Array[float] = [ 0.3333, 0.6333, 0.6333, 1.3333, 1.3333, 2
 @onready var interactions = $Interactions
 @onready var anim_player:AnimationPlayer = $AnimationPlayer 
 @onready var anim_tree:AnimationTree = $AnimationTree
-@onready var timer_attack:Timer = $TimerAttack
+@onready var timer_use:Timer = $TimerUse
 
 const walking_speed:float = 7.0
 const running_speed:float = 14.0
@@ -40,7 +41,7 @@ var current_view:int = 0
 var signaled:bool = false
 
 # action animation playing
-var attack_cooldown:bool = false
+var use_cooldown:bool = false
 # one hit only allowed during attack cooldown
 var hit_allowed:bool = false
 # running animation playing
@@ -66,14 +67,19 @@ func _ready():
 	anim_attack =  anim_tree.get_tree_root().get_node("attack")
 
 func _process(_delta):
-	if Input.is_action_just_pressed("use") and (not attack_cooldown):
+	if Input.is_action_just_pressed("use") and (not use_cooldown):
+		if (GameState.current_item != null) and (GameState.current_item is ItemWeapon):
+			anim_state.travel(ANIM_ATTACKING)
+			hit_allowed = true
+			timer_use.wait_time = ATTACK_COOLDOWN[GameState.current_item.speed-1]
+		else:
+			anim_state.travel(ANIM_USING)
+			timer_use.wait_time = 1.0
 		move_to_target = null
 		running = false
-		attack_cooldown = true
-		hit_allowed = true
-		anim_state.travel(ANIM_ATTACK)
-		timer_attack.start()
-	if (attack_cooldown): return
+		use_cooldown = true
+		timer_use.start()
+	if (use_cooldown): return
 	if Input.is_action_pressed("player_moveto"):
 		move_to(get_viewport().get_mouse_position())
 	elif Input.is_action_just_released("player_moveto"):
@@ -120,7 +126,7 @@ func _physics_process(delta):
 		
 	var no_jump = false
 	var direction = Vector3.ZERO
-	if (not attack_cooldown):
+	if (not use_cooldown):
 		if Input.is_action_pressed("player_right"):
 			direction.x += directions["right"][current_view].x
 			direction.z += directions["right"][current_view].z
@@ -208,7 +214,7 @@ func handle_item():
 	attach_item.add_child(GameState.current_item)
 	if (GameState.current_item is ItemWeapon):
 		anim_attack.animation = ANIM_SWORD_SLASH % GameState.current_item.speed
-		timer_attack.wait_time = ATTACK_COOLDOWN[GameState.current_item.speed-1]
+		
 	if (GameState.current_item.use_area != null):
 		GameState.current_item.use_area.connect("body_entered", _on_item_hit)
 
@@ -224,4 +230,4 @@ func _on_item_hit(node:Node3D):
 			node.hit(GameState.current_item)
 
 func _on_timer_attack_timeout():
-	attack_cooldown = false
+	use_cooldown = false
