@@ -9,6 +9,7 @@ var current_item_key:String = ""
 var nickname:String = "Player"
 var sex:bool = true
 var char:String = "player_1"
+var xp:int = 0
 
 func _init():
 	super("player")

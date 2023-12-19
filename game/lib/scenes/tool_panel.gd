@@ -10,6 +10,8 @@ func set_shortcuts():
 func use():
 	Tools.show_item(GameState.current_item, insert_point)
 	label_item.text = tr(str(GameState.current_item))
+	if (GameState.current_item is ItemWeapon):
+		label_item.text += "\n%s" % str(GameState.current_item.damage)
 	visible = true
 
 func unuse():

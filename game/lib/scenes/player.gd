@@ -72,9 +72,11 @@ func _process(_delta):
 			anim_state.travel(ANIM_ATTACKING)
 			hit_allowed = true
 			timer_use.wait_time = ATTACK_COOLDOWN[GameState.current_item.speed-1]
-		else:
+		elif interactions.node_to_use != null:
 			anim_state.travel(ANIM_USING)
 			timer_use.wait_time = 1.0
+		else:
+			return
 		move_to_target = null
 		running = false
 		use_cooldown = true
@@ -225,6 +227,7 @@ func unhandle_item():
 
 func _on_item_hit(node:Node3D):
 	if (hit_allowed):
+		look_at(node.global_position)
 		hit_allowed = false
 		if (node is EnemyCharacter):
 			node.hit(GameState.current_item)

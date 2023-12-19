@@ -90,7 +90,7 @@ states/walk/position = Vector2(749, 168)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_8sxfj"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_65n61"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_jr2xr"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_4qdvx"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_icesk"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_c0vmp"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_h2ey5"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_bcruw"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_33hqf"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_xl2nf"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_2btob"), "run", "attack", SubResource("AnimationNodeStateMachineTransition_6gppk"), "attack", "run", SubResource("AnimationNodeStateMachineTransition_3eneh"), "idle", "use", SubResource("AnimationNodeStateMachineTransition_feypf"), "use", "idle", SubResource("AnimationNodeStateMachineTransition_g7u07")]
 
 [node name="Player" type="CharacterBody3D"]
-collision_layer = 5
+collision_layer = 513
 collision_mask = 3
 script = ExtResource("1_q3dva")
 

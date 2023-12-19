@@ -94,23 +94,7 @@ func _resume_game():
 	#if (not use_joypad): Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	ui.resume_game()
 	
-func item_use(item:Item):
-	item_unuse()
-	current_item = item.dup()
-	if (item is ItemMultiple):
-		current_item.quantity = 1
-	inventory.remove(current_item)
-	ui.panel_item.use()
-	player.handle_item()
-	current_item.use()
 
-func item_unuse():
-	if (current_item == null): return
-	player.unhandle_item()
-	ui.panel_item.unuse()
-	current_item.unuse()
-	inventory.add(current_item.dup())
-	current_item = null
 
 func _on_joypad_connection_changed(_id, _connected):
 	use_joypad = Input.get_connected_joypads().size() > 0

@@ -220,6 +220,14 @@ texture = ExtResource("9_sflov")
 expand_mode = 2
 stretch_mode = 4
 
+[node name="LabelXP" type="Label" parent="HUD"]
+layout_mode = 1
+offset_left = 52.0
+offset_top = 7.0
+offset_right = 155.0
+offset_bottom = 32.0
+text = "XP"
+
 [node name="MenuClose" type="TextureRect" parent="."]
 process_mode = 4
 layout_mode = 1

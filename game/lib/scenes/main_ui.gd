@@ -10,6 +10,7 @@ class_name MainUI extends Control
 @onready var focused_button:Button = $Menu/MainMenu/ButtonInventory
 @onready var label_notif:Label = $HUD/LabelNotification
 @onready var timer_notif:Timer = $HUD/LabelNotification/Timer
+@onready var label_xp:Label = $HUD/LabelXP
 @onready var icon_menu_open = $HUD/MenuOpen
 @onready var icon_menu_close = $MenuClose
 @onready var icon_use = $HUD/LabelInfo/Icon
@@ -52,6 +53,7 @@ func _ready():
 	player.interactions.connect("hide_info", hide_info)
 	#player.connect("update_oxygen", update_oxygen)
 	Input.connect("joy_connection_changed", _on_joypad_connection_changed)
+	display_xp()
 	set_shortcuts()
 	_on_camera_view_rotate(GameState.camera.view)
 
@@ -77,8 +79,6 @@ func _input(event):
 			_on_save_before_quit_confirm(true)
 		elif Input.is_action_just_released("inventory"):
 			inventory_open()
-		elif  Input.is_action_just_released("unuse"):
-			GameState.item_unuse()
 
 func _physics_process(delta):
 	for label in _hits:
@@ -178,6 +178,9 @@ func display_xp_gain(xp:int):
 	pos3d.y += GameState.player.height
 	var pos = camera_pivot.camera.unproject_position(pos3d)
 	display_moving_notification( "+%d XP" % xp, 150, pos)
+
+func display_xp():
+	label_xp.text = "%d XP" % GameState.player_state.xp
 
 func display_moving_notification(text:String, cooldown:int, label_info_position:Vector2):
 	var label = Label.new()
