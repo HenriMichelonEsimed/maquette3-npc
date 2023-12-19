@@ -5,6 +5,7 @@ signal stop_moving()
 
 const ANIM_STANDING = "idle"
 const ANIM_WALKING = "walk"
+const ANIM_RUNNING = "run"
 const ANIM_SWORD_SLASH = "sword_slash"
 
 @export var camera_pivot:Node3D
@@ -37,6 +38,7 @@ var signaled:bool = false
 
 # action animation playing
 var action:bool = false
+var running:bool = false
 
 const directions = {
 	"forward" : 	[  { 'x':  1, 'z': -1 },  { 'x':  1, 'z':  1 },  { 'x': -1, 'z':  1 },  { 'x': -1, 'z': -1 } ],
@@ -56,9 +58,9 @@ func _ready():
 func _process(_delta):
 	if Input.is_action_just_pressed("use"):
 		move_to_target = null
-		print(anim_state.get_current_node() )
-		anim_state.travel(ANIM_SWORD_SLASH)
+		running = false
 		action = true
+		anim_state.travel(ANIM_SWORD_SLASH)
 	if (action):
 		return
 	elif Input.is_action_pressed("player_moveto"):
@@ -83,10 +85,12 @@ func _physics_process(delta):
 				stop_move_to()
 				return
 			if Input.is_action_pressed("modifier"):
-				#if (anim.current_animation != Consts.ANIM_RUNNING):
+				if (not running):
 					speed = running_speed
-					#anim.play(Consts.ANIM_RUNNING)
+					anim_state.travel(ANIM_RUNNING)
+					running = true
 			else:
+				running = false
 				speed = walking_speed
 				anim_state.travel(ANIM_WALKING)
 			velocity = -transform.basis.z * speed
@@ -127,9 +131,10 @@ func _physics_process(delta):
 			direction = direction.normalized()
 			look_at(position + direction, Vector3.UP)
 			if Input.is_action_pressed("modifier"):
-				#if (anim.current_animation != Consts.ANIM_RUNNING):
+				if (not running):
 					speed = running_speed
-					#anim.play(Consts.ANIM_RUNNING)
+					anim_state.travel(ANIM_RUNNING)
+					running = true
 			else:
 				speed = walking_speed
 			anim_state.travel(ANIM_WALKING)
