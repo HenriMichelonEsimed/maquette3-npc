@@ -6,7 +6,8 @@ signal stop_moving()
 const ANIM_STANDING = "idle"
 const ANIM_WALKING = "walk"
 const ANIM_RUNNING = "run"
-const ANIM_SWORD_SLASH = "sword_slash"
+const ANIM_ATTACK= "attack"
+const ANIM_SWORD_SLASH = "sword_slash_1_v%d"
 
 @export var camera_pivot:Node3D
 
@@ -42,6 +43,8 @@ var action:bool = false
 var action_hit:bool = false
 # running animation playing
 var running:bool = false
+# item animation
+var item_animation:String
 
 const directions = {
 	"forward" : 	[  { 'x':  1, 'z': -1 },  { 'x':  1, 'z':  1 },  { 'x': -1, 'z':  1 },  { 'x': -1, 'z': -1 } ],
@@ -64,10 +67,12 @@ func _process(_delta):
 		running = false
 		action = true
 		action_hit = false
-		anim_state.travel(ANIM_SWORD_SLASH)
+		anim_state.travel(ANIM_ATTACK)
+		print(anim_tree.get_tree_root())
+		pass
 	if (action):
 		return
-	elif Input.is_action_pressed("player_moveto"):
+	if Input.is_action_pressed("player_moveto"):
 		move_to(get_viewport().get_mouse_position())
 	elif Input.is_action_just_released("player_moveto"):
 		stop_move_to()
@@ -206,6 +211,8 @@ func _on_view_rotate(view:int):
 
 func handle_item():
 	attach_item.add_child(GameState.current_item)
+	if (GameState.current_item is ItemWeapon):
+		item_animation = ANIM_SWORD_SLASH % GameState.current_item.speed
 	if (GameState.current_item.use_area != null):
 		GameState.current_item.use_area.connect("body_entered", _on_item_hit)
 

@@ -13,7 +13,6 @@ var _last_spawnpoint:String
 func _ready():
 	GameState.player = player
 	GameState.ui = ui
-	NotificationManager.connect("new_notification", GameState.ui.display_notification)
 	#player.connect("update_oxygen", update_oxygen)
 	TranslationServer.set_locale(GameState.settings.lang)
 	if (GameState.current_item != null):

@@ -41,6 +41,8 @@ func _ready():
 	panel_item.visible = false
 	icon_menu_close.visible = false
 	panel_oxygen.visible = false
+	NotificationManager.connect("new_notification",display_notification)
+	NotificationManager.connect("new_hit",display_notification)
 	GameState.connect("saving_start", _on_saving_start)
 	GameState.connect("saving_end", _on_saving_end)
 	camera_pivot.camera.connect("view_rotate", _on_camera_view_rotate)
@@ -196,7 +198,7 @@ func _on_display_info(node:Node3D):
 	var label:String = tr(str(_displayed_node))
 	if (label.is_empty()): 
 		label = str(node)
-	label_info.position = camera_pivot.camera.unproject_position(node.global_position)
+	label_info.position =  get_viewport().get_camera_3d().unproject_position(node.global_position)
 	label_info.text = label
 	label_info.visible = true
 	var meshes = node.find_children("", "MeshInstance3D")

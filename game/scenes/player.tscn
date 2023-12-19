@@ -8,14 +8,14 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_k8wjv"]
 size = Vector3(0.608642, 1.80127, 0.644699)
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wbdxh"]
+animation = &"default/sword_slash"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2nq3j"]
 animation = &"default/standing_idle"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rjm8p"]
 animation = &"default/running"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wbdxh"]
-animation = &"default/sword_slash"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j3w3d"]
 animation = &"default/walking"
@@ -63,15 +63,15 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_eam0s"]
 states/Start/position = Vector2(162, 55)
+states/attack/node = SubResource("AnimationNodeAnimation_wbdxh")
+states/attack/position = Vector2(244, 214)
 states/idle/node = SubResource("AnimationNodeAnimation_2nq3j")
 states/idle/position = Vector2(386, 64)
 states/run/node = SubResource("AnimationNodeAnimation_rjm8p")
 states/run/position = Vector2(454, 294)
-states/sword_slash/node = SubResource("AnimationNodeAnimation_wbdxh")
-states/sword_slash/position = Vector2(243, 214)
 states/walk/node = SubResource("AnimationNodeAnimation_j3w3d")
 states/walk/position = Vector2(609, 191)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_8sxfj"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_65n61"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_jr2xr"), "idle", "sword_slash", SubResource("AnimationNodeStateMachineTransition_4qdvx"), "sword_slash", "idle", SubResource("AnimationNodeStateMachineTransition_icesk"), "walk", "sword_slash", SubResource("AnimationNodeStateMachineTransition_c0vmp"), "sword_slash", "walk", SubResource("AnimationNodeStateMachineTransition_h2ey5"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_bcruw"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_33hqf"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_xl2nf"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_2btob"), "run", "sword_slash", SubResource("AnimationNodeStateMachineTransition_6gppk"), "sword_slash", "run", SubResource("AnimationNodeStateMachineTransition_3eneh")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_8sxfj"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_65n61"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_jr2xr"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_4qdvx"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_icesk"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_c0vmp"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_h2ey5"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_bcruw"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_33hqf"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_xl2nf"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_2btob"), "run", "attack", SubResource("AnimationNodeStateMachineTransition_6gppk"), "attack", "run", SubResource("AnimationNodeStateMachineTransition_3eneh")]
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 5
