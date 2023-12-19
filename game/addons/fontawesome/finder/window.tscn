@@ -20,7 +20,7 @@ anchor_bottom = 1.0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = -8.0
-offset_bottom = -49.0
+offset_bottom = -56.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -129,7 +129,7 @@ text = "No Icons Found"
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 504.0
-offset_bottom = 463.0
+offset_bottom = 456.0
 
 [node name="Box" type="VBoxContainer" parent="Fetching"]
 layout_mode = 0
