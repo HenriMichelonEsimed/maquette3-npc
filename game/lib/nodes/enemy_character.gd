@@ -9,14 +9,14 @@ const ANIM_HIT = "hit"
 
 @export var label:String = "Enemy"
 @export var damages:DicesRoll 
-@export var speed:int = 1
+@export var attack_speed:int = 1
 @export var hit_points_start:DicesRoll
 @export var walking_speed:float = 0.5
 @export var running_speed:float = 1.0
 @export var info_distance:float = 10
 @export var detection_distance:float = 6
 @export var hear_distance:float = 2
-@export var min_distance:float = 0.5
+@export var attack_distance:float = 0.9
 
 @onready var anim_tree:AnimationTree = $AnimationTree
 @onready var collision_shape:CollisionShape3D = $CollisionShape3D
@@ -28,10 +28,8 @@ var hit_points:int
 var xp:int
 var anim_die_name:String
 var in_info_area:bool = false
-
-var detection_mesh:CylinderShape3D
-var detection_shape:CollisionShape3D
-var detection_area:Area3D
+var timer_attack:Timer
+var attack_cooldown:bool = false
 
 func _ready():
 	hit_points = hit_points_start.roll()
@@ -47,47 +45,41 @@ func _ready():
 	label_info.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label_info.visible = false
 	add_child(label_info)
-	detection_mesh = CylinderShape3D.new()
-	detection_mesh.radius = detection_distance
-	detection_mesh.height = 2
-	detection_shape = CollisionShape3D.new()
-	detection_shape.shape = detection_mesh
-	detection_shape.position.y += detection_mesh.height / 2
-	detection_area = Area3D.new()
-	detection_area.add_child(detection_shape)
-	detection_area.connect("body_entered", _on_detection_aera_body_entered)
-	detection_area.connect("body_exited", _on_detection_aera_body_exited)
-	detection_area.set_collision_mask_value(Consts.LAYER_PLAYER, true)
-	detection_area.set_collision_mask_value(Consts.LAYER_WORLD, false)
-	detection_area.set_collision_layer_value(Consts.LAYER_WORLD, false)
-	add_child(detection_area)
+	timer_attack = Timer.new()
+	timer_attack.process_callback = Timer.TIMER_PROCESS_PHYSICS
+	timer_attack.one_shot = true
+	timer_attack.wait_time = Consts.ATTACK_COOLDOWN[attack_speed-1]
+	add_child(timer_attack)
+	timer_attack.connect("timeout", _on_timer_attack_timeout)
 	update_info()
 
 func _process(delta):
+	if (hit_points <= 0): return
 	var dist = position.distance_to(GameState.player.position)
 	in_info_area = dist < info_distance
 	update_label_info_position()
 	if (dist < detection_distance):
-		pass
-		
-	#if (in_detection_area): 
-	#	update_label_info_position()
-		#if (dist < attack_distance) and (dist > min_distance):
-		#	var vector_to_player = global_position.direction_to(GameState.player.global_position)
-		#	print( vector_to_player.dot(position.normalized()))
-			#var detected = (dist < hear_distance)
-			#if (not detected):
-			#	var vector_to_player = position.direction_to(GameState.player.position)
-			#	detected = vector_to_player.dot(position.normalized()) > 0
-			#if (detected):
-			#	look_at(GameState.player.position)
-			#	velocity = -transform.basis.z * running_speed
-			#	anim_state.travel(ANIM_RUN)
-			#	move_and_slide()
-		#else:
-		#	anim_state.travel(ANIM_IDLE)
-		#	if (randf() < 0.1):
-		#		rotate_y(deg_to_rad(randf_range(-10, 10)))
+		var detected = (dist < hear_distance)
+		if (not detected):
+			var forward_vector = -get_transform().basis.z
+			var vector_to_player = (GameState.player.position - position).normalized()
+			detected = acos(forward_vector.dot(vector_to_player)) <= deg_to_rad(60)
+		if (detected):
+			velocity = Vector3.ZERO
+			# raycast
+			look_at(GameState.player.position)
+			if (dist > attack_distance):
+				velocity = -transform.basis.z * running_speed
+				anim_state.travel(ANIM_RUN)
+				move_and_slide()
+			elif not attack_cooldown:
+				anim_state.travel(ANIM_ATTACK)
+				timer_attack.start()
+				attack_cooldown = true
+			return
+	anim_state.travel(ANIM_IDLE)
+	if (randf() < 0.1):
+		rotate_y(deg_to_rad(randf_range(-10, 10)))
 
 func _to_string():
 	return label
@@ -115,6 +107,7 @@ func hit(hit_by:ItemWeapon):
 	look_at(GameState.player.position)
 	var pos = label_info.position
 	pos.x += label_info.size.x / 2
+	velocity = Vector3.ZERO
 	NotificationManager.hit(self, hit_by, damage_points, pos)
 	if (anim_state != null):
 		anim_state.travel(ANIM_HIT if hit_points > 0 else ANIM_DIE)
@@ -122,20 +115,9 @@ func hit(hit_by:ItemWeapon):
 		NotificationManager.xp(xp)
 		set_collision_layer_value(Consts.LAYER_ENEMY_CHARACTER, false)
 		set_collision_layer_value(Consts.LAYER_WORLD, true)
-		detection_area.disconnect("body_entered", _on_detection_aera_body_entered)
-		detection_area.disconnect("body_exited", _on_detection_aera_body_exited)
-		detection_shape.queue_free()
-		detection_area.queue_free()
 		label_info.queue_free()
 		label_info = null
 		in_info_area = false
 
-func _on_detection_aera_body_entered(node:Node):
-	#in_detection_area = true
-	#display_info()
-	pass
-
-func _on_detection_aera_body_exited(node:Node):
-	#in_detection_area = false
-	#update_label_info_position()
-	pass
+func _on_timer_attack_timeout():
+	attack_cooldown = false

@@ -9,7 +9,6 @@ const ANIM_RUNNING = "run"
 const ANIM_ATTACKING= "attack"
 const ANIM_USING= "use"
 const ANIM_SWORD_SLASH = "default/sword_slash_1_v%d"
-const ATTACK_COOLDOWN:Array[float] = [ 0.3333, 0.6333, 0.6333, 1.3333, 1.3333, 2, 2, 2.6667 ]
 
 @export var camera_pivot:Node3D
 
@@ -66,12 +65,12 @@ func _ready():
 	attach_item = character.get_node("RootNode/Skeleton3D/HandAttachment/AttachmentPoint")
 	anim_attack =  anim_tree.get_tree_root().get_node("attack")
 
-func _process(_delta):
+func _unhandled_input(event):
 	if Input.is_action_just_pressed("use") and (not use_cooldown):
 		if (GameState.current_item != null) and (GameState.current_item is ItemWeapon):
 			anim_state.travel(ANIM_ATTACKING)
 			hit_allowed = true
-			timer_use.wait_time = ATTACK_COOLDOWN[GameState.current_item.speed-1]
+			timer_use.wait_time = Consts.ATTACK_COOLDOWN[GameState.current_item.speed-1]
 		elif interactions.node_to_use != null:
 			anim_state.travel(ANIM_USING)
 			timer_use.wait_time = 1.0

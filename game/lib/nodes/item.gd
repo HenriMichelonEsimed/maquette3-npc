@@ -36,6 +36,7 @@ func use():
 	rotate_y(deg_to_rad(180))
 
 func unuse():
+	position = Vector3.ZERO
 	rotation = original_rotation
 	scale = Vector3.ZERO
 	enable()
