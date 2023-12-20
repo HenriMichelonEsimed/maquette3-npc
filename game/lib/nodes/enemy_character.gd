@@ -41,6 +41,9 @@ var detection_distance:float = 6
 
 func _ready():
 	weapon.disable()
+	weapon.use_area.set_collision_mask_value(Consts.LAYER_PLAYER, true)
+	weapon.use_area.set_collision_mask_value(Consts.LAYER_ENEMY_CHARACTER, false)
+	anim_tree["parameters/attack/TimeScale/scale"] = GameMechanics.anim_scale(weapon.speed)
 	hit_points = hit_points_roll.roll()
 	walking_speed = walking_speed_roll.roll()
 	running_speed = running_speed_roll.roll()

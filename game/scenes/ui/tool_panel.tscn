@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://r3fibn5pmeaq"]
+[gd_scene load_steps=6 format=3 uid="uid://r3fibn5pmeaq"]
 
 [ext_resource type="Script" path="res://lib/scenes/tool_panel.gd" id="1_4a67e"]
-[ext_resource type="PackedScene" uid="uid://bc0qy5c1xxgsw" path="res://models/items/weapons/long_blade_1.tscn" id="2_ksojw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_na1ij"]
 bg_color = Color(0, 0, 0, 0.313726)
@@ -64,8 +63,6 @@ material = SubResource("StandardMaterial3D_wb7bd")
 
 [node name="InsertPoint" type="Node3D" parent="ViewContent/3DView"]
 transform = Transform3D(0.866025, -0.5, 0, 0.433013, 0.75, 0.5, -0.25, -0.433013, 0.866025, 0, 0, 0)
-
-[node name="long_blade_1" parent="ViewContent/3DView/InsertPoint" instance=ExtResource("2_ksojw")]
 
 [node name="LabelTool" type="Label" parent="."]
 layout_mode = 1

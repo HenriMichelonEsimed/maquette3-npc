@@ -10,6 +10,7 @@ var nickname:String = "Player"
 var sex:bool = true
 var char:String = "player_1"
 var xp:int = 0
+var xp_next_level = 2000
 var hp:int = 20
 var hp_max:int = 20
 

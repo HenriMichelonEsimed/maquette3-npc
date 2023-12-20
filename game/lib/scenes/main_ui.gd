@@ -10,7 +10,6 @@ class_name MainUI extends Control
 @onready var focused_button:Button = $Menu/MainMenu/ButtonInventory
 @onready var label_notif:Label = $HUD/LabelNotification
 @onready var timer_notif:Timer = $HUD/LabelNotification/Timer
-@onready var label_xp:Label = $HUD/LabelXP
 @onready var icon_menu_open = $HUD/MenuOpen
 @onready var icon_menu_close = $MenuClose
 @onready var icon_use = $HUD/LabelInfo/Icon
@@ -24,6 +23,7 @@ class_name MainUI extends Control
 @onready var hud = $HUD
 @onready var blur = $Blur
 @onready var hp = $HUD/HP
+@onready var xp = $HUD/XP
 
 const compass_rotation = [ 0.0, -90.0, -180.0, -270.0 ]
 
@@ -186,7 +186,8 @@ func display_xp_gain(xp:int):
 	display_moving_notification(tr("+%d XP") % xp, 150, pos)
 
 func display_xp():
-	label_xp.text = "%d XP" % GameState.player_state.xp
+	xp.max_value = GameState.player_state.xp_next_level
+	xp.value = GameState.player_state.xp
 
 func display_moving_notification(text:String, cooldown:int, label_info_position:Vector2):
 	var label = Label.new()
