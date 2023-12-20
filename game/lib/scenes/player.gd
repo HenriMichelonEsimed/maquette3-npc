@@ -64,13 +64,14 @@ func _ready():
 	attach_item = character.get_node("RootNode/Skeleton3D/HandAttachment/AttachmentPoint")
 
 func _unhandled_input(_event):
-	if (attack_cooldown): return
+	if (attack_cooldown) or (GameState.player_state.hp <= 0): return
 	if Input.is_action_pressed("player_moveto"):
 		move_to(get_viewport().get_mouse_position())
 	elif Input.is_action_just_released("player_moveto"):
 		stop_move_to()
 
 func _physics_process(delta):
+	if (GameState.player_state.hp <= 0): return
 	if Input.is_action_pressed("use") and (not attack_cooldown) and (GameState.current_item != null) and (GameState.current_item is ItemWeapon):
 			anim_state.travel(ANIM_ATTACKING)
 			hit_allowed = true
@@ -226,6 +227,7 @@ func unhandle_item():
 	attach_item.remove_child(GameState.current_item)
 
 func hit(hit_by:ItemWeapon):
+	if (GameState.player_state.hp <= 0): return
 	var damage_points = min(hit_by.damages_roll.roll(), GameState.player_state.hp)
 	GameState.player_state.hp -= damage_points
 	var pos3d = global_position
@@ -235,8 +237,6 @@ func hit(hit_by:ItemWeapon):
 	NotificationManager.hit(self, hit_by, damage_points, pos)
 	if (GameState.player_state.hp  <= 0):
 		anim_state.travel(ANIM_DIE)
-		get_tree().paused = true
-		pass
 
 func _on_item_hit(node:Node3D):
 	if (hit_allowed):
@@ -250,3 +250,7 @@ func _on_timer_attack_timeout():
 
 func _to_string():
 	return GameState.player_state.nickname
+
+func _on_animation_tree_animation_finished(anim_name):
+	if (anim_name == "default/die_backward_1"):
+		Tools.load_dialog(self, Tools.DIALOG_GAMEOVER).open()

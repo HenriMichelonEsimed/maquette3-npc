@@ -144,4 +144,5 @@ process_callback = 0
 wait_time = 0.1
 one_shot = true
 
+[connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="timeout" from="TimerUse" to="." method="_on_timer_attack_timeout"]

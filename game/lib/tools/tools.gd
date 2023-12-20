@@ -10,10 +10,10 @@ const DIALOG_ALERT = "alert"
 const DIALOG_PLAYER_SETUP = "player_setup"
 const DIALOG_CONTROLLER = "controller"
 const DIALOG_ENEMY_INFO = "enemy_info"
+const DIALOG_GAMEOVER = "gameover"
 
 const SCREEN_INVENTORY = "inventory"
 const SCREEN_TERMINAL = "terminal"
-const SCREEN_GAMEOVER = "gameover"
 const SCREEN_NPC_TALK = "talk"
 const SCREEN_NPC_TRADE = "trade"
 

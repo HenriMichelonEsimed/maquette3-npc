@@ -77,6 +77,9 @@ func _ready():
 
 func _process(delta):
 	if (hit_points <= 0): return
+	if (GameState.player_state.hp <= 0):
+		anim_state.travel(ANIM_IDLE)
+		return
 	var dist = position.distance_to(GameState.player.position)
 	in_info_area = dist < info_distance
 	update_label_info_position()
