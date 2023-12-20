@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b873fs2lbtp6t"]
+[gd_scene load_steps=16 format=3 uid="uid://b873fs2lbtp6t"]
 
 [ext_resource type="Script" path="res://lib/scenes/main_ui.gd" id="1_ghhs3"]
 [ext_resource type="FontFile" uid="uid://cave61j52xeuh" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="1_ni5mw"]
@@ -19,6 +19,22 @@ shader_parameter/amount = 2.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qmmbd"]
 bg_color = Color(0.188235, 0.639216, 0.901961, 0.501961)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c6xqv"]
+bg_color = Color(0.676076, 0.600434, 0.266762, 0.501961)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -206,6 +222,42 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("2_ur2r2")
 icon_name = "lungs"
+
+[node name="HP" type="ProgressBar" parent="HUD"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 1
+offset_left = 7.0
+offset_top = 203.0
+offset_right = 170.0
+offset_bottom = 233.0
+rotation = -1.5708
+size_flags_horizontal = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_c6xqv")
+value = 50.0
+show_percentage = false
+
+[node name="FontAwesome" type="Label" parent="HUD/HP"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 75.5
+offset_right = 105.5
+offset_bottom = 24.0
+grow_horizontal = 2
+rotation = 1.5708
+auto_translate = false
+localize_numeral_system = false
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/font = ExtResource("1_ni5mw")
+theme_override_font_sizes/font_size = 16
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_ur2r2")
+icon_name = "heart"
 
 [node name="Compass" type="TextureRect" parent="HUD"]
 layout_mode = 1

@@ -6,6 +6,7 @@ signal stop_moving()
 const ANIM_STANDING = "idle"
 const ANIM_WALKING = "walk"
 const ANIM_RUNNING = "run"
+const ANIM_DIE = "die"
 const ANIM_ATTACKING= "attack"
 const ANIM_USING= "use"
 const ANIM_SWORD_SLASH = "default/sword_slash_1_v1"
@@ -224,12 +225,28 @@ func unhandle_item():
 		GameState.current_item.use_area.disconnect("body_entered", _on_item_hit)
 	attach_item.remove_child(GameState.current_item)
 
+func hit(hit_by:ItemWeapon):
+	var damage_points = min(hit_by.damages_roll.roll(), GameState.player_state.hp)
+	GameState.player_state.hp -= damage_points
+	var pos3d = global_position
+	pos3d.y += height
+	var pos = camera_pivot.camera.unproject_position(pos3d)
+	velocity = Vector3.ZERO
+	NotificationManager.hit(self, hit_by, damage_points, pos)
+	if (GameState.player_state.hp  <= 0):
+		anim_state.travel(ANIM_DIE)
+		get_tree().paused = true
+		pass
+
 func _on_item_hit(node:Node3D):
 	if (hit_allowed):
-		look_at(node.global_position)
 		hit_allowed = false
 		if (node is EnemyCharacter):
+			look_at(node.global_position)
 			node.hit(GameState.current_item)
 
 func _on_timer_attack_timeout():
 	attack_cooldown = false
+
+func _to_string():
+	return GameState.player_state.nickname

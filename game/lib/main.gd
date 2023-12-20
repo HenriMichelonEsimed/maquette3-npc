@@ -27,6 +27,8 @@ func _ready():
 	_change_zone(GameState.player_state.zone_name)
 	if (GameState.player_state.position != Vector3.ZERO):
 		player.move(GameState.player_state.position, GameState.player_state.rotation)
+	GameState.player_state.hp_max = 20
+	GameState.player_state.hp = 20
 	GameState.game_started = true
 
 func _unhandled_input(event):

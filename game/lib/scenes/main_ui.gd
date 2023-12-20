@@ -23,6 +23,7 @@ class_name MainUI extends Control
 @onready var menu = $Menu
 @onready var hud = $HUD
 @onready var blur = $Blur
+@onready var hp = $HUD/HP
 
 const compass_rotation = [ 0.0, -90.0, -180.0, -270.0 ]
 
@@ -56,6 +57,8 @@ func _ready():
 	display_xp()
 	set_shortcuts()
 	_on_camera_view_rotate(GameState.camera.view)
+	hp.max_value = GameState.player_state.hp_max
+	hp.value = GameState.player_state.hp
 
 func set_shortcuts():
 	panel_item.set_shortcuts()
@@ -79,6 +82,9 @@ func _input(event):
 			_on_save_before_quit_confirm(true)
 		elif Input.is_action_just_released("inventory"):
 			inventory_open()
+
+func _process(delta):
+	hp.value = GameState.player_state.hp
 
 func _physics_process(delta):
 	for label in _hits:
@@ -170,7 +176,7 @@ func display_notification(message:String):
 	label_notif.visible = true
 	timer_notif.start()
 
-func display_new_hit(enemy:EnemyCharacter, weapons:ItemWeapon, damage_points:int, label_info_position:Vector2):
+func display_new_hit(enemy:Node3D, weapons:ItemWeapon, damage_points:int, label_info_position:Vector2):
 	display_moving_notification(tr("%s damages to %s with %s") % [damage_points, enemy, weapons], 50, label_info_position)
 	
 func display_xp_gain(xp:int):

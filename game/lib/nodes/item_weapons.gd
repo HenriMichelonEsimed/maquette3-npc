@@ -3,8 +3,6 @@ class_name ItemWeapon extends ItemUnique
 @onready var damages_roll:DicesRoll = $Damages
 @onready var speed_roll:DicesRoll = $Speed
 
-@export var invisible:bool = false
-
 var speed:int = 1
 
 func _init():

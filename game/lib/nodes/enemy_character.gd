@@ -12,7 +12,7 @@ const ANIM_HIT = "hit"
 @export var hear_distance:float = 2
 @export var attack_distance:float = 0.9
 
-@onready var weapon:ItemWeapon = $Weapon
+@onready var weapon:ItemWeapon = $RootNode/Skeleton3D/WeaponAttachement/Weapon
 @onready var hit_points_roll:DicesRoll = $HitPoints
 @onready var walking_speed_roll:DicesRoll = $WalkingSpeed
 @onready var running_speed_roll:DicesRoll = $RunningSpeed
@@ -29,7 +29,10 @@ var xp:int
 var anim_die_name:String
 var in_info_area:bool = false
 var timer_attack:Timer
+# action animation playing
 var attack_cooldown:bool = false
+# one hit only allowed during attack cooldown
+var hit_allowed:bool = false
 
 var hit_points:int = 100
 var walking_speed:float = 0.5
@@ -38,7 +41,6 @@ var detection_distance:float = 6
 
 func _ready():
 	weapon.disable()
-	weapon.visible = not weapon.invisible
 	hit_points = hit_points_roll.roll()
 	walking_speed = walking_speed_roll.roll()
 	running_speed = running_speed_roll.roll()
@@ -70,6 +72,8 @@ func _ready():
 	timer_attack.connect("timeout", _on_timer_attack_timeout)
 	update_info()
 	label_info.text = "%s" % label
+	if (weapon.use_area != null):
+		weapon.use_area.connect("body_entered", _on_item_hit)
 
 func _process(delta):
 	if (hit_points <= 0): return
@@ -94,6 +98,7 @@ func _process(delta):
 				anim_state.travel(ANIM_ATTACK)
 				timer_attack.start()
 				attack_cooldown = true
+				hit_allowed = true
 			return
 	anim_state.travel(ANIM_IDLE)
 	if (randf() < 0.1):
@@ -145,6 +150,12 @@ func hit(hit_by:ItemWeapon):
 
 func _on_timer_attack_timeout():
 	attack_cooldown = false
+
+func _on_item_hit(node:Node3D):
+	if (hit_allowed):
+		hit_allowed = false
+		if (node is Player):
+			node.hit(weapon)
 
 func _on_input_event(camera, event, position, normal, shape_idx):
 	if (event is InputEventMouseButton) and (event.button_index == MOUSE_BUTTON_MIDDLE) and not(event.pressed):

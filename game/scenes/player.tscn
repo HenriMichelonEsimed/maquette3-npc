@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cfxsejwlekels"]
+[gd_scene load_steps=31 format=3 uid="uid://cfxsejwlekels"]
 
 [ext_resource type="Script" path="res://lib/scenes/player.gd" id="1_q3dva"]
 [ext_resource type="PackedScene" uid="uid://feuv31qq1vnp" path="res://scenes/characters/player_1.tscn" id="2_jd0ni"]
@@ -21,6 +21,9 @@ nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_7j2ac")
 nodes/TimeScale/position = Vector2(360, 160)
 nodes/output/position = Vector2(560, 160)
 node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_te7cv"]
+animation = &"default/die_backward_1"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2nq3j"]
 animation = &"default/standing_idle"
@@ -76,19 +79,36 @@ xfade_time = 1.0
 switch_mode = 1
 advance_mode = 0
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_om1xk"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nd31n"]
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xpbo5"]
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d5eqo"]
+advance_mode = 0
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_eam0s"]
+states/End/position = Vector2(1103, 114)
 states/Start/position = Vector2(162, 55)
 states/attack/node = SubResource("AnimationNodeBlendTree_r6kli")
 states/attack/position = Vector2(219, 291)
+states/die/node = SubResource("AnimationNodeAnimation_te7cv")
+states/die/position = Vector2(840, 404)
 states/idle/node = SubResource("AnimationNodeAnimation_2nq3j")
 states/idle/position = Vector2(386, 64)
 states/run/node = SubResource("AnimationNodeAnimation_rjm8p")
-states/run/position = Vector2(474, 344)
+states/run/position = Vector2(474, 262)
 states/use/node = SubResource("AnimationNodeAnimation_6ai1k")
 states/use/position = Vector2(739, 55)
 states/walk/node = SubResource("AnimationNodeAnimation_j3w3d")
 states/walk/position = Vector2(749, 168)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_8sxfj"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_65n61"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_jr2xr"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_bcruw"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_33hqf"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_xl2nf"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_2btob"), "idle", "use", SubResource("AnimationNodeStateMachineTransition_feypf"), "use", "idle", SubResource("AnimationNodeStateMachineTransition_g7u07"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_w5oos"), "run", "attack", SubResource("AnimationNodeStateMachineTransition_7epka"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_0jain")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_8sxfj"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_65n61"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_jr2xr"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_bcruw"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_33hqf"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_xl2nf"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_2btob"), "idle", "use", SubResource("AnimationNodeStateMachineTransition_feypf"), "use", "idle", SubResource("AnimationNodeStateMachineTransition_g7u07"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_w5oos"), "run", "attack", SubResource("AnimationNodeStateMachineTransition_7epka"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_0jain"), "die", "End", SubResource("AnimationNodeStateMachineTransition_om1xk"), "attack", "die", SubResource("AnimationNodeStateMachineTransition_nd31n"), "idle", "die", SubResource("AnimationNodeStateMachineTransition_xpbo5"), "walk", "die", SubResource("AnimationNodeStateMachineTransition_d5eqo")]
+graph_offset = Vector2(0, -3.21372)
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 513

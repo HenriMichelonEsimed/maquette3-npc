@@ -26,6 +26,7 @@ func _ready():
 	use_area = get_node("Area3D")
 	if (use_area != null):
 		use_area.set_collision_layer_value(Consts.LAYER_WORLD, false)
+		use_area.set_collision_mask_value(Consts.LAYER_PLAYER, true)
 		use_area.set_collision_mask_value(Consts.LAYER_ENEMY_CHARACTER, true)
 		use_area.set_collision_mask_value(Consts.LAYER_WORLD, false)
 
