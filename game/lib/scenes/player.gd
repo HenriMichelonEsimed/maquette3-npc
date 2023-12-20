@@ -45,8 +45,6 @@ var attack_cooldown:bool = false
 var hit_allowed:bool = false
 # running animation playing
 var running:bool = false
-# attack animation state node
-var anim_attack:AnimationNodeBlendTree
 # approx height
 var height = 1.7
 
@@ -63,9 +61,8 @@ func _ready():
 	camera = camera_pivot.get_node("Camera")
 	camera.connect("view_rotate", _on_view_rotate)
 	attach_item = character.get_node("RootNode/Skeleton3D/HandAttachment/AttachmentPoint")
-	anim_attack =  anim_tree.get_tree_root().get_node("attack")
 
-func _unhandled_input(event):
+func _unhandled_input(_event):
 	if (attack_cooldown): return
 	if Input.is_action_pressed("player_moveto"):
 		move_to(get_viewport().get_mouse_position())
@@ -77,12 +74,10 @@ func _physics_process(delta):
 			anim_state.travel(ANIM_ATTACKING)
 			hit_allowed = true
 			timer_use.wait_time = GameMechanics.attack_cooldown(GameState.current_item.speed)
-			print("cooldown %f" % timer_use.wait_time)
 			move_to_target = null
 			running = false
 			attack_cooldown = true
 			timer_use.start()
-			print("attack")
 	if (attack_cooldown): return
 	var on_floor = is_on_floor_only() 
 	if (move_to_target != null):
@@ -235,4 +230,3 @@ func _on_item_hit(node:Node3D):
 
 func _on_timer_attack_timeout():
 	attack_cooldown = false
-	print("timeout")

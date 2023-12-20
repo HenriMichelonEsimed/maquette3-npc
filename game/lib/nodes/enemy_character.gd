@@ -13,9 +13,7 @@ const ANIM_HIT = "hit"
 @export var attack_distance:float = 0.9
 
 @onready var weapon:ItemWeapon = $Weapon
-@onready var damages_roll:DicesRoll = $Damages 
 @onready var hit_points_roll:DicesRoll = $HitPoints
-@onready var attack_speed_roll:DicesRoll = $AttackSpeed
 @onready var walking_speed_roll:DicesRoll = $WalkingSpeed
 @onready var running_speed_roll:DicesRoll = $RunningSpeed
 @onready var detection_distance_roll:DicesRoll = $DetectionDistance
@@ -25,6 +23,7 @@ const ANIM_HIT = "hit"
 
 var anim_state:AnimationNodeStateMachinePlayback
 var label_info:Label
+var progress_hp:ProgressBar
 var collision_height:float = 0.0
 var xp:int
 var anim_die_name:String
@@ -33,14 +32,16 @@ var timer_attack:Timer
 var attack_cooldown:bool = false
 
 var hit_points:int = 100
-var attack_speed:int = 1
 var walking_speed:float = 0.5
 var running_speed:float = 1.0
 var detection_distance:float = 6
 
 func _ready():
+	weapon.disable()
+	if (weapon.invisible):
+		weapon.visible = false
+	# attach weapon
 	hit_points = hit_points_roll.roll()
-	attack_speed = attack_speed_roll.roll()
 	walking_speed = walking_speed_roll.roll()
 	running_speed = running_speed_roll.roll()
 	detection_distance = detection_distance_roll.roll()
@@ -56,13 +57,21 @@ func _ready():
 	label_info.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label_info.visible = false
 	add_child(label_info)
+	progress_hp = ProgressBar.new()
+	progress_hp.max_value = hit_points
+	progress_hp.value = hit_points
+	progress_hp.show_percentage = false
+	progress_hp.size.x = 50
+	progress_hp.modulate = Color.RED
+	add_child(progress_hp)
 	timer_attack = Timer.new()
 	timer_attack.process_callback = Timer.TIMER_PROCESS_PHYSICS
 	timer_attack.one_shot = true
-	timer_attack.wait_time = GameMechanics.attack_cooldown(attack_speed)
+	timer_attack.wait_time = GameMechanics.attack_cooldown(weapon.speed)
 	add_child(timer_attack)
 	timer_attack.connect("timeout", _on_timer_attack_timeout)
 	update_info()
+	label_info.text = "%s" % label
 
 func _process(delta):
 	if (hit_points <= 0): return
@@ -97,18 +106,23 @@ func _to_string():
 
 func update_info():
 	if (label_info == null): return
-	label_info.text = "%s\nHP %d DMG %s" % [ label, hit_points, damages_roll ]
+	progress_hp.value = hit_points
 	update_label_info_position()
 
 func update_label_info_position():
 	if (label_info == null): return
 	label_info.visible = in_info_area and GameState.camera.size < 30
+	progress_hp.visible = label_info.visible
 	if (label_info.visible):
-		var pos = position
+		var pos:Vector3 = position
 		pos.y += collision_height
-		label_info.position = get_viewport().get_camera_3d().unproject_position(pos)
+		var pos2d:Vector2 = get_viewport().get_camera_3d().unproject_position(pos)
+		progress_hp.position = pos2d
+		progress_hp.position.x -= progress_hp.size.x / 2
+		progress_hp.position.y -= progress_hp.size.y/2
+		label_info.position = pos2d
 		label_info.position.x -= label_info.size.x / 2
-		label_info.position.y -= label_info.size.y
+		label_info.position.y -= label_info.size.y + progress_hp.size.y
 		label_info.add_theme_font_size_override("font_size", 14 - GameState.camera.size / 10)
 
 func hit(hit_by:ItemWeapon):
@@ -128,6 +142,7 @@ func hit(hit_by:ItemWeapon):
 		set_collision_layer_value(Consts.LAYER_WORLD, true)
 		label_info.queue_free()
 		label_info = null
+		progress_hp.queue_free()
 		in_info_area = false
 
 func _on_timer_attack_timeout():

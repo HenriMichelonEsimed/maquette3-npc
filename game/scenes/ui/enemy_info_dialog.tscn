@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://jtr136e05oby"]
+[gd_scene load_steps=5 format=3 uid="uid://jtr136e05oby"]
 
 [ext_resource type="Script" path="res://lib/scenes/enemy_info_dialog.gd" id="1_4cmdh"]
+[ext_resource type="Texture2D" uid="uid://cjo1d842a4hx4" path="res://assets/textures/ui/cancel_normal.png" id="2_ae7fs"]
+[ext_resource type="Texture2D" uid="uid://bfq3j14jn0px0" path="res://assets/textures/ui/cancel_hover.png" id="3_263sw"]
+[ext_resource type="Texture2D" uid="uid://clysvli6bak58" path="res://assets/textures/ui/cancel_disabled.png" id="4_ma26q"]
 
 [node name="EnemyInfo" type="Control"]
 clip_contents = true
@@ -44,27 +47,56 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 alignment = 1
 
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="ButtonCancel" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../Bottom/ButtonOk")
+focus_next = NodePath("../../Bottom/ButtonOk")
+focus_previous = NodePath("../../Bottom/ButtonNo")
+texture_normal = ExtResource("2_ae7fs")
+texture_pressed = ExtResource("3_263sw")
+texture_hover = ExtResource("3_263sw")
+texture_disabled = ExtResource("4_ma26q")
+texture_focused = ExtResource("3_263sw")
+
 [node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "XXX"
 horizontal_alignment = 1
 
+[node name="LabelWeapon" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "XP"
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="LabelDamage" type="Label" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "DMG"
+
+[node name="LabelAttackSpeed" type="Label" parent="Panel/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "AS"
+
 [node name="LabelXP" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "XP"
 
-[node name="LabelDamage" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "DMG"
-
 [node name="LabelHitPoints" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "HP"
-
-[node name="LabelAttackSpeed" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "AS"
 
 [node name="LabelWalkingSpeed" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -81,3 +113,5 @@ text = "DD"
 [node name="LabelHearDistance" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "HD"
+
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer/ButtonCancel" to="." method="close"]
