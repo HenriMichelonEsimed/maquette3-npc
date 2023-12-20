@@ -97,7 +97,7 @@ func _to_string():
 
 func update_info():
 	if (label_info == null): return
-	label_info.text = "%s\nHP:%d DMG:%s" % [ label, hit_points, damages_roll ]
+	label_info.text = "%s\nHP %d DMG %s" % [ label, hit_points, damages_roll ]
 	update_label_info_position()
 
 func update_label_info_position():
