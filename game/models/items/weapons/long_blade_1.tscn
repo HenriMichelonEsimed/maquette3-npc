@@ -208,3 +208,4 @@ modifier = 2
 [node name="Speed" type="Node" parent="."]
 script = ExtResource("8_8pruc")
 modifier = 3
+minimum = 5

@@ -10,7 +10,7 @@ height = 1.7
 radius = 0.35
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n20fm"]
-animation = &"default/sword_slash_1_v8"
+animation = &"default/sword_slash_1"
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_7j2ac"]
 
@@ -65,6 +65,7 @@ advance_mode = 0
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w5oos"]
+xfade_time = 0.1
 advance_mode = 0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tpqsr"]
@@ -76,7 +77,7 @@ xfade_time = 0.1
 advance_mode = 0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lelh4"]
-xfade_time = 0.1
+xfade_time = 0.2
 switch_mode = 2
 advance_mode = 2
 

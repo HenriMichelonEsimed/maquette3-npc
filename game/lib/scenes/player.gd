@@ -40,7 +40,7 @@ var current_view:int = 0
 var signaled:bool = false
 
 # action animation playing
-var use_cooldown:bool = false
+var attack_cooldown:bool = false
 # one hit only allowed during attack cooldown
 var hit_allowed:bool = false
 # running animation playing
@@ -66,29 +66,24 @@ func _ready():
 	anim_attack =  anim_tree.get_tree_root().get_node("attack")
 
 func _unhandled_input(event):
-	if Input.is_action_just_pressed("use") and (not use_cooldown):
-		if (GameState.current_item != null) and (GameState.current_item is ItemWeapon):
-			anim_state.travel(ANIM_ATTACKING)
-			hit_allowed = true
-			timer_use.wait_time = GameMechanics.attack_cooldown(GameState.current_item.speed)
-			print("cooldown %f" % timer_use.wait_time)
-		elif interactions.node_to_use != null:
-			anim_state.travel(ANIM_USING)
-			timer_use.wait_time = 1.0
-		else:
-			return
-		move_to_target = null
-		running = false
-		use_cooldown = true
-		timer_use.start()
-		print("attack")
-	if (use_cooldown): return
+	if (attack_cooldown): return
 	if Input.is_action_pressed("player_moveto"):
 		move_to(get_viewport().get_mouse_position())
 	elif Input.is_action_just_released("player_moveto"):
 		stop_move_to()
 
 func _physics_process(delta):
+	if Input.is_action_pressed("use") and (not attack_cooldown) and (GameState.current_item != null) and (GameState.current_item is ItemWeapon):
+			anim_state.travel(ANIM_ATTACKING)
+			hit_allowed = true
+			timer_use.wait_time = GameMechanics.attack_cooldown(GameState.current_item.speed)
+			print("cooldown %f" % timer_use.wait_time)
+			move_to_target = null
+			running = false
+			attack_cooldown = true
+			timer_use.start()
+			print("attack")
+	if (attack_cooldown): return
 	var on_floor = is_on_floor_only() 
 	if (move_to_target != null):
 		if Input.is_action_pressed("player_right") or  Input.is_action_pressed("player_left") or  Input.is_action_pressed("player_backward") or  Input.is_action_pressed("player_forward"):
@@ -129,46 +124,45 @@ func _physics_process(delta):
 		
 	var no_jump = false
 	var direction = Vector3.ZERO
-	if (not use_cooldown):
-		if Input.is_action_pressed("player_right"):
-			direction.x += directions["right"][current_view].x
-			direction.z += directions["right"][current_view].z
-		if Input.is_action_pressed("player_left"):
-			direction.x += directions["left"][current_view].x
-			direction.z += directions["left"][current_view].z
-		if Input.is_action_pressed("player_backward"):
-			direction.x += directions["backward"][current_view].x
-			direction.z += directions["backward"][current_view].z
-		if Input.is_action_pressed("player_forward"):
-			direction.x += directions["forward"][current_view].x
-			direction.z += directions["forward"][current_view].z
-		if direction != Vector3.ZERO:
-			direction = direction.normalized()
-			look_at(position + direction, Vector3.UP)
-			if Input.is_action_pressed("modifier"):
-				if (not running):
-					speed = running_speed
-					anim_state.travel(ANIM_RUNNING)
-					running = true
-			else:
-				speed = walking_speed
-			anim_state.travel(ANIM_WALKING)
-			for index in range(get_slide_collision_count()):
-				var collision = get_slide_collision(index)
-				var collider = collision.get_collider()
-				if collider == null:
-					continue
-				if collider.is_in_group("stairs"):
-					target_velocity.y = 5
-					no_jump = true
-				elif collider.is_in_group("ladders") and Input.is_action_pressed("player_jump"):
-					target_velocity.y = 12
-					no_jump = true
+	if Input.is_action_pressed("player_right"):
+		direction.x += directions["right"][current_view].x
+		direction.z += directions["right"][current_view].z
+	if Input.is_action_pressed("player_left"):
+		direction.x += directions["left"][current_view].x
+		direction.z += directions["left"][current_view].z
+	if Input.is_action_pressed("player_backward"):
+		direction.x += directions["backward"][current_view].x
+		direction.z += directions["backward"][current_view].z
+	if Input.is_action_pressed("player_forward"):
+		direction.x += directions["forward"][current_view].x
+		direction.z += directions["forward"][current_view].z
+	if direction != Vector3.ZERO:
+		direction = direction.normalized()
+		look_at(position + direction, Vector3.UP)
+		if Input.is_action_pressed("modifier"):
+			if (not running):
+				speed = running_speed
+				anim_state.travel(ANIM_RUNNING)
+				running = true
 		else:
-			target_velocity.y = 0
-			signaled = false
-			stop_moving.emit()
-			anim_state.travel("idle")
+			speed = walking_speed
+		anim_state.travel(ANIM_WALKING)
+		for index in range(get_slide_collision_count()):
+			var collision = get_slide_collision(index)
+			var collider = collision.get_collider()
+			if collider == null:
+				continue
+			if collider.is_in_group("stairs"):
+				target_velocity.y = 5
+				no_jump = true
+			elif collider.is_in_group("ladders") and Input.is_action_pressed("player_jump"):
+				target_velocity.y = 12
+				no_jump = true
+	else:
+		target_velocity.y = 0
+		signaled = false
+		stop_moving.emit()
+		anim_state.travel("idle")
 	
 	target_velocity.x = direction.x * speed
 	target_velocity.z = direction.z * speed
@@ -240,5 +234,5 @@ func _on_item_hit(node:Node3D):
 			node.hit(GameState.current_item)
 
 func _on_timer_attack_timeout():
-	use_cooldown = false
+	attack_cooldown = false
 	print("timeout")
