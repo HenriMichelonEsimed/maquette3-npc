@@ -17,7 +17,7 @@ func _ready():
 	camera.connect("view_rotate", _on_camera_view_rotate)
 
 func _process(_delta):
-	if Input.is_action_pressed("modifier") or player_moving : return
+	if Input.is_action_pressed("modifier") or player_moving or get_tree().paused: return
 	mouse_vector = Vector2.ZERO
 	var mouse_pos =  get_viewport().get_mouse_position()
 	if (mouse_pos.x >= (get_viewport().size.x - mouse_delta)):
@@ -53,7 +53,7 @@ func _process(_delta):
 	if (new_pos.z > (player_pos.z + player_maxdistance.z)):
 		new_pos.z = player_pos.z + player_maxdistance.z
 	if (position != new_pos):
-		position = new_pos
+		camera.move(new_pos)
 		if (!signaled) :
 			view_moving.emit()
 			signaled = true

@@ -23,6 +23,7 @@ var game_started:bool = false
 var oxygen:float = 100.0
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 	_on_joypad_connection_changed(0, 0)
 	Input.connect("joy_connection_changed", _on_joypad_connection_changed)
 	GameState.load_game()
@@ -81,7 +82,7 @@ func pause_game():
 	if (ui.menu.visible): return
 	#player.mute()
 	get_tree().paused = true
-	#if (not use_joypad): Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	if (not use_joypad): Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	ui.pause_game()
 
 func resume_game():
@@ -90,10 +91,8 @@ func resume_game():
 
 func _resume_game():
 	get_tree().paused = false
-	#if (not use_joypad): Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if (not use_joypad): Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 	ui.resume_game()
-	
-
 
 func _on_joypad_connection_changed(_id, _connected):
 	use_joypad = Input.get_connected_joypads().size() > 0

@@ -171,13 +171,13 @@ func display_notification(message:String):
 	timer_notif.start()
 
 func display_new_hit(enemy:EnemyCharacter, weapons:ItemWeapon, damage_points:int, label_info_position:Vector2):
-	display_moving_notification( "%s damages to %s with %s" % [damage_points, enemy, weapons], 50, label_info_position)
+	display_moving_notification(tr("%s damages to %s with %s") % [damage_points, enemy, weapons], 50, label_info_position)
 	
 func display_xp_gain(xp:int):
 	var pos3d = GameState.player.global_position
 	pos3d.y += GameState.player.height
 	var pos = camera_pivot.camera.unproject_position(pos3d)
-	display_moving_notification( "+%d XP" % xp, 150, pos)
+	display_moving_notification(tr("+%d XP") % xp, 150, pos)
 
 func display_xp():
 	label_xp.text = "%d XP" % GameState.player_state.xp

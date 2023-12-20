@@ -51,6 +51,9 @@ alignment = 1
 layout_mode = 2
 alignment = 2
 
+[node name="IconCancel" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
 [node name="ButtonCancel" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 focus_neighbor_left = NodePath(".")

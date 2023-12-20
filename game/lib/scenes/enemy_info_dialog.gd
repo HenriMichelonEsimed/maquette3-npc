@@ -10,20 +10,24 @@ extends Dialog
 @onready var detection = $Panel/MarginContainer/VBoxContainer/LabelDetectionDistance
 @onready var hear = $Panel/MarginContainer/VBoxContainer/LabelHearDistance
 @onready var weapon = $Panel/MarginContainer/VBoxContainer/LabelWeapon
-
+@onready var button_cancel = $Panel/MarginContainer/VBoxContainer/HBoxContainer/IconCancel
 
 func _input(event):
 	if Input.is_action_just_pressed("cancel"):
 		close()
-
+		
+func set_shortcuts():
+	Tools.set_shortcut_icon(button_cancel, Tools.SHORTCUT_CANCEL)
+	
 func open(enemy:EnemyCharacter):
-	xp.text = "XP Gain : %d"  % enemy.xp 
+	super._open()
+	xp.text = tr("XP Gain : %d")  % enemy.xp 
 	label.text = str(enemy)
 	weapon.text = str(enemy.weapon)
-	damages.text = "Damages : %s" % [ enemy.weapon.damages_roll ]
-	attackspeed.text = "Attack Speed (%s) : %d"  % [enemy.weapon.speed_roll,  enemy.weapon.speed ]
-	hitpoints.text = "Hit Points (%s) : %d"  % [enemy.hit_points_roll,  enemy.hit_points ]
-	walkingspeed.text = "Walking Speed (%s) : %d"  % [enemy.walking_speed_roll,  enemy.walking_speed ]
-	runningspeed.text = "Running Speed (%s) : %d"  % [enemy.running_speed_roll,  enemy.running_speed ]
-	detection.text = "Detection Distance (%s) : %dm"  % [enemy.detection_distance_roll,  enemy.detection_distance ]
-	hear.text = "Hearing Distance: %dm"  % enemy.hear_distance
+	damages.text = tr("Damages : %s") % [ enemy.weapon.damages_roll ]
+	attackspeed.text = tr("Attack Speed (%s) : %d")  % [enemy.weapon.speed_roll,  enemy.weapon.speed ]
+	hitpoints.text = tr("Hit Points (%s) : %d")  % [enemy.hit_points_roll,  enemy.hit_points ]
+	walkingspeed.text = tr("Walking Speed (%s) : %d")  % [enemy.walking_speed_roll,  enemy.walking_speed ]
+	runningspeed.text = tr("Running Speed (%s) : %d")  % [enemy.running_speed_roll,  enemy.running_speed ]
+	detection.text = tr("Detection Distance (%s) : %dm")  % [enemy.detection_distance_roll,  enemy.detection_distance ]
+	hear.text = tr("Hearing Distance: %dm")  % enemy.hear_distance

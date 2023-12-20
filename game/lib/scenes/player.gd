@@ -113,8 +113,7 @@ func _physics_process(delta):
 			if (position.distance_to(move_to_previous_position) < 0.001):
 				stop_move_to()
 				return
-			camera_pivot.position = position
-			camera_pivot.position.y += 1.5
+			_update_camera()
 			return
 		
 	var no_jump = false
@@ -170,15 +169,19 @@ func _physics_process(delta):
 	velocity = target_velocity
 	move_and_slide()
 	if direction != Vector3.ZERO:
-		camera_pivot.position = position
-		camera_pivot.position.y += 1.5
-		if (!signaled) :
-			start_moving.emit()
-			signaled = true
+		_update_camera()
 
 func move(pos:Vector3, rot:Vector3):
 	position = pos
 	rotation = rot
+	_update_camera()
+
+func _update_camera():
+	camera_pivot.position = position
+	camera_pivot.position.y += 1.5
+	if (!signaled) :
+		start_moving.emit()
+		signaled = true
 
 func move_to(target:Vector2):
 	var ray_query = PhysicsRayQueryParameters3D.new()

@@ -38,9 +38,7 @@ var detection_distance:float = 6
 
 func _ready():
 	weapon.disable()
-	if (weapon.invisible):
-		weapon.visible = false
-	# attach weapon
+	weapon.visible = not weapon.invisible
 	hit_points = hit_points_roll.roll()
 	walking_speed = walking_speed_roll.roll()
 	running_speed = running_speed_roll.roll()
@@ -56,14 +54,14 @@ func _ready():
 	label_info = Label.new()
 	label_info.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label_info.visible = false
-	add_child(label_info)
+	GameState.ui.hud.add_child(label_info)
 	progress_hp = ProgressBar.new()
 	progress_hp.max_value = hit_points
 	progress_hp.value = hit_points
 	progress_hp.show_percentage = false
 	progress_hp.size.x = 50
 	progress_hp.modulate = Color.RED
-	add_child(progress_hp)
+	GameState.ui.hud.add_child(progress_hp)
 	timer_attack = Timer.new()
 	timer_attack.process_callback = Timer.TIMER_PROCESS_PHYSICS
 	timer_attack.one_shot = true
@@ -150,5 +148,4 @@ func _on_timer_attack_timeout():
 
 func _on_input_event(camera, event, position, normal, shape_idx):
 	if (event is InputEventMouseButton) and (event.button_index == MOUSE_BUTTON_MIDDLE) and not(event.pressed):
-		GameState.pause_game()
 		Tools.load_dialog(self, Tools.DIALOG_ENEMY_INFO, GameState.resume_game).open(self)

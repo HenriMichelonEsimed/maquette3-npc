@@ -60,20 +60,10 @@ Transfer all;Transfer all;Tout transférer
 Transfer;Transfer;Transférer
 Load;Load;Charger
 Menu;Menu;Menu
-Smartphone;Smartphone;Téléphone
 Controls;Controls;Contrôles
 Quit;Quit;Quitter
 Notifications;Notifications;Notifications
-"Joypad and keyboard
-vertical axis";"Joypad and keyboard
-vertical axis";"Axe vertical
-manette et clavier"
 Normal;Normal;Normal
-Inverted;Inverted;Inversé
-"Mouse
-vertical axis";"Mouse
-vertical axis";"Axe vertical
-souris"
 Loading...;Loading...;Chargement...
 Continue;Continue;Continuer
 New game;New game;Nouvelle partie
@@ -84,3 +74,13 @@ Your name :;Your name :;Votre nom :
 Character :;Character :;Personnage :
 YOU_DIED_M;You died !;Vous êtes mort !
 YOU_DIED_F;You died !;Vous êtes morte !
+XP Gain : %d;XP Gain : %d;Gain XP : %d
+Damages : %s;Damages : %s;Dommages : %s
+Attack Speed (%s) : %d;Attack Speed (%s) : %d;Vitesse d'attaque (%s) : %d
+Hit Points (%s) : %d;Hit Points (%s) : %d;Points de vie (%s) : %d
+Walking Speed (%s) : %d;Walking Speed (%s) : %d;Vitesse de marche (%s) : %d
+Running Speed (%s) : %d;Running Speed (%s) : %d;Vitesse de course (%s) : %d
+Detection Distance (%s) : %dm;Detection Distance (%s) : %dm;Distance de détection (%s) : %dm
+Hearing Distance: %dm;Hearing Distance: %dm;Distance d'écoute: %dm
+%s damages to %s with %s;%s damages to %s with %s;%s dommages à %s avec %s
++%d XP;+%d XP;+%d XP
