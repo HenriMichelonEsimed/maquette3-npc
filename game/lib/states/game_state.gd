@@ -13,7 +13,7 @@ var camera:CameraState
 
 var player:Player
 var ui:MainUI
-var current_item:Item
+var current_item = null
 var current_zone:Zone
 var savegame_name:String
 var use_joypad:bool = false
@@ -25,7 +25,6 @@ var oxygen:float = 100.0
 func _ready():
 	_on_joypad_connection_changed(0, 0)
 	Input.connect("joy_connection_changed", _on_joypad_connection_changed)
-	GameState.prepare_game(true)
 	GameState.load_game()
 
 func new_game():

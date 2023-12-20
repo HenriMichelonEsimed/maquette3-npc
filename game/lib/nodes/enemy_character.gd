@@ -8,15 +8,17 @@ const ANIM_DIE = "die"
 const ANIM_HIT = "hit"
 
 @export var label:String = "Enemy"
-@export var damages:DicesRoll 
-@export var attack_speed:int = 1
-@export var hit_points_start:DicesRoll
-@export var walking_speed:float = 0.5
-@export var running_speed:float = 1.0
 @export var info_distance:float = 10
-@export var detection_distance:float = 6
 @export var hear_distance:float = 2
 @export var attack_distance:float = 0.9
+
+@onready var weapon:ItemWeapon = $Weapon
+@onready var damages_roll:DicesRoll = $Damages 
+@onready var hit_points_roll:DicesRoll = $HitPoints
+@onready var attack_speed_roll:DicesRoll = $AttackSpeed
+@onready var walking_speed_roll:DicesRoll = $WalkingSpeed
+@onready var running_speed_roll:DicesRoll = $RunningSpeed
+@onready var detection_distance_roll:DicesRoll = $DetectionDistance
 
 @onready var anim_tree:AnimationTree = $AnimationTree
 @onready var collision_shape:CollisionShape3D = $CollisionShape3D
@@ -24,15 +26,24 @@ const ANIM_HIT = "hit"
 var anim_state:AnimationNodeStateMachinePlayback
 var label_info:Label
 var collision_height:float = 0.0
-var hit_points:int
 var xp:int
 var anim_die_name:String
 var in_info_area:bool = false
 var timer_attack:Timer
 var attack_cooldown:bool = false
 
+var hit_points:int = 100
+var attack_speed:int = 1
+var walking_speed:float = 0.5
+var running_speed:float = 1.0
+var detection_distance:float = 6
+
 func _ready():
-	hit_points = hit_points_start.roll()
+	hit_points = hit_points_roll.roll()
+	attack_speed = attack_speed_roll.roll()
+	walking_speed = walking_speed_roll.roll()
+	running_speed = running_speed_roll.roll()
+	detection_distance = detection_distance_roll.roll()
 	xp = hit_points
 	set_collision_layer_value(Consts.LAYER_ENEMY_CHARACTER, true)
 	if (anim_tree != null):
@@ -48,7 +59,7 @@ func _ready():
 	timer_attack = Timer.new()
 	timer_attack.process_callback = Timer.TIMER_PROCESS_PHYSICS
 	timer_attack.one_shot = true
-	timer_attack.wait_time = Consts.ATTACK_COOLDOWN[attack_speed-1]
+	timer_attack.wait_time = GameMechanics.attack_cooldown(attack_speed)
 	add_child(timer_attack)
 	timer_attack.connect("timeout", _on_timer_attack_timeout)
 	update_info()
@@ -86,7 +97,7 @@ func _to_string():
 
 func update_info():
 	if (label_info == null): return
-	label_info.text = "%s\nHP:%d DMG:%s" % [ label, hit_points, damages ]
+	label_info.text = "%s\nHP:%d DMG:%s" % [ label, hit_points, damages_roll ]
 	update_label_info_position()
 
 func update_label_info_position():
@@ -101,7 +112,7 @@ func update_label_info_position():
 		label_info.add_theme_font_size_override("font_size", 14 - GameState.camera.size / 10)
 
 func hit(hit_by:ItemWeapon):
-	var damage_points = min(hit_by.damage.roll(), hit_points)
+	var damage_points = min(hit_by.damages_roll.roll(), hit_points)
 	hit_points -= damage_points
 	update_info()
 	look_at(GameState.player.position)
@@ -121,3 +132,8 @@ func hit(hit_by:ItemWeapon):
 
 func _on_timer_attack_timeout():
 	attack_cooldown = false
+
+func _on_input_event(camera, event, position, normal, shape_idx):
+	if (event is InputEventMouseButton) and (event.button_index == MOUSE_BUTTON_MIDDLE) and not(event.pressed):
+		GameState.pause_game()
+		Tools.load_dialog(self, Tools.DIALOG_ENEMY_INFO, GameState.resume_game).open(self)

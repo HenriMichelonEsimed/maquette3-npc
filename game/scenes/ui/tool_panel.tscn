@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://r3fibn5pmeaq"]
 
 [ext_resource type="Script" path="res://lib/scenes/tool_panel.gd" id="1_4a67e"]
-[ext_resource type="PackedScene" uid="uid://bb16b3i0u7i5g" path="res://models/items/weapons/long_blade_1.tscn" id="2_ksojw"]
+[ext_resource type="PackedScene" uid="uid://bc0qy5c1xxgsw" path="res://models/items/weapons/long_blade_1.tscn" id="2_ksojw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_na1ij"]
 bg_color = Color(0, 0, 0, 0.313726)

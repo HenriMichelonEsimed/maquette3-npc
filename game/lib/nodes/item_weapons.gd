@@ -1,7 +1,15 @@
 class_name ItemWeapon extends ItemUnique
 
-@export var damage:DicesRoll
-@export var speed:int = 1
+@onready var damages_roll:DicesRoll = $Damages
+@onready var speed_roll:DicesRoll = $Speed
+
+@export var invisible:bool = false
+
+var speed:int = 1
 
 func _init():
 	type = ItemType.ITEM_WEAPONS
+
+func _ready():
+	super._ready()
+	speed = speed_roll.roll()

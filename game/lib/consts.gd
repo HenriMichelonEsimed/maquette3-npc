@@ -12,7 +12,6 @@ enum {
 	LAYER_ENEMY_CHARACTER = 9,
 	LAYER_PLAYER = 10
 }
-const ATTACK_COOLDOWN:Array[float] = [ 0.3, 0.6, 0.9, 1.3, 1.6, 2, 2.3, 2.6 ]
 
 const AUDIO_VOLUME_EFFECTS = 10
 const AUDIO_BUS_EFFECTS = "Effects"

@@ -9,7 +9,7 @@ extends Node3D
 
 var _previous_zone:Zone
 var _last_spawnpoint:String
-var _previous_item:Item
+var _previous_item = null
 
 func _ready():
 	GameState.player = player
@@ -90,8 +90,8 @@ func item_use(item:Item):
 	if (item is ItemMultiple):
 		GameState.current_item.quantity = 1
 	GameState.inventory.remove(GameState.current_item)
-	ui.panel_item.use()
 	player.handle_item()
+	ui.panel_item.use()
 	GameState.current_item.use()
 
 func item_unuse():

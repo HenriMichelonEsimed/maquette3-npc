@@ -11,7 +11,7 @@ func use():
 	Tools.show_item(GameState.current_item, insert_point)
 	label_item.text = tr(str(GameState.current_item))
 	if (GameState.current_item is ItemWeapon):
-		label_item.text += "\n%s" % GameState.current_item.damage
+		label_item.text += "\nDMG %s AS %d" % [ GameState.current_item.damages_roll, GameState.current_item.speed ]
 	visible = true
 
 func unuse():

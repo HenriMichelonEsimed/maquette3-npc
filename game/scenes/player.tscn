@@ -9,8 +9,19 @@
 height = 1.7
 radius = 0.35
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wbdxh"]
-animation = &"default/sword_slash"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n20fm"]
+animation = &"default/sword_slash_1_v8"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_7j2ac"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_r6kli"]
+graph_offset = Vector2(-133.019, 119.031)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_n20fm")
+nodes/Animation/position = Vector2(51, 227)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_7j2ac")
+nodes/TimeScale/position = Vector2(360, 160)
+nodes/output/position = Vector2(560, 160)
+node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2nq3j"]
 animation = &"default/standing_idle"
@@ -33,21 +44,6 @@ advance_mode = 0
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jr2xr"]
 xfade_time = 0.1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4qdvx"]
-xfade_time = 0.1
-advance_mode = 0
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_icesk"]
-xfade_time = 0.2
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c0vmp"]
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h2ey5"]
-xfade_time = 0.2
-switch_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bcruw"]
 xfade_time = 0.1
 advance_mode = 0
@@ -62,33 +58,41 @@ xfade_time = 0.1
 xfade_time = 0.1
 advance_mode = 0
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6gppk"]
-xfade_time = 0.2
-advance_mode = 0
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3eneh"]
-xfade_time = 0.2
-switch_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_feypf"]
 advance_mode = 0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g7u07"]
 switch_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w5oos"]
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tpqsr"]
+xfade_time = 0.1
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7epka"]
+xfade_time = 0.1
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lelh4"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_eam0s"]
 states/Start/position = Vector2(162, 55)
-states/attack/node = SubResource("AnimationNodeAnimation_wbdxh")
-states/attack/position = Vector2(55, 254)
+states/attack/node = SubResource("AnimationNodeBlendTree_r6kli")
+states/attack/position = Vector2(274, 198)
 states/idle/node = SubResource("AnimationNodeAnimation_2nq3j")
 states/idle/position = Vector2(386, 64)
 states/run/node = SubResource("AnimationNodeAnimation_rjm8p")
-states/run/position = Vector2(348, 515)
+states/run/position = Vector2(474, 344)
 states/use/node = SubResource("AnimationNodeAnimation_6ai1k")
 states/use/position = Vector2(739, 55)
 states/walk/node = SubResource("AnimationNodeAnimation_j3w3d")
 states/walk/position = Vector2(749, 168)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_8sxfj"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_65n61"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_jr2xr"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_4qdvx"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_icesk"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_c0vmp"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_h2ey5"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_bcruw"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_33hqf"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_xl2nf"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_2btob"), "run", "attack", SubResource("AnimationNodeStateMachineTransition_6gppk"), "attack", "run", SubResource("AnimationNodeStateMachineTransition_3eneh"), "idle", "use", SubResource("AnimationNodeStateMachineTransition_feypf"), "use", "idle", SubResource("AnimationNodeStateMachineTransition_g7u07")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_8sxfj"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_65n61"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_jr2xr"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_bcruw"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_33hqf"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_xl2nf"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_2btob"), "idle", "use", SubResource("AnimationNodeStateMachineTransition_feypf"), "use", "idle", SubResource("AnimationNodeStateMachineTransition_g7u07"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_w5oos"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_tpqsr"), "run", "attack", SubResource("AnimationNodeStateMachineTransition_7epka"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_lelh4")]
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 513
@@ -117,6 +121,7 @@ libraries = {
 }
 tree_root = SubResource("AnimationNodeStateMachine_eam0s")
 anim_player = NodePath("../AnimationPlayer")
+parameters/attack/TimeScale/scale = 0.5
 
 [node name="TimerUse" type="Timer" parent="."]
 process_callback = 0

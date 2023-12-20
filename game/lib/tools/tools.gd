@@ -9,6 +9,7 @@ const DIALOG_CONFIRM = "confirm"
 const DIALOG_ALERT = "alert"
 const DIALOG_PLAYER_SETUP = "player_setup"
 const DIALOG_CONTROLLER = "controller"
+const DIALOG_ENEMY_INFO = "enemy_info"
 
 const SCREEN_INVENTORY = "inventory"
 const SCREEN_TERMINAL = "terminal"

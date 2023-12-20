@@ -8,7 +8,7 @@ const ANIM_WALKING = "walk"
 const ANIM_RUNNING = "run"
 const ANIM_ATTACKING= "attack"
 const ANIM_USING= "use"
-const ANIM_SWORD_SLASH = "default/sword_slash_1_v%d"
+const ANIM_SWORD_SLASH = "default/sword_slash_1_v1"
 
 @export var camera_pivot:Node3D
 
@@ -46,7 +46,7 @@ var hit_allowed:bool = false
 # running animation playing
 var running:bool = false
 # attack animation state node
-var anim_attack:AnimationNodeAnimation
+var anim_attack:AnimationNodeBlendTree
 # approx height
 var height = 1.7
 
@@ -70,7 +70,8 @@ func _unhandled_input(event):
 		if (GameState.current_item != null) and (GameState.current_item is ItemWeapon):
 			anim_state.travel(ANIM_ATTACKING)
 			hit_allowed = true
-			timer_use.wait_time = Consts.ATTACK_COOLDOWN[GameState.current_item.speed-1]
+			timer_use.wait_time = GameMechanics.attack_cooldown(GameState.current_item.speed)
+			print("cooldown %f" % timer_use.wait_time)
 		elif interactions.node_to_use != null:
 			anim_state.travel(ANIM_USING)
 			timer_use.wait_time = 1.0
@@ -80,6 +81,7 @@ func _unhandled_input(event):
 		running = false
 		use_cooldown = true
 		timer_use.start()
+		print("attack")
 	if (use_cooldown): return
 	if Input.is_action_pressed("player_moveto"):
 		move_to(get_viewport().get_mouse_position())
@@ -211,11 +213,17 @@ func _look_at(node:Node3D):
 func _on_view_rotate(view:int):
 	current_view = view
 
+func print_property_list(parent):
+	print(parent.get_name())
+	var list = parent.get_property_list()
+	for prop in list:
+		print("	> " + prop["name"])
+	print("---")
+
 func handle_item():
 	attach_item.add_child(GameState.current_item)
 	if (GameState.current_item is ItemWeapon):
-		anim_attack.animation = ANIM_SWORD_SLASH % GameState.current_item.speed
-		
+		anim_tree["parameters/attack/TimeScale/scale"] = GameMechanics.anim_scale(GameState.current_item.speed)
 	if (GameState.current_item.use_area != null):
 		GameState.current_item.use_area.connect("body_entered", _on_item_hit)
 
@@ -233,3 +241,4 @@ func _on_item_hit(node:Node3D):
 
 func _on_timer_attack_timeout():
 	use_cooldown = false
+	print("timeout")
