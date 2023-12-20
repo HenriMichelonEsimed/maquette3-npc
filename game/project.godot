@@ -26,10 +26,6 @@ NotificationManager="*res://lib/tools/notification_manager.gd"
 
 shapes/collision/shape_color=Color(0, 0.6, 0.701961, 0.745098)
 
-[display]
-
-window/size/mode=3
-
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/fontawesome/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")

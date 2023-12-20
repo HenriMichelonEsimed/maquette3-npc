@@ -72,14 +72,14 @@ func _unhandled_input(_event):
 
 func _physics_process(delta):
 	if (GameState.player_state.hp <= 0): return
-	if Input.is_action_pressed("use") and (not attack_cooldown) and (GameState.current_item != null) and (GameState.current_item is ItemWeapon):
-			anim_state.travel(ANIM_ATTACKING)
-			hit_allowed = true
-			timer_use.wait_time = GameMechanics.attack_cooldown(GameState.current_item.speed)
-			move_to_target = null
-			running = false
-			attack_cooldown = true
-			timer_use.start()
+	if Input.is_action_pressed("use") and (not attack_cooldown) and (GameState.current_item != null) and (GameState.current_item is ItemWeapon) and (interactions.node_to_use == null):
+		anim_state.travel(ANIM_ATTACKING)
+		hit_allowed = true
+		timer_use.wait_time = GameMechanics.attack_cooldown(GameState.current_item.speed)
+		move_to_target = null
+		running = false
+		attack_cooldown = true
+		timer_use.start()
 	if (attack_cooldown): return
 	var on_floor = is_on_floor_only() 
 	if (move_to_target != null):
@@ -141,6 +141,7 @@ func _physics_process(delta):
 				anim_state.travel(ANIM_RUNNING)
 				running = true
 		else:
+			running = false
 			speed = walking_speed
 		anim_state.travel(ANIM_WALKING)
 		for index in range(get_slide_collision_count()):
@@ -157,6 +158,7 @@ func _physics_process(delta):
 	else:
 		target_velocity.y = 0
 		signaled = false
+		running = false
 		stop_moving.emit()
 		anim_state.travel("idle")
 	
@@ -207,12 +209,12 @@ func _look_at(node:Node3D):
 func _on_view_rotate(view:int):
 	current_view = view
 
-func print_property_list(parent):
-	print(parent.get_name())
-	var list = parent.get_property_list()
-	for prop in list:
-		print("	> " + prop["name"])
-	print("---")
+#func print_property_list(parent):
+#	print(parent.get_name())
+#	var list = parent.get_property_list()
+#	for prop in list:
+#		print("	> " + prop["name"])
+#	print("---")
 
 func handle_item():
 	attach_item.add_child(GameState.current_item)

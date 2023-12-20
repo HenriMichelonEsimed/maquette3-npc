@@ -7,5 +7,4 @@ static func attack_cooldown(speed:int) -> float:
 	return ATTACK_COOLDOWN[speed-1] - 0.1
 	
 static func anim_scale(speed:int) -> float:
-	print(1.0/ANIM_SCALE[speed-1])
 	return ANIM_SCALE[speed-1]

@@ -24,6 +24,8 @@ const ANIM_HIT = "hit"
 var anim_state:AnimationNodeStateMachinePlayback
 var label_info:Label
 var progress_hp:ProgressBar
+var raycast_detection:RayCast3D
+
 var collision_height:float = 0.0
 var xp:int
 var anim_die_name:String
@@ -33,6 +35,10 @@ var timer_attack:Timer
 var attack_cooldown:bool = false
 # one hit only allowed during attack cooldown
 var hit_allowed:bool = false
+# player detection position
+var detected_position:Vector3 = Vector3.ZERO
+var move_to_detected_position:bool = false
+var previous_position:Vector3 = Vector3.ZERO
 
 var hit_points:int = 100
 var walking_speed:float = 0.5
@@ -49,6 +55,7 @@ func _ready():
 	running_speed = running_speed_roll.roll()
 	detection_distance = detection_distance_roll.roll()
 	xp = hit_points
+	set_collision_mask_value(Consts.LAYER_ROOFS, true)
 	set_collision_layer_value(Consts.LAYER_ENEMY_CHARACTER, true)
 	if (anim_tree != null):
 		anim_state = anim_tree["parameters/playback"]
@@ -56,6 +63,12 @@ func _ready():
 		anim_die_name = anim_die.animation
 	if (collision_shape.shape is CylinderShape3D):
 		collision_height = collision_shape.shape.height
+	raycast_detection = RayCast3D.new()
+	raycast_detection.position.y += collision_height
+	raycast_detection.target_position = Vector3(0.0, 0.0, -detection_distance)
+	raycast_detection.set_collision_mask_value(Consts.LAYER_ROOFS, true)
+	raycast_detection.set_collision_mask_value(Consts.LAYER_ENEMY_CHARACTER, true)
+	add_child(raycast_detection)
 	label_info = Label.new()
 	label_info.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label_info.visible = false
@@ -89,26 +102,57 @@ func _process(delta):
 	if (dist < detection_distance):
 		var detected = (dist < hear_distance)
 		if (not detected):
-			var forward_vector = -get_transform().basis.z
+			var forward_vector = -transform.basis.z
 			var vector_to_player = (GameState.player.position - position).normalized()
 			detected = acos(forward_vector.dot(vector_to_player)) <= deg_to_rad(60)
 		if (detected):
-			velocity = Vector3.ZERO
-			# raycast
 			look_at(GameState.player.position)
-			if (dist > attack_distance):
-				velocity = -transform.basis.z * running_speed
-				anim_state.travel(ANIM_RUN)
-				move_and_slide()
-			elif not attack_cooldown:
-				anim_state.travel(ANIM_ATTACK)
-				timer_attack.start()
-				attack_cooldown = true
-				hit_allowed = true
+			if (raycast_detection.is_colliding() and not(raycast_detection.get_collider() is Player)):
+				if (move_to_detected_position):
+					_move_to_detected_position()
+				else:
+					move_to_detected_position = true
+				return
+			if (dist <= attack_distance):
+				if (not attack_cooldown):
+					anim_state.travel(ANIM_ATTACK)
+					timer_attack.start()
+					attack_cooldown = true
+					hit_allowed = true
+				return
+			detected_position = GameState.player.position
+			velocity = -transform.basis.z * running_speed
+			anim_state.travel(ANIM_RUN)
+			previous_position = position
+			move_and_slide()
 			return
+	if move_to_detected_position:
+		_move_to_detected_position()
+	_idle()
+
+func _idle():
 	anim_state.travel(ANIM_IDLE)
 	if (randf() < 0.1):
-		rotate_y(deg_to_rad(randf_range(-10, 10)))
+		rotate_y(deg_to_rad(randf_range(-20, 20)))
+
+func _move_to_detected_position():
+	if move_to_detected_position and (detected_position != Vector3.ZERO):
+		if (transform.origin.distance_to(previous_position) < 0.01):
+			move_to_detected_position = false
+			detected_position = Vector3.ZERO
+			_idle()
+			return
+		if (transform.origin.distance_to(detected_position)) < 1.0:
+			move_to_detected_position = false
+			detected_position = Vector3.ZERO
+			_idle()
+			return
+		look_at(detected_position)
+		velocity = -transform.basis.z * running_speed
+		anim_state.travel(ANIM_RUN)
+		previous_position = position
+		move_and_slide()
+		return
 
 func _to_string():
 	return label

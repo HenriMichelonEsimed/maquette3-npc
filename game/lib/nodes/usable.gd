@@ -49,7 +49,7 @@ func _check_item_use(message_locked:String, message_unlocked:String, tools_to_us
 	return check
 	
 func _check_use():
-	if (GameState.current_item != null):
+	if (GameState.current_item != null) and not(GameState.current_item is ItemWeapon):
 		unlock.emit(false)
 		return false
 	return true
