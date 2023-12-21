@@ -19,7 +19,3 @@ camera_pivot = NodePath("../CameraPivot")
 player = NodePath("../Player")
 camera_pivot = NodePath("../CameraPivot")
 highlighter_material = ExtResource("5_nt6im")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer3D" parent="."]
-volume_db = 50.0
-bus = &"Effects"

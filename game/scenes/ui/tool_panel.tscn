@@ -86,13 +86,27 @@ vertical_alignment = 2
 autowrap_mode = 1
 justification_flags = 161
 
-[node name="IconUnuse" type="TextureRect" parent="."]
+[node name="Unuse" type="TextureButton" parent="."]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -46.0
-offset_top = 6.0
-offset_right = -6.0
-offset_bottom = 46.0
+offset_left = -41.0
+offset_top = 5.0
+offset_right = -9.0
+offset_bottom = 37.0
 grow_horizontal = 0
+
+[node name="Help" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -66.0
+offset_top = 5.0
+offset_right = -34.0
+offset_bottom = 37.0
+grow_horizontal = 0
+
+[connection signal="pressed" from="Unuse" to="." method="_on_unuse_pressed"]
+[connection signal="pressed" from="Help" to="." method="_on_help_pressed"]

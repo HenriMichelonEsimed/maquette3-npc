@@ -65,14 +65,7 @@ func _ready():
 
 func _unhandled_input(_event):
 	if (attack_cooldown) or (GameState.player_state.hp <= 0): return
-	if Input.is_action_pressed("player_moveto"):
-		move_to(get_viewport().get_mouse_position())
-	elif Input.is_action_just_released("player_moveto"):
-		stop_move_to()
-
-func _physics_process(delta):
-	if (GameState.player_state.hp <= 0): return
-	if Input.is_action_pressed("use") and (not attack_cooldown) and (GameState.current_item != null) and (GameState.current_item is ItemWeapon) and (interactions.node_to_use == null):
+	if Input.is_action_pressed("use") and (GameState.current_item != null) and (GameState.current_item is ItemWeapon) and (interactions.node_to_use == null):
 		anim_state.travel(ANIM_ATTACKING)
 		hit_allowed = true
 		timer_use.wait_time = GameMechanics.attack_cooldown(GameState.current_item.speed)
@@ -80,7 +73,13 @@ func _physics_process(delta):
 		running = false
 		attack_cooldown = true
 		timer_use.start()
-	if (attack_cooldown): return
+	if Input.is_action_pressed("player_moveto"):
+		move_to(get_viewport().get_mouse_position())
+	elif Input.is_action_just_released("player_moveto"):
+		stop_move_to()
+
+func _physics_process(delta):
+	if (GameState.player_state.hp <= 0) or attack_cooldown: return
 	var on_floor = is_on_floor_only() 
 	if (move_to_target != null):
 		if Input.is_action_pressed("player_right") or  Input.is_action_pressed("player_left") or  Input.is_action_pressed("player_backward") or  Input.is_action_pressed("player_forward"):

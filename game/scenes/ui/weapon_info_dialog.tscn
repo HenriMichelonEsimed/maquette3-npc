@@ -1,0 +1,93 @@
+[gd_scene load_steps=5 format=3 uid="uid://dehwes75uvcbj"]
+
+[ext_resource type="Script" path="res://lib/scenes/weapon_info_dialog.gd" id="1_jvqwb"]
+[ext_resource type="Texture2D" uid="uid://cjo1d842a4hx4" path="res://assets/textures/ui/cancel_normal.png" id="2_i14wo"]
+[ext_resource type="Texture2D" uid="uid://bfq3j14jn0px0" path="res://assets/textures/ui/cancel_hover.png" id="3_hcink"]
+[ext_resource type="Texture2D" uid="uid://clysvli6bak58" path="res://assets/textures/ui/cancel_disabled.png" id="4_vq4o8"]
+
+[node name="WeaponInfo" type="Control"]
+clip_contents = true
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jvqwb")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(500, 350)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -175.0
+offset_right = 250.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="IconCancel" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonCancel" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../Bottom/ButtonOk")
+focus_next = NodePath("../../Bottom/ButtonOk")
+focus_previous = NodePath("../../Bottom/ButtonNo")
+texture_normal = ExtResource("2_i14wo")
+texture_pressed = ExtResource("3_hcink")
+texture_hover = ExtResource("3_hcink")
+texture_disabled = ExtResource("4_vq4o8")
+texture_focused = ExtResource("3_hcink")
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "XXX"
+horizontal_alignment = 1
+
+[node name="LabelDamage" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "DMG"
+
+[node name="LabelAttackSpeed" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "AS"
+
+[node name="LabelPrice" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "PRICE"
+
+[node name="Control" type="Control" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer/ButtonCancel" to="." method="close"]

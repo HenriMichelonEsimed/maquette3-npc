@@ -175,6 +175,7 @@ offset_bottom = 19.0
 grow_vertical = 2
 
 [node name="PanelTool" parent="HUD" instance=ExtResource("8_qxtma")]
+process_mode = 1
 layout_mode = 1
 
 [node name="Oxygen" type="ProgressBar" parent="HUD"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://bc0qy5c1xxgsw"]
 
-[ext_resource type="Script" path="res://lib/nodes/item_weapons.gd" id="1_l3ajb"]
+[ext_resource type="Script" path="res://lib/nodes/item_weapon.gd" id="1_l3ajb"]
 [ext_resource type="Material" uid="uid://b8pegg5nuy112" path="res://assets/materials/items/steel_1.tres" id="2_1aubg"]
 [ext_resource type="Material" uid="uid://08mg1vd5pvew" path="res://assets/materials/items/copper_shinning_1.tres" id="3_amvs4"]
 [ext_resource type="Texture2D" uid="uid://gx0r7lshd7c0" path="res://assets/textures/items/Leather034C/Leather034C_1K-JPG_Color.jpg" id="3_pj8vt"]

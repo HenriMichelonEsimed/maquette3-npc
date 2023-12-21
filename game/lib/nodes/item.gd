@@ -14,6 +14,7 @@ enum ItemType {
 @export var price:float = 0.0
 @export var type:ItemType
 @export var preview_scale:float = 1.0
+
 var original_rotation:Vector3
 var use_area:Area3D
 
@@ -32,13 +33,13 @@ func _ready():
 func use():
 	disable()
 	position = Vector3.ZERO
-	scale = Vector3(100.0,100.0,100.0)
+	scale = Vector3(100.0,100.0,100.0) # compensate mixamo chars scale
 	rotate_y(deg_to_rad(180))
 
 func unuse():
 	position = Vector3.ZERO
 	rotation = original_rotation
-	scale = Vector3.ZERO
+	scale = Vector3(1.0,1.0,1.0)
 	enable()
 
 func collect():
@@ -51,7 +52,7 @@ func dup():
 
 func disable():
 	set_collision_layer_value(Consts.LAYER_ITEM, false)
-	
+
 func enable():
 	set_collision_layer_value(Consts.LAYER_ITEM, true)
 

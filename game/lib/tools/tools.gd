@@ -10,6 +10,7 @@ const DIALOG_ALERT = "alert"
 const DIALOG_PLAYER_SETUP = "player_setup"
 const DIALOG_CONTROLLER = "controller"
 const DIALOG_ENEMY_INFO = "enemy_info"
+const DIALOG_WEAPON_INFO = "weapon_info"
 const DIALOG_GAMEOVER = "gameover"
 
 const SCREEN_INVENTORY = "inventory"
@@ -22,6 +23,7 @@ const CONTROLLER_XBOX = "xbox"
 const CONTROLLER_PS = "ps"
 
 const SHORTCUT_DROP = "drop"
+const SHORTCUT_HELP = "help"
 const SHORTCUT_DELETE = "drop"
 const SHORTCUT_CANCEL = "cancel"
 const SHORTCUT_INVENTORY = "inventory"
@@ -48,7 +50,7 @@ static func load_item(type:int,name:String):
 	return null
 
 static func load_char(_char:String):
-	var item = load("res://models/characters/" + _char + "/" + _char + ".tscn")
+	var item = load("res://scenes/characters/" + _char + ".tscn")
 	if (item != null):
 		return item.instantiate()
 	return null
@@ -83,11 +85,11 @@ static func show_item(item:Item, node_3d:Node3D):
 	for c in node_3d.get_children():
 		c.queue_free()
 	var scale = item.preview_scale
-	var clone = item.duplicate(0)
+	var clone = item.dup()
 	node_3d.add_child(clone)
 	clone.position = Vector3.ZERO
 	clone.rotation = Vector3.ZERO
-	clone.scale = clone.scale * scale * 1.2
+	clone.scale = clone.scale * scale
 
 static func show_character(_char:InteractiveCharacter, node_3d:Node3D):
 	for c in node_3d.get_children():
@@ -99,13 +101,17 @@ static func show_character(_char:InteractiveCharacter, node_3d:Node3D):
 	clone.scale = Vector3(1.0, 1.0, 1.0)
 
 static func set_shortcut_icon(button:Control, name:String):
-	if (button is Button):
+	if (button is TextureButton):
+		button.texture_normal = load_shortcut_icon(name)
+	elif (button is Button):
 		button.icon = load_shortcut_icon(name)
 	elif (button is TextureRect):
 		button.texture = load_shortcut_icon(name)
 
 static func reset_shortcut_icon(button:Control):
-	if (button is Button):
+	if (button is TextureButton):
+		button.texture_normal = null
+	elif (button is Button):
 		button.icon = null
 	elif (button is TextureRect):
 		button.texture = null

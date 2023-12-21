@@ -49,6 +49,8 @@ func _ready():
 	weapon.disable()
 	weapon.use_area.set_collision_mask_value(Consts.LAYER_PLAYER, true)
 	weapon.use_area.set_collision_mask_value(Consts.LAYER_ENEMY_CHARACTER, false)
+	connect("input_event", _on_input_event)
+	anim_tree.connect("animation_finished", _on_animation_tree_animation_finished)
 	anim_tree["parameters/attack/TimeScale/scale"] = GameMechanics.anim_scale(weapon.speed)
 	hit_points = hit_points_roll.roll()
 	walking_speed = walking_speed_roll.roll()
@@ -211,7 +213,6 @@ func _on_item_hit(node:Node3D):
 func _on_input_event(camera, event, position, normal, shape_idx):
 	if (event is InputEventMouseButton) and (event.button_index == MOUSE_BUTTON_MIDDLE) and not(event.pressed):
 		Tools.load_dialog(self, Tools.DIALOG_ENEMY_INFO, GameState.resume_game).open(self)
-
 
 func _on_animation_tree_animation_finished(anim_name):
 	if (anim_name == "undead/react_death_backward_1"):
