@@ -113,14 +113,11 @@ func _process(delta):
 		var forward_vector = -transform.basis.z
 		var vector_to_player = (GameState.player.position - position).normalized()
 		detected = acos(forward_vector.dot(vector_to_player)) <= deg_to_rad(75)
-		move_to_detected_position = false
+		move_to_detected_position = (raycast_detection.is_colliding() and not(raycast_detection.get_collider() is CharacterBody3D))
 	if move_to_detected_position:
 		_move_to_detected_position()
 	elif (detected):
 		look_at(GameState.player.position)
-		if (raycast_detection.is_colliding() and not(raycast_detection.get_collider() is CharacterBody3D)):
-			move_to_detected_position = true
-			return
 		if (dist <= attack_distance):
 			if (not attack_cooldown):
 				anim_state.travel(ANIM_ATTACK)
@@ -142,22 +139,16 @@ func _idle():
 		rotate_y(deg_to_rad(randf_range(-20, 20)))
 
 func _move_to_detected_position():
-	if move_to_detected_position and (detected_position != Vector3.ZERO):
-		if (position.distance_to(previous_position) < 0.01):
+	if (detected_position != Vector3.ZERO):
+		if (position.distance_to(previous_position) < 0.1):
 			move_to_detected_position = false
 			detected_position = Vector3.ZERO
-			_idle()
-			return
-		if (position.distance_to(detected_position)) < 0.1:
-			move_to_detected_position = false
-			detected_position = Vector3.ZERO
-			_idle()
-			return
-		look_at(detected_position)
-		velocity = -transform.basis.z * running_speed
-		anim_state.travel(ANIM_RUN)
-		previous_position = position
-		move_and_slide()
+		else:
+			look_at(detected_position)
+			velocity = -transform.basis.z * running_speed
+			anim_state.travel(ANIM_RUN)
+			previous_position = position
+			move_and_slide()
 	else:
 		move_to_detected_position = false
 		_idle()
@@ -197,7 +188,7 @@ func hit(hit_by:ItemWeapon):
 	NotificationManager.hit(self, hit_by, damage_points)
 	if (anim_state != null):
 		anim_state.travel(ANIM_HIT if hit_points > 0 else ANIM_DIE)
-	if (hit_points < (progress_hp.max_value * 0.25)) and (not help_called) and (randf() < 0.2):
+	if (hit_points < (progress_hp.max_value * 0.25)) and (not help_called) and (randf() < 0.25):
 		help_called = true
 		NotificationManager.call_for_help(self)
 	if (hit_points <= 0):
