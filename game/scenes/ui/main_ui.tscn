@@ -310,6 +310,7 @@ stretch_mode = 4
 [node name="TimerMovingNotifications" type="Timer" parent="HUD"]
 process_mode = 1
 wait_time = 0.2
+autostart = true
 
 [node name="MenuClose" type="TextureRect" parent="."]
 process_mode = 4

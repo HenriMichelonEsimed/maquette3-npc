@@ -200,7 +200,6 @@ func display_moving_notification(node:Node3D, text:String, cooldown:int, color=n
 	label.set_meta("count", cooldown)
 	label.set_meta("node", node)
 	_moving_notifs_queue.push_back(label)
-	if (timer_moving_notif_queue.is_stopped()): timer_moving_notif_queue.start()
 
 func display_next_moving_notification():
 	var label:Label = _moving_notifs_queue.pop_front()
@@ -293,7 +292,5 @@ func _on_button_pressed():
 	get_tree().quit()
 
 func _on_timer_moving_notifications_timeout():
-	if (_moving_notifs_queue.is_empty()):
-		timer_moving_notif_queue.stop()
-	else:
+	if (not _moving_notifs_queue.is_empty()):
 		display_next_moving_notification()

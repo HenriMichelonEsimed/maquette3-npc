@@ -45,7 +45,7 @@ var hit_points:int = 100
 var walking_speed:float = 0.5
 var running_speed:float = 1.0
 var detection_distance:float = 6
-var trying_to_help:bool = false
+var help_called:bool = false
 
 func _ready():
 	weapon.disable()
@@ -95,6 +95,7 @@ func _ready():
 	if (weapon.use_area != null):
 		weapon.use_area.connect("body_entered", _on_item_hit)
 	NotificationManager.connect("new_hit", _on_new_hit)
+	NotificationManager.connect("node_call_for_help", _on_call_for_help)
 
 func _process(delta):
 	if (hit_points <= 0): return
@@ -134,8 +135,8 @@ func _process(delta):
 
 func _idle():
 	anim_state.travel(ANIM_IDLE)
-	#if (randf() < 0.1):
-	#	rotate_y(deg_to_rad(randf_range(-20, 20)))
+	if (randf() < 0.1):
+		rotate_y(deg_to_rad(randf_range(-20, 20)))
 
 func _move_to_detected_position():
 	if move_to_detected_position and (detected_position != Vector3.ZERO):
@@ -193,8 +194,9 @@ func hit(hit_by:ItemWeapon):
 	NotificationManager.hit(self, hit_by, damage_points)
 	if (anim_state != null):
 		anim_state.travel(ANIM_HIT if hit_points > 0 else ANIM_DIE)
-	#if (hit_points < (progress_hp.max_value * 0.5)):
-	NotificationManager.node_notif(self, tr("%s call for help !") % label)
+	if (hit_points < (progress_hp.max_value * 0.25)) and (not help_called) and (randf() < 0.1):
+		help_called = true
+		NotificationManager.call_for_help(self)
 	if (hit_points <= 0):
 		NotificationManager.xp(xp)
 		label_info.queue_free()
@@ -207,10 +209,17 @@ func hit(hit_by:ItemWeapon):
 		in_info_area = false
 
 func _on_new_hit(target:Node3D, weapon:ItemWeapon, damage_points:int, positive:bool):
-	return
 	if positive and (target != self) and (position.distance_to(target.position) < detection_distance):
 		if (randf() < 0.2):
+			print("%s detect hit" % name)
 			detected_position = target.position
+			move_to_detected_position = true
+
+func _on_call_for_help(sender:Node3D):
+	if (sender is EnemyCharacter) and (sender != self) and (position.distance_to(sender.position) < (detection_distance * 2.0)):
+		if (randf() < 0.2):
+			print("%s going to help" % name)
+			detected_position = sender.position
 			move_to_detected_position = true
 
 func _on_timer_attack_timeout():

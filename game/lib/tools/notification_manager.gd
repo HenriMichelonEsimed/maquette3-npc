@@ -8,6 +8,7 @@ signal new_hit(target:Node3D, weapon:ItemWeapon, damage_points:int, positive:boo
 signal xp_gain(xp:int)
 signal use_item(item:Item)
 signal unuse_item()
+signal node_call_for_help(sender:Node3D)
 
 func notif(message:String):
 	new_notification.emit(message)
@@ -27,3 +28,7 @@ func use(item:Item):
 
 func unuse_current_item():
 	unuse_item.emit()
+
+func call_for_help(sender:Node3D):
+	node_notif(sender, tr("%s call for help !") % str(sender))
+	node_call_for_help.emit(sender)
