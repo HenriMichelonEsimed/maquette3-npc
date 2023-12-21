@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://0326gqgjjtkv"]
+[gd_scene load_steps=23 format=3 uid="uid://0326gqgjjtkv"]
 
 [ext_resource type="Script" path="res://lib/nodes/zone.gd" id="1_3tay3"]
 [ext_resource type="Terrain3DMaterial" uid="uid://bh2je3jcyw70l" path="res://assets/materials/terrain/grass_1.tres" id="2_6mkug"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://08mjxh8sadly" path="res://models/props/props_shelf_8.tscn" id="15_mcf0m"]
 [ext_resource type="Script" path="res://lib/nodes/enemy_spawn_point.gd" id="16_u18of"]
 [ext_resource type="Script" path="res://lib/dices_roll.gd" id="17_b8wr8"]
+[ext_resource type="PackedScene" uid="uid://bf7krp07f51ww" path="res://scenes/characters/undead_1.tscn" id="18_4qsf6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_whqtd"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -118,3 +119,12 @@ modifier = 1
 [node name="SpawnPath" type="Path3D" parent="EnemySpawnPoint"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -520.771, 0, -508.536)
 curve = SubResource("Curve3D_dla37")
+
+[node name="Undead1" parent="." instance=ExtResource("18_4qsf6")]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 511.917, 0, 529.953)
+
+[node name="Undead2" parent="." instance=ExtResource("18_4qsf6")]
+transform = Transform3D(0.867097, 0, -0.49814, 0, 1, 0, 0.49814, 0, 0.867097, 532.373, 0, 529.953)
+
+[node name="Undead3" parent="." instance=ExtResource("18_4qsf6")]
+transform = Transform3D(-0.707908, 0, -0.706304, 0, 1, 0, 0.706304, 0, -0.707908, 525.543, 0, 537.79)

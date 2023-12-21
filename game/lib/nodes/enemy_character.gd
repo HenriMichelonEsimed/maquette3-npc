@@ -45,6 +45,7 @@ var hit_points:int = 100
 var walking_speed:float = 0.5
 var running_speed:float = 1.0
 var detection_distance:float = 6
+var trying_to_help:bool = false
 
 func _ready():
 	weapon.disable()
@@ -93,6 +94,7 @@ func _ready():
 	label_info.text = "%s" % label
 	if (weapon.use_area != null):
 		weapon.use_area.connect("body_entered", _on_item_hit)
+	NotificationManager.connect("new_hit", _on_new_hit)
 
 func _process(delta):
 	if (hit_points <= 0): return
@@ -102,7 +104,9 @@ func _process(delta):
 	var dist = position.distance_to(GameState.player.position)
 	in_info_area = dist < info_distance
 	update_label_info_position()
-	if (dist < detection_distance):
+	if move_to_detected_position:
+		_move_to_detected_position()
+	elif (dist < detection_distance):
 		var detected = (dist < hear_distance)
 		if (not detected):
 			var forward_vector = -transform.basis.z
@@ -111,10 +115,7 @@ func _process(delta):
 		if (detected):
 			look_at(GameState.player.position)
 			if (raycast_detection.is_colliding() and not(raycast_detection.get_collider() is Player)):
-				if (move_to_detected_position):
-					_move_to_detected_position()
-				else:
-					move_to_detected_position = true
+				move_to_detected_position = true
 				return
 			if (dist <= attack_distance):
 				if (not attack_cooldown):
@@ -128,24 +129,22 @@ func _process(delta):
 			anim_state.travel(ANIM_RUN)
 			previous_position = position
 			move_and_slide()
-			return
-	if move_to_detected_position:
-		_move_to_detected_position()
-	_idle()
+	else:
+		_idle()
 
 func _idle():
 	anim_state.travel(ANIM_IDLE)
-	if (randf() < 0.1):
-		rotate_y(deg_to_rad(randf_range(-20, 20)))
+	#if (randf() < 0.1):
+	#	rotate_y(deg_to_rad(randf_range(-20, 20)))
 
 func _move_to_detected_position():
 	if move_to_detected_position and (detected_position != Vector3.ZERO):
-		if (transform.origin.distance_to(previous_position) < 0.01):
+		if (position.distance_to(previous_position) < 0.01):
 			move_to_detected_position = false
 			detected_position = Vector3.ZERO
 			_idle()
 			return
-		if (transform.origin.distance_to(detected_position)) < 1.0:
+		if (position.distance_to(detected_position)) < 1.0:
 			move_to_detected_position = false
 			detected_position = Vector3.ZERO
 			_idle()
@@ -155,7 +154,9 @@ func _move_to_detected_position():
 		anim_state.travel(ANIM_RUN)
 		previous_position = position
 		move_and_slide()
-		return
+	else:
+		move_to_detected_position = false
+		_idle()
 
 func _to_string():
 	return label
@@ -199,8 +200,15 @@ func hit(hit_by:ItemWeapon):
 		raycast_detection.queue_free()
 		weapon.queue_free()
 		$CollisionShape3D.queue_free()
+		NotificationManager.disconnect("new_hit", _on_new_hit)
 		label_info = null
 		in_info_area = false
+
+func _on_new_hit(target:Node3D, weapon:ItemWeapon, damage_points:int, positive:bool):
+	if positive and (target != self) and (position.distance_to(target.position) < detection_distance):
+		if (randf() < 0.2):
+			detected_position = target.position
+			move_to_detected_position = true
 
 func _on_timer_attack_timeout():
 	attack_cooldown = false
