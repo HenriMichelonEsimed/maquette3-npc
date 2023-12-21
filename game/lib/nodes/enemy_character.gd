@@ -108,31 +108,31 @@ func _process(delta):
 	var dist = position.distance_to(GameState.player.position)
 	in_info_area = dist < info_distance
 	update_label_info_position()
+	var detected = (dist < hear_distance)
+	if (not detected) and (dist < detection_distance):
+		var forward_vector = -transform.basis.z
+		var vector_to_player = (GameState.player.position - position).normalized()
+		detected = acos(forward_vector.dot(vector_to_player)) <= deg_to_rad(75)
+		move_to_detected_position = false
 	if move_to_detected_position:
 		_move_to_detected_position()
-	elif (dist < detection_distance):
-		var detected = (dist < hear_distance)
-		if (not detected):
-			var forward_vector = -transform.basis.z
-			var vector_to_player = (GameState.player.position - position).normalized()
-			detected = acos(forward_vector.dot(vector_to_player)) <= deg_to_rad(75)
-		if (detected):
-			look_at(GameState.player.position)
-			if (raycast_detection.is_colliding() and not(raycast_detection.get_collider() is Player)):
-				move_to_detected_position = true
-				return
-			if (dist <= attack_distance):
-				if (not attack_cooldown):
-					anim_state.travel(ANIM_ATTACK)
-					timer_attack.start()
-					attack_cooldown = true
-					hit_allowed = true
-				return
-			detected_position = GameState.player.position
-			velocity = -transform.basis.z * running_speed
-			anim_state.travel(ANIM_RUN)
-			previous_position = position
-			move_and_slide()
+	elif (detected):
+		look_at(GameState.player.position)
+		if (raycast_detection.is_colliding() and not(raycast_detection.get_collider() is CharacterBody3D)):
+			move_to_detected_position = true
+			return
+		if (dist <= attack_distance):
+			if (not attack_cooldown):
+				anim_state.travel(ANIM_ATTACK)
+				timer_attack.start()
+				attack_cooldown = true
+				hit_allowed = true
+			return
+		detected_position = GameState.player.position
+		velocity = -transform.basis.z * running_speed
+		anim_state.travel(ANIM_RUN)
+		previous_position = position
+		move_and_slide()
 	else:
 		_idle()
 
@@ -148,7 +148,7 @@ func _move_to_detected_position():
 			detected_position = Vector3.ZERO
 			_idle()
 			return
-		if (position.distance_to(detected_position)) < (hear_distance/2):
+		if (position.distance_to(detected_position)) < 0.1:
 			move_to_detected_position = false
 			detected_position = Vector3.ZERO
 			_idle()

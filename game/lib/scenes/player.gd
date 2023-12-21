@@ -73,6 +73,7 @@ func _unhandled_input(_event):
 func _physics_process(delta):
 	if (GameState.player_state.hp <= 0): return
 	if Input.is_action_pressed("use") and (not attack_cooldown) and (GameState.current_item != null) and (GameState.current_item is ItemWeapon) and (interactions.node_to_use == null):
+		look_to(get_viewport().get_mouse_position())
 		anim_state.travel(ANIM_ATTACKING)
 		hit_allowed = true
 		timer_use.wait_time = GameMechanics.attack_cooldown(GameState.current_item.speed)
@@ -196,6 +197,17 @@ func move_to(target:Vector2):
 	if (iray.size() > 0):
 		move_to_target = iray.position
 
+func look_to(target:Vector2):
+	var ray_query = PhysicsRayQueryParameters3D.new()
+	ray_query.collision_mask = 0x1
+	ray_query.from = camera.project_ray_origin(target)
+	ray_query.to = ray_query.from + camera.project_ray_normal(target) * 1000
+	var iray = get_world_3d().direct_space_state.intersect_ray(ray_query)
+	if (iray.size() > 0):
+		var pos = iray.position
+		pos.y = position.y
+		look_at(pos)
+
 func stop_move_to():
 	if (move_to_target != null):
 		move_to_target = null
@@ -241,7 +253,6 @@ func _on_item_hit(node:Node3D):
 	if (hit_allowed):
 		hit_allowed = false
 		if (node is EnemyCharacter):
-			look_at(node.global_position)
 			node.hit(GameState.current_item)
 
 func _on_timer_attack_timeout():
