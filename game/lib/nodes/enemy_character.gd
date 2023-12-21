@@ -191,11 +191,12 @@ func hit(hit_by:ItemWeapon):
 		anim_state.travel(ANIM_HIT if hit_points > 0 else ANIM_DIE)
 	if (hit_points <= 0):
 		NotificationManager.xp(xp)
-		set_collision_layer_value(Consts.LAYER_ENEMY_CHARACTER, false)
-		set_collision_layer_value(Consts.LAYER_WORLD, true)
 		label_info.queue_free()
-		label_info = null
 		progress_hp.queue_free()
+		raycast_detection.queue_free()
+		weapon.queue_free()
+		$CollisionShape3D.queue_free()
+		label_info = null
 		in_info_area = false
 
 func _on_timer_attack_timeout():
@@ -210,3 +211,10 @@ func _on_item_hit(node:Node3D):
 func _on_input_event(camera, event, position, normal, shape_idx):
 	if (event is InputEventMouseButton) and (event.button_index == MOUSE_BUTTON_MIDDLE) and not(event.pressed):
 		Tools.load_dialog(self, Tools.DIALOG_ENEMY_INFO, GameState.resume_game).open(self)
+
+
+func _on_animation_tree_animation_finished(anim_name):
+	if (anim_name == "undead/react_death_backward_1"):
+		anim_tree.queue_free()
+		$AnimationPlayer.queue_free()
+		process_mode = Node.PROCESS_MODE_DISABLED

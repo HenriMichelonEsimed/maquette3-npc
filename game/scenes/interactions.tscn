@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://lib/scenes/interactions.gd" id="1_0ixu8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s04di"]
-size = Vector3(0.840723, 1.7, 1.67102)
+size = Vector3(0.840723, 1.7, 1.57233)
 
 [node name="Interactions" type="Area3D"]
 process_mode = 1
@@ -12,7 +12,7 @@ collision_mask = 60
 script = ExtResource("1_0ixu8")
 
 [node name="DetectionShape" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.00346678, 0.73551, -1)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.00346678, 0.784857, -1)
 shape = SubResource("BoxShape3D_s04di")
 
 [connection signal="body_entered" from="." to="." method="_on_collect_item_aera_body_entered"]

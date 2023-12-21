@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://8exssb37mmo0"]
+[gd_scene load_steps=34 format=3 uid="uid://8exssb37mmo0"]
 
 [ext_resource type="Material" uid="uid://0j2ge6ftyhb5" path="res://assets/materials/architecture/Planks037A.tres" id="3_4mtgp"]
 [ext_resource type="Material" uid="uid://h88nel3i3vvl" path="res://assets/materials/architecture/WoodSiding010_.tres" id="3_buo4v"]
@@ -98,17 +98,20 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_af6b3")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_y3y7d"]
-size = Vector3(8.2, 0.4, 2.2)
+[sub_resource type="BoxShape3D" id="BoxShape3D_pb6l5"]
+size = Vector3(3.71149, 0.41748, 0.262932)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yne8y"]
-size = Vector3(4.4, 0.943164, 0.1)
+size = Vector3(4.4, 0.943164, 0.280481)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7fmrp"]
-size = Vector3(0.2, 1.34307, 2)
+size = Vector3(0.271252, 1.34307, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8dcbe"]
-size = Vector3(0.221924, 1.35156, 1.9989)
+size = Vector3(0.292725, 1.35156, 1.9989)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y3y7d"]
+size = Vector3(8.2, 0.454248, 2.05983)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_c3j2r"]
 _surfaces = [{
@@ -390,23 +393,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.0444002, 2)
 mesh = SubResource("ArrayMesh_pffuo")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="House4_Flooor_out" groups=["stairs"]]
+[node name="stairs" type="StaticBody3D" parent="House4_Flooor_out" groups=["stairs"]]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="House4_Flooor_out/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.2, 1.1)
-shape = SubResource("BoxShape3D_y3y7d")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="House4_Flooor_out/stairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.10194, -0.18457, 2.09443)
+shape = SubResource("BoxShape3D_pb6l5")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="House4_Flooor_out/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.471582, 2.05)
+[node name="floor" type="StaticBody3D" parent="House4_Flooor_out"]
+
+[node name="barrier1" type="CollisionShape3D" parent="House4_Flooor_out/floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.471582, 2.07795)
 shape = SubResource("BoxShape3D_yne8y")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="House4_Flooor_out/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0.271533, 1)
+[node name="barrier2" type="CollisionShape3D" parent="House4_Flooor_out/floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08609, 0.271533, 1)
 shape = SubResource("BoxShape3D_7fmrp")
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="House4_Flooor_out/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.07401, 0.269531, 0.993675)
+[node name="barrier4" type="CollisionShape3D" parent="House4_Flooor_out/floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.09452, 0.269531, 0.993675)
 shape = SubResource("BoxShape3D_8dcbe")
+
+[node name="floor" type="CollisionShape3D" parent="House4_Flooor_out/floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.172876, 0.93642)
+shape = SubResource("BoxShape3D_y3y7d")
 
 [node name="House4_Foundation" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.01, 0, 0, 0, 1.01, 0, 0, 0, 1.01, 2, 0.044, -4)
@@ -425,7 +434,6 @@ skeleton = NodePath("")
 
 [node name="House4_Roof" type="MeshInstance3D" parent="." groups=["96YC6"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 7, -1)
-visible = false
 mesh = SubResource("ArrayMesh_2hisl")
 skeleton = NodePath("")
 
