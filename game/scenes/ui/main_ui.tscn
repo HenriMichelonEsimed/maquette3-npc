@@ -307,6 +307,10 @@ texture = ExtResource("9_sflov")
 expand_mode = 2
 stretch_mode = 4
 
+[node name="TimerMovingNotifications" type="Timer" parent="HUD"]
+process_mode = 1
+wait_time = 0.2
+
 [node name="MenuClose" type="TextureRect" parent="."]
 process_mode = 4
 layout_mode = 1
@@ -469,6 +473,7 @@ icon_name = "person-walking-arrow-right"
 
 [connection signal="timeout" from="LabelSaving/Timer" to="." method="_on_saving_timer_timeout"]
 [connection signal="timeout" from="HUD/LabelNotification/Timer" to="." method="_on_timer_notif_timeout"]
+[connection signal="timeout" from="HUD/TimerMovingNotifications" to="." method="_on_timer_moving_notifications_timeout"]
 [connection signal="pressed" from="Menu/MainMenu/ButtonInventory" to="." method="inventory_open"]
 [connection signal="pressed" from="Menu/SubMenu/ButtonSave" to="." method="savegame_open"]
 [connection signal="pressed" from="Menu/SubMenu/ButtonLoad" to="." method="load_savegame_open"]

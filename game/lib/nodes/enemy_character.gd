@@ -193,6 +193,8 @@ func hit(hit_by:ItemWeapon):
 	NotificationManager.hit(self, hit_by, damage_points)
 	if (anim_state != null):
 		anim_state.travel(ANIM_HIT if hit_points > 0 else ANIM_DIE)
+	#if (hit_points < (progress_hp.max_value * 0.5)):
+	NotificationManager.node_notif(self, tr("%s call for help !") % label)
 	if (hit_points <= 0):
 		NotificationManager.xp(xp)
 		label_info.queue_free()
@@ -205,6 +207,7 @@ func hit(hit_by:ItemWeapon):
 		in_info_area = false
 
 func _on_new_hit(target:Node3D, weapon:ItemWeapon, damage_points:int, positive:bool):
+	return
 	if positive and (target != self) and (position.distance_to(target.position) < detection_distance):
 		if (randf() < 0.2):
 			detected_position = target.position

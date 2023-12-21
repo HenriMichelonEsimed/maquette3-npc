@@ -3,6 +3,7 @@ extends Node
 var notifications:Array[String] = []
 
 signal new_notification(message:String)
+signal new_node_notification(sender:Node3D, message:String)
 signal new_hit(target:Node3D, weapon:ItemWeapon, damage_points:int, positive:bool)
 signal xp_gain(xp:int)
 signal use_item(item:Item)
@@ -11,6 +12,9 @@ signal unuse_item()
 func notif(message:String):
 	new_notification.emit(message)
 	notifications.push_back(message)
+	
+func node_notif(sender:Node3D, message:String):
+	new_node_notification.emit(sender, message)
 
 func hit(target:Node3D, weapon:ItemWeapon, damage_points:int, positive:bool=true):
 	new_hit.emit(target, weapon, damage_points, positive)

@@ -10,6 +10,7 @@ class_name MainUI extends Control
 @onready var focused_button:Button = $Menu/MainMenu/ButtonInventory
 @onready var label_notif:Label = $HUD/LabelNotification
 @onready var timer_notif:Timer = $HUD/LabelNotification/Timer
+@onready var timer_moving_notif_queue:Timer = $HUD/TimerMovingNotifications
 @onready var icon_menu_open = $HUD/MenuOpen
 @onready var icon_menu_close = $MenuClose
 @onready var icon_use = $HUD/LabelInfo/Icon
@@ -33,7 +34,8 @@ var _talk_screen:Dialog
 var _trade_screen:Dialog
 var _highlighted_mesh:MeshInstance3D
 var _highlighted_mat:Material
-var _hits:Array[Label] = []
+var _notifs:Array[Label] = []
+var _moving_notifs_queue:Array[Label] = []
 
 func _ready():
 	blur.visible = false
@@ -45,6 +47,7 @@ func _ready():
 	icon_menu_close.visible = false
 	panel_oxygen.visible = false
 	NotificationManager.connect("new_notification",display_notification)
+	NotificationManager.connect("new_node_notification",display_node_notification)
 	NotificationManager.connect("new_hit", display_new_hit)
 	NotificationManager.connect("xp_gain", display_xp_gain)
 	GameState.connect("saving_start", _on_saving_start)
@@ -87,15 +90,15 @@ func _process(delta):
 	hp.value = GameState.player_state.hp
 
 func _physics_process(delta):
-	for label in _hits:
+	for label in _notifs:
 		var count = label.get_meta("count")
 		count -= 1
 		if (count == 0):
-			_hits.erase(label)
+			_notifs.erase(label)
 			label.queue_free()
 		else:
 			label.set_meta("count", count)
-			label.position.y -= 1
+			label.position.y -= 2
 
 func _on_camera_view_rotate(view:int):
 	compass.rotation_degrees = compass_rotation[view]
@@ -177,31 +180,38 @@ func display_notification(message:String):
 	timer_notif.start()
 
 func display_new_hit(target:Node3D, weapons:ItemWeapon, damage_points:int, positive:bool):
-	var pos3d = target.global_position
-	pos3d.y += target.height
-	var pos = camera_pivot.camera.unproject_position(pos3d)
-	display_moving_notification("%d" % damage_points, 50, pos, Consts.COLOR_POSITIVE if positive else  Consts.COLOR_NEGATIVE )
+	display_moving_notification(target, "%d" % damage_points, 50, Consts.COLOR_POSITIVE if positive else  Consts.COLOR_NEGATIVE )
 	
 func display_xp_gain(xp:int):
-	var pos3d = GameState.player.global_position
-	pos3d.y += GameState.player.height
-	var pos = camera_pivot.camera.unproject_position(pos3d)
-	display_moving_notification(tr("+%d XP") % xp, 150, pos)
+	display_moving_notification(GameState.player, tr("+%d XP") % xp, 150)
 
 func display_xp():
 	xp.max_value = GameState.player_state.xp_next_level
 	xp.value = GameState.player_state.xp
 
-func display_moving_notification(text:String, cooldown:int, pos:Vector2, color=null):
+func display_node_notification(node:Node3D, message:String):
+	display_moving_notification(node, message, 50)
+
+func display_moving_notification(node:Node3D, text:String, cooldown:int, color=null):
 	var label = Label.new()
 	label.text = text
-	label.position = pos
-	label.position.y -= label.size.y
-	label.position.x -= label.size.x / 2
 	if (color != null):
 		label.add_theme_color_override("font_color", color)
 	label.set_meta("count", cooldown)
-	_hits.push_back(label)
+	label.set_meta("node", node)
+	_moving_notifs_queue.push_back(label)
+	if (timer_moving_notif_queue.is_stopped()): timer_moving_notif_queue.start()
+
+func display_next_moving_notification():
+	var label:Label = _moving_notifs_queue.pop_front()
+	var node:Node3D = label.get_meta("node")
+	var pos3d = node.position
+	pos3d.y += node.height
+	var pos = camera_pivot.camera.unproject_position(pos3d)
+	label.position = pos
+	label.position.y -= label.size.y
+	label.position.x -= label.size.x / 2
+	_notifs.push_back(label)
 	add_child(label)
 
 func _on_load_savegame(savegame:String):
@@ -281,3 +291,9 @@ func _on_timer_notif_timeout():
 
 func _on_button_pressed():
 	get_tree().quit()
+
+func _on_timer_moving_notifications_timeout():
+	if (_moving_notifs_queue.is_empty()):
+		timer_moving_notif_queue.stop()
+	else:
+		display_next_moving_notification()
