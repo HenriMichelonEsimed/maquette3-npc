@@ -33,6 +33,7 @@ var xp:int
 var anim_die_name:String
 var in_info_area:bool = false
 var timer_attack:Timer
+var timer_start_animation:Timer
 # action animation playing
 var attack_cooldown:bool = false
 # one hit only allowed during attack cooldown
@@ -69,10 +70,12 @@ func _ready():
 		anim_die_name = anim_die.animation
 		anim_tree.connect("animation_finished", _on_animation_tree_animation_finished)
 		anim_tree["parameters/attack/TimeScale/scale"] = GameMechanics.anim_scale(weapon.speed)
-		anim_tree["parameters/idle/TimeSeek/seek_request"] = randf() * 10 # idle animation must be >= 10s
-		anim_state.travel(ANIM_IDLE)
-		anim_tree.active = true
-		print(anim_tree["parameters/idle/TimeSeek/seek_request"])
+		anim_tree["parameters/idle_start/TimeSeek/seek_request"] = randf() * 10
+		#timer_start_animation = Timer.new()
+		#timer_start_animation.wait_time = randf()*5
+		#timer_start_animation.connect("timeout", _on_start_timer_timeout)
+		#add_child(timer_start_animation)
+		#timer_start_animation.start()
 	if (height == 0) and (collision_shape.shape is CylinderShape3D):
 		height = collision_shape.shape.height
 	raycast_detection = RayCast3D.new()
@@ -105,10 +108,15 @@ func _ready():
 	NotificationManager.connect("new_hit", _on_new_hit)
 	NotificationManager.connect("node_call_for_help", _on_call_for_help)
 
+func _on_start_timer_timeout():
+	anim_tree.active = true
+	anim_state.travel(ANIM_IDLE)
+	timer_start_animation.queue_free()
+
 func _process(delta):
-	if (hit_points <= 0): return
+	if (hit_points <= 0) or (not anim_tree.active): return
 	if (GameState.player_state.hp <= 0):
-		anim_state.travel(ANIM_IDLE)
+		_idle()
 		return
 	var dist = position.distance_to(GameState.player.position)
 	in_info_area = dist < info_distance
@@ -131,30 +139,34 @@ func _process(delta):
 				attack_cooldown = true
 				hit_allowed = true
 			return
+		if (anim_state.get_current_node() != ANIM_RUN):
+			print("%s detect run -%s-" % [name, anim_state.get_current_node()])
+			anim_state.travel(ANIM_RUN)
+			print(anim_state.get_travel_path ( ))
 		detected_position = GameState.player.position
 		velocity = -transform.basis.z * running_speed
-		anim_state.travel(ANIM_RUN)
 		previous_position = position
 		move_and_slide()
 	else:
 		_idle()
 
 func _idle():
-	anim_state.travel(ANIM_IDLE)
-	#if ((idle_rotation_tween == null) or (not idle_rotation_tween.is_valid())) and (randf() < 0.01):
-	#	var angle = randf_range(-45, 45)
-	#	print("%s rotate by %f" % [name, angle])
-	#	idle_rotation_tween = get_tree().create_tween()
-	#	idle_rotation_tween.tween_property(
-	#		self, # target
-	#		"rotation_degrees:y", # target property
-	#		rotation_degrees.y+angle, # end value
-	#		1 # animation time
-	#	)
+	var current = anim_state.get_current_node()
+	if (current != ANIM_IDLE) and (current != ""):
+		#print("idle from : %s" % anim_state.get_current_node())
+		anim_state.travel(ANIM_IDLE)
+	if ((idle_rotation_tween == null) or (not idle_rotation_tween.is_valid())) and (randf() < 0.1):
+		var angle = randf_range(-45, 45)
+		idle_rotation_tween = get_tree().create_tween()
+		idle_rotation_tween.tween_property(
+			self, # target
+			"rotation_degrees:y", # target property
+			rotation_degrees.y+angle, # end value
+			10 # animation time
+		)
 
 func _stop_idle():
-	if (idle_rotation_tween != null):
-		print("%s stop rotate" % [name])
+	if (idle_rotation_tween != null) and (idle_rotation_tween.is_valid()):
 		idle_rotation_tween.kill()
 
 func _move_to_detected_position():
@@ -164,9 +176,11 @@ func _move_to_detected_position():
 			move_to_detected_position = false
 			detected_position = Vector3.ZERO
 		else:
+			if (anim_state.get_current_node() != ANIM_RUN):
+				#print("%s move to" % name)
+				anim_state.travel(ANIM_RUN)
 			look_at(detected_position)
 			velocity = -transform.basis.z * running_speed
-			anim_state.travel(ANIM_RUN)
 			previous_position = position
 			move_and_slide()
 	else:

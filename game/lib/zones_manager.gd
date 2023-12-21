@@ -69,6 +69,7 @@ func _spawn_enemy(enemy_scene:PackedScene, curve:Curve3D, curve_length:float, pr
 	var enemy = enemy_scene.instantiate()
 	var offset = randf()*curve_length
 	enemy.position = curve.sample_baked(offset)
+	enemy.rotate_y(randf() * deg_to_rad(360))
 	var conflict:bool = false
 	for other in previous_spawns:
 		if (enemy.position.distance_to(other.position) < 1.0):
