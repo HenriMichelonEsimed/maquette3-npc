@@ -48,14 +48,13 @@ var running_speed:float = 1.0
 var detection_distance:float = 10
 var help_distance:float = 15
 var help_called:bool = false
+var idle_rotation_tween:Tween
 
 func _ready():
 	weapon.disable()
 	weapon.use_area.set_collision_mask_value(Consts.LAYER_PLAYER, true)
 	weapon.use_area.set_collision_mask_value(Consts.LAYER_ENEMY_CHARACTER, false)
 	connect("input_event", _on_input_event)
-	anim_tree.connect("animation_finished", _on_animation_tree_animation_finished)
-	anim_tree["parameters/attack/TimeScale/scale"] = GameMechanics.anim_scale(weapon.speed)
 	hit_points = hit_points_roll.roll()
 	walking_speed = walking_speed_roll.roll()
 	running_speed = running_speed_roll.roll()
@@ -68,6 +67,12 @@ func _ready():
 		anim_state = anim_tree["parameters/playback"]
 		var anim_die:AnimationNodeAnimation =  anim_tree.get_tree_root().get_node("die")
 		anim_die_name = anim_die.animation
+		anim_tree.connect("animation_finished", _on_animation_tree_animation_finished)
+		anim_tree["parameters/attack/TimeScale/scale"] = GameMechanics.anim_scale(weapon.speed)
+		anim_tree["parameters/idle/TimeSeek/seek_request"] = randf() * 10 # idle animation must be >= 10s
+		anim_state.travel(ANIM_IDLE)
+		anim_tree.active = true
+		print(anim_tree["parameters/idle/TimeSeek/seek_request"])
 	if (height == 0) and (collision_shape.shape is CylinderShape3D):
 		height = collision_shape.shape.height
 	raycast_detection = RayCast3D.new()
@@ -117,6 +122,7 @@ func _process(delta):
 	if move_to_detected_position:
 		_move_to_detected_position()
 	elif (detected):
+		_stop_idle()
 		look_at(GameState.player.position)
 		if (dist <= attack_distance):
 			if (not attack_cooldown):
@@ -135,11 +141,25 @@ func _process(delta):
 
 func _idle():
 	anim_state.travel(ANIM_IDLE)
-	if (randf() < 0.1):
-		rotate_y(deg_to_rad(randf_range(-20, 20)))
+	#if ((idle_rotation_tween == null) or (not idle_rotation_tween.is_valid())) and (randf() < 0.01):
+	#	var angle = randf_range(-45, 45)
+	#	print("%s rotate by %f" % [name, angle])
+	#	idle_rotation_tween = get_tree().create_tween()
+	#	idle_rotation_tween.tween_property(
+	#		self, # target
+	#		"rotation_degrees:y", # target property
+	#		rotation_degrees.y+angle, # end value
+	#		1 # animation time
+	#	)
+
+func _stop_idle():
+	if (idle_rotation_tween != null):
+		print("%s stop rotate" % [name])
+		idle_rotation_tween.kill()
 
 func _move_to_detected_position():
 	if (detected_position != Vector3.ZERO):
+		_stop_idle()
 		if (position.distance_to(previous_position) < 0.1):
 			move_to_detected_position = false
 			detected_position = Vector3.ZERO
