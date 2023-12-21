@@ -10,6 +10,7 @@ const ANIM_HIT = "hit"
 @export var label:String = "Enemy"
 @export var hear_distance:float = 2
 @export var attack_distance:float = 0.9
+@export var height:float = 0.0
 
 @onready var weapon:ItemWeapon = $RootNode/Skeleton3D/WeaponAttachement/Weapon
 @onready var hit_points_roll:DicesRoll = $HitPoints
@@ -26,7 +27,7 @@ var progress_hp:ProgressBar
 var raycast_detection:RayCast3D
 
 var info_distance:float = 25
-var collision_height:float = 0.0
+
 var xp:int
 var anim_die_name:String
 var in_info_area:bool = false
@@ -63,10 +64,10 @@ func _ready():
 		anim_state = anim_tree["parameters/playback"]
 		var anim_die:AnimationNodeAnimation =  anim_tree.get_tree_root().get_node("die")
 		anim_die_name = anim_die.animation
-	if (collision_shape.shape is CylinderShape3D):
-		collision_height = collision_shape.shape.height
+	if (height == 0) and (collision_shape.shape is CylinderShape3D):
+		height = collision_shape.shape.height
 	raycast_detection = RayCast3D.new()
-	raycast_detection.position.y += collision_height
+	raycast_detection.position.y += height
 	raycast_detection.target_position = Vector3(0.0, 0.0, -detection_distance)
 	raycast_detection.set_collision_mask_value(Consts.LAYER_ROOFS, true)
 	raycast_detection.set_collision_mask_value(Consts.LAYER_ENEMY_CHARACTER, true)
@@ -170,7 +171,7 @@ func update_label_info_position():
 	progress_hp.visible = label_info.visible
 	if (label_info.visible):
 		var pos:Vector3 = position
-		pos.y += collision_height
+		pos.y += height
 		var pos2d:Vector2 = get_viewport().get_camera_3d().unproject_position(pos)
 		progress_hp.position = pos2d
 		progress_hp.position.x -= progress_hp.size.x / 2
@@ -188,7 +189,7 @@ func hit(hit_by:ItemWeapon):
 	var pos = label_info.position
 	pos.x += label_info.size.x / 2
 	velocity = Vector3.ZERO
-	NotificationManager.hit(self, hit_by, damage_points, pos)
+	NotificationManager.hit(self, hit_by, damage_points)
 	if (anim_state != null):
 		anim_state.travel(ANIM_HIT if hit_points > 0 else ANIM_DIE)
 	if (hit_points <= 0):

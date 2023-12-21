@@ -1,4 +1,4 @@
-class_name Consts extends Node
+class_name Consts extends Object
 
 enum {
 	LAYER_WORLD = 1,
@@ -15,3 +15,6 @@ enum {
 
 const AUDIO_VOLUME_EFFECTS = 10
 const AUDIO_BUS_EFFECTS = "Effects"
+
+const COLOR_POSITIVE = Color.DARK_GREEN
+const COLOR_NEGATIVE = Color.DARK_RED

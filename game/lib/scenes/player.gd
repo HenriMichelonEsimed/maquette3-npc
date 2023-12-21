@@ -232,11 +232,8 @@ func hit(hit_by:ItemWeapon):
 	if (GameState.player_state.hp <= 0): return
 	var damage_points = min(hit_by.damages_roll.roll(), GameState.player_state.hp)
 	GameState.player_state.hp -= damage_points
-	var pos3d = global_position
-	pos3d.y += height
-	var pos = camera_pivot.camera.unproject_position(pos3d)
 	velocity = Vector3.ZERO
-	NotificationManager.hit(self, hit_by, damage_points, pos)
+	NotificationManager.hit(self, hit_by, damage_points, false)
 	if (GameState.player_state.hp  <= 0):
 		anim_state.travel(ANIM_DIE)
 
