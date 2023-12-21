@@ -24,7 +24,7 @@ func _ready():
 	set_collision_mask_value(Consts.LAYER_WORLD, true)
 	original_rotation = rotation
 	enable()
-	use_area = get_node("Area3D")
+	use_area = get_node_or_null("Area3D")
 	if (use_area != null):
 		use_area.set_collision_layer_value(Consts.LAYER_WORLD, false)
 		use_area.set_collision_mask_value(Consts.LAYER_ENEMY_CHARACTER, true)

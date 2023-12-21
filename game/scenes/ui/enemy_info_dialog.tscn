@@ -56,12 +56,6 @@ layout_mode = 2
 
 [node name="ButtonCancel" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-focus_neighbor_left = NodePath(".")
-focus_neighbor_top = NodePath(".")
-focus_neighbor_right = NodePath(".")
-focus_neighbor_bottom = NodePath("../../Bottom/ButtonOk")
-focus_next = NodePath("../../Bottom/ButtonOk")
-focus_previous = NodePath("../../Bottom/ButtonNo")
 texture_normal = ExtResource("2_ae7fs")
 texture_pressed = ExtResource("3_263sw")
 texture_hover = ExtResource("3_263sw")
@@ -112,6 +106,11 @@ text = "RS"
 [node name="LabelDetectionDistance" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "DD"
+
+[node name="LabelHelpDistance" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "HLP
+"
 
 [node name="LabelHearDistance" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2

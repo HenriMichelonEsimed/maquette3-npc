@@ -19,8 +19,8 @@ func _ready():
 	zones.change_zone(self, GameState.player_state.zone_name)
 	if (GameState.player_state.position != Vector3.ZERO):
 		GameState.player.move(GameState.player_state.position, GameState.player_state.rotation)
-	GameState.player_state.hp_max = 20
-	GameState.player_state.hp = 20
+	GameState.player_state.hp_max = 100
+	GameState.player_state.hp = 100
 	GameState.game_started = true
 
 func xp_gain(xp:int):

@@ -8,7 +8,7 @@ const ANIM_DIE = "die"
 const ANIM_HIT = "hit"
 
 @export var label:String = "Enemy"
-@export var hear_distance:float = 2
+@export var hear_distance:float = 5
 @export var attack_distance:float = 0.9
 @export var height:float = 0.0
 
@@ -17,6 +17,7 @@ const ANIM_HIT = "hit"
 @onready var walking_speed_roll:DicesRoll = $WalkingSpeed
 @onready var running_speed_roll:DicesRoll = $RunningSpeed
 @onready var detection_distance_roll:DicesRoll = $DetectionDistance
+@onready var help_distance_roll:DicesRoll = $HelpDistance
 
 @onready var anim_tree:AnimationTree = $AnimationTree
 @onready var collision_shape:CollisionShape3D = $CollisionShape3D
@@ -44,7 +45,8 @@ var previous_position:Vector3 = Vector3.ZERO
 var hit_points:int = 100
 var walking_speed:float = 0.5
 var running_speed:float = 1.0
-var detection_distance:float = 6
+var detection_distance:float = 10
+var help_distance:float = 15
 var help_called:bool = false
 
 func _ready():
@@ -58,6 +60,7 @@ func _ready():
 	walking_speed = walking_speed_roll.roll()
 	running_speed = running_speed_roll.roll()
 	detection_distance = detection_distance_roll.roll()
+	help_distance = help_distance_roll.roll()
 	xp = hit_points
 	set_collision_mask_value(Consts.LAYER_ROOFS, true)
 	set_collision_layer_value(Consts.LAYER_ENEMY_CHARACTER, true)
@@ -112,7 +115,7 @@ func _process(delta):
 		if (not detected):
 			var forward_vector = -transform.basis.z
 			var vector_to_player = (GameState.player.position - position).normalized()
-			detected = acos(forward_vector.dot(vector_to_player)) <= deg_to_rad(60)
+			detected = acos(forward_vector.dot(vector_to_player)) <= deg_to_rad(75)
 		if (detected):
 			look_at(GameState.player.position)
 			if (raycast_detection.is_colliding() and not(raycast_detection.get_collider() is Player)):
@@ -145,7 +148,7 @@ func _move_to_detected_position():
 			detected_position = Vector3.ZERO
 			_idle()
 			return
-		if (position.distance_to(detected_position)) < 1.0:
+		if (position.distance_to(detected_position)) < (hear_distance/2):
 			move_to_detected_position = false
 			detected_position = Vector3.ZERO
 			_idle()
@@ -194,7 +197,7 @@ func hit(hit_by:ItemWeapon):
 	NotificationManager.hit(self, hit_by, damage_points)
 	if (anim_state != null):
 		anim_state.travel(ANIM_HIT if hit_points > 0 else ANIM_DIE)
-	if (hit_points < (progress_hp.max_value * 0.25)) and (not help_called) and (randf() < 0.1):
+	if (hit_points < (progress_hp.max_value * 0.25)) and (not help_called) and (randf() < 0.2):
 		help_called = true
 		NotificationManager.call_for_help(self)
 	if (hit_points <= 0):
@@ -211,14 +214,12 @@ func hit(hit_by:ItemWeapon):
 func _on_new_hit(target:Node3D, weapon:ItemWeapon, damage_points:int, positive:bool):
 	if positive and (target != self) and (position.distance_to(target.position) < detection_distance):
 		if (randf() < 0.2):
-			print("%s detect hit" % name)
 			detected_position = target.position
 			move_to_detected_position = true
 
 func _on_call_for_help(sender:Node3D):
 	if (sender is EnemyCharacter) and (sender != self) and (position.distance_to(sender.position) < (detection_distance * 2.0)):
 		if (randf() < 0.2):
-			print("%s going to help" % name)
 			detected_position = sender.position
 			move_to_detected_position = true
 
