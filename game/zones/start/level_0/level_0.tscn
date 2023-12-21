@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://0326gqgjjtkv"]
+[gd_scene load_steps=22 format=3 uid="uid://0326gqgjjtkv"]
 
 [ext_resource type="Script" path="res://lib/nodes/zone.gd" id="1_3tay3"]
 [ext_resource type="Terrain3DMaterial" uid="uid://bh2je3jcyw70l" path="res://assets/materials/terrain/grass_1.tres" id="2_6mkug"]
@@ -33,6 +33,13 @@ ssao_enabled = true
 ssil_enabled = true
 sdfgi_enabled = true
 glow_enabled = true
+
+[sub_resource type="Curve3D" id="Curve3D_dla37"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 514.379, 0, 501.617, 0, 0, 0, 0, 0, 0, 517.853, 0, 501.87, 0, 0, 0, 0, 0, 0, 522.174, 0, 501.043, 0, 0, 0, 0, 0, 0, 526.095, 0, 504.516, 0, 0, 0, 0, 0, 0, 524.771, 0, 508.251, 0, 0, 0, 0, 0, 0, 526.215, 0, 512.819, 0, 0, 0, 0, 0, 0, 524.39, 0, 510.241, 0, 0, 0, 0, 0, 0, 521.868, 0, 508.64, 0, 0, 0, 0, 0, 0, 524.267, 0, 506.431, 0, 0, 0, 0, 0, 0, 520.651, 0, 504.702, 0, 0, 0, 0, 0, 0, 519.02, 0, 505.644, 0, 0, 0, 0, 0, 0, 518.879, 0, 509.178, 0, 0, 0, 0, 0, 0, 516.389, 0, 505.97, 0, 0, 0, 0, 0, 0, 513.573, 0, 503.797, 0, 0, 0, 0, 0, 0, 515.948, 0, 507.907, 0, 0, 0, 0, 0, 0, 527.193, 0, 508.204, 0, 0, 0, 0, 0, 0, 514.379, 0, 501.617),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 17
 
 [node name="Level0" type="Node3D"]
 script = ExtResource("1_3tay3")
@@ -96,11 +103,18 @@ transform = Transform3D(0.783834, 0, 0.62097, 0, 1, 0, -0.62097, 0, 0.783834, -1
 [node name="Props_Shelf_8" parent="House_4" instance=ExtResource("15_mcf0m")]
 transform = Transform3D(0.999619, 0, 0.0275902, 0, 1, 0, -0.0275902, 0, 0.999619, 1.75787, 0, 1.62506)
 
-[node name="EnemySpawnPoint" type="Node3D" parent="." node_paths=PackedStringArray("count_roll")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 522.337, 0, 507.2)
+[node name="EnemySpawnPoint" type="Node3D" parent="." node_paths=PackedStringArray("count_roll", "spawn_path")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 520.771, 0, 508.536)
 script = ExtResource("16_u18of")
-static_count = false
-count_roll = NodePath("DicesRoll")
+count_roll = NodePath("CountRoll")
+spawn_path = NodePath("SpawnPath")
 
-[node name="DicesRoll" type="Node" parent="EnemySpawnPoint"]
+[node name="CountRoll" type="Node" parent="EnemySpawnPoint"]
 script = ExtResource("17_b8wr8")
+dice_count = 2
+dice_faces = 4
+modifier = 1
+
+[node name="SpawnPath" type="Path3D" parent="EnemySpawnPoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -520.771, 0, -508.536)
+curve = SubResource("Curve3D_dla37")

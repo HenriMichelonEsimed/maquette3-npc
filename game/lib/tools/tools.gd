@@ -55,6 +55,12 @@ static func load_char(_char:String):
 		return item.instantiate()
 	return null
 
+static func load_enemy(_char:String):
+	var item = load("res://scenes/characters/" + _char + ".tscn")
+	if (item != null):
+		return item
+	return null
+
 static func load_zone(zone_name:String):
 	var zone_path = "res://zones/" + zone_name + ".tscn"
 	return load(zone_path)

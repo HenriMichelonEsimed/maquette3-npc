@@ -17,11 +17,11 @@ func change_zone(main:Node, zone_name:String, spawnpoint_key:String="default"):
 	if (GameState.current_zone != null): 
 		GameState.player.interactions.disconnect("item_collected", GameState.current_zone.on_item_collected)
 		GameState.current_zone.disconnect("change_zone", change_zone)
-		for node in GameState.current_zone.find_children("*", "Storage", true, true):
+		for node:Storage in GameState.current_zone.find_children("*", "Storage", true, true):
 			node.disconnect("open", _on_storage_open)
-		for node in GameState.current_zone.find_children("*", "Usable", true, true):
+		for node:Usable in GameState.current_zone.find_children("*", "Usable", true, true):
 			node.disconnect("unlock", _on_usable_unlock)
-		for node in GameState.current_zone.find_children("*", "InteractiveCharacter", true, true):
+		for node:InteractiveCharacter in GameState.current_zone.find_children("*", "InteractiveCharacter", true, true):
 			node.disconnect("trade", GameState.ui.npc_trade)
 			node.disconnect("talk", GameState.ui.npc_talk)
 			node.disconnect("end_talk", GameState.ui.npc_end_talk)
@@ -34,11 +34,11 @@ func change_zone(main:Node, zone_name:String, spawnpoint_key:String="default"):
 	main.add_child(GameState.current_zone)
 	_spawn_player(spawnpoint_key)
 	_spawn_enemies()
-	for node in GameState.current_zone.find_children("*", "Storage", true, true):
+	for node:Storage in GameState.current_zone.find_children("*", "Storage", true, true):
 		node.connect("open", _on_storage_open)
-	for node in GameState.current_zone.find_children("*", "Usable", true, true):
+	for node:Usable in GameState.current_zone.find_children("*", "Usable", true, true):
 		node.connect("unlock", _on_usable_unlock)
-	for node in GameState.current_zone.find_children("*", "InteractiveCharacter", true, true):
+	for node:InteractiveCharacter in GameState.current_zone.find_children("*", "InteractiveCharacter", true, true):
 		node.connect("trade", GameState.ui.npc_trade)
 		node.connect("talk", GameState.ui.npc_talk)
 		node.connect("end_talk", GameState.ui.npc_end_talk)
@@ -54,8 +54,31 @@ func _spawn_player(spawnpoint_key:String):
 	_last_spawnpoint = spawnpoint_key
 
 func _spawn_enemies():
-	for node in GameState.current_zone.find_children("*", "EnemySpawnPoint", false, true):
-		pass
+	for node:EnemySpawnPoint in GameState.current_zone.find_children("*", "EnemySpawnPoint", false, true):
+		var enemy_scene = Tools.load_enemy(node.char_key)
+		var spawned:Array[EnemyCharacter] = []
+		var curve = node.spawn_path.curve
+		var curve_length = curve.get_baked_length()
+		var count = node.count
+		if (node.dice_roll_count):
+			count = node.count_roll.roll()
+		for i in range(count):
+			_spawn_enemy(enemy_scene, curve, curve_length, spawned)
+
+func _spawn_enemy(enemy_scene:PackedScene, curve:Curve3D, curve_length:float, previous_spawns:Array[EnemyCharacter]):
+	var enemy = enemy_scene.instantiate()
+	var offset = randf()*curve_length
+	enemy.position = curve.sample_baked(offset)
+	var conflict:bool = false
+	for other in previous_spawns:
+		if (enemy.position.distance_to(other.position) < 1.0):
+			conflict = true
+			break
+	if (conflict):
+		offset += 1.2
+		enemy.position = curve.sample_baked(offset)
+	GameState.current_zone.add_child(enemy)
+	previous_spawns.push_back(enemy)
 
 func _on_storage_open(node:Storage):
 	GameState.ui.storage_open(node, _on_storage_close)

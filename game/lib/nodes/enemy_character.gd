@@ -8,7 +8,6 @@ const ANIM_DIE = "die"
 const ANIM_HIT = "hit"
 
 @export var label:String = "Enemy"
-@export var info_distance:float = 10
 @export var hear_distance:float = 2
 @export var attack_distance:float = 0.9
 
@@ -26,6 +25,7 @@ var label_info:Label
 var progress_hp:ProgressBar
 var raycast_detection:RayCast3D
 
+var info_distance:float = 25
 var collision_height:float = 0.0
 var xp:int
 var anim_die_name:String
