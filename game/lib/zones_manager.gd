@@ -46,7 +46,7 @@ func change_zone(main:Node, zone_name:String, spawnpoint_key:String="default"):
 	GameState.current_zone.zone_post_start()
 
 func _spawn_player(spawnpoint_key:String):
-	for node in GameState.current_zone.find_children("*", "SpawnPoint", false, true):
+	for node:SpawnPoint in GameState.current_zone.find_children("*", "SpawnPoint", false, true):
 		if (node.key == spawnpoint_key):
 			GameState.player.move(node.global_position, node.global_rotation)
 			node.spawn()

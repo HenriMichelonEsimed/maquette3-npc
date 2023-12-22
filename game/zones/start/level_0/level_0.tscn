@@ -120,11 +120,5 @@ modifier = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -520.771, 0, -508.536)
 curve = SubResource("Curve3D_dla37")
 
-[node name="Undead1" parent="." instance=ExtResource("18_4qsf6")]
-transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 511.917, 0, 529.953)
-
 [node name="Undead2" parent="." instance=ExtResource("18_4qsf6")]
-transform = Transform3D(0.867097, 0, -0.49814, 0, 1, 0, 0.49814, 0, 0.867097, 532.373, 0, 529.953)
-
-[node name="Undead3" parent="." instance=ExtResource("18_4qsf6")]
-transform = Transform3D(-0.707908, 0, -0.706304, 0, 1, 0, 0.706304, 0, -0.707908, 525.543, 0, 537.79)
+transform = Transform3D(0.867097, 0, -0.49814, 0, 1, 0, 0.49814, 0, 0.867097, 529.935, 0, 529.953)
