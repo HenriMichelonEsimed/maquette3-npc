@@ -18,7 +18,7 @@ enum States {
 	MOVE_TO_POSITION,
 	MOVE_TO_PLAYER,
 	ATTACK,
-	SLIDE,
+	ESCAPE_TO_POSITION,
 }
 
 const STATES_NAMES:Array[String] = [
@@ -29,7 +29,7 @@ const STATES_NAMES:Array[String] = [
 	"MOVE_TO_POSITION",
 	"MOVE_TO_PLAYER",
 	"ATTACK",
-	"SLIDE"
+	"ESCAPE_TO_POSITION"
 ]
 
 var states:Dictionary = {
@@ -74,17 +74,14 @@ var states:Dictionary = {
 		condition_can_attack,
 		action_attack_player
 	],
-	States.SLIDE: [
+	States.ESCAPE_TO_POSITION: [
 		condition_preconditions,
-		setvar_player_detected,
-		condition_attack_player,
-		condition_heard_hit,
-		condition_heard_help_call,
-		condition_have_detected_position,
-		condition_slide_end,
-		condition_is_blocked,
-		action_move_to_detected_position
-	],
+		condition_player_in_hearing_distance,
+		condition_escape_stop,
+		condition_escape_end,
+		condition_escape_is_blocked,
+		action_move_to_escape_position
+	],	
 }
 #endregion
 
@@ -141,6 +138,7 @@ var idle_rotation_tween:Tween
 var player_distance:float = 0.0
 # last player detection position
 var detected_position:Vector3 = Vector3.ZERO
+var escape_position:Tools.NearestPath
 # player in detection area
 var player_detected:bool = false
 # last position when moving to position
@@ -213,6 +211,11 @@ func setvar_player_detected(_delta):
 #endregion
 
 #region Conditions Block
+func condition_player_in_hearing_distance(_delta):
+	if (player_distance < hear_distance):
+		return state.change_state(States.MOVE_TO_PLAYER, "player_in_hearing_distance")
+	return StateMachine.Result.CONTINUE
+
 func condition_preconditions(_delta) -> StateMachine.Result:
 	if (condition_death(_delta) == StateMachine.Result.STOP): return StateMachine.Result.STOP
 	if (condition_player_dead(_delta) == StateMachine.Result.STOP): return StateMachine.Result.STOP
@@ -257,6 +260,7 @@ func condition_can_attack(_delta) -> StateMachine.Result:
 	if (attack_cooldown):
 		return StateMachine.Result.STOP
 	return StateMachine.Result.CONTINUE
+
 func condition_player_hidden(_delta):
 	raycast_detection.target_position = Vector3(0.0, 0.0, -detection_distance)
 	if (raycast_detection.is_colliding() and not(raycast_detection.get_collider() is Player)):
@@ -272,7 +276,9 @@ func condition_player_still_detected(_delta) -> StateMachine.Result:
 
 func condition_player_detected_and_not_hidden(_delta) -> StateMachine.Result:
 	if (player_detected):
-		var local = raycast_detection.to_local(GameState.player.position)
+		var pos = GameState.player.position
+		pos.y += GameState.player.height
+		var local = raycast_detection.to_local(pos)
 		raycast_detection.target_position = local
 		if raycast_detection.is_colliding() and (raycast_detection.get_collider() is Player):
 			current_detection_angle = idle_detection_angle
@@ -309,29 +315,37 @@ func condition_continue_to_position(_delta) -> StateMachine.Result:
 		return state.change_state(States.IDLE, "continue_to_position")
 	return StateMachine.Result.CONTINUE
 
-func condition_slide_end(_delta) -> StateMachine.Result:
-	if (position.distance_to(detected_position) < 0.01):
-		rotate_y(-slide_angle)
-		detected_position = Vector3.ZERO
-		return state.change_state(States.IDLE, "condition_slide_end")
+func condition_escape_end(_delta) -> StateMachine.Result:
+	if (position.distance_to(escape_position.nearest) < 0.1):
+		var nearest_offset = escape_position.path.curve.get_closest_offset(position) + 1
+		if (nearest_offset >= escape_position.path.curve.get_baked_length()):
+			nearest_offset = 1.0
+		escape_position.nearest = escape_position.path.curve.sample_baked(nearest_offset)
+		escape_position.nearest.y = position.y
+		return state.change_state(States.ESCAPE_TO_POSITION, "escape_end")
 	return StateMachine.Result.CONTINUE
 
+func condition_escape_stop(_delta) -> StateMachine.Result:
+	if (randf() < 0.0075):
+		return state.change_state(States.MOVE_TO_POSITION, "escape_stop")
+	return StateMachine.Result.CONTINUE
+
+func condition_escape_is_blocked(_delta) -> StateMachine.Result:
+	if (position.distance_to(previous_position) < 0.02):
+		current_detection_angle = 90
+		return state.change_state(States.IDLE, "escape_is_blocked")
+	return StateMachine.Result.CONTINUE
+	
 func condition_is_blocked(_delta) -> StateMachine.Result:
 	if (position.distance_to(previous_position) < 0.02):
 		detected_position = Vector3.ZERO
-		blocked_count += 1
-		if (blocked_count > 10):
-			var dir = (GameState.player.transform.origin - transform.origin).dot(transform.basis.x)
-			slide_angle = deg_to_rad(10 if dir > 0.0 else -10)
-			var rot = slide_angle + rotation.y 
-			var rot_center = position
-			global_translate (-rot_center)
-			transform = transform.rotated(Vector3.UP, -rot)
-			global_translate (rot_center)
-			detected_position = position
-			detected_position.z -= 1.0
-			return state.change_state(States.SLIDE, "is_blocked")
-		return state.change_state(States.IDLE, "is_blocked")
+		var nearest_points:Array[Tools.NearestPath] = []
+		for path:Path3D in get_parent().find_children("EscapePath*"):
+			nearest_points.push_back(Tools.NearestPath.new(path, path.curve.get_closest_point(position)))
+		escape_position = Tools.get_nearest_path(position, nearest_points)
+		escape_position.nearest.y = position.y
+		previous_position = Vector3.ZERO
+		return state.change_state(States.ESCAPE_TO_POSITION, "is_blocked")
 	return StateMachine.Result.CONTINUE
 #endregion
 
@@ -366,7 +380,7 @@ func action_idle(_delta):
 	if (anim.current_animation != ANIM_IDLE):
 		print("%s idle from %s" % [name, anim.current_animation])
 		anim.play(ANIM_IDLE, 0.5)
-	_idle_rotation(randf_range(-45, 45), 10)
+	_idle_rotation(randf_range(-45, 45), 5)
 
 func action_move_to_detected_position(_delta):
 	if (anim.current_animation != ANIM_RUN):
@@ -375,6 +389,12 @@ func action_move_to_detected_position(_delta):
 		print("%s move to position from %s" % [name, anim.current_animation])
 		anim.play(ANIM_RUN, 0.2)
 	look_at(detected_position)
+	velocity = -transform.basis.z * running_speed
+	previous_position = position
+	move_and_slide()
+
+func action_move_to_escape_position(_delta):
+	look_at(escape_position.nearest)
 	velocity = -transform.basis.z * running_speed
 	previous_position = position
 	move_and_slide()

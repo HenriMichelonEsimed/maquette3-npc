@@ -121,3 +121,19 @@ static func reset_shortcut_icon(button:Control):
 		button.icon = null
 	elif (button is TextureRect):
 		button.texture = null
+
+static func get_nearest_point(position:Vector3, array:Array[Vector3]) -> Vector3:
+	array.sort_custom( func(a,b): return a.distance_to(position)<b.distance_to(position) )
+	return array[0]
+
+static func get_nearest_path(position:Vector3, array:Array[NearestPath]) -> NearestPath:
+	array.sort_custom( func(a,b): return a.nearest.distance_to(position)<b.nearest.distance_to(position) )
+	return array[0]
+
+class NearestPath extends Object:
+	var path:Path3D
+	var nearest:Vector3
+	func _init(p, n):
+		path = p
+		nearest = n
+	
