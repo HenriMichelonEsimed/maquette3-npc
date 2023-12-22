@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cfxsejwlekels"]
+[gd_scene load_steps=31 format=3 uid="uid://cfxsejwlekels"]
 
 [ext_resource type="Script" path="res://lib/scenes/player.gd" id="1_q3dva"]
 [ext_resource type="PackedScene" uid="uid://feuv31qq1vnp" path="res://scenes/characters/player_1.tscn" id="2_jd0ni"]
@@ -6,16 +6,8 @@
 [ext_resource type="AnimationLibrary" uid="uid://b5m6srwk404r6" path="res://assets/animations/default.res" id="4_m24mr"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2huph"]
-height = 0.752407
-radius = 0.290423
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_1ca2a"]
-height = 0.784156
-radius = 0.243658
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_uj7tu"]
-height = 0.270584
-radius = 0.15581
+height = 1.72115
+radius = 0.237539
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n20fm"]
 animation = &"default/sword_slash_1"
@@ -128,16 +120,8 @@ script = ExtResource("1_q3dva")
 [node name="Character" parent="." instance=ExtResource("2_jd0ni")]
 
 [node name="CollisionShapeBody" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00842277, 1.15977, -0.016487)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00842277, 0.865763, -0.016487)
 shape = SubResource("CylinderShape3D_2huph")
-
-[node name="CollisionShapeLegs" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00842277, 0.393552, -0.016487)
-shape = SubResource("CylinderShape3D_1ca2a")
-
-[node name="CollisionShapeHead" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00842277, 1.67223, -0.016487)
-shape = SubResource("CylinderShape3D_uj7tu")
 
 [node name="Interactions" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_0h8y3")]
 player = NodePath("..")
