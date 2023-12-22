@@ -81,7 +81,7 @@ var previous_position:Vector3 = Vector3.ZERO
 var heard_hit:bool = false
 # we heard a call for help
 var heard_help_call:bool = false
-var idle_detection_angle:float = 60
+var idle_detection_angle:float = 75
 var current_detection_angle:float = idle_detection_angle
 
 func _ready():
@@ -154,6 +154,7 @@ func _physics_process(delta):
 			if (condition_preconditions() == StatesResult.STOP): return
 			setvar_player_detected()
 			if (condition_attack_player() == StatesResult.STOP): return
+			if (condition_player_detected_and_not_hidden() == StatesResult.STOP): return
 			if (condition_heard_hit() == StatesResult.STOP): return
 			if (condition_heard_help_call() == StatesResult.STOP): return
 			if (condition_have_detected_position() == StatesResult.STOP): return
