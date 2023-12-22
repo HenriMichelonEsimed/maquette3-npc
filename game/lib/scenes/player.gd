@@ -105,6 +105,7 @@ func _physics_process(delta):
 						anim_state.travel(ANIM_RUNNING)
 						running = true
 				else:
+					_regen_endurance()
 					speed = walking_speed
 					anim_state.travel(ANIM_WALKING)
 			else:
@@ -155,6 +156,7 @@ func _physics_process(delta):
 					anim_state.travel(ANIM_RUNNING)
 					running = true
 			else:
+				_regen_endurance()
 				speed = walking_speed
 				anim_state.travel(ANIM_WALKING)
 		else:
