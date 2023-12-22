@@ -82,7 +82,9 @@ func _physics_process(delta):
 		running = false
 		attack_cooldown = true
 		timer_use.start()
-	if (attack_cooldown): return
+	if (attack_cooldown): 
+		_regen_endurance()
+		return
 	var on_floor = is_on_floor_only() 
 	if (move_to_target != null):
 		if Input.is_action_pressed("player_right") or  Input.is_action_pressed("player_left") or  Input.is_action_pressed("player_backward") or  Input.is_action_pressed("player_forward"):
@@ -94,17 +96,19 @@ func _physics_process(delta):
 			if (transform.origin.distance_to(move_to_target)) < 0.1:
 				stop_move_to()
 				return
-			if Input.is_action_pressed("modifier") and GameState.player_state.endurance > 0:
-				if (not running):
-					speed = running_speed
-					anim_state.travel(ANIM_RUNNING)
-					running = true
-				GameState.player_state.endurance -= 1
+			if Input.is_action_pressed("modifier"):
+				GameState.player_state.endurance -= 2
 				endurance_change.emit()
+				if (GameState.player_state.endurance > 0):
+					if (not running):
+						speed = running_speed
+						anim_state.travel(ANIM_RUNNING)
+						running = true
+				else:
+					speed = walking_speed
+					anim_state.travel(ANIM_WALKING)
 			else:
-				if (GameState.player_state.endurance < GameState.player_state.endurance_max):
-					GameState.player_state.endurance += 1
-					endurance_change.emit()
+				_regen_endurance()
 				running = false
 				speed = walking_speed
 				anim_state.travel(ANIM_WALKING)
@@ -142,17 +146,22 @@ func _physics_process(delta):
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
 		look_at(position + direction, Vector3.UP)
-		if Input.is_action_pressed("modifier") and GameState.player_state.endurance > 0:
-			if (not running):
-				speed = running_speed
-				anim_state.travel(ANIM_RUNNING)
-				running = true
-			GameState.player.endurance -= 1
+		if Input.is_action_pressed("modifier"):
+			GameState.player_state.endurance -= 2
 			endurance_change.emit()
+			if (GameState.player_state.endurance > 0):
+				if (not running):
+					speed = running_speed
+					anim_state.travel(ANIM_RUNNING)
+					running = true
+			else:
+				speed = walking_speed
+				anim_state.travel(ANIM_WALKING)
 		else:
+			_regen_endurance()
 			running = false
 			speed = walking_speed
-		anim_state.travel(ANIM_WALKING)
+			anim_state.travel(ANIM_WALKING)
 		for index in range(get_slide_collision_count()):
 			var collision = get_slide_collision(index)
 			var collider = collision.get_collider()
@@ -170,9 +179,7 @@ func _physics_process(delta):
 		running = false
 		stop_moving.emit()
 		anim_state.travel("idle")
-		if (GameState.player_state.endurance < GameState.player_state.endurance_max):
-			GameState.player_state.endurance += 1
-			endurance_change.emit()
+		_regen_endurance()
 	
 	target_velocity.x = direction.x * speed
 	target_velocity.z = direction.z * speed
@@ -198,6 +205,11 @@ func _update_camera():
 	if (!signaled) :
 		start_moving.emit()
 		signaled = true
+
+func _regen_endurance():
+	if (GameState.player_state.endurance < GameState.player_state.endurance_max):
+		GameState.player_state.endurance += 1
+		endurance_change.emit()
 
 func move_to(target:Vector2):
 	var ray_query = PhysicsRayQueryParameters3D.new()
