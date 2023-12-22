@@ -139,6 +139,7 @@ var player_distance:float = 0.0
 # last player detection position
 var detected_position:Vector3 = Vector3.ZERO
 var escape_position:Tools.NearestPath
+var escape_direction:int = 1.0
 # player in detection area
 var player_detected:bool = false
 # last position when moving to position
@@ -212,7 +213,7 @@ func setvar_player_detected(_delta):
 
 #region Conditions Block
 func condition_player_in_hearing_distance(_delta):
-	if (player_distance < hear_distance):
+	if (randf() < 0.02) and (player_distance < hear_distance):
 		return state.change_state(States.MOVE_TO_PLAYER, "player_in_hearing_distance")
 	return StateMachine.Result.CONTINUE
 
@@ -317,16 +318,19 @@ func condition_continue_to_position(_delta) -> StateMachine.Result:
 
 func condition_escape_end(_delta) -> StateMachine.Result:
 	if (position.distance_to(escape_position.nearest) < 0.1):
-		var nearest_offset = escape_position.path.curve.get_closest_offset(position) + 1
-		if (nearest_offset >= escape_position.path.curve.get_baked_length()):
+		var nearest_offset = escape_position.path.curve.get_closest_offset(position) + escape_direction
+		var max = escape_position.path.curve.get_baked_length()
+		if (nearest_offset >= max):
 			nearest_offset = 1.0
+		if (nearest_offset <= 0):
+			nearest_offset = max
 		escape_position.nearest = escape_position.path.curve.sample_baked(nearest_offset)
 		escape_position.nearest.y = position.y
 		return state.change_state(States.ESCAPE_TO_POSITION, "escape_end")
 	return StateMachine.Result.CONTINUE
 
 func condition_escape_stop(_delta) -> StateMachine.Result:
-	if (randf() < 0.0075):
+	if (randf() < 0.002):
 		return state.change_state(States.MOVE_TO_POSITION, "escape_stop")
 	return StateMachine.Result.CONTINUE
 
@@ -345,6 +349,8 @@ func condition_is_blocked(_delta) -> StateMachine.Result:
 		escape_position = Tools.get_nearest_path(position, nearest_points)
 		escape_position.nearest.y = position.y
 		previous_position = Vector3.ZERO
+		if (randf() < 0.1):
+			escape_direction = 1 - escape_direction
 		return state.change_state(States.ESCAPE_TO_POSITION, "is_blocked")
 	return StateMachine.Result.CONTINUE
 #endregion
@@ -394,6 +400,11 @@ func action_move_to_detected_position(_delta):
 	move_and_slide()
 
 func action_move_to_escape_position(_delta):
+	if (anim.current_animation != ANIM_RUN):
+		_stop_idle_rotation()
+		blocked_count = 0
+		print("%s move to escape position from %s" % [name, anim.current_animation])
+		anim.play(ANIM_RUN, 0.2)
 	look_at(escape_position.nearest)
 	velocity = -transform.basis.z * running_speed
 	previous_position = position
