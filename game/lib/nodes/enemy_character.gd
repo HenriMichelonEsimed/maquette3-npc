@@ -406,9 +406,9 @@ func action_move_to_escape_position(_delta):
 		_stop_idle_rotation()
 		blocked_count = 0
 		print("%s move to escape position from %s" % [name, anim.current_animation])
-		anim.play(ANIM_RUN, 0.2, 0.5)
+		anim.play(ANIM_RUN, 0.2)
 	look_at(escape_position.nearest)
-	velocity = -transform.basis.z * walking_speed
+	velocity = -transform.basis.z * running_speed
 	previous_position = position
 	move_and_slide()
 #endregion

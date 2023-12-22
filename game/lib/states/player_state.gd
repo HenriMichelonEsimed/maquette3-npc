@@ -13,6 +13,8 @@ var xp:int = 0
 var xp_next_level = 2000
 var hp:int = 20
 var hp_max:int = 20
+var endurance:int = 1000
+var endurance_max:int = 1000
 
 func _init():
 	super("player")

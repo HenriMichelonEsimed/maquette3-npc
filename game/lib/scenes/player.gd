@@ -2,6 +2,7 @@ class_name Player extends CharacterBody3D
 
 signal start_moving()
 signal stop_moving()
+signal endurance_change()
 
 const ANIM_STANDING = "idle"
 const ANIM_WALKING = "walk"
@@ -93,12 +94,17 @@ func _physics_process(delta):
 			if (transform.origin.distance_to(move_to_target)) < 0.1:
 				stop_move_to()
 				return
-			if Input.is_action_pressed("modifier"):
+			if Input.is_action_pressed("modifier") and GameState.player_state.endurance > 0:
 				if (not running):
 					speed = running_speed
 					anim_state.travel(ANIM_RUNNING)
 					running = true
+				GameState.player_state.endurance -= 1
+				endurance_change.emit()
 			else:
+				if (GameState.player_state.endurance < GameState.player_state.endurance_max):
+					GameState.player_state.endurance += 1
+					endurance_change.emit()
 				running = false
 				speed = walking_speed
 				anim_state.travel(ANIM_WALKING)
@@ -136,11 +142,13 @@ func _physics_process(delta):
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
 		look_at(position + direction, Vector3.UP)
-		if Input.is_action_pressed("modifier"):
+		if Input.is_action_pressed("modifier") and GameState.player_state.endurance > 0:
 			if (not running):
 				speed = running_speed
 				anim_state.travel(ANIM_RUNNING)
 				running = true
+			GameState.player.endurance -= 1
+			endurance_change.emit()
 		else:
 			running = false
 			speed = walking_speed
@@ -162,6 +170,9 @@ func _physics_process(delta):
 		running = false
 		stop_moving.emit()
 		anim_state.travel("idle")
+		if (GameState.player_state.endurance < GameState.player_state.endurance_max):
+			GameState.player_state.endurance += 1
+			endurance_change.emit()
 	
 	target_velocity.x = direction.x * speed
 	target_velocity.z = direction.z * speed

@@ -24,6 +24,7 @@ class_name MainUI extends Control
 @onready var blur = $Blur
 @onready var hp = $HUD/HP
 @onready var xp = $HUD/XP
+@onready var endurance = $HUD/Endurance
 
 const compass_rotation = [ 0.0, -90.0, -180.0, -270.0 ]
 
@@ -53,6 +54,7 @@ func _ready():
 	camera_pivot.camera.connect("view_rotate", _on_camera_view_rotate)
 	player.interactions.connect("display_info", _on_display_info)
 	player.interactions.connect("hide_info", hide_info)
+	player.connect("endurance_change", endurance_change)
 	#player.connect("update_oxygen", update_oxygen)
 	Input.connect("joy_connection_changed", _on_joypad_connection_changed)
 	display_xp()
@@ -60,6 +62,7 @@ func _ready():
 	_on_camera_view_rotate(GameState.camera.view)
 	hp.max_value = GameState.player_state.hp_max
 	hp.value = GameState.player_state.hp
+	endurance_change()
 
 func set_shortcuts():
 	panel_item.set_shortcuts()
@@ -292,3 +295,7 @@ func _on_timer_notif_timeout():
 
 func _on_button_pressed():
 	get_tree().quit()
+
+func endurance_change():
+	endurance.max_value = GameState.player_state.endurance_max
+	endurance.value = GameState.player_state.endurance
