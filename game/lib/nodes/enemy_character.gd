@@ -400,7 +400,7 @@ func action_idle(_delta):
 		#print("%s idle from %s" % [name, anim.current_animation])
 		anim.play(ANIM_IDLE, 0.2)
 	else:
-		_idle_rotation(randf_range(-45, 45), 5)
+		_idle_rotation(randf_range(-45, 45), 10)
 
 func action_move_to_detected_position(_delta):
 	if (anim.current_animation != ANIM_RUN):
@@ -436,7 +436,7 @@ func _to_string():
 	return label
 
 func _idle_rotation(angle, time):
-	if ((idle_rotation_tween == null) or (not idle_rotation_tween.is_valid())) and (randf() < 0.1):
+	if ((idle_rotation_tween == null) or (not idle_rotation_tween.is_valid())) and (randf() < 0.5):
 		idle_rotation_tween = get_tree().create_tween()
 		idle_rotation_tween.tween_property(
 			self, # target

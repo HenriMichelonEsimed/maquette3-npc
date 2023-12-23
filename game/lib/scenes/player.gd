@@ -73,7 +73,8 @@ func _unhandled_input(_event):
 func _physics_process(delta):
 	if (GameState.player_state.hp <= 0): return
 	if Input.is_action_pressed("use") and (not attack_cooldown) and (GameState.current_item != null) and (GameState.current_item is ItemWeapon) and (interactions.node_to_use == null):
-		look_to(get_viewport().get_mouse_position())
+		if (not GameState.use_joypad) : 
+			look_to(get_viewport().get_mouse_position())
 		anim.play(ANIM_ATTACKING, 0.2, attack_speed_scale)
 		hit_allowed = true
 		timer_use.wait_time =  GameMechanics.attack_cooldown(GameState.current_item.speed)

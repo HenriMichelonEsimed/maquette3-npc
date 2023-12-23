@@ -44,6 +44,22 @@ func _unhandled_input(event):
 				rotate_view(-1)
 			else:
 				zoom_view(-2)
+	if (event is InputEventJoypadMotion) and Input.is_action_pressed("modifier"):
+		if (event.axis == JOY_AXIS_RIGHT_X):
+			if (event.axis_value == 1):
+				rotate_view(1)
+			elif (event.axis_value == -1):
+				rotate_view(-1)
+		elif (event.axis == JOY_AXIS_RIGHT_Y):
+			if (event.axis_value == -1):
+				zoom_in = true
+				zoom_out = false
+			elif (event.axis_value == 1):
+				zoom_out = true
+				zoom_in = false
+			else:
+				zoom_in = false
+				zoom_out = false
 
 func _unhandled_key_input(event):
 	if (event is InputEventKey) and Input.is_action_pressed("modifier"):
