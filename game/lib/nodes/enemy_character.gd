@@ -87,8 +87,8 @@ var states:Dictionary = {
 
 #region Exports
 @export var label:String = "Enemy"
-@export var hear_distance:float = 5
-@export var attack_distance:float = 0.9
+@export var hear_distance:float = 8
+@export var attack_distance:float = 0.8
 @export var height:float = 0.0
 #endregion
 
@@ -138,8 +138,12 @@ var idle_rotation_tween:Tween
 var player_distance:float = 0.0
 # last player detection position
 var detected_position:Vector3 = Vector3.ZERO
+# blocked, trying to escape using a pre defined path
 var escape_position:Tools.NearestPath
 var escape_direction:int = 1.0
+# blocked for too long
+var is_blocked_count:int = 0
+const is_blocked_count_trigger:int = 4
 # player in detection area
 var player_detected:bool = false
 # last position when moving to position
@@ -198,6 +202,7 @@ func _ready():
 		weapon.use_area.connect("body_entered", _on_item_hit)
 	NotificationManager.connect("new_hit", _on_new_hit)
 	NotificationManager.connect("node_call_for_help", _on_call_for_help)
+	if (randf() < 0.5): escape_direction = -1.0
 
 func _physics_process(delta):
 	state.execute(delta)
@@ -213,8 +218,9 @@ func setvar_player_detected(_delta):
 
 #region Conditions Block
 func condition_player_in_hearing_distance(_delta):
+	if (is_blocked_count > is_blocked_count_trigger):
+		return StateMachine.Result.CONTINUE
 	var pos = GameState.player.position
-	pos.y = GameState.player.height
 	var local = raycast_detection.to_local(pos)
 	raycast_detection.target_position = local
 	var hidden = raycast_detection.is_colliding() and not(raycast_detection.get_collider() is Player)
@@ -284,6 +290,8 @@ func condition_player_still_detected(_delta) -> StateMachine.Result:
 
 func condition_player_detected_and_not_hidden(_delta) -> StateMachine.Result:
 	if (player_detected):
+		if (is_blocked_count > is_blocked_count_trigger):
+			return StateMachine.Result.CONTINUE
 		var pos = GameState.player.position
 		pos.y = GameState.player.height
 		var local = raycast_detection.to_local(pos)
@@ -326,8 +334,11 @@ func condition_continue_to_position(_delta) -> StateMachine.Result:
 func condition_escape_end(_delta) -> StateMachine.Result:
 	if (position.distance_to(escape_position.nearest) < 0.1):
 		var nearest_offset = escape_position.path.curve.get_closest_offset(position) + escape_direction
-		if (nearest_offset >= escape_position.path.curve.get_baked_length()):
+		var max = escape_position.path.curve.get_baked_length()
+		if (nearest_offset >= max):
 			nearest_offset = 1.0
+		elif (nearest_offset <= 0):
+			nearest_offset = max -1.0 
 		escape_position.nearest = escape_position.path.curve.sample_baked(nearest_offset)
 		escape_position.nearest.y = position.y
 		return state.change_state(States.ESCAPE_TO_POSITION, "escape_end")
@@ -340,20 +351,36 @@ func condition_escape_stop(_delta) -> StateMachine.Result:
 
 func condition_escape_is_blocked(_delta) -> StateMachine.Result:
 	if (position.distance_to(previous_position) < 0.01):
+		is_blocked_count = 0
 		current_detection_angle = 90
 		return state.change_state(States.IDLE, "escape_is_blocked")
 	return StateMachine.Result.CONTINUE
 	
 func condition_is_blocked(_delta) -> StateMachine.Result:
-	if (position.distance_to(previous_position) < 0.02):
-		detected_position = Vector3.ZERO
+	var distance = position.distance_to(previous_position)
+	if (distance < 0.02):
+		if (is_blocked_count < is_blocked_count_trigger):
+			for index in range(get_slide_collision_count()):
+				var collision = get_slide_collision(index)
+				var collider = collision.get_collider()
+				if collider.is_in_group("stairs"):
+					velocity = -transform.basis.z * running_speed
+					velocity.y = 5
+					print("stairs")
+					move_and_slide()
+					return state.change_state(States.MOVE_TO_POSITION, "is_blocked")
+		is_blocked_count += 1
 		var nearest_points:Array[Tools.NearestPath] = []
 		for path:Path3D in get_parent().find_children("EscapePath*"):
 			nearest_points.push_back(Tools.NearestPath.new(path, path.curve.get_closest_point(position)))
 		escape_position = Tools.get_nearest_path(position, nearest_points)
+		if (position.distance_to(escape_position.nearest) > 3.0):
+			return state.change_state(States.IDLE, "is_blocked (escape_position)")
 		escape_position.nearest.y = position.y
 		previous_position = Vector3.ZERO
 		return state.change_state(States.ESCAPE_TO_POSITION, "is_blocked")
+	elif (is_blocked_count > (is_blocked_count_trigger * 1.5)):
+		is_blocked_count = 0
 	return StateMachine.Result.CONTINUE
 #endregion
 
@@ -364,7 +391,7 @@ func action_start(_delta):
 	state.change_state(States.IDLE, "start")
 
 func action_attack_player(_delta) -> StateMachine.Result:
-	print("%s attack player" % name)
+	#print("%s attack player" % name)
 	anim.play(ANIM_ATTACK, 0.2, attack_animation_scale)
 	timer_attack_cooldown.start()
 	attack_cooldown = true
@@ -375,7 +402,7 @@ func action_move_to_player(_delta) -> StateMachine.Result:
 	if (anim.current_animation != ANIM_RUN):
 		_stop_idle_rotation()
 		blocked_count = 0
-		print("%s move to player from %s" % [name, anim.current_animation])
+		#print("%s move to player from %s" % [name, anim.current_animation])
 		anim.play(ANIM_RUN, 0.2)
 	detected_position = GameState.player.position
 	look_at(detected_position)
@@ -386,7 +413,7 @@ func action_move_to_player(_delta) -> StateMachine.Result:
 
 func action_idle(_delta):
 	if (anim.current_animation != ANIM_IDLE):
-		print("%s idle from %s" % [name, anim.current_animation])
+		#print("%s idle from %s" % [name, anim.current_animation])
 		anim.play(ANIM_IDLE, 0.5)
 	_idle_rotation(randf_range(-45, 45), 5)
 
@@ -394,7 +421,7 @@ func action_move_to_detected_position(_delta):
 	if (anim.current_animation != ANIM_RUN):
 		_stop_idle_rotation()
 		blocked_count = 0
-		print("%s move to position from %s" % [name, anim.current_animation])
+		#print("%s move to position from %s" % [name, anim.current_animation])
 		anim.play(ANIM_RUN, 0.2)
 	look_at(detected_position)
 	velocity = -transform.basis.z * running_speed
@@ -405,7 +432,7 @@ func action_move_to_escape_position(_delta):
 	if (anim.current_animation != ANIM_RUN):
 		_stop_idle_rotation()
 		blocked_count = 0
-		print("%s move to escape position from %s" % [name, anim.current_animation])
+		#print("%s move to escape position from %s" % [name, anim.current_animation])
 		anim.play(ANIM_RUN, 0.2)
 	look_at(escape_position.nearest)
 	velocity = -transform.basis.z * running_speed
