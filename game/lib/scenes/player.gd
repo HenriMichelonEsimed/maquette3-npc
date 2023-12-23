@@ -8,23 +8,20 @@ signal endurance_change()
 const ANIM_STANDING = "idle"
 const ANIM_WALKING = "walk"
 const ANIM_RUNNING = "run"
-const ANIM_DIE = "die"
-const ANIM_ATTACKING= "attack"
+const ANIM_DIEING = "die"
+const ANIM_ATTACKING= "attack_sword_1"
 const ANIM_USING= "use"
-const ANIM_SWORD_SLASH = "default/sword_slash_1_v1"
 
 @export var camera_pivot:Node3D
 
 @onready var interactions = $Interactions
-@onready var anim_player:AnimationPlayer = $AnimationPlayer 
-@onready var anim_tree:AnimationTree = $AnimationTree
+@onready var anim:AnimationPlayer = $AnimationPlayer 
 @onready var timer_use:Timer = $TimerUse
 
 const walking_speed:float = 7.0
 const running_speed:float = 14.0
 const walking_jump_impulse:float = 20.0
 
-var anim_state:AnimationNodeStateMachinePlayback
 var camera:IsometricCamera
 var character:Node3D
 var attach_item:Node3D
@@ -49,7 +46,9 @@ var hit_allowed:bool = false
 # running animation playing
 var running:bool = false
 # approx height
-var height = 1.7
+var height:float = 1.7
+# weapon speed animation scale
+var attack_speed_scale:float = 1.0
 
 const directions = {
 	"forward" : 	[  { 'x':  1, 'z': -1 },  { 'x':  1, 'z':  1 },  { 'x': -1, 'z':  1 },  { 'x': -1, 'z': -1 } ],
@@ -60,7 +59,6 @@ const directions = {
 
 func _ready():
 	character = get_node("Character")
-	anim_state = anim_tree["parameters/playback"]
 	camera = camera_pivot.get_node("Camera")
 	camera.connect("view_rotate", _on_view_rotate)
 	attach_item = character.get_node("RootNode/Skeleton3D/HandAttachment/AttachmentPoint")
@@ -76,7 +74,7 @@ func _physics_process(delta):
 	if (GameState.player_state.hp <= 0): return
 	if Input.is_action_pressed("use") and (not attack_cooldown) and (GameState.current_item != null) and (GameState.current_item is ItemWeapon) and (interactions.node_to_use == null):
 		look_to(get_viewport().get_mouse_position())
-		anim_state.travel(ANIM_ATTACKING)
+		anim.play(ANIM_ATTACKING, 0.2)
 		hit_allowed = true
 		timer_use.wait_time = GameMechanics.attack_cooldown(GameState.current_item.speed)
 		move_to_target = null
@@ -103,17 +101,17 @@ func _physics_process(delta):
 				if (GameState.player_state.endurance > 0):
 					if (not running):
 						speed = running_speed
-						anim_state.travel(ANIM_RUNNING)
+						anim.play(ANIM_RUNNING)
 						running = true
 				else:
 					_regen_endurance()
 					speed = walking_speed
-					anim_state.travel(ANIM_WALKING)
+					anim.play(ANIM_WALKING, 0.2)
 			else:
 				_regen_endurance()
 				running = false
 				speed = walking_speed
-				anim_state.travel(ANIM_WALKING)
+				anim.play(ANIM_WALKING, 0.2)
 			moving.emit()
 			velocity = -transform.basis.z * speed
 			if (move_to_target.y > position.y):
@@ -155,17 +153,17 @@ func _physics_process(delta):
 			if (GameState.player_state.endurance > 0):
 				if (not running):
 					speed = running_speed
-					anim_state.travel(ANIM_RUNNING)
+					anim.play(ANIM_RUNNING, 0.2)
 					running = true
 			else:
 				_regen_endurance()
 				speed = walking_speed
-				anim_state.travel(ANIM_WALKING)
+				anim.play(ANIM_WALKING, 0.2)
 		else:
 			_regen_endurance()
 			running = false
 			speed = walking_speed
-			anim_state.travel(ANIM_WALKING)
+			anim.play(ANIM_WALKING, 0.2)
 		moving.emit()
 		for index in range(get_slide_collision_count()):
 			var collision = get_slide_collision(index)
@@ -179,7 +177,7 @@ func _physics_process(delta):
 		signaled = false
 		running = false
 		stop_moving.emit()
-		anim_state.travel("idle")
+		anim.play("idle", 0.2)
 		_regen_endurance()
 	
 	target_velocity.x = direction.x * speed
@@ -255,7 +253,7 @@ func _on_view_rotate(view:int):
 func handle_item():
 	attach_item.add_child(GameState.current_item)
 	if (GameState.current_item is ItemWeapon):
-		anim_tree["parameters/attack/TimeScale/scale"] = GameMechanics.anim_scale(GameState.current_item.speed)
+		attack_speed_scale = GameMechanics.anim_scale(GameState.current_item.speed)
 	if (GameState.current_item.use_area != null):
 		GameState.current_item.use_area.connect("body_entered", _on_item_hit)
 
@@ -271,7 +269,7 @@ func hit(hit_by:ItemWeapon):
 	velocity = Vector3.ZERO
 	NotificationManager.hit(self, hit_by, damage_points, false)
 	if (GameState.player_state.hp  <= 0):
-		anim_state.travel(ANIM_DIE)
+		anim.play(ANIM_DIEING, 0.2)
 
 func _on_item_hit(node:Node3D):
 	if (hit_allowed):

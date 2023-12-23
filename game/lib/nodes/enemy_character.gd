@@ -39,6 +39,7 @@ var states:Dictionary = {
 	States.IDLE: [
 		condition_preconditions,
 		setvar_player_detected,
+		condition_attack_player,
 		condition_player_in_hearing_distance,
 		condition_player_detected_and_not_hidden,
 		condition_heard_hit,
@@ -49,7 +50,6 @@ var states:Dictionary = {
 		condition_preconditions,
 		setvar_player_detected,
 		condition_player_still_detected,
-		condition_player_hidden,
 		condition_attack_player,
 		condition_is_blocked,
 		action_move_to_player
@@ -59,18 +59,17 @@ var states:Dictionary = {
 		setvar_player_detected,
 		condition_attack_player,
 		condition_player_detected_and_not_hidden,
+		condition_is_blocked,
 		condition_heard_hit,
 		condition_heard_help_call,
-		condition_have_detected_position,
 		condition_continue_to_position,
-		condition_is_blocked,
 		action_move_to_detected_position
 	],
 	States.ATTACK: [
 		condition_preconditions,
 		setvar_player_detected,
 		condition_player_still_detected,
-		condition_player_hidden,
+		condition_player_not_in_sight,
 		condition_player_in_attack_range,
 		condition_can_attack,
 		action_attack_player
@@ -147,6 +146,7 @@ var is_blocked_count:int = 0
 const is_blocked_count_trigger:int = 4
 # player in detection area
 var player_detected:bool = false
+var player_hidden:bool = false
 # last position when moving to position
 var previous_position:Vector3 = Vector3.ZERO
 # we heard a fight
@@ -178,7 +178,7 @@ func _ready():
 	attack_animation_scale = GameMechanics.anim_scale(weapon.speed)
 	if (height == 0) and (collision_shape.shape is CylinderShape3D):
 		height = collision_shape.shape.height
-	raycast_detection.position.y += height
+	raycast_detection.position.y = height
 	raycast_detection.target_position = Vector3(0.0, 0.0, -detection_distance)
 	raycast_detection.set_collision_mask_value(Consts.LAYER_ROOFS, true)
 	add_child(raycast_detection)
@@ -215,15 +215,16 @@ func setvar_player_detected(_delta):
 		var forward_vector = -transform.basis.z
 		var vector_to_player = (GameState.player.position - position).normalized()
 		player_detected = acos(forward_vector.dot(vector_to_player)) <= deg_to_rad(current_detection_angle)
+	var pos = GameState.player.position
+	pos.y = GameState.player.height
+	var local = raycast_detection.to_local(pos)
+	raycast_detection.target_position = local
+	player_hidden = raycast_detection.is_colliding() and not(raycast_detection.get_collider() is Player)
 #endregion
 
 #region Conditions Block
 func condition_player_in_hearing_distance(_delta):
-	var pos = GameState.player.position
-	var local = raycast_detection.to_local(pos)
-	raycast_detection.target_position = local
-	var hidden = raycast_detection.is_colliding() and not(raycast_detection.get_collider() is Player)
-	if (not hidden) and (player_distance < hear_distance) and (is_blocked_count < is_blocked_count_trigger):
+	if (not player_hidden) and (player_distance < hear_distance) and (is_blocked_count < is_blocked_count_trigger):
 		return state.change_state(States.MOVE_TO_PLAYER, "player_in_hearing_distance")
 	return StateMachine.Result.CONTINUE
 
@@ -263,9 +264,7 @@ func condition_attack_player(_delta) -> StateMachine.Result:
 	return StateMachine.Result.CONTINUE
 
 func condition_player_in_attack_range(_delta) -> StateMachine.Result:
-	raycast_detection.target_position = Vector3(0.0, 0.0, -detection_distance)
-	var hidden = raycast_detection.is_colliding() and not(raycast_detection.get_collider() is Player)
-	if (not hidden) and (player_distance <= attack_distance):
+	if (not player_hidden) and (player_distance <= attack_distance):
 		return StateMachine.Result.CONTINUE
 	return state.change_state(States.MOVE_TO_PLAYER, "player_in_attack_range")
 
@@ -274,12 +273,13 @@ func condition_can_attack(_delta) -> StateMachine.Result:
 		return StateMachine.Result.STOP
 	return StateMachine.Result.CONTINUE
 
-func condition_player_hidden(_delta):
+func condition_player_not_in_sight(_delta):
 	raycast_detection.target_position = Vector3(0.0, 0.0, -detection_distance)
+	raycast_detection.force_raycast_update()
 	if (raycast_detection.is_colliding() and not(raycast_detection.get_collider() is Player)):
 		current_detection_angle = 90
 		previous_position = Vector3.ZERO
-		return state.change_state(States.MOVE_TO_POSITION, "player_hidden")
+		return state.change_state(States.MOVE_TO_POSITION, "player_not_in_sight")
 	return StateMachine.Result.CONTINUE
 
 func condition_player_still_detected(_delta) -> StateMachine.Result:
@@ -291,11 +291,7 @@ func condition_player_detected_and_not_hidden(_delta) -> StateMachine.Result:
 	if (player_detected):
 		if (is_blocked_count > is_blocked_count_trigger):
 			return StateMachine.Result.CONTINUE
-		var pos = GameState.player.position
-		pos.y = GameState.player.height
-		var local = raycast_detection.to_local(pos)
-		raycast_detection.target_position = local
-		if raycast_detection.is_colliding() and (raycast_detection.get_collider() is Player):
+		if not player_hidden:
 			current_detection_angle = idle_detection_angle
 			return state.change_state(States.MOVE_TO_PLAYER, "player_detected_and_not_hidden")
 	return StateMachine.Result.CONTINUE
@@ -326,7 +322,6 @@ func condition_have_detected_position(_delta) -> StateMachine.Result:
 
 func condition_continue_to_position(_delta) -> StateMachine.Result:
 	if (position.distance_to(detected_position) < 0.1):
-		detected_position = Vector3.ZERO
 		return state.change_state(States.IDLE, "continue_to_position")
 	return StateMachine.Result.CONTINUE
 
@@ -339,7 +334,6 @@ func condition_escape_end(_delta) -> StateMachine.Result:
 		elif (nearest_offset <= 0):
 			nearest_offset = max -1.0 
 		escape_position.nearest = escape_position.path.curve.sample_baked(nearest_offset)
-		escape_position.nearest.y = position.y + height
 		return state.change_state(States.ESCAPE_TO_POSITION, "escape_end")
 	return StateMachine.Result.CONTINUE
 
@@ -349,7 +343,7 @@ func condition_escape_stop(_delta) -> StateMachine.Result:
 	return StateMachine.Result.CONTINUE
 
 func condition_escape_is_blocked(_delta) -> StateMachine.Result:
-	if (position.distance_to(previous_position) < 0.01):
+	if (position.distance_to(previous_position) < 0.02):
 		is_blocked_count = 0
 		current_detection_angle = 90
 		return state.change_state(States.IDLE, "escape_is_blocked")
@@ -358,16 +352,6 @@ func condition_escape_is_blocked(_delta) -> StateMachine.Result:
 func condition_is_blocked(_delta) -> StateMachine.Result:
 	var distance = position.distance_to(previous_position)
 	if (distance < 0.02):
-		if (is_blocked_count < is_blocked_count_trigger):
-			for index in range(get_slide_collision_count()):
-				var collision = get_slide_collision(index)
-				var collider = collision.get_collider()
-				if collider.is_in_group("stairs"):
-					velocity = -transform.basis.z * running_speed
-					velocity.y = 5
-					print("stairs")
-					move_and_slide()
-					return state.change_state(States.MOVE_TO_POSITION, "is_blocked")
 		is_blocked_count += 1
 		var nearest_points:Array[Tools.NearestPath] = []
 		for path:Path3D in get_parent().find_children("EscapePath*"):
@@ -375,7 +359,6 @@ func condition_is_blocked(_delta) -> StateMachine.Result:
 		escape_position = Tools.get_nearest_path(position, nearest_points)
 		previous_position = Vector3.ZERO
 		if (position.distance_to(escape_position.nearest) > 2.0):
-			escape_position.nearest = Vector3.ZERO
 			return state.change_state(States.IDLE, "is_blocked (escape_position)")
 		return state.change_state(States.ESCAPE_TO_POSITION, "is_blocked")
 	elif (is_blocked_count > (is_blocked_count_trigger * 1.5)):
@@ -405,9 +388,9 @@ func action_move_to_player(_delta) -> StateMachine.Result:
 		anim.play(ANIM_RUN, 0.2)
 		anim.seek(randf())
 	detected_position = GameState.player.position
-	detected_position.y = GameState.player.position.y + GameState.player.height / 2
 	look_at(detected_position)
 	velocity = -transform.basis.z * running_speed
+	_check_stairs()
 	previous_position = position
 	move_and_slide()
 	return StateMachine.Result.CONTINUE
@@ -415,8 +398,9 @@ func action_move_to_player(_delta) -> StateMachine.Result:
 func action_idle(_delta):
 	if (anim.current_animation != ANIM_IDLE):
 		#print("%s idle from %s" % [name, anim.current_animation])
-		anim.play(ANIM_IDLE, 0.5)
-	_idle_rotation(randf_range(-45, 45), 5)
+		anim.play(ANIM_IDLE, 0.2)
+	else:
+		_idle_rotation(randf_range(-45, 45), 5)
 
 func action_move_to_detected_position(_delta):
 	if (anim.current_animation != ANIM_RUN):
@@ -427,6 +411,7 @@ func action_move_to_detected_position(_delta):
 		anim.seek(randf())
 	look_at(detected_position)
 	velocity = -transform.basis.z * running_speed
+	_check_stairs()
 	previous_position = position
 	move_and_slide()
 
@@ -437,7 +422,9 @@ func action_move_to_escape_position(_delta):
 		#print("%s move to escape position from %s" % [name, anim.current_animation])
 		anim.play(ANIM_RUN, 0.2)
 		anim.seek(randf())
-	look_at(escape_position.nearest)
+	var pos = escape_position.nearest
+	pos.y = position.y
+	look_at(pos)
 	velocity = -transform.basis.z * running_speed
 	previous_position = position
 	move_and_slide()
@@ -461,6 +448,16 @@ func _idle_rotation(angle, time):
 func _stop_idle_rotation():
 	if (idle_rotation_tween != null) and (idle_rotation_tween.is_valid()):
 		idle_rotation_tween.kill()
+
+func _check_stairs():
+	if (detected_position.y > position.y):
+		for index in range(get_slide_collision_count()):
+			var collision = get_slide_collision(index)
+			if (collision == null): return
+			var collider = collision.get_collider()
+			if collider.is_in_group("stairs"):
+				velocity.y = 5
+				print("stairs")
 
 func _update_info():
 	if (label_info == null): return

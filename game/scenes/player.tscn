@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cfxsejwlekels"]
+[gd_scene load_steps=6 format=3 uid="uid://cfxsejwlekels"]
 
 [ext_resource type="Script" path="res://lib/scenes/player.gd" id="1_q3dva"]
 [ext_resource type="PackedScene" uid="uid://feuv31qq1vnp" path="res://scenes/characters/player_1.tscn" id="2_jd0ni"]
@@ -9,107 +9,6 @@
 height = 1.72115
 radius = 0.237539
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n20fm"]
-animation = &"default/sword_slash_1"
-
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_7j2ac"]
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_r6kli"]
-nodes/Animation/node = SubResource("AnimationNodeAnimation_n20fm")
-nodes/Animation/position = Vector2(51, 227)
-nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_7j2ac")
-nodes/TimeScale/position = Vector2(360, 160)
-nodes/output/position = Vector2(560, 160)
-node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_te7cv"]
-animation = &"default/die_backward_1"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2nq3j"]
-animation = &"default/standing_idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rjm8p"]
-animation = &"default/running"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6ai1k"]
-animation = &"default/using"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j3w3d"]
-animation = &"default/walking"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8sxfj"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_65n61"]
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jr2xr"]
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bcruw"]
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_33hqf"]
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xl2nf"]
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2btob"]
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_feypf"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g7u07"]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w5oos"]
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7epka"]
-xfade_time = 0.1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0jain"]
-xfade_time = 1.0
-switch_mode = 1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_om1xk"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nd31n"]
-advance_mode = 0
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xpbo5"]
-advance_mode = 0
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d5eqo"]
-advance_mode = 0
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e8yv4"]
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ilcup"]
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_eam0s"]
-states/End/position = Vector2(1103, 114)
-states/Start/position = Vector2(162, 55)
-states/attack/node = SubResource("AnimationNodeBlendTree_r6kli")
-states/attack/position = Vector2(219, 291)
-states/die/node = SubResource("AnimationNodeAnimation_te7cv")
-states/die/position = Vector2(840, 404)
-states/idle/node = SubResource("AnimationNodeAnimation_2nq3j")
-states/idle/position = Vector2(386, 64)
-states/run/node = SubResource("AnimationNodeAnimation_rjm8p")
-states/run/position = Vector2(559, 445)
-states/use/node = SubResource("AnimationNodeAnimation_6ai1k")
-states/use/position = Vector2(739, 55)
-states/walk/node = SubResource("AnimationNodeAnimation_j3w3d")
-states/walk/position = Vector2(749, 168)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_8sxfj"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_65n61"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_jr2xr"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_bcruw"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_33hqf"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_xl2nf"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_2btob"), "idle", "use", SubResource("AnimationNodeStateMachineTransition_feypf"), "use", "idle", SubResource("AnimationNodeStateMachineTransition_g7u07"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_w5oos"), "run", "attack", SubResource("AnimationNodeStateMachineTransition_7epka"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_0jain"), "die", "End", SubResource("AnimationNodeStateMachineTransition_om1xk"), "attack", "die", SubResource("AnimationNodeStateMachineTransition_nd31n"), "idle", "die", SubResource("AnimationNodeStateMachineTransition_xpbo5"), "walk", "die", SubResource("AnimationNodeStateMachineTransition_d5eqo"), "attack", "run", SubResource("AnimationNodeStateMachineTransition_e8yv4"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_ilcup")]
-graph_offset = Vector2(0, -69.536)
-
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0042032, 0)
 collision_layer = 513
@@ -119,7 +18,7 @@ script = ExtResource("1_q3dva")
 [node name="Character" parent="." instance=ExtResource("2_jd0ni")]
 
 [node name="CollisionShapeBody" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00842277, 0.865763, -0.016487)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00842277, 0.861221, -0.016487)
 shape = SubResource("CylinderShape3D_2huph")
 
 [node name="Interactions" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_0h8y3")]
@@ -128,22 +27,12 @@ player = NodePath("..")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Character")
 libraries = {
-"default": ExtResource("4_m24mr")
+"": ExtResource("4_m24mr")
 }
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-root_node = NodePath("../Character")
-libraries = {
-"default": ExtResource("4_m24mr")
-}
-tree_root = SubResource("AnimationNodeStateMachine_eam0s")
-anim_player = NodePath("../AnimationPlayer")
-parameters/attack/TimeScale/scale = 1.0
 
 [node name="TimerUse" type="Timer" parent="."]
 process_callback = 0
 wait_time = 0.1
 one_shot = true
 
-[connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
 [connection signal="timeout" from="TimerUse" to="." method="_on_timer_attack_timeout"]
