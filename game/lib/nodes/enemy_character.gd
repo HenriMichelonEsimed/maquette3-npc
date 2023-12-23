@@ -181,7 +181,6 @@ func _ready():
 	raycast_detection.position.y += height
 	raycast_detection.target_position = Vector3(0.0, 0.0, -detection_distance)
 	raycast_detection.set_collision_mask_value(Consts.LAYER_ROOFS, true)
-	raycast_detection.set_collision_mask_value(Consts.LAYER_ENEMY_CHARACTER, true)
 	add_child(raycast_detection)
 	label_info.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label_info.visible = false
@@ -204,7 +203,7 @@ func _ready():
 	NotificationManager.connect("new_hit", _on_new_hit)
 	NotificationManager.connect("node_call_for_help", _on_call_for_help)
 	if (randf() < 0.5): escape_direction = -1.0
-	GameState.player.connect("start_moving", _on_player_start_moving)
+	GameState.player.connect("moving", _on_player_moving)
 
 func _physics_process(delta):
 	state.execute(delta)
@@ -340,7 +339,7 @@ func condition_escape_end(_delta) -> StateMachine.Result:
 		elif (nearest_offset <= 0):
 			nearest_offset = max -1.0 
 		escape_position.nearest = escape_position.path.curve.sample_baked(nearest_offset)
-		escape_position.nearest.y = position.y
+		escape_position.nearest.y = position.y + height
 		return state.change_state(States.ESCAPE_TO_POSITION, "escape_end")
 	return StateMachine.Result.CONTINUE
 
@@ -376,8 +375,8 @@ func condition_is_blocked(_delta) -> StateMachine.Result:
 		escape_position = Tools.get_nearest_path(position, nearest_points)
 		previous_position = Vector3.ZERO
 		if (position.distance_to(escape_position.nearest) > 2.0):
+			escape_position.nearest = Vector3.ZERO
 			return state.change_state(States.IDLE, "is_blocked (escape_position)")
-		escape_position.nearest.y = position.y
 		return state.change_state(States.ESCAPE_TO_POSITION, "is_blocked")
 	elif (is_blocked_count > (is_blocked_count_trigger * 1.5)):
 		is_blocked_count = 0
@@ -402,9 +401,11 @@ func action_move_to_player(_delta) -> StateMachine.Result:
 	if (anim.current_animation != ANIM_RUN):
 		_stop_idle_rotation()
 		blocked_count = 0
-		print("%s move to player from %s" % [name, anim.current_animation])
+		#print("%s move to player from %s" % [name, anim.current_animation])
 		anim.play(ANIM_RUN, 0.2)
+		anim.seek(randf())
 	detected_position = GameState.player.position
+	detected_position.y = GameState.player.position.y + GameState.player.height / 2
 	look_at(detected_position)
 	velocity = -transform.basis.z * running_speed
 	previous_position = position
@@ -423,6 +424,7 @@ func action_move_to_detected_position(_delta):
 		blocked_count = 0
 		#print("%s move to position from %s" % [name, anim.current_animation])
 		anim.play(ANIM_RUN, 0.2)
+		anim.seek(randf())
 	look_at(detected_position)
 	velocity = -transform.basis.z * running_speed
 	previous_position = position
@@ -434,6 +436,7 @@ func action_move_to_escape_position(_delta):
 		blocked_count = 0
 		#print("%s move to escape position from %s" % [name, anim.current_animation])
 		anim.play(ANIM_RUN, 0.2)
+		anim.seek(randf())
 	look_at(escape_position.nearest)
 	velocity = -transform.basis.z * running_speed
 	previous_position = position
@@ -493,6 +496,7 @@ func hit(hit_by:ItemWeapon):
 		help_called = true
 		NotificationManager.call_for_help(self)
 	anim.play(ANIM_HIT if hit_points > 0 else ANIM_DIE)
+	is_blocked_count = 0
 
 func _on_new_hit(target:Node3D, weapon:ItemWeapon, damage_points:int, positive:bool):
 	if positive and (target != self) and (position.distance_to(target.position) < detection_distance):
@@ -524,7 +528,8 @@ func _on_animation_tree_animation_finished(anim_name):
 		$AnimationPlayer.queue_free()
 		process_mode = Node.PROCESS_MODE_DISABLED
 
-func _on_player_start_moving():
-	is_blocked_count = 0
+func _on_player_moving():
+	if (player_detected) :
+		is_blocked_count = 0
 
 #endregion

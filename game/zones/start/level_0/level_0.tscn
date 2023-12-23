@@ -114,7 +114,6 @@ transform = Transform3D(0.999619, 0, 0.0275902, 0, 1, 0, -0.0275902, 0, 0.999619
 [node name="EnemySpawnPoint" type="Node3D" parent="." node_paths=PackedStringArray("count_roll", "spawn_path")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 520.771, 0, 508.536)
 script = ExtResource("16_u18of")
-dice_roll_count = false
 count_roll = NodePath("CountRoll")
 spawn_path = NodePath("SpawnPath")
 
@@ -129,23 +128,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -520.771, 0, -508.536)
 curve = SubResource("Curve3D_dla37")
 
 [node name="Undead2" parent="." instance=ExtResource("18_4qsf6")]
-transform = Transform3D(0.867097, 0, -0.49814, 0, 1, 0, 0.49814, 0, 0.867097, 592.624, 0, 529.953)
+transform = Transform3D(0.867097, 0, -0.49814, 0, 1, 0, 0.49814, 0, 0.867097, 559.11, 0, 529.953)
 
 [node name="Undead3" parent="." instance=ExtResource("18_4qsf6")]
-transform = Transform3D(0.867097, 0, -0.49814, 0, 1, 0, 0.49814, 0, 0.867097, 464.377, 0, 525.263)
+transform = Transform3D(0.867097, 0, -0.49814, 0, 1, 0, 0.49814, 0, 0.867097, 503.056, 0, 525.263)
 
 [node name="Undead4" parent="." instance=ExtResource("18_4qsf6")]
 transform = Transform3D(0.960712, 0, 0.27755, 0, 1, 0, -0.27755, 0, 0.960712, 532.659, 0, 533.058)
 
 [node name="EscapePath1" type="Path3D" parent="."]
 curve = SubResource("Curve3D_g7pb2")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(0.993252, 0, 0.115977, 0, 1, 0, -0.115977, 0, 0.993252, 531.336, 0.42036, 530.745)
-use_collision = true
-size = Vector3(10, 1, 0.1)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(0.719061, 0, 0.694947, 0, 1, 0, -0.694947, 0, 0.719061, 523.03, 0.42036, 512.07)
-use_collision = true
-size = Vector3(10, 1, 0.1)

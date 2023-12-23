@@ -1,6 +1,7 @@
 class_name Player extends CharacterBody3D
 
 signal start_moving()
+signal moving()
 signal stop_moving()
 signal endurance_change()
 
@@ -113,6 +114,7 @@ func _physics_process(delta):
 				running = false
 				speed = walking_speed
 				anim_state.travel(ANIM_WALKING)
+			moving.emit()
 			velocity = -transform.basis.z * speed
 			if (move_to_target.y > position.y):
 				for index in range(get_slide_collision_count()):
@@ -164,6 +166,7 @@ func _physics_process(delta):
 			running = false
 			speed = walking_speed
 			anim_state.travel(ANIM_WALKING)
+		moving.emit()
 		for index in range(get_slide_collision_count()):
 			var collision = get_slide_collision(index)
 			var collider = collision.get_collider()
@@ -171,10 +174,6 @@ func _physics_process(delta):
 				continue
 			if collider.is_in_group("stairs"):
 				target_velocity.y = 5
-				no_jump = true
-			elif collider.is_in_group("ladders") and Input.is_action_pressed("player_jump"):
-				target_velocity.y = 12
-				no_jump = true
 	else:
 		target_velocity.y = 0
 		signaled = false
