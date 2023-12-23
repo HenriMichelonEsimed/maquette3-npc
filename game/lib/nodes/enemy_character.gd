@@ -39,6 +39,7 @@ var states:Dictionary = {
 	States.IDLE: [
 		condition_preconditions,
 		setvar_player_detected,
+		condition_player_in_hearing_distance,
 		condition_player_detected_and_not_hidden,
 		condition_heard_hit,
 		condition_heard_help_call,
@@ -203,6 +204,7 @@ func _ready():
 	NotificationManager.connect("new_hit", _on_new_hit)
 	NotificationManager.connect("node_call_for_help", _on_call_for_help)
 	if (randf() < 0.5): escape_direction = -1.0
+	GameState.player.connect("start_moving", _on_player_start_moving)
 
 func _physics_process(delta):
 	state.execute(delta)
@@ -218,13 +220,11 @@ func setvar_player_detected(_delta):
 
 #region Conditions Block
 func condition_player_in_hearing_distance(_delta):
-	if (is_blocked_count > is_blocked_count_trigger):
-		return StateMachine.Result.CONTINUE
 	var pos = GameState.player.position
 	var local = raycast_detection.to_local(pos)
 	raycast_detection.target_position = local
 	var hidden = raycast_detection.is_colliding() and not(raycast_detection.get_collider() is Player)
-	if (not hidden) and (player_distance < hear_distance):
+	if (not hidden) and (player_distance < hear_distance) and (is_blocked_count < is_blocked_count_trigger):
 		return state.change_state(States.MOVE_TO_PLAYER, "player_in_hearing_distance")
 	return StateMachine.Result.CONTINUE
 
@@ -374,10 +374,10 @@ func condition_is_blocked(_delta) -> StateMachine.Result:
 		for path:Path3D in get_parent().find_children("EscapePath*"):
 			nearest_points.push_back(Tools.NearestPath.new(path, path.curve.get_closest_point(position)))
 		escape_position = Tools.get_nearest_path(position, nearest_points)
-		if (position.distance_to(escape_position.nearest) > 3.0):
+		previous_position = Vector3.ZERO
+		if (position.distance_to(escape_position.nearest) > 2.0):
 			return state.change_state(States.IDLE, "is_blocked (escape_position)")
 		escape_position.nearest.y = position.y
-		previous_position = Vector3.ZERO
 		return state.change_state(States.ESCAPE_TO_POSITION, "is_blocked")
 	elif (is_blocked_count > (is_blocked_count_trigger * 1.5)):
 		is_blocked_count = 0
@@ -402,7 +402,7 @@ func action_move_to_player(_delta) -> StateMachine.Result:
 	if (anim.current_animation != ANIM_RUN):
 		_stop_idle_rotation()
 		blocked_count = 0
-		#print("%s move to player from %s" % [name, anim.current_animation])
+		print("%s move to player from %s" % [name, anim.current_animation])
 		anim.play(ANIM_RUN, 0.2)
 	detected_position = GameState.player.position
 	look_at(detected_position)
@@ -523,5 +523,8 @@ func _on_animation_tree_animation_finished(anim_name):
 	if (anim_name == "undead/react_death_backward_1"):
 		$AnimationPlayer.queue_free()
 		process_mode = Node.PROCESS_MODE_DISABLED
+
+func _on_player_start_moving():
+	is_blocked_count = 0
 
 #endregion
