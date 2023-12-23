@@ -76,7 +76,7 @@ func _physics_process(delta):
 		look_to(get_viewport().get_mouse_position())
 		anim.play(ANIM_ATTACKING, 0.2, attack_speed_scale)
 		hit_allowed = true
-		timer_use.wait_time = attack_speed_scale
+		timer_use.wait_time =  GameMechanics.attack_cooldown(GameState.current_item.speed)
 		move_to_target = null
 		running = false
 		attack_cooldown = true
@@ -92,31 +92,12 @@ func _physics_process(delta):
 			var look_at_target = move_to_target
 			look_at_target.y = position.y
 			look_at(look_at_target)
-			if (transform.origin.distance_to(move_to_target)) < 0.1:
-				stop_move_to()
-				return
-			if Input.is_action_pressed("modifier"):
-				GameState.player_state.endurance -= 2
-				endurance_change.emit()
-				if (GameState.player_state.endurance > 0):
-					if (not running):
-						speed = running_speed
-						anim.play(ANIM_RUNNING)
-						running = true
-				else:
-					_regen_endurance()
-					speed = walking_speed
-					anim.play(ANIM_WALKING, 0.2)
-			else:
-				_regen_endurance()
-				running = false
-				speed = walking_speed
-				anim.play(ANIM_WALKING, 0.2)
-			moving.emit()
+			_run_or_walk()
 			velocity = -transform.basis.z * speed
 			if (move_to_target.y > position.y):
 				for index in range(get_slide_collision_count()):
 					var collision = get_slide_collision(index)
+					if (collision == null): return
 					var collider = collision.get_collider()
 					if collider.is_in_group("stairs"):
 						velocity.y = 5
@@ -147,29 +128,11 @@ func _physics_process(delta):
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
 		look_at(position + direction, Vector3.UP)
-		if Input.is_action_pressed("modifier"):
-			GameState.player_state.endurance -= 2
-			endurance_change.emit()
-			if (GameState.player_state.endurance > 0):
-				if (not running):
-					speed = running_speed
-					anim.play(ANIM_RUNNING, 0.2)
-					running = true
-			else:
-				_regen_endurance()
-				speed = walking_speed
-				anim.play(ANIM_WALKING, 0.2)
-		else:
-			_regen_endurance()
-			running = false
-			speed = walking_speed
-			anim.play(ANIM_WALKING, 0.2)
-		moving.emit()
+		_run_or_walk()
 		for index in range(get_slide_collision_count()):
 			var collision = get_slide_collision(index)
+			if (collision == null): return
 			var collider = collision.get_collider()
-			if collider == null:
-				continue
 			if collider.is_in_group("stairs"):
 				target_velocity.y = 5
 	else:
@@ -177,7 +140,7 @@ func _physics_process(delta):
 		signaled = false
 		running = false
 		stop_moving.emit()
-		anim.play("idle", 0.2)
+		anim.play(ANIM_STANDING, 0.2)
 		_regen_endurance()
 	
 	target_velocity.x = direction.x * speed
@@ -192,6 +155,26 @@ func _physics_process(delta):
 	move_and_slide()
 	if direction != Vector3.ZERO:
 		_update_camera()
+
+func _run_or_walk():
+	if Input.is_action_pressed("modifier"):
+		GameState.player_state.endurance -= 2
+		endurance_change.emit()
+		if (GameState.player_state.endurance > 0):
+			if (not running):
+				speed = running_speed
+				anim.play(ANIM_RUNNING, 0.2)
+				running = true
+		else:
+			_regen_endurance()
+			speed = walking_speed
+			anim.play(ANIM_WALKING, 0.2)
+	else:
+		_regen_endurance()
+		running = false
+		speed = walking_speed
+		anim.play(ANIM_WALKING, 0.2)
+	moving.emit()
 
 func move(pos:Vector3, rot:Vector3):
 	position = pos
@@ -279,6 +262,7 @@ func _on_item_hit(node:Node3D):
 
 func _on_timer_attack_timeout():
 	attack_cooldown = false
+	print('cooldown')
 
 func _to_string():
 	return GameState.player_state.nickname
