@@ -34,4 +34,3 @@ _shader_parameters = {
 "noise3_scale": 0.225,
 "noise_texture": SubResource("NoiseTexture2D_dq5vb")
 }
-show_navigation = true

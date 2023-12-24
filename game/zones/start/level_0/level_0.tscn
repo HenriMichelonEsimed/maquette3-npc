@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://0326gqgjjtkv"]
+[gd_scene load_steps=26 format=3 uid="uid://0326gqgjjtkv"]
 
 [ext_resource type="Script" path="res://lib/nodes/zone.gd" id="1_3tay3"]
 [ext_resource type="Terrain3DMaterial" uid="uid://bh2je3jcyw70l" path="res://assets/materials/terrain/grass_1.tres" id="2_6mkug"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://lib/nodes/enemy_spawn_point.gd" id="16_u18of"]
 [ext_resource type="Script" path="res://lib/dices_roll.gd" id="17_b8wr8"]
 [ext_resource type="PackedScene" uid="uid://bf7krp07f51ww" path="res://scenes/characters/undead_1.tscn" id="18_4qsf6"]
+[ext_resource type="Script" path="res://lib/nodes/enemy_escape_path.gd" id="19_ga82n"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_whqtd"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -37,10 +38,10 @@ glow_enabled = true
 
 [sub_resource type="Curve3D" id="Curve3D_dla37"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 514.379, 0, 501.617, 0, 0, 0, 0, 0, 0, 517.853, 0, 501.87, 0, 0, 0, 0, 0, 0, 522.174, 0, 501.043, 0, 0, 0, 0, 0, 0, 526.095, 0, 504.516, 0, 0, 0, 0, 0, 0, 524.771, 0, 508.251, 0, 0, 0, 0, 0, 0, 526.215, 0, 512.819, 0, 0, 0, 0, 0, 0, 524.39, 0, 510.241, 0, 0, 0, 0, 0, 0, 521.868, 0, 508.64, 0, 0, 0, 0, 0, 0, 524.267, 0, 506.431, 0, 0, 0, 0, 0, 0, 520.651, 0, 504.702, 0, 0, 0, 0, 0, 0, 519.02, 0, 505.644, 0, 0, 0, 0, 0, 0, 518.879, 0, 509.178, 0, 0, 0, 0, 0, 0, 516.389, 0, 505.97, 0, 0, 0, 0, 0, 0, 513.573, 0, 503.797, 0, 0, 0, 0, 0, 0, 515.948, 0, 507.907, 0, 0, 0, 0, 0, 0, 527.193, 0, 508.204, 0, 0, 0, 0, 0, 0, 514.379, 0, 501.617),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 520.284, 0.00378418, 508.387, 0, 0, 0, 0, 0, 0, 524.752, 0.00378418, 504.309, 0, 0, 0, 0, 0, 0, 528.83, 0.00378418, 505.567, 0, 0, 0, 0, 0, 0, 530.478, 0.00378418, 507.91, 0, 0, 0, 0, 0, 0, 531.042, 0.00378418, 512.378, 0, 0, 0, 0, 0, 0, 530.044, 0.00378418, 514.286, 0, 0, 0, 0, 0, 0, 527.615, 0.00378418, 515.284, 0, 0, 0, 0, 0, 0, 524.535, 0.00378418, 515.024, 0, 0, 0, 0, 0, 0, 522.149, 0.00378418, 514.416, 0, 0, 0, 0, 0, 0, 519.72, 0.00378418, 512.985, 0, 0, 0, 0, 0, 0, 519.59, 0.00378418, 511.033, 0, 0, 0, 0, 0, 0, 521.499, 0.00378418, 509.037, 0, 0, 0, 0, 0, 0, 523.537, 0.00378418, 507.866, 0, 0, 0, 0, 0, 0, 526.184, 0.00378418, 507.129, 0, 0, 0, 0, 0, 0, 528.916, 0.00378418, 508.994, 0, 0, 0, 0, 0, 0, 529.177, 0.00378418, 511.293, 0, 0, 0, 0, 0, 0, 527.615, 0.00378418, 512.811, 0, 0, 0, 0, 0, 0, 523.711, 0.00378418, 512.768, 0, 0, 0, 0, 0, 0, 521.976, 0.00378418, 510.859, 0, 0, 0, 0, 0, 0, 520.284, 0.00378418, 508.387),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 17
+point_count = 20
 
 [sub_resource type="Curve3D" id="Curve3D_g7pb2"]
 _data = {
@@ -48,6 +49,13 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
 }
 point_count = 6
+
+[sub_resource type="Curve3D" id="Curve3D_ombxq"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 502.679, 0, 531.304, 0, 0, 0, 0, 0, 0, 489.899, 0, 536.657, 0, 0, 0, 0, 0, 0, 475.48, 0, 534.69, 0, 0, 0, 0, 0, 0, 468.926, 0, 524.859, 0, 0, 0, 0, 0, 0, 467.506, 0, 508.583, 0, 0, 0, 0, 0, 0, 470.783, 0, 494.82, 0, 0, 0, 0, 0, 0, 476.245, 0, 485.207, 0, 0, 0, 0, 0, 0, 482.471, 0, 481.493, 0, 0, 0, 0, 0, 0, 494.487, 0, 474.284, 0, 0, 0, 0, 0, 0, 512.947, 0, 472.427, 0, 0, 0, 0, 0, 0, 521.358, 0, 482.913, 0, 0, 0, 0, 0, 0, 522.341, 0, 500.719, 0, 0, 0, 0, 0, 0, 521.795, 0, 515.138, 0, 0, 0, 0, 0, 0, 517.972, 0, 518.633, 0, 0, 0, 0, 0, 0, 509.561, 0, 525.624, 0, 0, 0, 0, 0, 0, 502.679, 0, 531.304),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 16
 
 [node name="Level0" type="Node3D"]
 script = ExtResource("1_3tay3")
@@ -112,8 +120,9 @@ transform = Transform3D(0.783834, 0, 0.62097, 0, 1, 0, -0.62097, 0, 0.783834, -1
 transform = Transform3D(0.999619, 0, 0.0275902, 0, 1, 0, -0.0275902, 0, 0.999619, 1.75787, 0, 1.62506)
 
 [node name="EnemySpawnPoint" type="Node3D" parent="." node_paths=PackedStringArray("count_roll", "spawn_path")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 520.771, 0, 508.536)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 520.771, 0, 529.512)
 script = ExtResource("16_u18of")
+dice_roll_count = false
 count_roll = NodePath("CountRoll")
 spawn_path = NodePath("SpawnPath")
 
@@ -121,20 +130,27 @@ spawn_path = NodePath("SpawnPath")
 script = ExtResource("17_b8wr8")
 dice_count = 2
 dice_faces = 4
-modifier = 1
+modifier = 2
 
 [node name="SpawnPath" type="Path3D" parent="EnemySpawnPoint"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -520.771, 0, -508.536)
 curve = SubResource("Curve3D_dla37")
 
 [node name="Undead2" parent="." instance=ExtResource("18_4qsf6")]
-transform = Transform3D(0.867097, 0, -0.49814, 0, 1, 0, 0.49814, 0, 0.867097, 559.11, 0, 529.953)
+transform = Transform3D(0.867097, 0, -0.49814, 0, 1, 0, 0.49814, 0, 0.867097, 594.168, 0, 529.953)
 
 [node name="Undead3" parent="." instance=ExtResource("18_4qsf6")]
-transform = Transform3D(0.867097, 0, -0.49814, 0, 1, 0, 0.49814, 0, 0.867097, 503.056, 0, 525.263)
+transform = Transform3D(-0.589027, 0, 0.808114, 0, 1, 0, -0.808114, 0, -0.589027, 502.117, 0, 535.807)
 
 [node name="Undead4" parent="." instance=ExtResource("18_4qsf6")]
-transform = Transform3D(0.960712, 0, 0.27755, 0, 1, 0, -0.27755, 0, 0.960712, 532.659, 0, 533.058)
+transform = Transform3D(0.960712, 0, 0.27755, 0, 1, 0, -0.27755, 0, 0.960712, 532.659, 0, 482.252)
 
 [node name="EscapePath1" type="Path3D" parent="."]
 curve = SubResource("Curve3D_g7pb2")
+script = ExtResource("19_ga82n")
+escape_distance = 2
+
+[node name="EscapePath2" type="Path3D" parent="."]
+curve = SubResource("Curve3D_ombxq")
+script = ExtResource("19_ga82n")
+escape_distance = 20

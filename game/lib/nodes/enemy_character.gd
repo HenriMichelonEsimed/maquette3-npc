@@ -78,8 +78,8 @@ var states:Dictionary = {
 		condition_preconditions,
 		condition_player_in_hearing_distance,
 		condition_escape_stop,
-		condition_escape_end,
 		condition_escape_is_blocked,
+		condition_escape_end,
 		action_move_to_escape_position
 	],	
 }
@@ -331,8 +331,10 @@ func condition_escape_end(_delta) -> StateMachine.Result:
 		var max = escape_position.path.curve.get_baked_length()
 		if (nearest_offset >= max):
 			nearest_offset = 1.0
+			print("restart +1.0")
 		elif (nearest_offset <= 0):
-			nearest_offset = max -1.0 
+			nearest_offset = max - 1.0
+			print("restart -1.0")
 		escape_position.nearest = escape_position.path.curve.sample_baked(nearest_offset)
 		return state.change_state(States.ESCAPE_TO_POSITION, "escape_end")
 	return StateMachine.Result.CONTINUE
@@ -354,12 +356,12 @@ func condition_is_blocked(_delta) -> StateMachine.Result:
 	if (distance < 0.02):
 		is_blocked_count += 1
 		var nearest_points:Array[Tools.NearestPath] = []
-		for path:Path3D in get_parent().find_children("EscapePath*"):
+		for path:Path3D in get_parent().find_children("", "EnemyEscapePath"):
 			nearest_points.push_back(Tools.NearestPath.new(path, path.curve.get_closest_point(position)))
 		escape_position = Tools.get_nearest_path(position, nearest_points)
 		previous_position = Vector3.ZERO
-		if (position.distance_to(escape_position.nearest) > 2.0):
-			return state.change_state(States.IDLE, "is_blocked (escape_position)")
+		if (position.distance_to(escape_position.nearest) > escape_position.path.escape_distance):
+			return state.change_state(States.IDLE, "is_blocked (escape_distance)")
 		return state.change_state(States.ESCAPE_TO_POSITION, "is_blocked")
 	elif (is_blocked_count > (is_blocked_count_trigger * 1.5)):
 		is_blocked_count = 0
