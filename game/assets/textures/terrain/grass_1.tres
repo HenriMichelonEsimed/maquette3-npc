@@ -1,4 +1,4 @@
-[gd_resource type="Terrain3DTextureList" load_steps=16 format=3 uid="uid://bgeuxwtfr5iw4"]
+[gd_resource type="Terrain3DTextureList" load_steps=19 format=3 uid="uid://bgeuxwtfr5iw4"]
 
 [ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/Ground037/Ground037_albedo_height.dds" id="1_cqnut"]
 [ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/Ground037/Ground037_normal_roughness.dds" id="2_mrrit"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/Rock028/Rock028_normal_roughness.dds" id="8_1s3ol"]
 [ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/leaves_forest_ground/leaves_forest_ground_albedo_height.dds" id="9_8stqy"]
 [ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/leaves_forest_ground/leaves_forest_ground_normal_roughness.dds" id="10_84or1"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/Ground023/Ground023_albedo_height.dds" id="11_ogq8h"]
+[ext_resource type="Texture2D" path="res://assets/textures/terrain/textures/Ground023/Ground023_normal_roughness.dds" id="12_ad6bu"]
 
 [sub_resource type="Terrain3DTexture" id="Terrain3DTexture_xr84q"]
 name = "Ground037"
@@ -44,5 +46,11 @@ albedo_texture = ExtResource("9_8stqy")
 normal_texture = ExtResource("10_84or1")
 uv_scale = 0.25
 
+[sub_resource type="Terrain3DTexture" id="Terrain3DTexture_dv4qw"]
+texture_id = 5
+albedo_texture = ExtResource("11_ogq8h")
+normal_texture = ExtResource("12_ad6bu")
+uv_scale = 0.5
+
 [resource]
-textures = Array[Terrain3DTexture]([SubResource("Terrain3DTexture_xr84q"), SubResource("Terrain3DTexture_2ekjx"), SubResource("Terrain3DTexture_s3p74"), SubResource("Terrain3DTexture_p2ujc"), SubResource("Terrain3DTexture_g5n2s")])
+textures = Array[Terrain3DTexture]([SubResource("Terrain3DTexture_xr84q"), SubResource("Terrain3DTexture_2ekjx"), SubResource("Terrain3DTexture_s3p74"), SubResource("Terrain3DTexture_p2ujc"), SubResource("Terrain3DTexture_g5n2s"), SubResource("Terrain3DTexture_dv4qw")])

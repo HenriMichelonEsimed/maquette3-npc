@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://0326gqgjjtkv"]
+[gd_scene load_steps=28 format=3 uid="uid://0326gqgjjtkv"]
 
 [ext_resource type="Script" path="res://lib/nodes/zone.gd" id="1_3tay3"]
 [ext_resource type="Terrain3DMaterial" uid="uid://bh2je3jcyw70l" path="res://assets/materials/terrain/grass_1.tres" id="2_6mkug"]
@@ -17,8 +17,11 @@
 [ext_resource type="PackedScene" uid="uid://08mjxh8sadly" path="res://models/props/props_shelf_8.tscn" id="15_mcf0m"]
 [ext_resource type="Script" path="res://lib/nodes/enemy_spawn_point.gd" id="16_u18of"]
 [ext_resource type="Script" path="res://lib/dices_roll.gd" id="17_b8wr8"]
-[ext_resource type="PackedScene" uid="uid://15jpqur7sqmi" path="res://models/terrain/trees/platano_1/platano_1.tscn" id="19_bm26j"]
+[ext_resource type="PackedScene" uid="uid://15jpqur7sqmi" path="res://models/terrain/trees/platano_1.tscn" id="19_bm26j"]
 [ext_resource type="Script" path="res://lib/nodes/enemy_escape_path.gd" id="19_ga82n"]
+[ext_resource type="PackedScene" uid="uid://c6xhg44lsoxct" path="res://models/terrain/trees/tree_1.tscn" id="20_qh868"]
+[ext_resource type="PackedScene" uid="uid://ncrjay68ndvr" path="res://models/terrain/trees/tree_2.tscn" id="21_eid55"]
+[ext_resource type="PackedScene" uid="uid://578gtry3wdbt" path="res://models/terrain/trees/tree_3.tscn" id="22_b1kma"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_whqtd"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -110,7 +113,7 @@ transform = Transform3D(0.783834, 0, 0.62097, 0, 1, 0, -0.62097, 0, 0.783834, -1
 transform = Transform3D(0.999619, 0, 0.0275902, 0, 1, 0, -0.0275902, 0, 0.999619, 1.75787, 0, 1.62506)
 
 [node name="EnemySpawnPoint" type="Node3D" parent="." node_paths=PackedStringArray("count_roll", "spawn_path")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 520.771, 0.104628, 529.512)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 594.013, 0.104628, 529.512)
 script = ExtResource("16_u18of")
 dice_roll_count = false
 count_roll = NodePath("CountRoll")
@@ -129,8 +132,6 @@ curve = SubResource("Curve3D_6ukcb")
 curve = SubResource("Curve3D_g7pb2")
 script = ExtResource("19_ga82n")
 escape_distance = 2
-
-[node name="City" type="Node3D" parent="."]
 
 [node name="Trees" type="Node3D" parent="."]
 
@@ -151,3 +152,25 @@ transform = Transform3D(0.588726, 0, 0.541665, 0, 0.8, 0, -0.541665, 0, 0.588726
 
 [node name="Platano_5" parent="Trees" instance=ExtResource("19_bm26j")]
 transform = Transform3D(0.46955, 0, 0.647706, 0, 0.8, 0, -0.647706, 0, 0.46955, 544.817, 0, 524.818)
+
+[node name="tree_1" parent="Trees" instance=ExtResource("20_qh868")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 510.1, 0, 541.25)
+
+[node name="tree_2" parent="Trees" instance=ExtResource("20_qh868")]
+transform = Transform3D(0.94545, 0, 0.325766, 0, 1, 0, -0.325766, 0, 0.94545, 511.587, 0, 528.395)
+
+[node name="tree_3" parent="Trees" instance=ExtResource("20_qh868")]
+transform = Transform3D(0.927745, 0, 0.373214, 0, 1, 0, -0.373214, 0, 0.927745, 512.079, 0, 511.369)
+
+[node name="tree_4" parent="Trees" instance=ExtResource("20_qh868")]
+transform = Transform3D(0.945069, 0, -0.326872, 0, 1, 0, 0.326872, 0, 0.945069, 514.874, 0, 493.805)
+
+[node name="tree_7" parent="Trees" instance=ExtResource("21_eid55")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 512.073, 0, 534.78)
+
+[node name="tree_10" parent="Trees" node_paths=PackedStringArray("roofs") instance=ExtResource("21_eid55")]
+transform = Transform3D(0.812328, 0, -0.583201, 0, 1, 0, 0.583201, 0, 0.812328, 511.438, 0, 501.506)
+roofs = [NodePath("../tree_7/Tree-1")]
+
+[node name="tree_11" parent="Trees" instance=ExtResource("22_b1kma")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 512.066, 0, 519.082)

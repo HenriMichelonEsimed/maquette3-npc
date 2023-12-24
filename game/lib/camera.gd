@@ -91,7 +91,7 @@ func _process(_delta):
 			_reset_camera_collider()
 		if (collider != null) and (last_collider != collider):
 			for mesh in collider.roofs:
-				_set_camera_collider(mesh, 0.1)
+				_set_camera_collider(mesh, 0.2)
 			for mesh in collider.walls:
 				_set_camera_collider(mesh, 0.4)
 			last_collider = collider
@@ -132,18 +132,15 @@ func _on_player_moving():
 func _set_camera_collider(parent_mesh:MeshInstance3D, alpha:float):
 	var mesh = parent_mesh.mesh
 	for i in range(0, mesh.get_surface_count()):
-		var mat = mesh.surface_get_material(0).duplicate(0)
-		if (mat is StandardMaterial3D):
-			print("set %s" % mesh)
-			mat.albedo_color.a = alpha
-			parent_mesh.set_surface_override_material(i, mat)
-			last_collider_mesh.push_back(parent_mesh)
+		var mat:StandardMaterial3D = mesh.surface_get_material(i).duplicate(0)
+		mat.albedo_color.a = alpha
+		parent_mesh.set_surface_override_material(i, mat)
+		last_collider_mesh.push_back(parent_mesh)
 
 func _reset_camera_collider():
 	if (last_collider != null):
 		for mesh in last_collider_mesh:
 			for i in range(0, mesh.mesh.get_surface_count()):
-				print("unset %s" % mesh)
 				mesh.set_surface_override_material(i, null)
 		last_collider = null
 		last_collider_mesh.clear()
