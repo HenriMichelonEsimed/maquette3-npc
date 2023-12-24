@@ -168,9 +168,35 @@ transform = Transform3D(0.945069, 0, -0.326872, 0, 1, 0, 0.326872, 0, 0.945069, 
 [node name="tree_7" parent="Trees" instance=ExtResource("21_eid55")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 512.073, 0, 534.78)
 
-[node name="tree_10" parent="Trees" node_paths=PackedStringArray("roofs") instance=ExtResource("21_eid55")]
-transform = Transform3D(0.812328, 0, -0.583201, 0, 1, 0, 0.583201, 0, 0.812328, 511.438, 0, 501.506)
-roofs = [NodePath("../tree_7/Tree-1")]
-
 [node name="tree_11" parent="Trees" instance=ExtResource("22_b1kma")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 512.066, 0, 519.082)
+
+[node name="tree_5" parent="Trees" instance=ExtResource("21_eid55")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 513.893, 0, 502.08)
+
+[node name="tree_6" parent="Trees" instance=ExtResource("20_qh868")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 529.471, 0, 508.42)
+
+[node name="tree_8" parent="Trees" instance=ExtResource("21_eid55")]
+transform = Transform3D(0.922397, 0, 0.386244, 0, 1, 0, -0.386244, 0, 0.922397, 529.615, 0, 534.199)
+
+[node name="tree_9" parent="Trees" instance=ExtResource("22_b1kma")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 527.382, 0, 540.668)
+
+[node name="tree_10" parent="Trees" instance=ExtResource("22_b1kma")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 529.913, 0, 497.471)
+
+[node name="tree_12" parent="Trees" instance=ExtResource("20_qh868")]
+transform = Transform3D(0.921145, 0, -0.38922, 0, 1, 0, 0.38922, 0, 0.921145, 529.913, 0, 527.998)
+
+[node name="Platano_7" parent="Trees" instance=ExtResource("19_bm26j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 549.215, 0, 520.131)
+
+[node name="Platano_8" parent="Trees" instance=ExtResource("19_bm26j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 550.671, 0, 511.721)
+
+[node name="Platano_9" parent="Trees" instance=ExtResource("19_bm26j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 552.742, 0, 527.887)
+
+[node name="Platano_10" parent="Trees" instance=ExtResource("19_bm26j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 548.552, 0, 535.267)
