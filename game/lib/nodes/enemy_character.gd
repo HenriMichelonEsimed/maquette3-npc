@@ -79,7 +79,6 @@ var states:Dictionary = {
 		condition_player_in_hearing_distance,
 		condition_escape_stop,
 		condition_escape_is_blocked,
-		condition_escape_end,
 		action_move_to_escape_position
 	],	
 }
@@ -143,7 +142,7 @@ var escape_position:Tools.NearestPath
 var escape_direction:int = 1.0
 # blocked for too long
 var is_blocked_count:int = 0
-const is_blocked_count_trigger:int = 4
+const is_blocked_count_trigger:int = 8
 # player in detection area
 var player_detected:bool = false
 var player_hidden:bool = false
@@ -325,18 +324,11 @@ func condition_continue_to_position(_delta) -> StateMachine.Result:
 		return state.change_state(States.IDLE, "continue_to_position")
 	return StateMachine.Result.CONTINUE
 
-func condition_escape_end(_delta) -> StateMachine.Result:
-	if (position.distance_to(escape_position.nearest) < 0.1):
-		var nearest_offset = escape_position.path.curve.get_closest_offset(position) + escape_direction
-		var max = escape_position.path.curve.get_baked_length()
-		if (nearest_offset >= max):
-			nearest_offset = 1.0
-			print("restart +1.0")
-		elif (nearest_offset <= 0):
-			nearest_offset = max - 1.0
-			print("restart -1.0")
-		escape_position.nearest = escape_position.path.curve.sample_baked(nearest_offset)
-		return state.change_state(States.ESCAPE_TO_POSITION, "escape_end")
+func condition_escape_is_blocked(_delta) -> StateMachine.Result:
+	if (position.distance_to(previous_position) < 0.02):
+		is_blocked_count = 0
+		current_detection_angle = 90
+		return state.change_state(States.IDLE, "escape_is_blocked")
 	return StateMachine.Result.CONTINUE
 
 func condition_escape_stop(_delta) -> StateMachine.Result:
@@ -344,13 +336,6 @@ func condition_escape_stop(_delta) -> StateMachine.Result:
 		return state.change_state(States.MOVE_TO_POSITION, "escape_stop")
 	return StateMachine.Result.CONTINUE
 
-func condition_escape_is_blocked(_delta) -> StateMachine.Result:
-	if (position.distance_to(previous_position) < 0.02):
-		is_blocked_count = 0
-		current_detection_angle = 90
-		return state.change_state(States.IDLE, "escape_is_blocked")
-	return StateMachine.Result.CONTINUE
-	
 func condition_is_blocked(_delta) -> StateMachine.Result:
 	var distance = position.distance_to(previous_position)
 	if (distance < 0.02):
@@ -362,6 +347,9 @@ func condition_is_blocked(_delta) -> StateMachine.Result:
 		previous_position = Vector3.ZERO
 		if (position.distance_to(escape_position.nearest) > escape_position.path.escape_distance):
 			return state.change_state(States.IDLE, "is_blocked (escape_distance)")
+		var pos = escape_position.nearest
+		pos.y = position.y
+		look_at(pos)
 		return state.change_state(States.ESCAPE_TO_POSITION, "is_blocked")
 	elif (is_blocked_count > (is_blocked_count_trigger * 1.5)):
 		is_blocked_count = 0
@@ -426,10 +414,21 @@ func action_move_to_escape_position(_delta):
 		anim.seek(randf())
 	var pos = escape_position.nearest
 	pos.y = position.y
-	look_at(pos)
-	velocity = -transform.basis.z * running_speed
-	previous_position = position
-	move_and_slide()
+	if (position.distance_to(pos) < 0.5):
+		var nearest_offset = escape_position.path.curve.get_closest_offset(position) + escape_direction
+		var max = escape_position.path.curve.get_baked_length()
+		if (nearest_offset >= max):
+			nearest_offset = 1.0
+			print("restart +1.0")
+		elif (nearest_offset <= 0):
+			nearest_offset = max - 1.0
+			print("restart -1.0")
+		escape_position.nearest = escape_position.path.curve.sample_baked(nearest_offset)
+	else:
+		look_at(pos)
+		velocity = -transform.basis.z * running_speed
+		previous_position = position
+		move_and_slide()
 #endregion
 
 #region Private Methods
