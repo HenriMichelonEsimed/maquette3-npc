@@ -1,0 +1,43 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://bjks370u41e51"
+path="res://.godot/imported/platano_1.glb-14a27392e281d7a5efcd0b86cf5c6bd1.scn"
+
+[deps]
+
+source_file="res://models/terrain/trees/platano_1/platano_1.glb"
+dest_files=["res://.godot/imported/platano_1.glb-14a27392e281d7a5efcd0b86cf5c6bd1.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name="Platano_1"
+nodes/apply_root_scale=true
+nodes/root_scale=0.02
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"nodes": {
+"PATH:Sketchfab_model/f672f0698cc748bf94cf2c950cddca02_fbx/RootNode/Camera": {
+"import/skip_import": true
+},
+"PATH:Sketchfab_model/f672f0698cc748bf94cf2c950cddca02_fbx/RootNode/Directional Light": {
+"import/skip_import": true
+}
+}
+}
+gltf/naming_version=1
+gltf/embedded_image_handling=1

@@ -1,13 +1,18 @@
-[gd_scene load_steps=33 format=3 uid="uid://8exssb37mmo0"]
+[gd_scene load_steps=39 format=3 uid="uid://8exssb37mmo0"]
 
-[ext_resource type="Material" uid="uid://0j2ge6ftyhb5" path="res://assets/materials/architecture/Planks037A.tres" id="3_4mtgp"]
-[ext_resource type="Material" uid="uid://h88nel3i3vvl" path="res://assets/materials/architecture/WoodSiding010_.tres" id="3_buo4v"]
-[ext_resource type="Material" uid="uid://cj05l7mj26q3b" path="res://assets/materials/architecture/Planks023B.tres" id="4_e7oak"]
-[ext_resource type="Material" uid="uid://c6k6wwoml0xci" path="res://assets/materials/architecture/Planks023B_.tres" id="4_j2jge"]
-[ext_resource type="Material" uid="uid://w36iyiv2joqk" path="res://assets/materials/architecture/WoodSiding011_.tres" id="5_d2uue"]
+[ext_resource type="Script" path="res://lib/nodes/static_with_roof.gd" id="1_7xjv7"]
+[ext_resource type="Material" uid="uid://curqdhhdqldg8" path="res://assets/materials/architecture/Planks023B.res" id="2_tjvxn"]
+[ext_resource type="Texture2D" uid="uid://deqfeh2sim4wh" path="res://assets/textures/architecture/Planks037A/Planks037A_1K-JPG_Color.jpg" id="3_d4mid"]
+[ext_resource type="Material" uid="uid://cmg8d3uvbmihq" path="res://assets/materials/architecture/WoodSiding010.res" id="4_l0pya"]
+[ext_resource type="Material" uid="uid://dq3diy2x030b" path="res://assets/materials/architecture/WoodSiding011.res" id="4_nltv6"]
+[ext_resource type="Texture2D" uid="uid://da2wkpcebogdm" path="res://assets/textures/architecture/Planks037A/Planks037A_1K-JPG_AmbientOcclusion.jpg" id="4_xhfd4"]
 [ext_resource type="Material" uid="uid://cserma4al0pjw" path="res://assets/materials/windows_glasses_1.tres" id="5_e62n8"]
+[ext_resource type="Texture2D" uid="uid://bcpm2b17sw4ol" path="res://assets/textures/architecture/Planks037A/Planks037A_1K-JPG_Displacement.jpg" id="5_gsyfq"]
 [ext_resource type="PackedScene" uid="uid://drd7j1wr2svyx" path="res://models/doors/door_normal_1.tscn" id="6_b7mto"]
-[ext_resource type="Material" uid="uid://c0yaqio3u81th" path="res://assets/materials/architecture/Planks037A_.tres" id="7_qq4lu"]
+[ext_resource type="Texture2D" uid="uid://clr62nf7in5an" path="res://assets/textures/architecture/Planks037A/Planks037A_1K-JPG_Metalness.jpg" id="6_fdtkk"]
+[ext_resource type="Texture2D" uid="uid://7ypexjkij84r" path="res://assets/textures/architecture/Planks037A/Planks037A_1K-JPG_NormalGL.jpg" id="7_jefvy"]
+[ext_resource type="Material" uid="uid://temlvilf84e7" path="res://assets/materials/architecture/Planks037A.res" id="7_kiidq"]
+[ext_resource type="Texture2D" uid="uid://ewgydtcrmi5l" path="res://assets/textures/architecture/Planks037A/Planks037A_1K-JPG_Roughness.jpg" id="8_cyk5a"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ujmqi"]
 _surfaces = [{
@@ -31,7 +36,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 6,
 "index_data": PackedByteArray(0, 0, 2, 0, 3, 0, 0, 0, 1, 0, 2, 0),
-"material": ExtResource("3_4mtgp"),
+"material": ExtResource("7_kiidq"),
 "name": "Floor",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -73,7 +78,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 6,
 "index_data": PackedByteArray(3, 0, 1, 0, 0, 0, 3, 0, 2, 0, 1, 0),
-"material": ExtResource("3_4mtgp"),
+"material": ExtResource("7_kiidq"),
 "name": "Floor",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -85,7 +90,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 576,
 "index_data": PackedByteArray(10, 0, 5, 0, 1, 0, 10, 0, 11, 0, 5, 0, 12, 0, 3, 0, 7, 0, 12, 0, 13, 0, 3, 0, 14, 0, 0, 0, 4, 0, 14, 0, 9, 0, 0, 0, 20, 0, 15, 0, 16, 0, 20, 0, 18, 0, 15, 0, 23, 0, 19, 0, 21, 0, 23, 0, 8, 0, 19, 0, 17, 0, 6, 0, 22, 0, 17, 0, 2, 0, 6, 0, 31, 0, 29, 0, 25, 0, 31, 0, 33, 0, 29, 0, 32, 0, 27, 0, 28, 0, 32, 0, 35, 0, 27, 0, 34, 0, 24, 0, 26, 0, 34, 0, 30, 0, 24, 0, 46, 0, 37, 0, 39, 0, 46, 0, 44, 0, 37, 0, 36, 0, 42, 0, 38, 0, 36, 0, 40, 0, 42, 0, 51, 0, 45, 0, 47, 0, 51, 0, 49, 0, 45, 0, 43, 0, 48, 0, 50, 0, 43, 0, 41, 0, 48, 0, 52, 0, 58, 0, 54, 0, 52, 0, 56, 0, 58, 0, 57, 0, 66, 0, 59, 0, 57, 0, 64, 0, 66, 0, 65, 0, 63, 0, 67, 0, 65, 0, 61, 0, 63, 0, 60, 0, 55, 0, 62, 0, 60, 0, 53, 0, 55, 0, 68, 0, 74, 0, 70, 0, 68, 0, 72, 0, 74, 0, 73, 0, 82, 0, 75, 0, 73, 0, 80, 0, 82, 0, 81, 0, 79, 0, 83, 0, 81, 0, 77, 0, 79, 0, 76, 0, 71, 0, 78, 0, 76, 0, 69, 0, 71, 0, 84, 0, 90, 0, 86, 0, 84, 0, 88, 0, 90, 0, 89, 0, 98, 0, 91, 0, 89, 0, 96, 0, 98, 0, 97, 0, 95, 0, 99, 0, 97, 0, 93, 0, 95, 0, 92, 0, 87, 0, 94, 0, 92, 0, 85, 0, 87, 0, 100, 0, 106, 0, 102, 0, 100, 0, 104, 0, 106, 0, 105, 0, 114, 0, 107, 0, 105, 0, 112, 0, 114, 0, 113, 0, 111, 0, 115, 0, 113, 0, 109, 0, 111, 0, 108, 0, 103, 0, 110, 0, 108, 0, 101, 0, 103, 0, 116, 0, 122, 0, 118, 0, 116, 0, 120, 0, 122, 0, 121, 0, 130, 0, 123, 0, 121, 0, 128, 0, 130, 0, 129, 0, 127, 0, 131, 0, 129, 0, 125, 0, 127, 0, 124, 0, 119, 0, 126, 0, 124, 0, 117, 0, 119, 0, 132, 0, 138, 0, 134, 0, 132, 0, 136, 0, 138, 0, 137, 0, 146, 0, 139, 0, 137, 0, 144, 0, 146, 0, 145, 0, 143, 0, 147, 0, 145, 0, 141, 0, 143, 0, 140, 0, 135, 0, 142, 0, 140, 0, 133, 0, 135, 0, 162, 0, 148, 0, 156, 0, 162, 0, 152, 0, 148, 0, 160, 0, 153, 0, 163, 0, 160, 0, 154, 0, 153, 0, 159, 0, 155, 0, 161, 0, 159, 0, 151, 0, 155, 0, 149, 0, 158, 0, 157, 0, 149, 0, 150, 0, 158, 0, 165, 0, 170, 0, 167, 0, 165, 0, 168, 0, 170, 0, 169, 0, 179, 0, 171, 0, 169, 0, 177, 0, 179, 0, 176, 0, 175, 0, 178, 0, 176, 0, 173, 0, 175, 0, 172, 0, 166, 0, 174, 0, 172, 0, 164, 0, 166, 0, 181, 0, 186, 0, 183, 0, 181, 0, 184, 0, 186, 0, 185, 0, 195, 0, 187, 0, 185, 0, 193, 0, 195, 0, 192, 0, 191, 0, 194, 0, 192, 0, 189, 0, 191, 0, 188, 0, 182, 0, 190, 0, 188, 0, 180, 0, 182, 0, 197, 0, 202, 0, 199, 0, 197, 0, 200, 0, 202, 0, 201, 0, 211, 0, 203, 0, 201, 0, 209, 0, 211, 0, 208, 0, 207, 0, 210, 0, 208, 0, 205, 0, 207, 0, 204, 0, 198, 0, 206, 0, 204, 0, 196, 0, 198, 0, 227, 0, 213, 0, 221, 0, 227, 0, 217, 0, 213, 0, 225, 0, 216, 0, 226, 0, 225, 0, 219, 0, 216, 0, 222, 0, 218, 0, 224, 0, 222, 0, 214, 0, 218, 0, 212, 0, 223, 0, 220, 0, 212, 0, 215, 0, 223, 0, 228, 0, 235, 0, 230, 0, 228, 0, 233, 0, 235, 0, 232, 0, 242, 0, 234, 0, 232, 0, 240, 0, 242, 0, 241, 0, 238, 0, 243, 0, 241, 0, 236, 0, 238, 0, 237, 0, 231, 0, 239, 0, 237, 0, 229, 0, 231, 0, 244, 0, 251, 0, 246, 0, 244, 0, 249, 0, 251, 0, 248, 0, 2, 1, 250, 0, 248, 0, 0, 1, 2, 1, 1, 1, 254, 0, 3, 1, 1, 1, 252, 0, 254, 0, 253, 0, 247, 0, 255, 0, 253, 0, 245, 0, 247, 0, 4, 1, 11, 1, 6, 1, 4, 1, 9, 1, 11, 1, 8, 1, 18, 1, 10, 1, 8, 1, 16, 1, 18, 1, 17, 1, 14, 1, 19, 1, 17, 1, 12, 1, 14, 1, 13, 1, 7, 1, 15, 1, 13, 1, 5, 1, 7, 1, 20, 1, 26, 1, 22, 1, 20, 1, 24, 1, 26, 1, 25, 1, 34, 1, 27, 1, 25, 1, 32, 1, 34, 1, 33, 1, 31, 1, 35, 1, 33, 1, 29, 1, 31, 1, 28, 1, 23, 1, 30, 1, 28, 1, 21, 1, 23, 1, 46, 1, 51, 1, 54, 1, 46, 1, 49, 1, 51, 1, 37, 1, 53, 1, 40, 1, 37, 1, 45, 1, 53, 1, 42, 1, 48, 1, 39, 1, 42, 1, 50, 1, 48, 1, 41, 1, 52, 1, 43, 1, 41, 1, 55, 1, 52, 1, 38, 1, 44, 1, 36, 1, 38, 1, 47, 1, 44, 1, 56, 1, 63, 1, 58, 1, 56, 1, 61, 1, 63, 1, 60, 1, 70, 1, 62, 1, 60, 1, 68, 1, 70, 1, 69, 1, 66, 1, 71, 1, 69, 1, 64, 1, 66, 1, 65, 1, 59, 1, 67, 1, 65, 1, 57, 1, 59, 1, 81, 1, 88, 1, 90, 1, 81, 1, 85, 1, 88, 1, 73, 1, 91, 1, 77, 1, 73, 1, 82, 1, 91, 1, 78, 1, 83, 1, 74, 1, 78, 1, 86, 1, 83, 1, 76, 1, 87, 1, 79, 1, 76, 1, 89, 1, 87, 1, 75, 1, 80, 1, 72, 1, 75, 1, 84, 1, 80, 1, 92, 1, 99, 1, 94, 1, 92, 1, 97, 1, 99, 1, 96, 1, 106, 1, 98, 1, 96, 1, 104, 1, 106, 1, 105, 1, 102, 1, 107, 1, 105, 1, 100, 1, 102, 1, 101, 1, 95, 1, 103, 1, 101, 1, 93, 1, 95, 1, 117, 1, 124, 1, 126, 1, 117, 1, 121, 1, 124, 1, 109, 1, 127, 1, 113, 1, 109, 1, 118, 1, 127, 1, 114, 1, 119, 1, 110, 1, 114, 1, 122, 1, 119, 1, 112, 1, 123, 1, 115, 1, 112, 1, 125, 1, 123, 1, 111, 1, 116, 1, 108, 1, 111, 1, 120, 1, 116, 1),
-"material": ExtResource("4_e7oak"),
+"material": ExtResource("2_tjvxn"),
 "name": "Trim_Wood",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -110,6 +115,18 @@ size = Vector3(0.292725, 1.35156, 1.9989)
 [sub_resource type="BoxShape3D" id="BoxShape3D_y3y7d"]
 size = Vector3(8.20742, 0.445874, 8.04398)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y0wf6"]
+albedo_texture = ExtResource("3_d4mid")
+metallic = 1.0
+metallic_texture = ExtResource("6_fdtkk")
+roughness_texture = ExtResource("8_cyk5a")
+normal_enabled = true
+normal_texture = ExtResource("7_jefvy")
+ao_enabled = true
+ao_texture = ExtResource("4_xhfd4")
+heightmap_enabled = true
+heightmap_texture = ExtResource("5_gsyfq")
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_c3j2r"]
 _surfaces = [{
 "aabb": AABB(-6.0625, -0.394444, -0.0625, 8.125, 0.444454, 6.0625),
@@ -132,7 +149,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 24,
 "index_data": PackedByteArray(3, 0, 0, 0, 2, 0, 3, 0, 1, 0, 0, 0, 6, 0, 4, 0, 7, 0, 6, 0, 5, 0, 4, 0, 8, 0, 15, 0, 14, 0, 8, 0, 9, 0, 15, 0, 13, 0, 10, 0, 12, 0, 13, 0, 11, 0, 10, 0),
-"material": ExtResource("3_4mtgp"),
+"material": SubResource("StandardMaterial3D_y0wf6"),
 "name": "Wall_Outer",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -167,7 +184,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 96,
 "index_data": PackedByteArray(0, 0, 6, 0, 2, 0, 0, 0, 4, 0, 6, 0, 5, 0, 14, 0, 7, 0, 5, 0, 12, 0, 14, 0, 13, 0, 11, 0, 15, 0, 13, 0, 9, 0, 11, 0, 8, 0, 3, 0, 10, 0, 8, 0, 1, 0, 3, 0, 16, 0, 22, 0, 18, 0, 16, 0, 20, 0, 22, 0, 21, 0, 30, 0, 23, 0, 21, 0, 28, 0, 30, 0, 29, 0, 27, 0, 31, 0, 29, 0, 25, 0, 27, 0, 24, 0, 19, 0, 26, 0, 24, 0, 17, 0, 19, 0, 33, 0, 39, 0, 35, 0, 33, 0, 37, 0, 39, 0, 36, 0, 47, 0, 38, 0, 36, 0, 45, 0, 47, 0, 44, 0, 42, 0, 46, 0, 44, 0, 40, 0, 42, 0, 41, 0, 34, 0, 43, 0, 41, 0, 32, 0, 34, 0, 49, 0, 55, 0, 51, 0, 49, 0, 53, 0, 55, 0, 52, 0, 63, 0, 54, 0, 52, 0, 61, 0, 63, 0, 60, 0, 58, 0, 62, 0, 60, 0, 56, 0, 58, 0, 57, 0, 50, 0, 59, 0, 57, 0, 48, 0, 50, 0),
-"material": ExtResource("4_j2jge"),
+"material": ExtResource("2_tjvxn"),
 "name": "Trim_Wood",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -219,7 +236,7 @@ _surfaces = [{
 "format": 34359742495,
 "index_count": 96,
 "index_data": PackedByteArray(18, 0, 15, 0, 5, 0, 15, 0, 21, 0, 12, 0, 6, 0, 15, 0, 18, 0, 15, 0, 6, 0, 21, 0, 17, 0, 1, 0, 16, 0, 17, 0, 3, 0, 1, 0, 9, 0, 14, 0, 11, 0, 9, 0, 48, 0, 14, 0, 19, 0, 10, 0, 20, 0, 19, 0, 8, 0, 10, 0, 4, 0, 47, 0, 2, 0, 4, 0, 13, 0, 47, 0, 28, 0, 23, 0, 26, 0, 28, 0, 30, 0, 23, 0, 38, 0, 43, 0, 58, 0, 38, 0, 40, 0, 43, 0, 37, 0, 29, 0, 32, 0, 37, 0, 34, 0, 29, 0, 39, 0, 25, 0, 42, 0, 39, 0, 27, 0, 25, 0, 57, 0, 36, 0, 31, 0, 57, 0, 55, 0, 36, 0, 53, 0, 59, 0, 51, 0, 53, 0, 56, 0, 59, 0, 54, 0, 33, 0, 35, 0, 54, 0, 52, 0, 33, 0, 49, 0, 46, 0, 7, 0, 46, 0, 50, 0, 0, 0, 45, 0, 46, 0, 49, 0, 46, 0, 45, 0, 50, 0, 24, 0, 44, 0, 41, 0, 24, 0, 22, 0, 44, 0),
-"material": ExtResource("3_buo4v"),
+"material": ExtResource("4_l0pya"),
 "name": "Roof",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -231,7 +248,7 @@ _surfaces = [{
 "format": 34359742495,
 "index_count": 12,
 "index_data": PackedByteArray(6, 0, 0, 0, 1, 0, 6, 0, 4, 0, 0, 0, 5, 0, 2, 0, 3, 0, 5, 0, 7, 0, 2, 0),
-"material": ExtResource("4_j2jge"),
+"material": ExtResource("2_tjvxn"),
 "name": "WoodDeck",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -243,7 +260,7 @@ _surfaces = [{
 "format": 34359742495,
 "index_count": 294,
 "index_data": PackedByteArray(70, 0, 0, 0, 3, 0, 70, 0, 57, 0, 0, 0, 50, 0, 68, 0, 72, 0, 50, 0, 56, 0, 68, 0, 44, 0, 74, 0, 60, 0, 44, 0, 51, 0, 74, 0, 1, 0, 61, 0, 5, 0, 1, 0, 45, 0, 61, 0, 40, 0, 10, 0, 30, 0, 40, 0, 27, 0, 10, 0, 19, 0, 39, 0, 42, 0, 19, 0, 26, 0, 39, 0, 7, 0, 43, 0, 14, 0, 7, 0, 20, 0, 43, 0, 12, 0, 15, 0, 31, 0, 12, 0, 6, 0, 15, 0, 8, 0, 17, 0, 21, 0, 13, 0, 16, 0, 9, 0, 13, 0, 24, 0, 16, 0, 25, 0, 22, 0, 18, 0, 25, 0, 29, 0, 22, 0, 28, 0, 23, 0, 11, 0, 15, 0, 34, 0, 31, 0, 15, 0, 37, 0, 34, 0, 30, 0, 33, 0, 40, 0, 32, 0, 41, 0, 38, 0, 32, 0, 35, 0, 41, 0, 43, 0, 36, 0, 14, 0, 44, 0, 48, 0, 51, 0, 1, 0, 47, 0, 45, 0, 1, 0, 54, 0, 47, 0, 52, 0, 49, 0, 46, 0, 52, 0, 55, 0, 49, 0, 57, 0, 53, 0, 0, 0, 59, 0, 63, 0, 4, 0, 59, 0, 66, 0, 63, 0, 2, 0, 62, 0, 69, 0, 64, 0, 75, 0, 71, 0, 64, 0, 67, 0, 75, 0, 73, 0, 65, 0, 58, 0, 108, 0, 114, 0, 120, 0, 108, 0, 109, 0, 114, 0, 76, 0, 93, 0, 89, 0, 76, 0, 78, 0, 93, 0, 91, 0, 80, 0, 97, 0, 91, 0, 77, 0, 80, 0, 88, 0, 86, 0, 87, 0, 88, 0, 92, 0, 86, 0, 82, 0, 95, 0, 99, 0, 82, 0, 83, 0, 95, 0, 98, 0, 79, 0, 81, 0, 98, 0, 94, 0, 79, 0, 100, 0, 117, 0, 113, 0, 100, 0, 102, 0, 117, 0, 115, 0, 104, 0, 121, 0, 115, 0, 101, 0, 104, 0, 112, 0, 110, 0, 111, 0, 112, 0, 116, 0, 110, 0, 106, 0, 119, 0, 123, 0, 106, 0, 107, 0, 119, 0, 84, 0, 90, 0, 96, 0, 84, 0, 85, 0, 90, 0, 133, 0, 144, 0, 132, 0, 133, 0, 138, 0, 144, 0, 141, 0, 124, 0, 126, 0, 141, 0, 137, 0, 124, 0, 128, 0, 139, 0, 125, 0, 128, 0, 145, 0, 139, 0, 136, 0, 134, 0, 135, 0, 136, 0, 140, 0, 134, 0, 131, 0, 147, 0, 130, 0, 131, 0, 143, 0, 147, 0, 122, 0, 103, 0, 105, 0, 122, 0, 118, 0, 103, 0, 146, 0, 127, 0, 129, 0, 146, 0, 142, 0, 127, 0, 148, 0, 156, 0, 151, 0, 148, 0, 153, 0, 156, 0, 155, 0, 163, 0, 157, 0, 155, 0, 162, 0, 163, 0, 159, 0, 152, 0, 160, 0, 159, 0, 150, 0, 152, 0, 154, 0, 158, 0, 161, 0, 154, 0, 149, 0, 158, 0, 166, 0, 173, 0, 168, 0, 166, 0, 171, 0, 173, 0, 170, 0, 179, 0, 172, 0, 170, 0, 178, 0, 179, 0, 175, 0, 167, 0, 176, 0, 175, 0, 165, 0, 167, 0, 169, 0, 174, 0, 177, 0, 169, 0, 164, 0, 174, 0, 184, 0, 180, 0, 182, 0, 184, 0, 186, 0, 180, 0, 181, 0, 189, 0, 183, 0, 181, 0, 188, 0, 189, 0, 185, 0, 191, 0, 187, 0, 185, 0, 190, 0, 191, 0),
-"material": ExtResource("4_e7oak"),
+"material": ExtResource("2_tjvxn"),
 "name": "Trim_Wood",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -307,7 +324,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 81,
 "index_data": PackedByteArray(9, 0, 17, 0, 11, 0, 7, 0, 5, 0, 1, 0, 7, 0, 10, 0, 5, 0, 11, 0, 8, 0, 9, 0, 11, 0, 4, 0, 8, 0, 6, 0, 8, 0, 3, 0, 6, 0, 10, 0, 8, 0, 15, 0, 12, 0, 18, 0, 15, 0, 13, 0, 12, 0, 12, 0, 16, 0, 18, 0, 27, 0, 19, 0, 29, 0, 27, 0, 22, 0, 19, 0, 27, 0, 25, 0, 21, 0, 27, 0, 30, 0, 25, 0, 28, 0, 31, 0, 24, 0, 31, 0, 29, 0, 20, 0, 31, 0, 28, 0, 29, 0, 26, 0, 28, 0, 23, 0, 26, 0, 30, 0, 28, 0, 34, 0, 33, 0, 35, 0, 34, 0, 32, 0, 33, 0, 37, 0, 40, 0, 36, 0, 40, 0, 39, 0, 38, 0, 40, 0, 37, 0, 39, 0, 0, 0, 14, 0, 16, 0, 7, 0, 17, 0, 9, 0, 7, 0, 2, 0, 17, 0),
-"material": ExtResource("5_d2uue"),
+"material": ExtResource("4_nltv6"),
 "name": "Wall_Outer",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -319,7 +336,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 456,
 "index_data": PackedByteArray(54, 0, 18, 0, 14, 0, 54, 0, 50, 0, 18, 0, 65, 0, 33, 0, 25, 0, 65, 0, 61, 0, 33, 0, 24, 0, 17, 0, 21, 0, 24, 0, 32, 0, 17, 0, 38, 0, 16, 0, 69, 0, 38, 0, 56, 0, 16, 0, 2, 0, 52, 0, 34, 0, 2, 0, 20, 0, 52, 0, 13, 0, 19, 0, 1, 0, 13, 0, 23, 0, 19, 0, 28, 0, 22, 0, 12, 0, 28, 0, 64, 0, 22, 0, 6, 0, 60, 0, 48, 0, 6, 0, 30, 0, 60, 0, 67, 0, 31, 0, 8, 0, 67, 0, 15, 0, 31, 0, 43, 0, 3, 0, 37, 0, 43, 0, 71, 0, 3, 0, 0, 0, 5, 0, 11, 0, 0, 0, 66, 0, 5, 0, 26, 0, 4, 0, 44, 0, 26, 0, 10, 0, 4, 0, 58, 0, 51, 0, 55, 0, 58, 0, 62, 0, 51, 0, 45, 0, 57, 0, 39, 0, 45, 0, 59, 0, 57, 0, 35, 0, 63, 0, 27, 0, 35, 0, 53, 0, 63, 0, 42, 0, 29, 0, 49, 0, 42, 0, 36, 0, 29, 0, 74, 0, 70, 0, 7, 0, 74, 0, 78, 0, 70, 0, 81, 0, 47, 0, 41, 0, 81, 0, 86, 0, 47, 0, 77, 0, 40, 0, 68, 0, 77, 0, 80, 0, 40, 0, 85, 0, 9, 0, 46, 0, 85, 0, 75, 0, 9, 0, 91, 0, 107, 0, 94, 0, 91, 0, 105, 0, 107, 0, 97, 0, 111, 0, 102, 0, 97, 0, 109, 0, 111, 0, 93, 0, 108, 0, 96, 0, 93, 0, 106, 0, 108, 0, 101, 0, 104, 0, 90, 0, 101, 0, 110, 0, 104, 0, 79, 0, 99, 0, 83, 0, 79, 0, 95, 0, 99, 0, 73, 0, 92, 0, 76, 0, 73, 0, 89, 0, 92, 0, 84, 0, 88, 0, 72, 0, 84, 0, 100, 0, 88, 0, 82, 0, 103, 0, 87, 0, 82, 0, 98, 0, 103, 0, 119, 0, 112, 0, 114, 0, 119, 0, 117, 0, 112, 0, 123, 0, 124, 0, 121, 0, 123, 0, 126, 0, 124, 0, 113, 0, 127, 0, 115, 0, 113, 0, 125, 0, 127, 0, 118, 0, 120, 0, 116, 0, 118, 0, 122, 0, 120, 0, 152, 0, 158, 0, 154, 0, 152, 0, 162, 0, 158, 0, 147, 0, 173, 0, 167, 0, 147, 0, 175, 0, 173, 0, 166, 0, 157, 0, 161, 0, 166, 0, 172, 0, 157, 0, 128, 0, 155, 0, 131, 0, 128, 0, 153, 0, 155, 0, 137, 0, 163, 0, 134, 0, 137, 0, 159, 0, 163, 0, 151, 0, 160, 0, 138, 0, 151, 0, 165, 0, 160, 0, 169, 0, 164, 0, 150, 0, 169, 0, 146, 0, 164, 0, 144, 0, 174, 0, 141, 0, 144, 0, 170, 0, 174, 0, 132, 0, 171, 0, 145, 0, 132, 0, 156, 0, 171, 0, 129, 0, 139, 0, 135, 0, 129, 0, 133, 0, 139, 0, 136, 0, 143, 0, 149, 0, 136, 0, 130, 0, 143, 0, 168, 0, 142, 0, 140, 0, 168, 0, 148, 0, 142, 0, 225, 0, 196, 0, 190, 0, 225, 0, 223, 0, 196, 0, 235, 0, 206, 0, 200, 0, 235, 0, 229, 0, 206, 0, 201, 0, 191, 0, 197, 0, 201, 0, 207, 0, 191, 0, 216, 0, 193, 0, 180, 0, 216, 0, 226, 0, 193, 0, 183, 0, 220, 0, 210, 0, 183, 0, 195, 0, 220, 0, 187, 0, 194, 0, 182, 0, 187, 0, 199, 0, 194, 0, 203, 0, 198, 0, 186, 0, 203, 0, 233, 0, 198, 0, 238, 0, 231, 0, 247, 0, 238, 0, 208, 0, 231, 0, 178, 0, 209, 0, 240, 0, 178, 0, 192, 0, 209, 0, 214, 0, 185, 0, 212, 0, 214, 0, 177, 0, 185, 0, 184, 0, 236, 0, 188, 0, 184, 0, 176, 0, 236, 0, 204, 0, 237, 0, 242, 0, 204, 0, 189, 0, 237, 0, 228, 0, 222, 0, 224, 0, 228, 0, 234, 0, 222, 0, 244, 0, 227, 0, 217, 0, 244, 0, 230, 0, 227, 0, 211, 0, 232, 0, 202, 0, 211, 0, 221, 0, 232, 0, 215, 0, 205, 0, 243, 0, 215, 0, 213, 0, 205, 0, 250, 0, 181, 0, 239, 0, 250, 0, 255, 0, 181, 0, 3, 1, 246, 0, 219, 0, 3, 1, 7, 1, 246, 0, 254, 0, 218, 0, 179, 0, 254, 0, 2, 1, 218, 0, 6, 1, 241, 0, 245, 0, 6, 1, 251, 0, 241, 0, 9, 1, 27, 1, 13, 1, 9, 1, 25, 1, 27, 1, 17, 1, 31, 1, 21, 1, 17, 1, 29, 1, 31, 1, 12, 1, 28, 1, 16, 1, 12, 1, 26, 1, 28, 1, 20, 1, 24, 1, 8, 1, 20, 1, 30, 1, 24, 1, 253, 0, 18, 1, 0, 1, 253, 0, 15, 1, 18, 1, 248, 0, 14, 1, 252, 0, 248, 0, 10, 1, 14, 1, 4, 1, 11, 1, 249, 0, 4, 1, 22, 1, 11, 1, 1, 1, 23, 1, 5, 1, 1, 1, 19, 1, 23, 1, 39, 1, 33, 1, 35, 1, 39, 1, 37, 1, 33, 1, 42, 1, 44, 1, 40, 1, 42, 1, 46, 1, 44, 1, 32, 1, 47, 1, 34, 1, 32, 1, 45, 1, 47, 1, 38, 1, 41, 1, 36, 1, 38, 1, 43, 1, 41, 1),
-"material": ExtResource("4_e7oak"),
+"material": ExtResource("2_tjvxn"),
 "name": "Trim_Wood",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -363,7 +380,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 78,
 "index_data": PackedByteArray(6, 0, 8, 0, 14, 0, 4, 0, 2, 0, 7, 0, 4, 0, 11, 0, 2, 0, 8, 0, 5, 0, 1, 0, 8, 0, 6, 0, 5, 0, 3, 0, 5, 0, 7, 0, 3, 0, 0, 0, 5, 0, 12, 0, 9, 0, 10, 0, 12, 0, 15, 0, 9, 0, 9, 0, 15, 0, 13, 0, 24, 0, 16, 0, 19, 0, 24, 0, 26, 0, 16, 0, 24, 0, 22, 0, 27, 0, 24, 0, 18, 0, 22, 0, 23, 0, 25, 0, 27, 0, 23, 0, 20, 0, 25, 0, 28, 0, 25, 0, 21, 0, 25, 0, 17, 0, 26, 0, 25, 0, 28, 0, 17, 0, 31, 0, 30, 0, 29, 0, 31, 0, 32, 0, 30, 0, 36, 0, 37, 0, 35, 0, 37, 0, 34, 0, 33, 0, 37, 0, 36, 0, 34, 0, 4, 0, 14, 0, 11, 0, 4, 0, 6, 0, 14, 0),
-"material": ExtResource("7_qq4lu"),
+"material": ExtResource("7_kiidq"),
 "name": "Wall_Interior",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -373,7 +390,10 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_usyg6")
 
-[node name="House_4" type="Node3D"]
+[node name="House_4" type="Node3D" node_paths=PackedStringArray("roofs", "walls")]
+script = ExtResource("1_7xjv7")
+roofs = [NodePath("House4_Roof")]
+walls = [NodePath("House4_Wall"), NodePath("House4_Wall_in")]
 
 [node name="House4_Flooor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.0444002, 2)
@@ -416,32 +436,32 @@ skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="House4_Foundation"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="House4_Foundation/StaticBody3D"]
+[node name="CollisionShapeFoundation" type="CollisionShape3D" parent="House4_Foundation/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_gvl3c")
 
 [node name="House4_Posts" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.0444002, 2)
+layers = 2
 mesh = SubResource("ArrayMesh_vjge0")
 skeleton = NodePath("")
 
-[node name="House4_Roof" type="MeshInstance3D" parent="." groups=["96YC6"]]
+[node name="House4_Roof" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 7, -1)
-visible = false
 mesh = SubResource("ArrayMesh_2hisl")
 skeleton = NodePath("")
 
 [node name="StaticRoof" type="StaticBody3D" parent="House4_Roof"]
-collision_layer = 3
+collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="House4_Roof/StaticRoof"]
+[node name="CollisionShapeWall" type="CollisionShape3D" parent="House4_Roof/StaticRoof"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -6.9556, 3)
 shape = SubResource("ConcavePolygonShape3D_px57r")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="House4_Roof/StaticRoof"]
+[node name="CollisionShapeRoof" type="CollisionShape3D" parent="House4_Roof/StaticRoof"]
 shape = SubResource("ConcavePolygonShape3D_70u6u")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="House4_Roof/StaticRoof"]
+[node name="CollisionShapeWall2" type="CollisionShape3D" parent="House4_Roof/StaticRoof"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -6.9556, 3)
 shape = SubResource("ConcavePolygonShape3D_5hdi2")
 
@@ -449,12 +469,12 @@ shape = SubResource("ConcavePolygonShape3D_5hdi2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -6.9556, 3)
 shape = SubResource("ConcavePolygonShape3D_34wig")
 
-[node name="House4_Wall" type="MeshInstance3D" parent="." groups=["96YC6"]]
+[node name="House4_Wall" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.044, 2)
 mesh = SubResource("ArrayMesh_1wole")
 skeleton = NodePath("")
 
-[node name="House4_Wall_in" type="MeshInstance3D" parent="." groups=["96YC6"]]
+[node name="House4_Wall_in" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.044, 2)
 mesh = SubResource("ArrayMesh_fsl6g")
 skeleton = NodePath("")
