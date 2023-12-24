@@ -430,22 +430,22 @@ visible = false
 mesh = SubResource("ArrayMesh_2hisl")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="House4_Roof"]
-collision_layer = 2
+[node name="StaticRoof" type="StaticBody3D" parent="House4_Roof"]
+collision_layer = 3
 collision_mask = 0
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="House4_Roof/StaticBody3D"]
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="House4_Roof/StaticRoof"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -6.9556, 3)
 shape = SubResource("ConcavePolygonShape3D_px57r")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="House4_Roof/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="House4_Roof/StaticRoof"]
 shape = SubResource("ConcavePolygonShape3D_70u6u")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="House4_Roof/StaticBody3D"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="House4_Roof/StaticRoof"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -6.9556, 3)
 shape = SubResource("ConcavePolygonShape3D_5hdi2")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="House4_Roof/StaticBody3D"]
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="House4_Roof/StaticRoof"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -6.9556, 3)
 shape = SubResource("ConcavePolygonShape3D_34wig")
 

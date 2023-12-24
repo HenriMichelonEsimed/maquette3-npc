@@ -263,7 +263,6 @@ func _on_item_hit(node:Node3D):
 
 func _on_timer_attack_timeout():
 	attack_cooldown = false
-	print('cooldown')
 
 func _to_string():
 	return GameState.player_state.nickname

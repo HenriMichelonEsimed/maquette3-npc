@@ -63,12 +63,12 @@ func _spawn_enemies():
 		if (node.dice_roll_count):
 			count = node.count_roll.roll()
 		for i in range(count):
-			_spawn_enemy(enemy_scene, curve, curve_length, spawned)
+			_spawn_enemy(node, enemy_scene, node.spawn_path, curve_length, spawned)
 
-func _spawn_enemy(enemy_scene:PackedScene, curve:Curve3D, curve_length:float, previous_spawns:Array[EnemyCharacter]):
+func _spawn_enemy(node:EnemySpawnPoint, enemy_scene:PackedScene, path:Path3D, curve_length:float, previous_spawns:Array[EnemyCharacter]):
 	var enemy = enemy_scene.instantiate()
 	var offset = randf()*curve_length
-	enemy.position = curve.sample_baked(offset)
+	enemy.position = path.curve.sample_baked(offset)
 	enemy.rotate_y(randf() * deg_to_rad(360))
 	var conflict:bool = false
 	for other in previous_spawns:
@@ -76,8 +76,9 @@ func _spawn_enemy(enemy_scene:PackedScene, curve:Curve3D, curve_length:float, pr
 			conflict = true
 			break
 	if (conflict):
-		offset += 1.2
-		enemy.position = curve.sample_baked(offset)
+		offset += 1.0 + randf()
+		enemy.position = path.curve.sample_baked(offset)
+	enemy.position += path.position + node.position
 	GameState.current_zone.add_child(enemy)
 	previous_spawns.push_back(enemy)
 

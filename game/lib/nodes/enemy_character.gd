@@ -218,7 +218,7 @@ func setvar_player_detected(_delta):
 	pos.y = GameState.player.height
 	var local = raycast_detection.to_local(pos)
 	raycast_detection.target_position = local
-	player_hidden = raycast_detection.is_colliding() and not(raycast_detection.get_collider() is Player)
+	player_hidden = not(raycast_detection.is_colliding()) or (raycast_detection.is_colliding() and not(raycast_detection.get_collider() is Player))
 #endregion
 
 #region Conditions Block
@@ -258,8 +258,11 @@ func condition_player_dead(_delta) -> StateMachine.Result:
 func condition_attack_player(_delta) -> StateMachine.Result:
 	if (player_distance <= attack_distance):
 		if (not attack_cooldown):
-			_stop_idle_rotation()
-			return state.change_state(States.ATTACK, "attack_player")
+			raycast_detection.target_position = Vector3(0.0, 0.0, -detection_distance)
+			raycast_detection.force_raycast_update()
+			if (raycast_detection.is_colliding() and raycast_detection.get_collider() is Player):
+				_stop_idle_rotation()
+				return state.change_state(States.ATTACK, "attack_player")
 	return StateMachine.Result.CONTINUE
 
 func condition_player_in_attack_range(_delta) -> StateMachine.Result:
@@ -419,10 +422,8 @@ func action_move_to_escape_position(_delta):
 		var max = escape_position.path.curve.get_baked_length()
 		if (nearest_offset >= max):
 			nearest_offset = 1.0
-			print("restart +1.0")
 		elif (nearest_offset <= 0):
 			nearest_offset = max - 1.0
-			print("restart -1.0")
 		escape_position.nearest = escape_position.path.curve.sample_baked(nearest_offset)
 	else:
 		look_at(pos)
@@ -458,7 +459,6 @@ func _check_stairs():
 			var collider = collision.get_collider()
 			if collider.is_in_group("stairs"):
 				velocity.y = 5
-				print("stairs")
 
 func _update_info():
 	if (label_info == null): return
