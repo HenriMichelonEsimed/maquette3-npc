@@ -113,9 +113,8 @@ transform = Transform3D(0.783834, 0, 0.62097, 0, 1, 0, -0.62097, 0, 0.783834, -1
 transform = Transform3D(0.999619, 0, 0.0275902, 0, 1, 0, -0.0275902, 0, 0.999619, 1.75787, 0, 1.62506)
 
 [node name="EnemySpawnPoint" type="Node3D" parent="." node_paths=PackedStringArray("count_roll", "spawn_path")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 594.013, 0.104628, 529.512)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 602.136, 0.104628, 553.591)
 script = ExtResource("16_u18of")
-dice_roll_count = false
 count_roll = NodePath("CountRoll")
 spawn_path = NodePath("SpawnPath")
 
