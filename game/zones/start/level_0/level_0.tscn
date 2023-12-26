@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://0326gqgjjtkv"]
+[gd_scene load_steps=29 format=3 uid="uid://0326gqgjjtkv"]
 
 [ext_resource type="Script" path="res://lib/nodes/zone.gd" id="1_3tay3"]
 [ext_resource type="Terrain3DMaterial" uid="uid://bh2je3jcyw70l" path="res://assets/materials/terrain/grass_1.tres" id="2_6mkug"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://c6xhg44lsoxct" path="res://models/terrain/trees/tree_1.tscn" id="20_qh868"]
 [ext_resource type="PackedScene" uid="uid://ncrjay68ndvr" path="res://models/terrain/trees/tree_2.tscn" id="21_eid55"]
 [ext_resource type="PackedScene" uid="uid://578gtry3wdbt" path="res://models/terrain/trees/tree_3.tscn" id="22_b1kma"]
+[ext_resource type="PackedScene" uid="uid://bf7krp07f51ww" path="res://scenes/characters/undead_1.tscn" id="23_3ocx3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_whqtd"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -113,7 +114,7 @@ transform = Transform3D(0.783834, 0, 0.62097, 0, 1, 0, -0.62097, 0, 0.783834, -1
 transform = Transform3D(0.999619, 0, 0.0275902, 0, 1, 0, -0.0275902, 0, 0.999619, 1.75787, 0, 1.62506)
 
 [node name="EnemySpawnPoint" type="Node3D" parent="." node_paths=PackedStringArray("count_roll", "spawn_path")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 602.136, 0.104628, 553.591)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 518.409, 0, 552.139)
 script = ExtResource("16_u18of")
 count_roll = NodePath("CountRoll")
 spawn_path = NodePath("SpawnPath")
@@ -138,19 +139,16 @@ escape_distance = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 540.259, 0, 534.059)
 
 [node name="Platano_4" parent="Trees" instance=ExtResource("19_bm26j")]
-transform = Transform3D(1.01767, 0, 0.417562, 0, 1.1, 0, -0.417562, 0, 1.01767, 543.233, 0, 512.776)
-
-[node name="Platano_3" parent="Trees" instance=ExtResource("19_bm26j")]
-transform = Transform3D(0.824682, 0, 0.360415, 0, 0.9, 0, -0.360415, 0, 0.824682, 542.038, 0, 521.586)
+transform = Transform3D(1.01767, 0, 0.417562, 0, 1.1, 0, -0.417562, 0, 1.01767, 544.156, 0, 511.607)
 
 [node name="Platano_6" parent="Trees" instance=ExtResource("19_bm26j")]
-transform = Transform3D(0.824682, 0, 0.360415, 0, 0.9, 0, -0.360415, 0, 0.824682, 539.63, 0, 527.397)
+transform = Transform3D(0.824682, 0, 0.360415, 0, 0.9, 0, -0.360415, 0, 0.824682, 541.723, 0, 528.443)
 
 [node name="Platano_2" parent="Trees" instance=ExtResource("19_bm26j")]
-transform = Transform3D(0.588726, 0, 0.541665, 0, 0.8, 0, -0.541665, 0, 0.588726, 544.817, 0, 528.583)
+transform = Transform3D(0.588726, 0, 0.541665, 0, 0.8, 0, -0.541665, 0, 0.588726, 546.048, 0, 531.168)
 
 [node name="Platano_5" parent="Trees" instance=ExtResource("19_bm26j")]
-transform = Transform3D(0.46955, 0, 0.647706, 0, 0.8, 0, -0.647706, 0, 0.46955, 544.817, 0, 524.818)
+transform = Transform3D(0.46955, 0, 0.647706, 0, 0.8, 0, -0.647706, 0, 0.46955, 546.54, 0, 526.295)
 
 [node name="tree_1" parent="Trees" instance=ExtResource("20_qh868")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 510.1, 0, 541.25)
@@ -174,7 +172,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 512.066, 0, 519.082)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 513.893, 0, 502.08)
 
 [node name="tree_6" parent="Trees" instance=ExtResource("20_qh868")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 529.471, 0, 508.42)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 529.471, 0, 505.099)
 
 [node name="tree_8" parent="Trees" instance=ExtResource("21_eid55")]
 transform = Transform3D(0.922397, 0, 0.386244, 0, 1, 0, -0.386244, 0, 0.922397, 529.615, 0, 534.199)
@@ -184,9 +182,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 527.382, 0, 540.668)
 
 [node name="tree_10" parent="Trees" instance=ExtResource("22_b1kma")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 529.913, 0, 497.471)
-
-[node name="tree_12" parent="Trees" instance=ExtResource("20_qh868")]
-transform = Transform3D(0.921145, 0, -0.38922, 0, 1, 0, 0.38922, 0, 0.921145, 529.913, 0, 527.998)
 
 [node name="Platano_7" parent="Trees" instance=ExtResource("19_bm26j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 549.215, 0, 520.131)
@@ -199,3 +194,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 552.742, 0, 527.887)
 
 [node name="Platano_10" parent="Trees" instance=ExtResource("19_bm26j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 548.552, 0, 535.267)
+
+[node name="Undead1" parent="." instance=ExtResource("23_3ocx3")]
+transform = Transform3D(0.68414, 0, 0.729351, 0, 1, 0, -0.729351, 0, 0.68414, 521.773, 0, 536.072)
+
+[node name="Undead2" parent="." instance=ExtResource("23_3ocx3")]
+transform = Transform3D(0.68414, 0, 0.729351, 0, 1, 0, -0.729351, 0, 0.68414, 521.773, 0, 540.526)

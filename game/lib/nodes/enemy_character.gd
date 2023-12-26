@@ -42,6 +42,7 @@ var states:Dictionary = {
 		condition_attack_player,
 		condition_player_in_hearing_distance,
 		condition_player_detected_and_not_hidden,
+		condition_getaround_enemy,
 		condition_heard_hit,
 		condition_heard_help_call,
 		action_idle
@@ -143,9 +144,15 @@ var escape_direction:int = 1.0
 # blocked for too long
 var is_blocked_count:int = 0
 const is_blocked_count_trigger:int = 8
+# trying to get around another enemy to attack
+var getaround_count:int = 0
+var getaround_count_trigger:int = 10
 # player in detection area
 var player_detected:bool = false
 var player_hidden:bool = false
+# raycast collision result
+var is_colliding:bool = false
+var last_collider:Node3D
 # last position when moving to position
 var previous_position:Vector3 = Vector3.ZERO
 # we heard a fight
@@ -218,13 +225,25 @@ func setvar_player_detected(_delta):
 	pos.y = GameState.player.height
 	var local = raycast_detection.to_local(pos)
 	raycast_detection.target_position = local
-	player_hidden = not(raycast_detection.is_colliding()) or (raycast_detection.is_colliding() and not(raycast_detection.get_collider() is Player))
+	last_collider = raycast_detection.get_collider()
+	is_colliding = raycast_detection.is_colliding()
+	#print("%s %s %s" % [ name, last_collider, is_colliding])
+	player_hidden = not(is_colliding) or (is_colliding and not(last_collider is Player))
 #endregion
 
 #region Conditions Block
 func condition_player_in_hearing_distance(_delta):
 	if (not player_hidden) and (player_distance < hear_distance) and (is_blocked_count < is_blocked_count_trigger):
 		return state.change_state(States.MOVE_TO_PLAYER, "player_in_hearing_distance")
+	return StateMachine.Result.CONTINUE
+
+func condition_getaround_enemy(_delta):
+	if (getaround_count < getaround_count_trigger) and player_hidden and is_colliding and (last_collider is EnemyCharacter) and (player_detected):
+		detected_position = last_collider.position
+		detected_position.x += escape_direction * randf() * getaround_count
+		detected_position.z += -1.0 * randf() * getaround_count
+		getaround_count += 1
+		return state.change_state(States.MOVE_TO_POSITION, "getaround_enemy")
 	return StateMachine.Result.CONTINUE
 
 func condition_preconditions(_delta) -> StateMachine.Result:
@@ -371,12 +390,14 @@ func action_attack_player(_delta) -> StateMachine.Result:
 	timer_attack_cooldown.start()
 	attack_cooldown = true
 	attack_allowed = true
+	getaround_count = 0
 	return StateMachine.Result.CONTINUE
 
 func action_move_to_player(_delta) -> StateMachine.Result:
 	if (anim.current_animation != ANIM_RUN):
 		_stop_idle_rotation()
 		blocked_count = 0
+		getaround_count = 0
 		#print("%s move to player from %s" % [name, anim.current_animation])
 		anim.play(ANIM_RUN, 0.2)
 		anim.seek(randf())
@@ -412,6 +433,7 @@ func action_move_to_escape_position(_delta):
 	if (anim.current_animation != ANIM_RUN):
 		_stop_idle_rotation()
 		blocked_count = 0
+		getaround_count = 0
 		#print("%s move to escape position from %s" % [name, anim.current_animation])
 		anim.play(ANIM_RUN, 0.2)
 		anim.seek(randf())
@@ -499,12 +521,14 @@ func hit(hit_by:ItemWeapon):
 func _on_new_hit(target:Node3D, weapon:ItemWeapon, damage_points:int, positive:bool):
 	if positive and (target != self) and (position.distance_to(target.position) < detection_distance):
 		if (randf() < 0.2):
+			getaround_count = 0
 			detected_position = target.position
 			heard_hit = true
 
 func _on_call_for_help(sender:Node3D):
 	if (sender is EnemyCharacter) and (sender != self) and (position.distance_to(sender.position) < (detection_distance * 2.0)):
 		if (randf() < 0.2):
+			getaround_count = 0
 			detected_position = sender.position
 			heard_help_call = true
 
