@@ -22,6 +22,7 @@ StateSaver="*res://lib/tools/state_saver.gd"
 GameState="*res://lib/states/game_state.gd"
 NotificationManager="*res://lib/tools/notification_manager.gd"
 CraftingRecipes="*res://lib/crafting_recipes.gd"
+CurrentItemManager="*res://lib/current_item_manager.gd"
 
 [debug]
 

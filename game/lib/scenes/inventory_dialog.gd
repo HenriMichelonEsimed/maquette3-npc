@@ -5,9 +5,6 @@ class InventoryScreenState extends State:
 	func _init():
 		super("inventory_screen")
 
-signal item_dropped(item:Item,quantity:int)
-signal item_use(item:Item)
-
 @onready var tabs:TabContainer = $Panel/Content/Body/Content/Tabs
 @onready var list_weapons:ItemList = $Panel/Content/Body/Content/Tabs/Weapons/List
 @onready var list_tools:ItemList = $Panel/Content/Body/Content/Tabs/Tools/List
@@ -66,7 +63,7 @@ func open():
 	if list_content[state.tab].item_count > 0:
 		tabs.current_tab = state.tab
 	connect("item_dropped", GameState.current_zone.on_item_dropped)
-	#connect("item_use", GameState.item_use)
+	connect("item_use", CurrentItemManager.use)
 
 func set_shortcuts():
 	Tools.set_shortcut_icon(button_close, Tools.SHORTCUT_CANCEL)
@@ -197,7 +194,7 @@ func _on_select_close():
 	_focus_current_tab()
 
 func _drop(quantity:int=1):
-	item_dropped.emit(item, quantity)
+	GameState.current_zone.on_item_dropped(item, quantity)
 	_refresh()
 
 func _refresh():
@@ -312,4 +309,4 @@ func _on_crafting_pressed():
 func _on_use_pressed():
 	if (item == null): return
 	_on_button_back_pressed()
-	item_use.emit(item)
+	CurrentItemManager.use(item)

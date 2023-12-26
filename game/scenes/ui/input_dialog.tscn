@@ -1,12 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dlq4ng5yt7oks"]
+[gd_scene load_steps=4 format=3 uid="uid://dlq4ng5yt7oks"]
 
 [ext_resource type="Script" path="res://lib/scenes/input_dialog.gd" id="1_aeqot"]
-[ext_resource type="Texture2D" uid="uid://cjo1d842a4hx4" path="res://assets/textures/ui/cancel_normal.png" id="2_2ky8c"]
-[ext_resource type="Texture2D" uid="uid://bfq3j14jn0px0" path="res://assets/textures/ui/cancel_hover.png" id="3_3pi8p"]
-[ext_resource type="Texture2D" uid="uid://clysvli6bak58" path="res://assets/textures/ui/cancel_disabled.png" id="4_an1dc"]
-[ext_resource type="Texture2D" uid="uid://b8fwu4onh5stj" path="res://assets/textures/ui/check_normal.png" id="5_hlgan"]
-[ext_resource type="Texture2D" uid="uid://xyuqx5onvrj3" path="res://assets/textures/ui/check_hover.png" id="6_8uqnp"]
-[ext_resource type="Texture2D" uid="uid://dwqv403k23djy" path="res://assets/textures/ui/check_disabled.png" id="7_mnx0f"]
+[ext_resource type="FontFile" uid="uid://cave61j52xeuh" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_o1bot"]
+[ext_resource type="Script" path="res://addons/fontawesome/FontAwesomeButton.gd" id="3_ykhkb"]
 
 [node name="InputDialog" type="Control"]
 layout_mode = 3
@@ -58,19 +54,22 @@ custom_minimum_size = Vector2(0, -1)
 layout_mode = 2
 alignment = 2
 
-[node name="ButtonCancel" type="TextureButton" parent="Panel/Content/VBoxContainer/Top"]
+[node name="ButtonCancel" type="Button" parent="Panel/Content/VBoxContainer/Top"]
 layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Close"
 focus_neighbor_left = NodePath(".")
 focus_neighbor_top = NodePath(".")
 focus_neighbor_right = NodePath(".")
-focus_neighbor_bottom = NodePath("../../Bottom/ButtonOk")
-focus_next = NodePath("../../Bottom/ButtonOk")
-focus_previous = NodePath("../../Bottom/ButtonNo")
-texture_normal = ExtResource("2_2ky8c")
-texture_pressed = ExtResource("3_3pi8p")
-texture_hover = ExtResource("3_3pi8p")
-texture_disabled = ExtResource("4_an1dc")
-texture_focused = ExtResource("3_3pi8p")
+focus_neighbor_bottom = NodePath("../../ListSavegames")
+focus_next = NodePath("../../ListSavegames")
+focus_previous = NodePath("../../Bottom/ButtonDelete")
+theme_override_fonts/font = ExtResource("2_o1bot")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("3_ykhkb")
+icon_size = 32
+icon_name = "xmark"
 
 [node name="Label" type="Label" parent="Panel/Content/VBoxContainer"]
 custom_minimum_size = Vector2(0, 32)
@@ -96,19 +95,22 @@ select_all_on_focus = true
 layout_mode = 2
 alignment = 1
 
-[node name="ButtonOk" type="TextureButton" parent="Panel/Content/VBoxContainer/Bottom"]
+[node name="ButtonOk" type="Button" parent="Panel/Content/VBoxContainer/Bottom"]
 layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Apply"
 focus_neighbor_left = NodePath(".")
-focus_neighbor_top = NodePath("../../HBoxContainer/ButtonCancel")
-focus_neighbor_right = NodePath("../ButtonNo")
+focus_neighbor_top = NodePath("../../i18n/OptionButton")
+focus_neighbor_right = NodePath(".")
 focus_neighbor_bottom = NodePath(".")
-focus_next = NodePath("../ButtonNo")
-focus_previous = NodePath("../../HBoxContainer/ButtonCancel")
-texture_normal = ExtResource("5_hlgan")
-texture_pressed = ExtResource("6_8uqnp")
-texture_hover = ExtResource("6_8uqnp")
-texture_disabled = ExtResource("7_mnx0f")
-texture_focused = ExtResource("6_8uqnp")
+focus_next = NodePath("../../../../../Top/ButtonClose")
+focus_previous = NodePath("../../i18n/OptionButton")
+theme_override_fonts/font = ExtResource("2_o1bot")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("3_ykhkb")
+icon_size = 32
+icon_name = "check"
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]

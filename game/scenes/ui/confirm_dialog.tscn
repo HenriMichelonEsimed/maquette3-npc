@@ -1,12 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://ciyed3m337gr6"]
+[gd_scene load_steps=4 format=3 uid="uid://ciyed3m337gr6"]
 
 [ext_resource type="Script" path="res://lib/scenes/confirm_dialog.gd" id="1_tlf1k"]
-[ext_resource type="Texture2D" uid="uid://b8fwu4onh5stj" path="res://assets/textures/ui/check_normal.png" id="4_y1uu8"]
-[ext_resource type="Texture2D" uid="uid://xyuqx5onvrj3" path="res://assets/textures/ui/check_hover.png" id="5_m4bfr"]
-[ext_resource type="Texture2D" uid="uid://dwqv403k23djy" path="res://assets/textures/ui/check_disabled.png" id="6_slg1u"]
-[ext_resource type="Texture2D" uid="uid://cjo1d842a4hx4" path="res://assets/textures/ui/cancel_normal.png" id="7_6sjq8"]
-[ext_resource type="Texture2D" uid="uid://bfq3j14jn0px0" path="res://assets/textures/ui/cancel_hover.png" id="8_6yghp"]
-[ext_resource type="Texture2D" uid="uid://clysvli6bak58" path="res://assets/textures/ui/cancel_disabled.png" id="9_deo58"]
+[ext_resource type="FontFile" uid="uid://cave61j52xeuh" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_8pi0x"]
+[ext_resource type="Script" path="res://addons/fontawesome/FontAwesomeButton.gd" id="3_1fc3n"]
 
 [node name="ConfirmDialog" type="Control"]
 layout_mode = 3
@@ -57,24 +53,22 @@ layout_mode = 2
 layout_mode = 2
 alignment = 2
 
-[node name="IconCancel" type="TextureRect" parent="Panel/Content/VBoxContainer/HBoxContainer"]
+[node name="ButtonCancel" type="Button" parent="Panel/Content/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-
-[node name="ButtonCancel" type="TextureButton" parent="Panel/Content/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(28, 28)
-layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Close"
 focus_neighbor_left = NodePath(".")
 focus_neighbor_top = NodePath(".")
 focus_neighbor_right = NodePath(".")
-focus_neighbor_bottom = NodePath("../../Bottom/ButtonYes")
-focus_next = NodePath("../../Bottom/ButtonYes")
-focus_previous = NodePath("../../Bottom/ButtonNo")
-texture_normal = ExtResource("7_6sjq8")
-texture_pressed = ExtResource("8_6yghp")
-texture_hover = ExtResource("8_6yghp")
-texture_disabled = ExtResource("9_deo58")
-texture_focused = ExtResource("8_6yghp")
-stretch_mode = 3
+focus_neighbor_bottom = NodePath("../../ListSavegames")
+focus_next = NodePath("../../ListSavegames")
+focus_previous = NodePath("../../Bottom/ButtonDelete")
+theme_override_fonts/font = ExtResource("2_8pi0x")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("3_1fc3n")
+icon_size = 32
+icon_name = "xmark"
 
 [node name="LabelTitle" type="Label" parent="Panel/Content/VBoxContainer"]
 custom_minimum_size = Vector2(0, 48)
@@ -96,44 +90,39 @@ vertical_alignment = 1
 layout_mode = 2
 alignment = 1
 
-[node name="IconYes" type="TextureRect" parent="Panel/Content/VBoxContainer/Bottom"]
+[node name="ButtonYes" type="Button" parent="Panel/Content/VBoxContainer/Bottom"]
 layout_mode = 2
-
-[node name="ButtonYes" type="TextureButton" parent="Panel/Content/VBoxContainer/Bottom"]
-custom_minimum_size = Vector2(28, 28)
-layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Apply"
 focus_neighbor_left = NodePath(".")
-focus_neighbor_top = NodePath("../../HBoxContainer/ButtonCancel")
-focus_neighbor_right = NodePath("../ButtonNo")
-focus_neighbor_bottom = NodePath(".")
-focus_next = NodePath("../ButtonNo")
-focus_previous = NodePath("../../HBoxContainer/ButtonCancel")
-texture_normal = ExtResource("4_y1uu8")
-texture_pressed = ExtResource("5_m4bfr")
-texture_hover = ExtResource("5_m4bfr")
-texture_disabled = ExtResource("6_slg1u")
-texture_focused = ExtResource("5_m4bfr")
-stretch_mode = 3
-
-[node name="IconNo" type="TextureRect" parent="Panel/Content/VBoxContainer/Bottom"]
-layout_mode = 2
-
-[node name="ButtonNo" type="TextureButton" parent="Panel/Content/VBoxContainer/Bottom"]
-custom_minimum_size = Vector2(28, 28)
-layout_mode = 2
-focus_neighbor_left = NodePath("../ButtonYes")
-focus_neighbor_top = NodePath("../../HBoxContainer/ButtonCancel")
+focus_neighbor_top = NodePath("../../i18n/OptionButton")
 focus_neighbor_right = NodePath(".")
 focus_neighbor_bottom = NodePath(".")
-focus_next = NodePath("../../HBoxContainer/ButtonCancel")
-focus_previous = NodePath("../ButtonYes")
-texture_normal = ExtResource("7_6sjq8")
-texture_pressed = ExtResource("8_6yghp")
-texture_hover = ExtResource("8_6yghp")
-texture_disabled = ExtResource("9_deo58")
-texture_focused = ExtResource("8_6yghp")
-ignore_texture_size = true
-stretch_mode = 3
+focus_next = NodePath("../../../../../Top/ButtonClose")
+focus_previous = NodePath("../../i18n/OptionButton")
+theme_override_fonts/font = ExtResource("2_8pi0x")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("3_1fc3n")
+icon_size = 32
+icon_name = "check"
+
+[node name="ButtonNo" type="Button" parent="Panel/Content/VBoxContainer/Bottom"]
+layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Close"
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../ListSavegames")
+focus_next = NodePath("../../ListSavegames")
+focus_previous = NodePath("../../Bottom/ButtonDelete")
+theme_override_fonts/font = ExtResource("2_8pi0x")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("3_1fc3n")
+icon_size = 32
+icon_name = "xmark"
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]

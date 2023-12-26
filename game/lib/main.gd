@@ -1,10 +1,8 @@
 extends Node3D
 
-var current_item:CurrentItemManager = CurrentItemManager.new()
 var zones:ZonesManager = ZonesManager.new()
 
 func _ready():
-	add_child(current_item)
 	GameState.player = $Player
 	GameState.ui = $MainUI
 	TranslationServer.set_locale(GameState.settings.lang)
@@ -12,9 +10,9 @@ func _ready():
 	if (GameState.current_item != null):
 		var item = GameState.current_item
 		GameState.current_item = null
-		current_item.use(item)
+		CurrentItemManager.use(item)
 	else:
-		current_item.use(Tools.load_item(Item.ItemType.ITEM_WEAPONS, "long_blade_1"))
+		CurrentItemManager.use(Tools.load_item(Item.ItemType.ITEM_WEAPONS, "long_blade_1"))
 	GameState.quests.start("main")
 	zones.change_zone(self, GameState.player_state.zone_name)
 	if (GameState.player_state.position != Vector3.ZERO):

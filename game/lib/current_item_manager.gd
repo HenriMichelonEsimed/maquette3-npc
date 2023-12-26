@@ -1,4 +1,4 @@
-class_name CurrentItemManager extends Node
+extends Node
 
 var _previous_item = null
 

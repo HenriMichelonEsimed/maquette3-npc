@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dehwes75uvcbj"]
+[gd_scene load_steps=4 format=3 uid="uid://dehwes75uvcbj"]
 
 [ext_resource type="Script" path="res://lib/scenes/weapon_info_dialog.gd" id="1_jvqwb"]
-[ext_resource type="Texture2D" uid="uid://cjo1d842a4hx4" path="res://assets/textures/ui/cancel_normal.png" id="2_i14wo"]
-[ext_resource type="Texture2D" uid="uid://bfq3j14jn0px0" path="res://assets/textures/ui/cancel_hover.png" id="3_hcink"]
-[ext_resource type="Texture2D" uid="uid://clysvli6bak58" path="res://assets/textures/ui/cancel_disabled.png" id="4_vq4o8"]
+[ext_resource type="FontFile" uid="uid://cave61j52xeuh" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_yovag"]
+[ext_resource type="Script" path="res://addons/fontawesome/FontAwesomeButton.gd" id="3_yggu1"]
 
 [node name="WeaponInfo" type="Control"]
 clip_contents = true
@@ -51,22 +50,22 @@ alignment = 1
 layout_mode = 2
 alignment = 2
 
-[node name="IconCancel" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="ButtonCancel" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-
-[node name="ButtonCancel" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Close"
 focus_neighbor_left = NodePath(".")
 focus_neighbor_top = NodePath(".")
 focus_neighbor_right = NodePath(".")
-focus_neighbor_bottom = NodePath("../../Bottom/ButtonOk")
-focus_next = NodePath("../../Bottom/ButtonOk")
-focus_previous = NodePath("../../Bottom/ButtonNo")
-texture_normal = ExtResource("2_i14wo")
-texture_pressed = ExtResource("3_hcink")
-texture_hover = ExtResource("3_hcink")
-texture_disabled = ExtResource("4_vq4o8")
-texture_focused = ExtResource("3_hcink")
+focus_neighbor_bottom = NodePath("../../ListSavegames")
+focus_next = NodePath("../../ListSavegames")
+focus_previous = NodePath("../../Bottom/ButtonDelete")
+theme_override_fonts/font = ExtResource("2_yovag")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("3_yggu1")
+icon_size = 32
+icon_name = "xmark"
 
 [node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
