@@ -164,17 +164,17 @@ func _run_or_walk():
 		if (GameState.player_state.endurance > 0):
 			if (not running):
 				speed = running_speed
-				anim.play(ANIM_RUNNING, 0.2)
+				anim.play(ANIM_RUNNING, 0.1)
 				running = true
 		else:
 			_regen_endurance()
 			speed = walking_speed
-			anim.play(ANIM_WALKING, 0.2)
+			anim.play(ANIM_WALKING, 0.1)
 	else:
 		_regen_endurance()
 		running = false
 		speed = walking_speed
-		anim.play(ANIM_WALKING, 0.2)
+		anim.play(ANIM_WALKING, 0.1)
 	moving.emit()
 
 func move(pos:Vector3, rot:Vector3):
