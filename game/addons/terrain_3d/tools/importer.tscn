@@ -1,16 +1,16 @@
 [gd_scene load_steps=5 format=3 uid="uid://blaieaqp413k7"]
 
 [ext_resource type="Script" path="res://addons/terrain_3d/tools/importer.gd" id="1_60b8f"]
-
-[sub_resource type="Terrain3DStorage" id="Terrain3DStorage_rmuvl"]
-
-[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_cjpaa"]
-show_checkered = true
-
-[sub_resource type="Terrain3DTextureList" id="Terrain3DTextureList_yjkn1"]
+[ext_resource type="Terrain3DStorage" uid="uid://cr5x52htbd004" path="res://zones/start/level_1/level_1_terrain_2.res" id="1_p7bpp"]
+[ext_resource type="Terrain3DMaterial" uid="uid://rrh2de5jm1kl" path="res://assets/materials/terrain/exterior_1.res" id="2_75uhg"]
+[ext_resource type="Terrain3DTextureList" uid="uid://c2yxt4p1muwd2" path="res://assets/textures/terrain/exterior_1.res" id="3_35gb1"]
 
 [node name="Importer" type="Terrain3D"]
-storage = SubResource("Terrain3DStorage_rmuvl")
-material = SubResource("Terrain3DMaterial_cjpaa")
-texture_list = SubResource("Terrain3DTextureList_yjkn1")
+storage = ExtResource("1_p7bpp")
+material = ExtResource("2_75uhg")
+texture_list = ExtResource("3_35gb1")
 script = ExtResource("1_60b8f")
+height_file_name = "C:/Users/z/Documents/rpg-maquette/game/zones/start/level_1/h1.res"
+control_file_name = "C:/Users/z/Documents/rpg-maquette/game/zones/start/level_1/c1.res"
+map_type = 1
+file_name_out = "res://zones/start/level_1/c1.res"

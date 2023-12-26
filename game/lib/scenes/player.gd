@@ -55,7 +55,7 @@ var attack_speed_scale:float = 1.0
 # movement sounds
 var sound_walking:AudioStream
 var sound_walking_name:String
-@onready var sound_swimming:AudioStream = load("res://assets/audio/water/swimming.mp3")
+#@onready var sound_swimming:AudioStream = load("res://assets/audio/water/swimming.mp3")
 
 const directions = {
 	"forward" : 	[  { 'x':  1, 'z': -1 },  { 'x':  1, 'z':  1 },  { 'x': -1, 'z':  1 },  { 'x': -1, 'z': -1 } ],

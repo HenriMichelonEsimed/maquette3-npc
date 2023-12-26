@@ -1,10 +1,10 @@
 [gd_scene load_steps=28 format=3 uid="uid://0326gqgjjtkv"]
 
 [ext_resource type="Script" path="res://lib/nodes/zone.gd" id="1_3tay3"]
-[ext_resource type="Terrain3DMaterial" uid="uid://bh2je3jcyw70l" path="res://assets/materials/terrain/grass_1.tres" id="2_6mkug"]
 [ext_resource type="Terrain3DStorage" uid="uid://ddi65i8xp6j8g" path="res://zones/start/level_0/terrain_3d_storage.res" id="2_cyd0x"]
-[ext_resource type="Terrain3DTextureList" uid="uid://bgeuxwtfr5iw4" path="res://assets/textures/terrain/grass_1.tres" id="3_hkils"]
+[ext_resource type="Terrain3DMaterial" uid="uid://rrh2de5jm1kl" path="res://assets/materials/terrain/exterior_1.res" id="3_j3drh"]
 [ext_resource type="Script" path="res://lib/nodes/spawn_point.gd" id="4_t10wc"]
+[ext_resource type="Terrain3DTextureList" uid="uid://c2yxt4p1muwd2" path="res://assets/textures/terrain/exterior_1.res" id="4_y06hu"]
 [ext_resource type="PackedScene" uid="uid://8exssb37mmo0" path="res://models/houses/house_4.tscn" id="6_mymwc"]
 [ext_resource type="PackedScene" uid="uid://cj08ptyc2qkgf" path="res://models/props/props_table_square_6.tscn" id="7_7wiix"]
 [ext_resource type="PackedScene" uid="uid://bg0r0oavteps7" path="res://models/props/props_bench_3.tscn" id="8_ae1di"]
@@ -63,8 +63,8 @@ environment = SubResource("Environment_7k2up")
 
 [node name="Terrain3D" type="Terrain3D" parent="."]
 storage = ExtResource("2_cyd0x")
-material = ExtResource("2_6mkug")
-texture_list = ExtResource("3_hkils")
+material = ExtResource("3_j3drh")
+texture_list = ExtResource("4_y06hu")
 
 [node name="SpawnPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 527.995, 0, 518.207)

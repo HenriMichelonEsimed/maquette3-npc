@@ -100,10 +100,10 @@ func _process(_delta):
 
 func zoom_view(delta:int=0):
 	_size += delta
-	if (_size < 8): 
-		_size = 8
-	elif (_size > 100):
-		_size = 100
+	if (_size < 6): 
+		_size = 6
+	elif (_size > 150):
+		_size = 150
 	size = _size
 	GameState.camera.size = _size
 

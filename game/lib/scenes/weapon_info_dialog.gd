@@ -1,10 +1,9 @@
 extends Dialog
 
 @onready var label = $Panel/MarginContainer/VBoxContainer/Label
-@onready var hitpoints = $Panel/MarginContainer/VBoxContainer/LabelHitPoints
 @onready var damages = $Panel/MarginContainer/VBoxContainer/LabelDamage
 @onready var attackspeed = $Panel/MarginContainer/VBoxContainer/LabelAttackSpeed
-@onready var button_cancel = $Panel/MarginContainer/VBoxContainer/HBoxContainer/IconCancel
+@onready var button_cancel = $Panel/MarginContainer/VBoxContainer/HBoxContainer/ButtonCancel
 @onready var price = $Panel/MarginContainer/VBoxContainer/LabelPrice
 
 func _input(event):
