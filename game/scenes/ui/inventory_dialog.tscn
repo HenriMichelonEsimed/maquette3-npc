@@ -1,0 +1,422 @@
+[gd_scene load_steps=10 format=3 uid="uid://dgkdm7de4k7sw"]
+
+[ext_resource type="Script" path="res://lib/scenes/inventory_dialog.gd" id="1_0hce1"]
+[ext_resource type="FontFile" uid="uid://cave61j52xeuh" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="3_q3qwn"]
+[ext_resource type="PackedScene" uid="uid://bc0qy5c1xxgsw" path="res://models/items/weapons/long_blade_1.tscn" id="4_kkqgw"]
+[ext_resource type="Script" path="res://addons/fontawesome/FontAwesomeButton.gd" id="5_p36nm"]
+[ext_resource type="Script" path="res://addons/fontawesome/FontAwesome.gd" id="9_tll54"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gicgb"]
+font_size = 34
+
+[sub_resource type="Environment" id="Environment_tvhn7"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="World3D" id="World3D_tt1eo"]
+environment = SubResource("Environment_tvhn7")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v5vnv"]
+bg_color = Color(0, 0, 0, 0.501961)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="InventoryScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -350.0
+offset_right = 316.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0hce1")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Content" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_right = -18.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Top" type="MarginContainer" parent="Panel/Content"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Content/Top"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Panel/Content/Top/HBoxContainer"]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/Content/Top/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Inventory"
+label_settings = SubResource("LabelSettings_gicgb")
+horizontal_alignment = 1
+
+[node name="ButtonBack" type="Button" parent="Panel/Content/Top/HBoxContainer"]
+layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Close"
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../../Body/Content/Tabs")
+focus_next = NodePath("../../../Body/Content/Tabs")
+focus_previous = NodePath("../../../Body/Content/PanelItem/Content/Actions/Drop")
+theme_override_fonts/font = ExtResource("3_q3qwn")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("5_p36nm")
+icon_size = 32
+icon_name = "xmark"
+
+[node name="Body" type="MarginContainer" parent="Panel/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 34
+theme_override_constants/margin_bottom = 20
+
+[node name="Content" type="HBoxContainer" parent="Panel/Content/Body"]
+layout_mode = 2
+
+[node name="Tabs" type="TabContainer" parent="Panel/Content/Body/Content"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Weapons" type="Control" parent="Panel/Content/Body/Content/Tabs"]
+layout_mode = 2
+
+[node name="List" type="ItemList" parent="Panel/Content/Body/Content/Tabs/Weapons"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_top = NodePath("../..")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../../Tools/List")
+focus_previous = NodePath("../../../../../Top/HBoxContainer/ButtonBack")
+allow_search = false
+
+[node name="Tools" type="Control" parent="Panel/Content/Body/Content/Tabs"]
+visible = false
+layout_mode = 2
+
+[node name="List" type="ItemList" parent="Panel/Content/Body/Content/Tabs/Tools"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_top = NodePath("../..")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../../Consumables/List")
+focus_previous = NodePath(".")
+allow_search = false
+
+[node name="Consumables" type="Control" parent="Panel/Content/Body/Content/Tabs"]
+visible = false
+layout_mode = 2
+
+[node name="List" type="ItemList" parent="Panel/Content/Body/Content/Tabs/Consumables"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_top = NodePath("../..")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../../Miscellaneous/List")
+focus_previous = NodePath("../../Tools/List")
+allow_search = false
+
+[node name="Miscellaneous" type="Control" parent="Panel/Content/Body/Content/Tabs"]
+visible = false
+layout_mode = 2
+
+[node name="List" type="ItemList" parent="Panel/Content/Body/Content/Tabs/Miscellaneous"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_top = NodePath("../..")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../../Quests/List")
+allow_search = false
+
+[node name="Quests" type="Control" parent="Panel/Content/Body/Content/Tabs"]
+visible = false
+layout_mode = 2
+
+[node name="List" type="ItemList" parent="Panel/Content/Body/Content/Tabs/Quests"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_top = NodePath("../..")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../../../PanelItem/Content/Actions/Drop")
+focus_previous = NodePath("../../Miscellaneous/List")
+allow_search = false
+
+[node name="PanelItem" type="PanelContainer" parent="Panel/Content/Body/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Content" type="VBoxContainer" parent="Panel/Content/Body/Content/PanelItem"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Panel/Content/Body/Content/PanelItem/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Title"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="InfosWeapons" type="VBoxContainer" parent="Panel/Content/Body/Content/PanelItem/Content"]
+layout_mode = 2
+
+[node name="LabelDamage" type="Label" parent="Panel/Content/Body/Content/PanelItem/Content/InfosWeapons"]
+layout_mode = 2
+text = "DMG"
+
+[node name="LabelAttackSpeed" type="Label" parent="Panel/Content/Body/Content/PanelItem/Content/InfosWeapons"]
+layout_mode = 2
+text = "AS"
+
+[node name="LabelPrice" type="Label" parent="Panel/Content/Body/Content/PanelItem/Content/InfosWeapons"]
+layout_mode = 2
+text = "PRICE"
+
+[node name="ViewContent" type="SubViewportContainer" parent="Panel/Content/Body/Content/PanelItem/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+stretch = true
+
+[node name="3DView" type="SubViewport" parent="Panel/Content/Body/Content/PanelItem/Content/ViewContent"]
+own_world_3d = true
+world_3d = SubResource("World3D_tt1eo")
+transparent_bg = true
+handle_input_locally = false
+msaa_3d = 1
+screen_space_aa = 1
+size = Vector2i(240, 226)
+render_target_update_mode = 4
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Panel/Content/Body/Content/PanelItem/Content/ViewContent/3DView"]
+transform = Transform3D(-0.771878, -0.617867, -0.149814, -0.377219, 0.255396, 0.890213, -0.511772, 0.743648, -0.430206, 0, 1, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Panel/Content/Body/Content/PanelItem/Content/ViewContent/3DView"]
+transform = Transform3D(1, -8.35189e-23, -3.65073e-30, 0, -4.37114e-08, 1, -8.35189e-23, -1, -4.37114e-08, -0.25, 1, -0.2)
+fov = 54.6
+
+[node name="InsertPoint" type="Node3D" parent="Panel/Content/Body/Content/PanelItem/Content/ViewContent/3DView"]
+transform = Transform3D(0.674692, 0.100831, -0.731179, 0.118249, 0.963063, 0.241922, 0.728565, -0.249684, 0.637848, 0, 0, 0)
+
+[node name="long_blade_1" parent="Panel/Content/Body/Content/PanelItem/Content/ViewContent/3DView/InsertPoint" instance=ExtResource("4_kkqgw")]
+
+[node name="Actions" type="HBoxContainer" parent="Panel/Content/Body/Content/PanelItem/Content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Drop" type="Button" parent="Panel/Content/Body/Content/PanelItem/Content/Actions"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Drop"
+focus_neighbor_top = NodePath("../../../../../../Top/HBoxContainer/ButtonBack")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../Use")
+focus_previous = NodePath("../../../../Tabs")
+theme_override_fonts/font = ExtResource("3_q3qwn")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("5_p36nm")
+icon_size = 32
+icon_name = "arrow-up-from-bracket"
+
+[node name="Use" type="Button" parent="Panel/Content/Body/Content/PanelItem/Content/Actions"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Use"
+focus_neighbor_top = NodePath("../../../../../../Top/HBoxContainer/ButtonBack")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../Craft")
+focus_previous = NodePath("../Drop")
+theme_override_fonts/font = ExtResource("3_q3qwn")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("5_p36nm")
+icon_size = 32
+icon_name = "hand-back-fist"
+
+[node name="Craft" type="Button" parent="Panel/Content/Body/Content/PanelItem/Content/Actions"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Craft"
+focus_neighbor_top = NodePath("../../../../../../Top/HBoxContainer/ButtonBack")
+focus_next = NodePath("../../../../PanelCrafting/Content/Actions/DropCraft")
+focus_previous = NodePath("../Use")
+theme_override_fonts/font = ExtResource("3_q3qwn")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("5_p36nm")
+icon_size = 32
+icon_name = "screwdriver-wrench"
+
+[node name="PanelCrafting" type="PanelContainer" parent="Panel/Content/Body/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Content" type="VBoxContainer" parent="Panel/Content/Body/Content/PanelCrafting"]
+layout_mode = 2
+
+[node name="Top" type="HBoxContainer" parent="Panel/Content/Body/Content/PanelCrafting/Content"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Panel/Content/Body/Content/PanelCrafting/Content/Top"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "Crafting"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonStopCraft" type="Button" parent="Panel/Content/Body/Content/PanelCrafting/Content/Top"]
+layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Cancel"
+focus_neighbor_top = NodePath("../../../../../../Top/HBoxContainer/ButtonBack")
+focus_neighbor_bottom = NodePath("../../Actions/Craft")
+focus_next = NodePath("../../../../../../Top/HBoxContainer/ButtonBack")
+focus_previous = NodePath("../../Actions/Craft")
+theme_override_fonts/font = ExtResource("3_q3qwn")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("5_p36nm")
+icon_size = 32
+icon_name = "xmark"
+
+[node name="ListCraft" type="ItemList" parent="Panel/Content/Body/Content/PanelCrafting/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Content/Body/Content/PanelCrafting/Content"]
+layout_mode = 2
+
+[node name="FontAwesome" type="Label" parent="Panel/Content/Body/Content/PanelCrafting/Content/VBoxContainer"]
+layout_mode = 2
+auto_translate = false
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("3_q3qwn")
+theme_override_font_sizes/font_size = 24
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("9_tll54")
+icon_size = 24
+icon_name = "down-long"
+
+[node name="LabelRecipe" type="Label" parent="Panel/Content/Body/Content/PanelCrafting/Content/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_v5vnv")
+text = "-"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Actions" type="HBoxContainer" parent="Panel/Content/Body/Content/PanelCrafting/Content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="DropCraft" type="Button" parent="Panel/Content/Body/Content/PanelCrafting/Content/Actions"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Remove"
+focus_neighbor_top = NodePath("../../Top/ButtonStopCraft")
+focus_neighbor_bottom = NodePath("../Craft")
+focus_next = NodePath("../Craft")
+focus_previous = NodePath("../../../../PanelItem/Content/Actions/Craft")
+theme_override_fonts/font = ExtResource("3_q3qwn")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("5_p36nm")
+icon_size = 32
+icon_name = "ban"
+
+[node name="Craft" type="Button" parent="Panel/Content/Body/Content/PanelCrafting/Content/Actions"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+localize_numeral_system = false
+tooltip_text = "Make"
+focus_neighbor_top = NodePath("../../Top/ButtonStopCraft")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../../Top/Title")
+focus_previous = NodePath("../DropCraft")
+theme_override_fonts/font = ExtResource("3_q3qwn")
+theme_override_font_sizes/font_size = 32
+text = ""
+script = ExtResource("5_p36nm")
+icon_size = 32
+icon_name = "screwdriver-wrench"
+
+[connection signal="pressed" from="Panel/Content/Top/HBoxContainer/ButtonBack" to="." method="_on_button_back_pressed"]
+[connection signal="tab_changed" from="Panel/Content/Body/Content/Tabs" to="." method="_on_tabs_tab_changed"]
+[connection signal="tab_selected" from="Panel/Content/Body/Content/Tabs" to="." method="_on_tabs_tab_selected"]
+[connection signal="item_selected" from="Panel/Content/Body/Content/Tabs/Weapons/List" to="." method="_on_list_weapons_item_selected"]
+[connection signal="item_selected" from="Panel/Content/Body/Content/Tabs/Tools/List" to="." method="_on_list_tools_item_selected"]
+[connection signal="item_selected" from="Panel/Content/Body/Content/Tabs/Consumables/List" to="." method="_on_list_item_consumable_selected"]
+[connection signal="item_selected" from="Panel/Content/Body/Content/Tabs/Miscellaneous/List" to="." method="_on_list_miscellaneous_item_selected"]
+[connection signal="item_selected" from="Panel/Content/Body/Content/Tabs/Quests/List" to="." method="_on_list_item_quest_selected"]
+[connection signal="pressed" from="Panel/Content/Body/Content/PanelItem/Content/Actions/Drop" to="." method="_on_drop_pressed"]
+[connection signal="pressed" from="Panel/Content/Body/Content/PanelItem/Content/Actions/Use" to="." method="_on_use_pressed"]
+[connection signal="pressed" from="Panel/Content/Body/Content/PanelItem/Content/Actions/Craft" to="." method="_on_craft_pressed"]
+[connection signal="pressed" from="Panel/Content/Body/Content/PanelCrafting/Content/Top/ButtonStopCraft" to="." method="_on_button_stop_craft_pressed"]
+[connection signal="item_selected" from="Panel/Content/Body/Content/PanelCrafting/Content/ListCraft" to="." method="_on_list_craft_item_selected"]
+[connection signal="pressed" from="Panel/Content/Body/Content/PanelCrafting/Content/Actions/DropCraft" to="." method="_on_drop_craft_pressed"]
+[connection signal="pressed" from="Panel/Content/Body/Content/PanelCrafting/Content/Actions/Craft" to="." method="_on_crafting_pressed"]

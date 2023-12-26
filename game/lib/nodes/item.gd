@@ -17,9 +17,13 @@ enum ItemType {
 
 var original_rotation:Vector3
 var use_area:Area3D
+var initialized:bool = false
 
 func _ready():
 	label = tr(label)
+	if (not initialized):
+		_initialize()
+		initialized = true
 	set_collision_layer_value(Consts.LAYER_WORLD, false)
 	set_collision_mask_value(Consts.LAYER_WORLD, true)
 	original_rotation = rotation
@@ -41,6 +45,9 @@ func unuse():
 	rotation = original_rotation
 	scale = Vector3(1.0,1.0,1.0)
 	enable()
+
+func _initialize():
+	pass
 
 func collect():
 	return true

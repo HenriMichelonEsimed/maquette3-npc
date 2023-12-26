@@ -8,7 +8,7 @@ extends Panel
 var current_item:CurrentItemManager
 
 func set_shortcuts():
-	Tools.set_shortcut_icon(icon_unuse, Tools.SHORTCUT_DROP)
+	Tools.set_shortcut_icon(icon_unuse, Tools.SHORTCUT_UNUSE)
 	Tools.set_shortcut_icon(icon_help, Tools.SHORTCUT_HELP)
 
 func use():

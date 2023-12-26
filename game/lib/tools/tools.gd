@@ -32,6 +32,7 @@ const SHORTCUT_DECLINE = "decline"
 const SHORTCUT_MENU = "menu"
 const SHORTCUT_TERMINAL = "terminal"
 const SHORTCUT_USE = "use"
+const SHORTCUT_UNUSE = "unuse"
 const SHORTCUT_ALL = "all"
 const SHORTCUT_ACCEPT = "accept"
 

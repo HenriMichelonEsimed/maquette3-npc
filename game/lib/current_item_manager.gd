@@ -7,8 +7,6 @@ func _ready():
 	NotificationManager.connect("unuse_item", unuse)
 
 func _unhandled_input(event):
-	if (Input.is_action_just_pressed("use_previous")):
-		use(_previous_item)
 	if (GameState.current_item == null): return
 	elif  Input.is_action_just_released("unuse"):
 		unuse()
@@ -24,6 +22,7 @@ func use(item:Item):
 	GameState.player.handle_item()
 	GameState.ui.panel_item.use()
 	GameState.current_item.use()
+	_previous_item = null
 
 func unuse():
 	if (GameState.current_item == null): return
