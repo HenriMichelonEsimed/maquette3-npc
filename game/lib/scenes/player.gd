@@ -98,7 +98,7 @@ func _physics_process(delta):
 		if Input.is_action_pressed("player_right") or  Input.is_action_pressed("player_left") or  Input.is_action_pressed("player_backward") or  Input.is_action_pressed("player_forward"):
 			stop_move_to()
 		else:
-			if (position.distance_to(move_to_target) < 0.2):
+			if (position.distance_to(move_to_target) < 0.1):
 				stop_move_to()
 				return
 			var look_at_target = move_to_target
