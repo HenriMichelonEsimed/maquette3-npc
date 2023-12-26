@@ -35,4 +35,11 @@ process_callback = 0
 wait_time = 0.1
 one_shot = true
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer3D" parent="."]
+volume_db = 50.0
+bus = &"Effects"
+
+[node name="RayCastToFloor" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.247987, 0)
+
 [connection signal="timeout" from="TimerUse" to="." method="_on_timer_attack_timeout"]

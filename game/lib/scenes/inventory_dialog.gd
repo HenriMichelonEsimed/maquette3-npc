@@ -62,8 +62,6 @@ func open():
 	panel_crafting.visible = false
 	if list_content[state.tab].item_count > 0:
 		tabs.current_tab = state.tab
-	connect("item_dropped", GameState.current_zone.on_item_dropped)
-	connect("item_use", CurrentItemManager.use)
 
 func set_shortcuts():
 	Tools.set_shortcut_icon(button_close, Tools.SHORTCUT_CANCEL)

@@ -45,6 +45,9 @@ static func load_shortcut_icon(name:String):
 		controller = CONTROLLER_PS if GameState.use_joypad_ps else CONTROLLER_XBOX 
 	return load("res://assets/textures/controllers/buttons/" + controller + "/" + name + ".png")
 
+static func load_audio(type:String,name:String):
+	return load("res://assets/audio/" + type + "/" + name + ".mp3")
+
 static func load_item(type:int,name:String):
 	var item = load("res://models/items/" + ITEMS_PATH[type] + "/" + name + ".tscn")
 	if (item != null):

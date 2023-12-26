@@ -17,6 +17,8 @@ const ANIM_USING= "use"
 @onready var interactions = $Interactions
 @onready var anim:AnimationPlayer = $AnimationPlayer 
 @onready var timer_use:Timer = $TimerUse
+@onready var raycast_to_floor:RayCast3D = $RayCastToFloor
+@onready var audio:AudioStreamPlayer3D = $AudioStreamPlayer
 
 const walking_speed:float = 7.0
 const running_speed:float = 14.0
@@ -50,6 +52,11 @@ var height:float = 1.7
 # weapon speed animation scale
 var attack_speed_scale:float = 1.0
 
+# movement sounds
+var sound_walking:AudioStream
+var sound_walking_name:String
+@onready var sound_swimming:AudioStream = load("res://assets/audio/water/swimming.mp3")
+
 const directions = {
 	"forward" : 	[  { 'x':  1, 'z': -1 },  { 'x':  1, 'z':  1 },  { 'x': -1, 'z':  1 },  { 'x': -1, 'z': -1 } ],
 	"left" : 		[  { 'x': -1, 'z': -1 },  { 'x':  1, 'z': -1 },  { 'x':  1, 'z':  1 },  { 'x': -1, 'z':  1 } ],
@@ -62,6 +69,7 @@ func _ready():
 	camera = camera_pivot.get_node("Camera")
 	camera.connect("view_rotate", _on_view_rotate)
 	attach_item = character.get_node("RootNode/Skeleton3D/HandAttachment/AttachmentPoint")
+	update_floor()
 
 func _unhandled_input(_event):
 	if (attack_cooldown) or (GameState.player_state.hp <= 0): return
@@ -106,7 +114,7 @@ func _physics_process(delta):
 				velocity.y = velocity.y - (fall_acceleration * 2 * delta)
 			move_to_previous_position = position
 			move_and_slide()
-			if (position.distance_to(move_to_previous_position) < 0.001):
+			if (position.distance_to(move_to_previous_position) < 0.01):
 				stop_move_to()
 				return
 			_update_camera()
@@ -143,6 +151,7 @@ func _physics_process(delta):
 		stop_moving.emit()
 		anim.play(ANIM_STANDING, 0.2)
 		_regen_endurance()
+		audio.stop()
 	
 	target_velocity.x = direction.x * speed
 	target_velocity.z = direction.z * speed
@@ -158,23 +167,29 @@ func _physics_process(delta):
 		_update_camera()
 
 func _run_or_walk():
+	update_floor()
 	if Input.is_action_pressed("modifier"):
 		GameState.player_state.endurance -= 2
 		endurance_change.emit()
 		if (GameState.player_state.endurance > 0):
 			if (not running):
+				audio.pitch_scale = 1.5
 				speed = running_speed
 				anim.play(ANIM_RUNNING, 0.1)
 				running = true
 		else:
+			audio.pitch_scale = 1.0
 			_regen_endurance()
 			speed = walking_speed
 			anim.play(ANIM_WALKING, 0.1)
 	else:
+		audio.pitch_scale = 1.0
 		_regen_endurance()
 		running = false
 		speed = walking_speed
 		anim.play(ANIM_WALKING, 0.1)
+	if (not audio.playing) :
+		audio.play()
 	moving.emit()
 
 func move(pos:Vector3, rot:Vector3):
@@ -268,5 +283,25 @@ func _to_string():
 	return GameState.player_state.nickname
 
 func _on_animation_tree_animation_finished(anim_name):
-	if (anim_name == "default/die_backward_1"):
+	if (anim_name == ANIM_DIEING):
 		Tools.load_dialog(self, Tools.DIALOG_GAMEOVER).open()
+
+func update_floor():
+	raycast_to_floor.force_raycast_update()
+	if (raycast_to_floor.is_colliding()):
+		var floor = raycast_to_floor.get_collider()
+		if (floor != null):
+			var play = audio.playing
+			var audio_name = "default"
+			if (floor is Terrain3D):
+				var idx = floor.storage.get_texture_id(global_position).x
+				var texture_name = floor.texture_list.get_texture(idx).name
+				if (Sounds.TERRAIN.has(texture_name)):
+					audio_name = Sounds.TERRAIN[texture_name]
+			elif (floor is Floor) and (not floor.sound.is_empty()):
+				audio_name = floor.sound
+			if (sound_walking_name != audio_name):
+				sound_walking = Tools.load_audio("terrain", audio_name)
+				sound_walking_name = audio_name
+				audio.stream = sound_walking
+				audio.play()

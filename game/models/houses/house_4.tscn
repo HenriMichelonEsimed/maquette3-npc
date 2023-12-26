@@ -1,8 +1,9 @@
-[gd_scene load_steps=39 format=3 uid="uid://8exssb37mmo0"]
+[gd_scene load_steps=40 format=3 uid="uid://8exssb37mmo0"]
 
 [ext_resource type="Script" path="res://lib/nodes/static_with_roof.gd" id="1_7xjv7"]
 [ext_resource type="Material" uid="uid://curqdhhdqldg8" path="res://assets/materials/architecture/Planks023B.res" id="2_tjvxn"]
 [ext_resource type="Texture2D" uid="uid://deqfeh2sim4wh" path="res://assets/textures/architecture/Planks037A/Planks037A_1K-JPG_Color.jpg" id="3_d4mid"]
+[ext_resource type="Script" path="res://lib/nodes/floor.gd" id="4_g0o6i"]
 [ext_resource type="Material" uid="uid://cmg8d3uvbmihq" path="res://assets/materials/architecture/WoodSiding010.res" id="4_l0pya"]
 [ext_resource type="Material" uid="uid://dq3diy2x030b" path="res://assets/materials/architecture/WoodSiding011.res" id="4_nltv6"]
 [ext_resource type="Texture2D" uid="uid://da2wkpcebogdm" path="res://assets/textures/architecture/Planks037A/Planks037A_1K-JPG_AmbientOcclusion.jpg" id="4_xhfd4"]
@@ -412,6 +413,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.10194, -0.174682, 2.09443)
 shape = SubResource("BoxShape3D_pb6l5")
 
 [node name="floor" type="StaticBody3D" parent="House4_Flooor_out"]
+script = ExtResource("4_g0o6i")
+sound = "indoor"
 
 [node name="barrier1" type="CollisionShape3D" parent="House4_Flooor_out/floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.471582, 2.07795)
@@ -447,6 +450,7 @@ skeleton = NodePath("")
 
 [node name="House4_Roof" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 7, -1)
+visible = false
 mesh = SubResource("ArrayMesh_2hisl")
 skeleton = NodePath("")
 
