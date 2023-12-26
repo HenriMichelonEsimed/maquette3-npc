@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cfxsejwlekels"]
+[gd_scene load_steps=7 format=3 uid="uid://cfxsejwlekels"]
 
 [ext_resource type="Script" path="res://lib/scenes/player.gd" id="1_q3dva"]
 [ext_resource type="PackedScene" uid="uid://feuv31qq1vnp" path="res://scenes/characters/player_1.tscn" id="2_jd0ni"]
@@ -9,6 +9,10 @@
 height = 1.72115
 radius = 0.237539
 
+[sub_resource type="SphereMesh" id="SphereMesh_5np3v"]
+radial_segments = 16
+rings = 4
+
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0042032, 0)
 collision_layer = 513
@@ -16,12 +20,14 @@ collision_mask = 3
 script = ExtResource("1_q3dva")
 
 [node name="Character" parent="." instance=ExtResource("2_jd0ni")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0946799, 0, 0)
 
 [node name="CollisionShapeBody" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00842277, 0.861221, -0.016487)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00734506, 0.861221, 0.00452882)
 shape = SubResource("CylinderShape3D_2huph")
 
 [node name="Interactions" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_0h8y3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0946799, 0, 0)
 player = NodePath("..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -41,5 +47,10 @@ bus = &"Effects"
 
 [node name="RayCastToFloor" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.247987, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.394128, 0)
+layers = 65536
+mesh = SubResource("SphereMesh_5np3v")
 
 [connection signal="timeout" from="TimerUse" to="." method="_on_timer_attack_timeout"]

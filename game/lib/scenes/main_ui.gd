@@ -25,6 +25,7 @@ class_name MainUI extends Control
 @onready var hp = $HUD/HP
 @onready var xp = $HUD/XP
 @onready var endurance = $HUD/Endurance
+@onready var fps = $HUD/LabelFPS
 
 const compass_rotation = [ 0.0, -90.0, -180.0, -270.0 ]
 
@@ -94,6 +95,7 @@ func _input(event):
 
 func _process(delta):
 	hp.value = GameState.player_state.hp
+	fps.text = str(Engine.get_frames_per_second())
 
 func _physics_process(delta):
 	for node in _notifs.keys():

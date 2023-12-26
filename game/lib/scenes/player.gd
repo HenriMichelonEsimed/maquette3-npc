@@ -98,6 +98,9 @@ func _physics_process(delta):
 		if Input.is_action_pressed("player_right") or  Input.is_action_pressed("player_left") or  Input.is_action_pressed("player_backward") or  Input.is_action_pressed("player_forward"):
 			stop_move_to()
 		else:
+			if (position.distance_to(move_to_target) < 0.2):
+				stop_move_to()
+				return
 			var look_at_target = move_to_target
 			look_at_target.y = position.y
 			look_at(look_at_target)
@@ -114,9 +117,7 @@ func _physics_process(delta):
 				velocity.y = velocity.y - (fall_acceleration * 2 * delta)
 			move_to_previous_position = position
 			move_and_slide()
-			if (position.distance_to(move_to_previous_position) < 0.01):
-				stop_move_to()
-				return
+			SimpleGrass.set_player_position(global_position) 
 			_update_camera()
 			return
 		
@@ -163,6 +164,7 @@ func _physics_process(delta):
 		#anim.play(Consts.ANIM_JUMPING)
 	velocity = target_velocity
 	move_and_slide()
+	SimpleGrass.set_player_position(global_position) 
 	if direction != Vector3.ZERO:
 		_update_camera()
 

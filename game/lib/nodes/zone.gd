@@ -10,6 +10,7 @@ func _init(_state:ZoneState=null):
 		state = _state.new(self)
 
 func _ready():
+	SimpleGrass.set_interactive(true) 
 	for node:Node in find_children("*_Roof", "", true, true):
 		node.visible = true
 	if (state == null) : 
