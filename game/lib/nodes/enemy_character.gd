@@ -60,6 +60,7 @@ var states:Dictionary = {
 		setvar_player_detected,
 		condition_attack_player,
 		condition_player_detected_and_not_hidden,
+		condition_getaround_enemy,
 		condition_is_blocked,
 		condition_heard_hit,
 		condition_heard_help_call,
@@ -238,12 +239,15 @@ func condition_player_in_hearing_distance(_delta):
 	return StateMachine.Result.CONTINUE
 
 func condition_getaround_enemy(_delta):
-	if (getaround_count < getaround_count_trigger) and player_hidden and is_colliding and (last_collider is EnemyCharacter) and (player_detected):
-		detected_position = last_collider.position
-		detected_position.x += escape_direction * randf() * getaround_count
-		detected_position.z += -1.0 * randf() * getaround_count
-		getaround_count += 1
-		return state.change_state(States.MOVE_TO_POSITION, "getaround_enemy")
+	if player_hidden and is_colliding and (last_collider is EnemyCharacter) and (player_detected):
+		if (getaround_count < getaround_count_trigger):
+			detected_position = last_collider.position
+			detected_position.x += escape_direction * randf() * getaround_count
+			detected_position.z += -1.0 * randf() * getaround_count
+			getaround_count += 1
+			return state.change_state(States.MOVE_TO_POSITION, "getaround_enemy")
+		else:
+			look_at(GameState.player.position)
 	return StateMachine.Result.CONTINUE
 
 func condition_preconditions(_delta) -> StateMachine.Result:
@@ -413,6 +417,7 @@ func action_idle(_delta):
 	if (anim.current_animation != ANIM_IDLE):
 		#print("%s idle from %s" % [name, anim.current_animation])
 		anim.play(ANIM_IDLE, 0.2)
+		anim.seek(randf())
 	else:
 		_idle_rotation(randf_range(-45, 45), 10)
 
@@ -552,6 +557,7 @@ func _on_animation_tree_animation_finished(anim_name):
 
 func _on_player_moving():
 	if (player_detected) :
+		getaround_count = 0
 		is_blocked_count = 0
 
 #endregion
