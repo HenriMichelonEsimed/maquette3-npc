@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://0326gqgjjtkv"]
+[gd_scene load_steps=29 format=3 uid="uid://0326gqgjjtkv"]
 
 [ext_resource type="Script" path="res://lib/nodes/zone.gd" id="1_3tay3"]
 [ext_resource type="Terrain3DMaterial" uid="uid://bh2je3jcyw70l" path="res://assets/materials/terrain/grass_1.tres" id="2_6mkug"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://c6xhg44lsoxct" path="res://models/terrain/trees/tree_1.tscn" id="20_qh868"]
 [ext_resource type="PackedScene" uid="uid://ncrjay68ndvr" path="res://models/terrain/trees/tree_2.tscn" id="21_eid55"]
 [ext_resource type="PackedScene" uid="uid://578gtry3wdbt" path="res://models/terrain/trees/tree_3.tscn" id="22_b1kma"]
+[ext_resource type="PackedScene" uid="uid://bf7krp07f51ww" path="res://scenes/characters/undead_1.tscn" id="23_3ocx3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_whqtd"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -113,7 +114,7 @@ transform = Transform3D(0.783834, 0, 0.62097, 0, 1, 0, -0.62097, 0, 0.783834, -1
 transform = Transform3D(0.999619, 0, 0.0275902, 0, 1, 0, -0.0275902, 0, 0.999619, 1.75787, 0, 1.62506)
 
 [node name="EnemySpawnPoint" type="Node3D" parent="." node_paths=PackedStringArray("count_roll", "spawn_path")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 643.504, 0, 552.139)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 518.404, 0, 535.175)
 script = ExtResource("16_u18of")
 count_roll = NodePath("CountRoll")
 spawn_path = NodePath("SpawnPath")
@@ -193,3 +194,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 552.742, 0, 527.887)
 
 [node name="Platano_10" parent="Trees" instance=ExtResource("19_bm26j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 548.552, 0, 535.267)
+
+[node name="Undead1" parent="." instance=ExtResource("23_3ocx3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 521.909, 0, 513.732)
+
+[node name="Undead2" parent="." instance=ExtResource("23_3ocx3")]
+transform = Transform3D(0.795886, 0, -0.605447, 0, 1, 0, 0.605447, 0, 0.795886, 524.739, 0, 520.007)

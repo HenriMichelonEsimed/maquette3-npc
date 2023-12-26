@@ -35,6 +35,7 @@ const SHORTCUT_USE = "use"
 const SHORTCUT_UNUSE = "unuse"
 const SHORTCUT_ALL = "all"
 const SHORTCUT_ACCEPT = "accept"
+const SHORTCUT_INFO = "info"
 
 const ITEMS_PATH = [ 'weapons', 'tools', 'consum', 'misc', 'quest']
 
@@ -125,6 +126,10 @@ static func reset_shortcut_icon(button:Control):
 
 static func get_nearest_point(position:Vector3, array:Array[Vector3]) -> Vector3:
 	array.sort_custom( func(a,b): return a.distance_to(position)<b.distance_to(position) )
+	return array[0]
+
+static func get_nearest_node(node:Node3D, array:Array[Node3D]) -> Node3D:
+	array.sort_custom( func(a,b): return a.global_position.distance_to(node.global_position)<b.global_position.distance_to(node.global_position) )
 	return array[0]
 
 static func get_nearest_path(position:Vector3, array:Array[NearestPath]) -> NearestPath:

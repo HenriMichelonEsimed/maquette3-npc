@@ -35,6 +35,8 @@ var _trade_screen:Dialog
 var _highlighted_mesh:MeshInstance3D
 var _highlighted_mat:Material
 var _notifs = {}
+var _last_enemy_info:int
+var _enemies_info:Array[Node3D]
 
 func _ready():
 	blur.visible = false
@@ -86,6 +88,9 @@ func _input(event):
 			_on_save_before_quit_confirm(true)
 		elif Input.is_action_just_released("inventory"):
 			inventory_open()
+		elif Input.is_action_just_released("info"):
+			display_enemy_info()
+			
 
 func _process(delta):
 	hp.value = GameState.player_state.hp
@@ -299,3 +304,18 @@ func _on_button_pressed():
 func endurance_change():
 	endurance.max_value = GameState.player_state.endurance_max
 	endurance.value = GameState.player_state.endurance
+
+func display_enemy_info(next:bool=false):
+	if (not next):
+		_enemies_info = []
+		for enemy:EnemyCharacter in get_parent().find_children("", "EnemyCharacter", true, false):
+			if (enemy.player_in_info_area):
+				_enemies_info.push_back(enemy)
+		if (_enemies_info.is_empty()): return
+		var nearest = Tools.get_nearest_node(GameState.player, _enemies_info)
+		_last_enemy_info = _enemies_info.find(nearest)
+	else:
+		_last_enemy_info += 1
+		if (_last_enemy_info >= _enemies_info.size()):
+			_last_enemy_info = 0
+	Tools.load_dialog(self, Tools.DIALOG_ENEMY_INFO, GameState.resume_game).open(_enemies_info[_last_enemy_info], true)

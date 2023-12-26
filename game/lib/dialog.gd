@@ -8,6 +8,7 @@ static var _ignore_input:bool = false
 func _ready():
 	if (GameState.game_started):
 		process_mode = PROCESS_MODE_WHEN_PAUSED
+	z_index = 2
 
 func set_shortcuts():
 	pass

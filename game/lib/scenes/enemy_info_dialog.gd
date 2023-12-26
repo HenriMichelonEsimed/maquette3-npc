@@ -10,18 +10,23 @@ extends Dialog
 @onready var detection = $Panel/MarginContainer/VBoxContainer/LabelDetectionDistance
 @onready var hear = $Panel/MarginContainer/VBoxContainer/LabelHearDistance
 @onready var weapon = $Panel/MarginContainer/VBoxContainer/LabelWeapon
-@onready var icon_cancel = $Panel/MarginContainer/VBoxContainer/HBoxContainer/IconCancel
+@onready var icon_cancel = $Panel/MarginContainer/VBoxContainer/HBoxContainer/ButtonCancel
 @onready var help = $Panel/MarginContainer/VBoxContainer/LabelHelpDistance
+@onready var button_next = $Panel/MarginContainer/VBoxContainer/PanelNext/ButtonNext
 
 func _input(event):
 	if Input.is_action_just_pressed("cancel"):
 		close()
+	if Input.is_action_just_released("info"):
+		GameState.ui.display_enemy_info(true)
 		
 func set_shortcuts():
 	Tools.set_shortcut_icon(icon_cancel, Tools.SHORTCUT_CANCEL)
+	Tools.set_shortcut_icon(button_next, Tools.SHORTCUT_INFO)
 	
-func open(enemy:EnemyCharacter):
+func open(enemy:EnemyCharacter, global:bool=false):
 	super._open()
+	button_next.visible = global
 	xp.text = tr("XP Gain : %d")  % enemy.xp 
 	label.text = str(enemy)
 	weapon.text = str(enemy.weapon)

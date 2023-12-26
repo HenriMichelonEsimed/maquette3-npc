@@ -109,6 +109,7 @@ var state:StateMachine = StateMachine.new(self, states, STATES_NAMES)
 # enemy info label & HP display
 var player_in_info_area:bool = false
 var label_info:Label = Label.new()
+var icon_info:TextureRect = TextureRect.new()
 var progress_hp:ProgressBar = ProgressBar.new()
 # attack & weapon speed cooldown timer
 var attack_allowed:bool = false
@@ -191,13 +192,17 @@ func _ready():
 	add_child(raycast_detection)
 	label_info.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label_info.visible = false
-	GameState.ui.hud.add_child(label_info)
+	get_tree().root.call_deferred("add_child", label_info)
+	icon_info.visible = false
+	icon_info.scale = Vector2(0.5, 0.5)
+	Tools.set_shortcut_icon(icon_info, Tools.SHORTCUT_INFO)
+	get_tree().root.call_deferred("add_child", icon_info)
 	progress_hp.max_value = hit_points
 	progress_hp.value = hit_points
 	progress_hp.show_percentage = false
 	progress_hp.size.x = 50
 	progress_hp.modulate = Color.RED
-	GameState.ui.hud.add_child(progress_hp)
+	get_tree().root.call_deferred("add_child", progress_hp)
 	timer_attack_cooldown.process_callback = Timer.TIMER_PROCESS_PHYSICS
 	timer_attack_cooldown.one_shot = true
 	timer_attack_cooldown.wait_time = GameMechanics.attack_cooldown(weapon.speed)
@@ -462,7 +467,7 @@ func action_move_to_escape_position(_delta):
 #region Private Methods
 
 func _to_string():
-	return label
+	return label + " " + name
 
 func _idle_rotation(angle, time):
 	if ((idle_rotation_tween == null) or (not idle_rotation_tween.is_valid())) and (randf() < 0.5):
@@ -496,6 +501,7 @@ func _update_label_info_position():
 	if (label_info == null): return
 	label_info.visible = player_in_info_area and GameState.camera.size < 30
 	progress_hp.visible = label_info.visible
+	icon_info.visible = label_info.visible
 	if (label_info.visible):
 		var pos:Vector3 = position
 		pos.y += height
@@ -507,6 +513,8 @@ func _update_label_info_position():
 		label_info.position.x -= label_info.size.x / 2
 		label_info.position.y -= label_info.size.y + progress_hp.size.y
 		label_info.add_theme_font_size_override("font_size", 14 - GameState.camera.size / 10)
+		icon_info.position.x = label_info.position.x + label_info.size.x + 1
+		icon_info.position.y = label_info.position.y
 
 func hit(hit_by:ItemWeapon):
 	var damage_points = min(hit_by.damages_roll.roll(), hit_points)

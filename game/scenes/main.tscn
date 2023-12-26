@@ -16,6 +16,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.66821, 0, 15.7788)
 camera_pivot = NodePath("../CameraPivot")
 
 [node name="MainUI" parent="." node_paths=PackedStringArray("player", "camera_pivot") instance=ExtResource("5_n75tm")]
+z_index = 1
 player = NodePath("../Player")
 camera_pivot = NodePath("../CameraPivot")
 highlighter_material = ExtResource("5_nt6im")
