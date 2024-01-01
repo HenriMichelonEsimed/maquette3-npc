@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3 uid="uid://d2qj1hscopd1f"]
+
+[ext_resource type="Script" path="res://lib/nodes/zone.gd" id="1_fj5a2"]
+[ext_resource type="Terrain3DStorage" uid="uid://b2qx4h12bl0sg" path="res://zones/level_0/terrain_2.res" id="2_byqwq"]
+[ext_resource type="Terrain3DMaterial" uid="uid://rrh2de5jm1kl" path="res://assets/materials/terrain/exterior_1.res" id="2_uehcx"]
+[ext_resource type="Terrain3DTextureList" uid="uid://c2yxt4p1muwd2" path="res://assets/textures/terrain/exterior_1.res" id="3_okkm8"]
+[ext_resource type="Script" path="res://lib/nodes/spawn_point.gd" id="5_bhob6"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_aih3m"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_25gs6"]
+sky_material = SubResource("ProceduralSkyMaterial_aih3m")
+
+[sub_resource type="Environment" id="Environment_ge2o1"]
+background_mode = 2
+sky = SubResource("Sky_25gs6")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Level0" type="Node3D"]
+script = ExtResource("1_fj5a2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.233445, 0.779622, -0.581113, 0, 0.597625, 0.801776, 0.97237, 0.187171, -0.139513, 0, 0, 0)
+light_color = Color(0.811765, 0.811765, 0.811765, 1)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ge2o1")
+
+[node name="Terrain3D" type="Terrain3D" parent="."]
+storage = ExtResource("2_byqwq")
+material = ExtResource("2_uehcx")
+texture_list = ExtResource("3_okkm8")
+
+[node name="SpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 256.239, 0, 254.042)
+script = ExtResource("5_bhob6")
