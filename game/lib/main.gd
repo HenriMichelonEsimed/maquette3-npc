@@ -12,7 +12,7 @@ func _ready():
 		GameState.current_item = null
 		CurrentItemManager.use(item)
 	else:
-		CurrentItemManager.use(Tools.load_item(Item.ItemType.ITEM_WEAPONS, "long_blade_1"))
+		CurrentItemManager.use(Tools.load_item(Item.ItemType.ITEM_WEAPONS, "short_sword_1"))
 	GameState.quests.start("main")
 	zones.change_zone(self, GameState.player_state.zone_name)
 	if (GameState.player_state.position != Vector3.ZERO):
