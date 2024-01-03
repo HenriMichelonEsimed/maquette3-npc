@@ -15,7 +15,7 @@ func _init(_node:Node3D, _states:Dictionary, _states_names:Array[String]):
 	states_names = _states_names
 	node = _node
 
-func change_state(new_state:int, from:String) -> StateMachine.Result:
+func change_state(new_state:int, _from:String) -> StateMachine.Result:
 	#print("%s %s (%s) from %s " % [node.name, states_names[new_state], from, states_names[state]])
 	state = new_state
 	return StateMachine.Result.STOP

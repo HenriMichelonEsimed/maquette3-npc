@@ -20,8 +20,8 @@ func node_notif(sender:Node3D, message:String):
 func hit(target:Node3D, weapon:ItemWeapon, damage_points:int, positive:bool=true):
 	new_hit.emit(target, weapon, damage_points, positive)
 
-func xp(xp:int):
-	xp_gain.emit(xp)
+func xp(_xp:int):
+	xp_gain.emit(_xp)
 
 func use(item:Item):
 	use_item.emit(item)

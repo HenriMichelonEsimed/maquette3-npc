@@ -142,7 +142,7 @@ var player_distance:float = 0.0
 var detected_position:Vector3 = Vector3.ZERO
 # blocked, trying to escape using a pre defined path
 var escape_position:Tools.NearestPath
-var escape_direction:int = 1.0
+var escape_direction:int = 1
 # blocked for too long
 var is_blocked_count:int = 0
 const is_blocked_count_trigger:int = 8
@@ -214,7 +214,7 @@ func _ready():
 		weapon.use_area.connect("body_entered", _on_item_hit)
 	NotificationManager.connect("new_hit", _on_new_hit)
 	NotificationManager.connect("node_call_for_help", _on_call_for_help)
-	if (randf() < 0.5): escape_direction = -1.0
+	if (randf() < 0.5): escape_direction = -1
 	GameState.player.connect("moving", _on_player_moving)
 
 func _physics_process(delta):
@@ -451,11 +451,11 @@ func action_move_to_escape_position(_delta):
 	pos.y = position.y
 	if (position.distance_to(pos) < 0.5):
 		var nearest_offset = escape_position.path.curve.get_closest_offset(position) + escape_direction
-		var max = escape_position.path.curve.get_baked_length()
-		if (nearest_offset >= max):
+		var _max = escape_position.path.curve.get_baked_length()
+		if (nearest_offset >= _max):
 			nearest_offset = 1.0
 		elif (nearest_offset <= 0):
-			nearest_offset = max - 1.0
+			nearest_offset = _max - 1.0
 		escape_position.nearest = escape_position.path.curve.sample_baked(nearest_offset)
 	else:
 		look_at(pos)
@@ -531,7 +531,7 @@ func hit(hit_by:ItemWeapon):
 	anim.play(ANIM_HIT if hit_points > 0 else ANIM_DIE)
 	is_blocked_count = 0
 
-func _on_new_hit(target:Node3D, weapon:ItemWeapon, damage_points:int, positive:bool):
+func _on_new_hit(target:Node3D, _weapon:ItemWeapon, _damage_points:int, positive:bool):
 	if positive and (target != self) and (position.distance_to(target.position) < detection_distance):
 		if (randf() < 0.2):
 			getaround_count = 0
@@ -554,7 +554,7 @@ func _on_item_hit(node:Node3D):
 		if (node is Player):
 			node.hit(weapon)
 
-func _on_input_event(camera, event, position, normal, shape_idx):
+func _on_input_event(_camera, event, _position, _normal, _shape_idx):
 	if (event is InputEventMouseButton) and (event.button_index == MOUSE_BUTTON_MIDDLE) and not(event.pressed):
 		Tools.load_dialog(self, Tools.DIALOG_ENEMY_INFO, GameState.resume_game).open(self)
 

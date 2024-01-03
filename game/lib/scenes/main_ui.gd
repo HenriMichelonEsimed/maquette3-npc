@@ -93,11 +93,11 @@ func _input(event):
 			display_enemy_info()
 			
 
-func _process(delta):
+func _process(_delta):
 	hp.value = GameState.player_state.hp
 	fps.text = str(Engine.get_frames_per_second())
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	for node in _notifs.keys():
 		for label in _notifs[node]:
 			var count = label.get_meta("count")
@@ -190,11 +190,11 @@ func display_notification(message:String):
 	label_notif.visible = true
 	timer_notif.start()
 
-func display_new_hit(target:Node3D, weapons:ItemWeapon, damage_points:int, positive:bool):
+func display_new_hit(target:Node3D, _weapons:ItemWeapon, damage_points:int, positive:bool):
 	display_moving_notification(target, "%d" % damage_points, 100, Consts.COLOR_POSITIVE if positive else  Consts.COLOR_NEGATIVE )
 	
-func display_xp_gain(xp:int):
-	display_moving_notification(GameState.player, tr("+%d XP") % xp, 150)
+func display_xp_gain(_xp:int):
+	display_moving_notification(GameState.player, tr("+%d XP") % _xp, 150)
 
 func display_xp():
 	xp.max_value = GameState.player_state.xp_next_level

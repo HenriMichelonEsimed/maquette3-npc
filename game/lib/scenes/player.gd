@@ -10,7 +10,7 @@ const ANIM_WALKING = "walk"
 const ANIM_RUNNING = "run"
 const ANIM_DIEING = "die"
 const ANIM_ATTACKING= "attack_sword_1"
-const ANIM_USING= "use"
+#const ANIM_USING= "use"
 
 @export var camera_pivot:Node3D
 
@@ -68,7 +68,7 @@ func _ready():
 	character = get_node("Character")
 	camera = camera_pivot.get_node("Camera")
 	camera.connect("view_rotate", _on_view_rotate)
-	attach_item = character.get_node("RootNode/Skeleton3D/HandAttachment/AttachmentPoint")
+	attach_item = character.get_node("Armature/Skeleton3D/HandAttachment/AttachmentPoint")
 	update_floor()
 
 func _unhandled_input(_event):

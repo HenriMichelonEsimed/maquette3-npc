@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://cfxsejwlekels"]
 
 [ext_resource type="Script" path="res://lib/scenes/player.gd" id="1_q3dva"]
-[ext_resource type="PackedScene" uid="uid://feuv31qq1vnp" path="res://scenes/characters/player_1.tscn" id="2_jd0ni"]
 [ext_resource type="PackedScene" uid="uid://bygi7i8djxa7k" path="res://scenes/interactions.tscn" id="3_0h8y3"]
-[ext_resource type="AnimationLibrary" uid="uid://b5m6srwk404r6" path="res://assets/animations/default.res" id="4_m24mr"]
+[ext_resource type="AnimationLibrary" uid="uid://d35cym7urjrbn" path="res://assets/animations/player/player.res" id="3_ehs3w"]
+[ext_resource type="PackedScene" uid="uid://bgg0t28oyk3lf" path="res://scenes/characters/player_0.tscn" id="4_2y8wt"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2huph"]
 height = 1.72115
@@ -19,9 +19,6 @@ collision_layer = 513
 collision_mask = 3
 script = ExtResource("1_q3dva")
 
-[node name="Character" parent="." instance=ExtResource("2_jd0ni")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0946799, 0, 0)
-
 [node name="CollisionShapeBody" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00734506, 0.861221, 0.00452882)
 shape = SubResource("CylinderShape3D_2huph")
@@ -33,7 +30,7 @@ player = NodePath("..")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Character")
 libraries = {
-"": ExtResource("4_m24mr")
+"": ExtResource("3_ehs3w")
 }
 
 [node name="TimerUse" type="Timer" parent="."]
@@ -52,5 +49,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.247987, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.394128, 0)
 layers = 65536
 mesh = SubResource("SphereMesh_5np3v")
+
+[node name="Character" parent="." instance=ExtResource("4_2y8wt")]
 
 [connection signal="timeout" from="TimerUse" to="." method="_on_timer_attack_timeout"]

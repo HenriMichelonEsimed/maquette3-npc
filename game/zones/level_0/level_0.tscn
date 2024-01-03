@@ -36,5 +36,5 @@ material = ExtResource("2_uehcx")
 texture_list = ExtResource("3_okkm8")
 
 [node name="SpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 256.239, 0, 254.042)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 320.669, 0, 310.105)
 script = ExtResource("5_bhob6")

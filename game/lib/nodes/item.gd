@@ -37,8 +37,7 @@ func _ready():
 func use():
 	disable()
 	position = Vector3.ZERO
-	scale = Vector3(100.0,100.0,100.0) # compensate mixamo chars scale
-	rotate_y(deg_to_rad(180))
+	scale = Vector3(100.0,100.0,100.0) # compensate mixamo/CC chars scale
 
 func unuse():
 	position = Vector3.ZERO

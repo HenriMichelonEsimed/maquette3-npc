@@ -8,16 +8,16 @@ class_name DicesRoll extends Node
 @export var minimum:int = 1
 
 func _to_string():
-	var str = "%dd%d" % [ dice_count, dice_faces]
+	var _str = "%dd%d" % [ dice_count, dice_faces]
 	if (modifier > 0):
-		str += "+%d" % modifier
+		_str += "+%d" % modifier
 	elif (modifier < 0):
-		str += "-%d" % (-modifier)
+		_str += "-%d" % (-modifier)
 	if (multiplier > 1):
-		str += "*%d" % multiplier
+		_str += "*%d" % multiplier
 	elif (divider > 1):
-		str += "/%d" % divider
-	return str
+		_str += "/%d" % divider
+	return _str
 
 func roll():
 	var points = modifier
