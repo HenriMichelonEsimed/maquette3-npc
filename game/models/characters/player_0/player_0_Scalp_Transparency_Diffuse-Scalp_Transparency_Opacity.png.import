@@ -2,14 +2,13 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7duhtegiq7wb"
+uid="uid://cax0nte2vi05x"
 path.s3tc="res://.godot/imported/player_0_Scalp_Transparency_Diffuse-Scalp_Transparency_Opacity.png-a12216ccc51b57f37a45903811893723.s3tc.ctex"
 path.etc2="res://.godot/imported/player_0_Scalp_Transparency_Diffuse-Scalp_Transparency_Opacity.png-a12216ccc51b57f37a45903811893723.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
-generator_parameters={}
 
 [deps]
 

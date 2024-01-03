@@ -2,14 +2,13 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2xdcmu8tff4b"
+uid="uid://dknul7wx86gaw"
 path.s3tc="res://.godot/imported/player_0_Std_Eye_L_Diffuse.jpg-5deacca538d1de98cb7517b271698539.s3tc.ctex"
 path.etc2="res://.godot/imported/player_0_Std_Eye_L_Diffuse.jpg-5deacca538d1de98cb7517b271698539.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
-generator_parameters={}
 
 [deps]
 

@@ -2,14 +2,13 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvrfsi5ikc83p"
+uid="uid://dg0fgv4b3g7vy"
 path.s3tc="res://.godot/imported/player_0_Hair_Transparency_Diffuse_0002-Hair_Transparency_Opacity_0002.png-465bb6cbf6b57851e302af44ef7c4103.s3tc.ctex"
 path.etc2="res://.godot/imported/player_0_Hair_Transparency_Diffuse_0002-Hair_Transparency_Opacity_0002.png-465bb6cbf6b57851e302af44ef7c4103.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
-generator_parameters={}
 
 [deps]
 

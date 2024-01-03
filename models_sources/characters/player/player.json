@@ -22,7 +22,7 @@
                                 "WorldTranslate": [
                                     -5.457330703735352,
                                     -0.3090982437133789,
-                                    100.33706665039063
+                                    102.95011138916016
                                 ],
                                 "WorldRotationQ": [
                                     0.8121441006660461,
@@ -48,7 +48,7 @@
                                 "WorldTranslate": [
                                     5.457338333129883,
                                     -0.3090982437133789,
-                                    100.33706665039063
+                                    102.95011901855469
                                 ],
                                 "WorldRotationQ": [
                                     0.8121441006660461,
@@ -74,23 +74,23 @@
                                 "Friction": 0.05000000074505806,
                                 "Elasticity": 0.5,
                                 "WorldTranslate": [
-                                    9.483585357666016,
-                                    0.9978587627410889,
-                                    68.79039764404297
+                                    9.652131080627442,
+                                    0.539147138595581,
+                                    71.243896484375
                                 ],
                                 "WorldRotationQ": [
-                                    -0.00342171941883862,
-                                    0.753493070602417,
-                                    -0.6574339270591736,
-                                    -0.004149693995714188
+                                    -0.0037193316966295244,
+                                    0.7509998679161072,
+                                    -0.6602771878242493,
+                                    -0.004392371512949467
                                 ],
                                 "WorldScale": [
+                                    1.0000001192092896,
                                     1.0,
-                                    0.9999999403953552,
-                                    1.0
+                                    1.0000001192092896
                                 ],
-                                "Radius": 8.088908195495606,
-                                "Capsule Length": 43.094200134277347
+                                "Radius": 8.088907241821289,
+                                "Capsule Length": 43.09419631958008
                             }
                         },
                         "CC_Base_L_Calf": {
@@ -102,23 +102,23 @@
                                 "Friction": 0.05000000074505806,
                                 "Elasticity": 0.5,
                                 "WorldTranslate": [
-                                    7.809972286224365,
-                                    3.1181275844573976,
-                                    26.38836669921875
+                                    7.9115824699401859,
+                                    2.649911880493164,
+                                    27.617881774902345
                                 ],
                                 "WorldRotationQ": [
-                                    0.005062797572463751,
-                                    -0.6932927370071411,
-                                    0.7206195592880249,
-                                    0.005203227512538433
+                                    0.005462031811475754,
+                                    -0.6949017643928528,
+                                    0.7190622687339783,
+                                    0.005583543796092272
                                 ],
                                 "WorldScale": [
-                                    1.000000238418579,
                                     1.0000003576278687,
+                                    1.000000238418579,
                                     1.0000001192092896
                                 ],
                                 "Radius": 6.164678573608398,
-                                "Capsule Length": 35.07792282104492
+                                "Capsule Length": 35.07792663574219
                             }
                         },
                         "CC_Base_R_Thigh": {
@@ -130,23 +130,23 @@
                                 "Friction": 0.05000000074505806,
                                 "Elasticity": 0.5,
                                 "WorldTranslate": [
-                                    -9.037425994873047,
-                                    0.9938192367553711,
-                                    68.80949401855469
+                                    -9.205982208251954,
+                                    0.5349502563476563,
+                                    71.26336669921875
                                 ],
                                 "WorldRotationQ": [
-                                    0.008646479807794094,
-                                    0.7534435987472534,
-                                    -0.6573830246925354,
-                                    0.009777908213436604
+                                    0.008923355489969254,
+                                    0.750944972038269,
+                                    -0.6602281928062439,
+                                    0.010039612650871277
                                 ],
                                 "WorldScale": [
+                                    1.0,
                                     1.0000001192092896,
-                                    1.000000238418579,
-                                    1.000000238418579
+                                    1.0
                                 ],
-                                "Radius": 8.055522918701172,
-                                "Capsule Length": 43.1326789855957
+                                "Radius": 8.055524826049805,
+                                "Capsule Length": 43.13267517089844
                             }
                         },
                         "CC_Base_R_Calf": {
@@ -158,22 +158,22 @@
                                 "Friction": 0.05000000074505806,
                                 "Elasticity": 0.5,
                                 "WorldTranslate": [
-                                    -7.806704521179199,
-                                    3.210843563079834,
-                                    26.39338493347168
+                                    -7.908339500427246,
+                                    2.742345094680786,
+                                    27.62257194519043
                                 ],
                                 "WorldRotationQ": [
-                                    -0.005064846947789192,
-                                    -0.6932772994041443,
-                                    0.7206343412399292,
-                                    -0.005204964429140091
+                                    -0.005463411565870047,
+                                    -0.6948882341384888,
+                                    0.7190753817558289,
+                                    -0.005584761034697294
                                 ],
                                 "WorldScale": [
                                     1.000000238418579,
                                     1.0000001192092896,
-                                    1.0000001192092896
+                                    1.0000003576278687
                                 ],
-                                "Radius": 6.154086112976074,
+                                "Radius": 6.154085159301758,
                                 "Capsule Length": 35.09910583496094
                             }
                         },
@@ -186,19 +186,19 @@
                                 "Friction": 0.05000000074505806,
                                 "Elasticity": 0.5,
                                 "WorldTranslate": [
-                                    -0.00023312182747758925,
-                                    -0.7970011234283447,
-                                    122.23362731933594
+                                    -0.00022793616517446935,
+                                    -0.9602131843566895,
+                                    125.25547790527344
                                 ],
                                 "WorldRotationQ": [
-                                    0.44489243626594546,
-                                    0.5496096014976502,
-                                    0.44489243626594546,
-                                    0.5496096014976502
+                                    0.44767263531684878,
+                                    0.547347366809845,
+                                    0.44767263531684878,
+                                    0.5473474264144898
                                 ],
                                 "WorldScale": [
-                                    0.9999998807907105,
-                                    0.9999998807907105,
+                                    0.9999999403953552,
+                                    0.9999999403953552,
                                     1.0
                                 ],
                                 "Radius": 12.7628173828125,
@@ -214,23 +214,23 @@
                                 "Friction": 0.05000000074505806,
                                 "Elasticity": 0.5,
                                 "WorldTranslate": [
-                                    0.0003188283008057624,
-                                    3.6411991119384767,
-                                    146.20822143554688
+                                    0.00023146682360675186,
+                                    3.5256783962249758,
+                                    150.2830810546875
                                 ],
                                 "WorldRotationQ": [
-                                    0.8009350895881653,
-                                    -2.2480875827568526e-7,
-                                    2.292301246598072e-7,
-                                    0.5987511873245239
+                                    0.7941268682479858,
+                                    -6.432304076042783e-7,
+                                    4.793222387888818e-7,
+                                    0.6077520251274109
                                 ],
                                 "WorldScale": [
                                     1.0,
-                                    0.9999999403953552,
-                                    0.9999999403953552
+                                    1.000000238418579,
+                                    1.000000238418579
                                 ],
-                                "Radius": 5.208508014678955,
-                                "Capsule Length": 5.25217342376709
+                                "Radius": 5.208507537841797,
+                                "Capsule Length": 5.252170562744141
                             },
                             "Capsule(0)": {
                                 "Bone Active": true,
@@ -240,23 +240,23 @@
                                 "Friction": 0.05000000074505806,
                                 "Elasticity": 0.5,
                                 "WorldTranslate": [
-                                    0.0029073860496282579,
-                                    4.535768985748291,
-                                    133.2486114501953
+                                    0.0028335154056549074,
+                                    4.127528190612793,
+                                    137.30657958984376
                                 ],
                                 "WorldRotationQ": [
-                                    0.5663465261459351,
-                                    0.42338088154792788,
-                                    0.5663467645645142,
-                                    0.42338114976882937
+                                    0.5615321397781372,
+                                    0.429745078086853,
+                                    0.5615328550338745,
+                                    0.42974603176116946
                                 ],
                                 "WorldScale": [
-                                    0.9999998211860657,
-                                    0.9999998807907105,
+                                    1.0000001192092896,
+                                    1.000000238418579,
                                     0.9999999403953552
                                 ],
-                                "Radius": 10.248791694641114,
-                                "Capsule Length": 18.442590713500978
+                                "Radius": 10.24878978729248,
+                                "Capsule Length": 18.44258689880371
                             },
                             "Capsule(1)": {
                                 "Bone Active": true,
@@ -266,23 +266,23 @@
                                 "Friction": 0.05000000074505806,
                                 "Elasticity": 0.5,
                                 "WorldTranslate": [
-                                    -6.998734951019287,
-                                    -2.453989267349243,
-                                    130.53701782226563
+                                    -6.998808860778809,
+                                    -2.9216501712799074,
+                                    134.75343322753907
                                 ],
                                 "WorldRotationQ": [
-                                    0.2795567512512207,
-                                    0.6494979858398438,
-                                    0.2795567512512207,
-                                    0.6494985222816467
+                                    0.2722090184688568,
+                                    0.652611255645752,
+                                    0.2722090780735016,
+                                    0.6526124477386475
                                 ],
                                 "WorldScale": [
-                                    0.9999998807907105,
-                                    0.9999998807907105,
+                                    1.000000238418579,
+                                    1.0000001192092896,
                                     0.9999999403953552
                                 ],
-                                "Radius": 6.835226535797119,
-                                "Capsule Length": 12.474379539489746
+                                "Radius": 6.835224628448486,
+                                "Capsule Length": 12.474373817443848
                             },
                             "Capsule(2)": {
                                 "Bone Active": true,
@@ -292,23 +292,23 @@
                                 "Friction": 0.05000000074505806,
                                 "Elasticity": 0.5,
                                 "WorldTranslate": [
-                                    7.001265525817871,
-                                    -2.454037666320801,
-                                    130.53697204589845
+                                    7.001192092895508,
+                                    -2.921705484390259,
+                                    134.75340270996095
                                 ],
                                 "WorldRotationQ": [
-                                    0.2795567512512207,
-                                    0.6494979858398438,
-                                    0.2795567512512207,
-                                    0.6494985222816467
+                                    0.2722090184688568,
+                                    0.652611255645752,
+                                    0.2722090780735016,
+                                    0.6526124477386475
                                 ],
                                 "WorldScale": [
-                                    0.9999998807907105,
-                                    0.9999998807907105,
+                                    1.000000238418579,
+                                    1.0000001192092896,
                                     0.9999999403953552
                                 ],
-                                "Radius": 6.838827610015869,
-                                "Capsule Length": 12.466601371765137
+                                "Radius": 6.8388261795043949,
+                                "Capsule Length": 12.466596603393555
                             }
                         },
                         "CC_Base_Head": {
@@ -320,22 +320,22 @@
                                 "Friction": 0.05000000074505806,
                                 "Elasticity": 0.5,
                                 "WorldTranslate": [
-                                    0.000379180972231552,
-                                    0.5630490779876709,
-                                    157.9163818359375
+                                    0.0004060088249389082,
+                                    0.38385093212127688,
+                                    162.59689331054688
                                 ],
                                 "WorldRotationQ": [
-                                    0.7071059942245483,
-                                    0.0,
-                                    0.0,
-                                    0.7071075439453125
+                                    0.707222044467926,
+                                    -4.930839168082457e-7,
+                                    2.6321191626266229e-7,
+                                    0.7069915533065796
                                 ],
                                 "WorldScale": [
                                     1.0,
-                                    1.000000238418579,
-                                    1.000000238418579
+                                    1.0000001192092896,
+                                    1.0000001192092896
                                 ],
-                                "Radius": 7.248215675354004,
+                                "Radius": 7.248217582702637,
                                 "Capsule Length": 7.324506759643555
                             }
                         },
@@ -348,23 +348,23 @@
                                 "Friction": 0.05000000074505806,
                                 "Elasticity": 0.5,
                                 "WorldTranslate": [
-                                    23.42542839050293,
-                                    6.189141750335693,
-                                    132.7926788330078
+                                    24.043041229248048,
+                                    6.134718894958496,
+                                    136.481201171875
                                 ],
                                 "WorldRotationQ": [
-                                    0.3516445755958557,
-                                    0.6163297295570374,
-                                    -0.6101394891738892,
-                                    0.3524395525455475
+                                    0.35260263085365298,
+                                    0.6155800819396973,
+                                    -0.6100122928619385,
+                                    0.3530121147632599
                                 ],
                                 "WorldScale": [
                                     0.9999998807907105,
-                                    1.000000238418579,
-                                    1.0000001192092896
+                                    0.9999998807907105,
+                                    1.0
                                 ],
-                                "Radius": 5.0454277992248539,
-                                "Capsule Length": 22.943683624267579
+                                "Radius": 5.045426845550537,
+                                "Capsule Length": 22.94369125366211
                             }
                         },
                         "CC_Base_L_Forearm": {
@@ -376,23 +376,23 @@
                                 "Friction": 0.05000000074505806,
                                 "Elasticity": 0.5,
                                 "WorldTranslate": [
-                                    48.003578186035159,
-                                    6.111954212188721,
-                                    120.04923248291016
+                                    48.600223541259769,
+                                    5.903415679931641,
+                                    123.75218963623047
                                 ],
                                 "WorldRotationQ": [
-                                    0.3510848581790924,
-                                    0.621518075466156,
-                                    -0.600475013256073,
-                                    0.36039498448371889
+                                    0.3521910309791565,
+                                    0.6183910369873047,
+                                    -0.6049943566322327,
+                                    0.3571215867996216
                                 ],
                                 "WorldScale": [
-                                    1.000000238418579,
-                                    1.0,
-                                    1.000000238418579
+                                    1.0000001192092896,
+                                    0.9999998211860657,
+                                    1.0000001192092896
                                 ],
-                                "Radius": 3.7167179584503176,
-                                "Capsule Length": 23.072669982910158
+                                "Radius": 3.7167181968688967,
+                                "Capsule Length": 23.072673797607423
                             }
                         },
                         "CC_Base_L_Hand": {
@@ -404,25 +404,25 @@
                                 "Friction": 0.05000000074505806,
                                 "Elasticity": 0.5,
                                 "WorldTranslate": [
-                                    62.97869873046875,
-                                    5.862894058227539,
-                                    111.50090789794922
+                                    63.990325927734378,
+                                    5.504988670349121,
+                                    114.91303253173828
                                 ],
                                 "WorldRotationQ": [
-                                    0.341058611869812,
-                                    0.642777144908905,
-                                    -0.5707882642745972,
-                                    0.3804173767566681
+                                    0.3411561846733093,
+                                    0.6426180005073547,
+                                    -0.5709428787231445,
+                                    0.38036665320396426
                                 ],
                                 "WorldScale": [
-                                    0.9999998211860657,
-                                    0.9999998807907105,
-                                    0.9999998807907105
+                                    1.0000001192092896,
+                                    0.9999999403953552,
+                                    1.0000001192092896
                                 ],
                                 "Extent": [
-                                    4.522910118103027,
+                                    4.522909164428711,
                                     9.572020530700684,
-                                    8.070646286010743
+                                    8.07064437866211
                                 ]
                             }
                         },
@@ -435,23 +435,23 @@
                                 "Friction": 0.05000000074505806,
                                 "Elasticity": 0.5,
                                 "WorldTranslate": [
-                                    -23.430625915527345,
-                                    6.188299655914307,
-                                    132.7942352294922
+                                    -24.04852294921875,
+                                    6.13401985168457,
+                                    136.48129272460938
                                 ],
                                 "WorldRotationQ": [
-                                    -0.35155004262924197,
-                                    0.6163533329963684,
-                                    -0.6102280616760254,
-                                    -0.35233914852142336
+                                    -0.35253360867500307,
+                                    0.6155967712402344,
+                                    -0.6100780963897705,
+                                    -0.3529382348060608
                                 ],
                                 "WorldScale": [
                                     1.0000001192092896,
-                                    1.000000238418579,
-                                    1.0000001192092896
+                                    0.9999998807907105,
+                                    1.0
                                 ],
-                                "Radius": 5.0451860427856449,
-                                "Capsule Length": 22.957773208618165
+                                "Radius": 5.045186519622803,
+                                "Capsule Length": 22.957782745361329
                             }
                         },
                         "CC_Base_R_Forearm": {
@@ -463,23 +463,23 @@
                                 "Friction": 0.05000000074505806,
                                 "Elasticity": 0.5,
                                 "WorldTranslate": [
-                                    -47.999366760253909,
-                                    6.112313270568848,
-                                    120.05172729492188
+                                    -48.596961975097659,
+                                    5.9034271240234379,
+                                    123.75357818603516
                                 ],
                                 "WorldRotationQ": [
-                                    -0.35105735063552859,
-                                    0.6215125322341919,
-                                    -0.6005057692527771,
-                                    -0.36038002371788027
+                                    -0.35216501355171206,
+                                    0.618388831615448,
+                                    -0.6050219535827637,
+                                    -0.3571043312549591
                                 ],
                                 "WorldScale": [
-                                    0.9999998807907105,
-                                    1.0000001192092896,
-                                    0.9999999403953552
+                                    1.0,
+                                    1.0,
+                                    1.0000001192092896
                                 ],
-                                "Radius": 3.712937355041504,
-                                "Capsule Length": 23.07701873779297
+                                "Radius": 3.7129366397857668,
+                                "Capsule Length": 23.0770206451416
                             }
                         },
                         "CC_Base_R_Hand": {
@@ -491,25 +491,81 @@
                                 "Friction": 0.05000000074505806,
                                 "Elasticity": 0.5,
                                 "WorldTranslate": [
-                                    -62.9505615234375,
-                                    6.128390312194824,
-                                    111.49214172363281
+                                    -63.96318817138672,
+                                    5.770561695098877,
+                                    114.90288543701172
                                 ],
                                 "WorldRotationQ": [
-                                    -0.34104377031326296,
-                                    0.6427591443061829,
-                                    -0.5708185434341431,
-                                    -0.38041558861732485
+                                    -0.34113791584968569,
+                                    0.6426074504852295,
+                                    -0.5709732174873352,
+                                    -0.3803553879261017
                                 ],
                                 "WorldScale": [
+                                    1.0000001192092896,
                                     1.0,
-                                    1.000000238418579,
                                     1.0000001192092896
                                 ],
                                 "Extent": [
                                     5.314798831939697,
-                                    9.573324203491211,
+                                    9.573325157165528,
                                     8.195562362670899
+                                ]
+                            }
+                        },
+                        "default": {
+                            "": {
+                                "Bone Active": false,
+                                "Bone Active": false,
+                                "Bound Type": "Box",
+                                "Margin": 0.800000011920929,
+                                "Friction": 0.05000000074505806,
+                                "Elasticity": 0.5,
+                                "WorldTranslate": [
+                                    0.0,
+                                    0.0,
+                                    0.0
+                                ],
+                                "WorldRotationQ": [
+                                    0.0,
+                                    0.0,
+                                    0.0,
+                                    1.0
+                                ],
+                                "WorldScale": [
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ],
+                                "Extent": [
+                                    0.0,
+                                    0.0,
+                                    0.0
+                                ],
+                                "Bound Axis": "Y",
+                                "Margin": 0.800000011920929,
+                                "Friction": 0.05000000074505806,
+                                "Elasticity": 0.5,
+                                "WorldTranslate": [
+                                    0.0,
+                                    0.0,
+                                    0.0
+                                ],
+                                "WorldRotationQ": [
+                                    0.0,
+                                    0.0,
+                                    0.0,
+                                    1.0
+                                ],
+                                "WorldScale": [
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ],
+                                "Extent": [
+                                    0.0,
+                                    0.0,
+                                    0.0
                                 ]
                             }
                         }
@@ -653,7 +709,7 @@
                                     "Shader Name": "RLTongue",
                                     "Image": {
                                         "MicroNormal": {
-                                            "Texture Path": "./textures/player/player/CC_Base_Body/Std_Skin_Leg/Std_Skin_Leg_MicroN.png"
+                                            "Texture Path": "./textures/player/player/CC_Base_Tongue/Std_Tongue/Std_Tongue_MicroN.png"
                                         },
                                         "Gradient AO": {
                                             "Texture Path": "./textures/player/player/CC_Base_Tongue/Std_Tongue/Std_Tongue_GradAO.jpg"
@@ -790,7 +846,7 @@
                                             "Texture Path": "./textures/player/player/CC_Base_Body/Std_Skin_Head/Std_Skin_Head_SSSMap.jpg"
                                         },
                                         "MicroNormal": {
-                                            "Texture Path": "./textures/player/player/CC_Base_Body/Std_Skin_Leg/Std_Skin_Leg_MicroN.png"
+                                            "Texture Path": "./textures/player/player/CC_Base_Tongue/Std_Tongue/Std_Tongue_MicroN.png"
                                         },
                                         "Cheek Fore UpperLip Chin Mask": {
                                             "Texture Path": "./textures/player/player/CC_Base_Body/Std_Skin_Head/Std_Skin_Head_CFULCMask.tga"
@@ -988,7 +1044,7 @@
                                             "Texture Path": "./textures/player/player/CC_Base_Body/Std_Skin_Body/Std_Skin_Body_SSSMap.png"
                                         },
                                         "MicroNormal": {
-                                            "Texture Path": "./textures/player/player/CC_Base_Body/Std_Skin_Leg/Std_Skin_Leg_MicroN.png"
+                                            "Texture Path": "./textures/player/player/CC_Base_Tongue/Std_Tongue/Std_Tongue_MicroN.png"
                                         },
                                         "MicroNormalMask": {
                                             "Texture Path": "./textures/player/player/CC_Base_Body/Std_Skin_Body/Std_Skin_Body_MicroNMask.jpg"
@@ -1138,7 +1194,7 @@
                                             "Texture Path": "./textures/player/player/CC_Base_Body/Std_Skin_Arm/Std_Skin_Arm_SSSMap.png"
                                         },
                                         "MicroNormal": {
-                                            "Texture Path": "./textures/player/player/CC_Base_Body/Std_Skin_Leg/Std_Skin_Leg_MicroN.png"
+                                            "Texture Path": "./textures/player/player/CC_Base_Tongue/Std_Tongue/Std_Tongue_MicroN.png"
                                         },
                                         "MicroNormalMask": {
                                             "Texture Path": "./textures/player/player/CC_Base_Body/Std_Skin_Arm/Std_Skin_Arm_MicroNMask.jpg"
@@ -1300,7 +1356,7 @@
                                             "Texture Path": "./textures/player/player/CC_Base_Body/Std_Skin_Leg/Std_Skin_Leg_SSSMap.png"
                                         },
                                         "MicroNormal": {
-                                            "Texture Path": "./textures/player/player/CC_Base_Body/Std_Skin_Leg/Std_Skin_Leg_MicroN.png"
+                                            "Texture Path": "./textures/player/player/CC_Base_Tongue/Std_Tongue/Std_Tongue_MicroN.png"
                                         },
                                         "MicroNormalMask": {
                                             "Texture Path": "./textures/player/player/CC_Base_Body/Std_Skin_Leg/Std_Skin_Leg_MicroNMask.jpg"
@@ -1450,7 +1506,7 @@
                                             "Texture Path": "./textures/player/player/CC_Base_Body/Std_Nails/Std_Nails_SSSMap.jpg"
                                         },
                                         "MicroNormal": {
-                                            "Texture Path": "./textures/player/player/CC_Base_Body/Std_Skin_Leg/Std_Skin_Leg_MicroN.png"
+                                            "Texture Path": "./textures/player/player/CC_Base_Tongue/Std_Tongue/Std_Tongue_MicroN.png"
                                         },
                                         "MicroNormalMask": {
                                             "Texture Path": "./textures/player/player/CC_Base_Body/Std_Nails/Std_Nails_MicroNMask.jpg"
@@ -1751,19 +1807,19 @@
                                     "Shader Name": "RLEye",
                                     "Image": {
                                         "Iris Normal": {
-                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_L/Std_Cornea_L_IrisN.png"
+                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_R/Std_Cornea_R_IrisN.png"
                                         },
                                         "Sclera Normal": {
-                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_L/Std_Cornea_L_ScleraN.png"
+                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_R/Std_Cornea_R_ScleraN.png"
                                         },
                                         "EyeBlendMap2": {
-                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_L/Std_Cornea_L_BCBMap.jpg"
+                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_R/Std_Cornea_R_BCBMap.jpg"
                                         },
                                         "Inner Iris Mask": {
-                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_L/Std_Cornea_L_IrisMask.png"
+                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_R/Std_Cornea_R_IrisMask.png"
                                         },
                                         "Sclera": {
-                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_L/Std_Cornea_L_Sclera.jpg"
+                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_R/Std_Cornea_R_Sclera.jpg"
                                         }
                                     },
                                     "Variable": {
@@ -1968,19 +2024,19 @@
                                     "Shader Name": "RLEye",
                                     "Image": {
                                         "Iris Normal": {
-                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_L/Std_Cornea_L_IrisN.png"
+                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_R/Std_Cornea_R_IrisN.png"
                                         },
                                         "Sclera Normal": {
-                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_L/Std_Cornea_L_ScleraN.png"
+                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_R/Std_Cornea_R_ScleraN.png"
                                         },
                                         "EyeBlendMap2": {
-                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_L/Std_Cornea_L_BCBMap.jpg"
+                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_R/Std_Cornea_R_BCBMap.jpg"
                                         },
                                         "Inner Iris Mask": {
-                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_L/Std_Cornea_L_IrisMask.png"
+                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_R/Std_Cornea_R_IrisMask.png"
                                         },
                                         "Sclera": {
-                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_L/Std_Cornea_L_Sclera.jpg"
+                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_R/Std_Cornea_R_Sclera.jpg"
                                         }
                                     },
                                     "Variable": {
@@ -2129,13 +2185,13 @@
                                     "Shader Name": "RLTeethGum",
                                     "Image": {
                                         "MicroNormal": {
-                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_L/Std_Cornea_L_ScleraN.png"
+                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_R/Std_Cornea_R_ScleraN.png"
                                         },
                                         "Gradient AO": {
                                             "Texture Path": "./textures/player/player/CC_Base_Tongue/Std_Tongue/Std_Tongue_GradAO.jpg"
                                         },
                                         "Gums Mask": {
-                                            "Texture Path": "./textures/player/CC_Base_Teeth/CC_Base_Teeth/Std_Upper_Teeth/Std_Upper_Teeth_GumsMask.jpg"
+                                            "Texture Path": "./textures/player/CC_Base_Teeth/CC_Base_Teeth/Std_Lower_Teeth/Std_Lower_Teeth_GumsMask.jpg"
                                         }
                                     },
                                     "Variable": {
@@ -2264,13 +2320,13 @@
                                     "Shader Name": "RLTeethGum",
                                     "Image": {
                                         "MicroNormal": {
-                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_L/Std_Cornea_L_ScleraN.png"
+                                            "Texture Path": "./textures/player/CC_Base_Eye/CC_Base_Eye/Std_Cornea_R/Std_Cornea_R_ScleraN.png"
                                         },
                                         "Gradient AO": {
                                             "Texture Path": "./textures/player/player/CC_Base_Tongue/Std_Tongue/Std_Tongue_GradAO.jpg"
                                         },
                                         "Gums Mask": {
-                                            "Texture Path": "./textures/player/CC_Base_Teeth/CC_Base_Teeth/Std_Upper_Teeth/Std_Upper_Teeth_GumsMask.jpg"
+                                            "Texture Path": "./textures/player/CC_Base_Teeth/CC_Base_Teeth/Std_Lower_Teeth/Std_Lower_Teeth_GumsMask.jpg"
                                         }
                                     },
                                     "Variable": {
@@ -3250,216 +3306,6 @@
                             }
                         }
                     },
-                    "Bun": {
-                        "Materials": {
-                            "Hair_Transparency": {
-                                "Material Type": "Pbr",
-                                "MultiUV Index": 0,
-                                "Node Type": "Hair",
-                                "Two Side": true,
-                                "Diffuse Color": [
-                                    255.0,
-                                    255.0,
-                                    255.0
-                                ],
-                                "Ambient Color": [
-                                    149.99099731445313,
-                                    149.99099731445313,
-                                    149.99099731445313
-                                ],
-                                "Specular Color": [
-                                    229.5,
-                                    229.5,
-                                    229.5
-                                ],
-                                "Opacity": 1.0,
-                                "Self Illumination": 0.0,
-                                "Textures": {
-                                    "Metallic": {
-                                        "Texture Path": "./textures/player/Bun/Bun/Hair_Transparency/Hair_Transparency_metallic.png",
-                                        "Strength": 100.0,
-                                        "Offset": [
-                                            0.0,
-                                            0.0
-                                        ],
-                                        "Tiling": [
-                                            1.0,
-                                            1.0
-                                        ]
-                                    },
-                                    "Base Color": {
-                                        "Texture Path": "Hair_Transparency_Diffuse_0001.png",
-                                        "Strength": 100.0,
-                                        "Offset": [
-                                            0.0,
-                                            0.0
-                                        ],
-                                        "Tiling": [
-                                            1.0,
-                                            1.0
-                                        ]
-                                    },
-                                    "Specular": {
-                                        "Texture Path": "Hair_Transparency_Specular_0001.png",
-                                        "Strength": 100.0,
-                                        "Offset": [
-                                            0.0,
-                                            0.0
-                                        ],
-                                        "Tiling": [
-                                            1.0,
-                                            1.0
-                                        ]
-                                    },
-                                    "Roughness": {
-                                        "Texture Path": "./textures/player/Bun/Bun/Hair_Transparency/Hair_Transparency_roughness.png",
-                                        "Strength": 100.0,
-                                        "Offset": [
-                                            0.0,
-                                            0.0
-                                        ],
-                                        "Tiling": [
-                                            1.0,
-                                            1.0
-                                        ]
-                                    },
-                                    "Opacity": {
-                                        "Texture Path": "Hair_Transparency_Opacity_0001.jpg",
-                                        "Strength": 100.0,
-                                        "Offset": [
-                                            0.0,
-                                            0.0
-                                        ],
-                                        "Tiling": [
-                                            1.0,
-                                            1.0
-                                        ]
-                                    },
-                                    "Blend": {
-                                        "Texture Path": "./textures/player/Bun/Bun/Hair_Transparency/Hair_Transparency_blend_multiply.jpg",
-                                        "Strength": 100.0,
-                                        "Offset": [
-                                            0.0,
-                                            0.0
-                                        ],
-                                        "Tiling": [
-                                            1.0,
-                                            1.0
-                                        ],
-                                        "Blend Mode": "Multiply"
-                                    },
-                                    "AO": {
-                                        "Texture Path": "./textures/player/Bun/Bun/Hair_Transparency/Hair_Transparency_ao.jpg",
-                                        "Strength": 100.0,
-                                        "Offset": [
-                                            0.0,
-                                            0.0
-                                        ],
-                                        "Tiling": [
-                                            1.0,
-                                            1.0
-                                        ]
-                                    }
-                                },
-                                "Custom Shader": {
-                                    "Shader Name": "RLHair",
-                                    "Image": {
-                                        "Hair Root Map": {
-                                            "Texture Path": "./textures/player/Bun/Bun/Hair_Transparency/Hair_Transparency_Hair Root Map.jpg"
-                                        },
-                                        "Hair ID Map": {
-                                            "Texture Path": "./textures/player/Bun/Bun/Hair_Transparency/Hair_Transparency_Hair ID Map.png"
-                                        },
-                                        "Hair Flow Map": {
-                                            "Texture Path": "./textures/player/Bun/Bun/Hair_Transparency/Hair_Transparency_Hair Flow Map.png"
-                                        }
-                                    },
-                                    "Variable": {
-                                        "TangentVectorColor": [
-                                            255.0,
-                                            0.0,
-                                            0.0
-                                        ],
-                                        "TangentMapFlipGreen": 1.0,
-                                        "AO Map Occlude All Lighting": 0.0,
-                                        "Diffuse Strength": 1.0,
-                                        "Hair Roughness Map Strength": 0.5189999938011169,
-                                        "Hair Specular Map Strength": 0.1979999989271164,
-                                        "Specular Strength": 0.4740000069141388,
-                                        "Secondary Specular Strength": 0.7160000205039978,
-                                        "Transmission Strength": 0.10999999940395355,
-                                        "No Back Face Triangles": 1.0,
-                                        "VertexGrayToColor": [
-                                            0.0,
-                                            0.0,
-                                            0.0
-                                        ],
-                                        "VertexColorStrength": 0.8339999914169312,
-                                        "ActiveChangeHairColor": 0.0,
-                                        "BaseColorMapStrength": 1.0,
-                                        "padding c4z": 0.0,
-                                        "paddingHasMips": 0.0,
-                                        "RootColor": [
-                                            0.0,
-                                            0.0,
-                                            0.0
-                                        ],
-                                        "padding c5w": 0.0,
-                                        "TipColor": [
-                                            29.0,
-                                            16.0,
-                                            10.0
-                                        ],
-                                        "RootTipBlendMode": 0.0,
-                                        "UseRootTipColor": 1.0,
-                                        "RootColorStrength": 1.0,
-                                        "TipColorStrength": 1.0,
-                                        "InvertRootTip": 0.0,
-                                        "_1st Dye Color": [
-                                            99.0,
-                                            67.0,
-                                            43.0
-                                        ],
-                                        "_1st Dye Strength": 0.0,
-                                        "_1st Dye Distribution from Grayscale": [
-                                            25.5,
-                                            51.0,
-                                            76.5
-                                        ],
-                                        "_1st BlendMode": 0.0,
-                                        "Mask 1st Dye by RootMap": 1.0,
-                                        "Invert 1st Dye RootMap Mask": 1.0,
-                                        "_1st Dye add Specular": 0.0,
-                                        "padding c10w": 0.0,
-                                        "_2nd Dye Color": [
-                                            255.0,
-                                            255.0,
-                                            255.0
-                                        ],
-                                        "_2nd Dye Strength": 0.0,
-                                        "_2nd Dye Distribution from Grayscale": [
-                                            25.5,
-                                            51.0,
-                                            76.5
-                                        ],
-                                        "_2nd BlendMode": 0.0,
-                                        "Mask 2nd Dye by RootMap": 0.0,
-                                        "Invert 2nd Dye RootMap Mask": 0.0,
-                                        "_2nd Dye add Specular": 0.0,
-                                        "padding c13w": 0.0,
-                                        "BlackColor Reflection Offset X": 0.0,
-                                        "BlackColor Reflection Offset Y": 0.0,
-                                        "BlackColor Reflection Offset Z": 0.0,
-                                        "padding c14w": 0.0,
-                                        "WhiteColor Reflection Offset X": 0.0,
-                                        "WhiteColor Reflection Offset Y": 0.0,
-                                        "WhiteColor Reflection Offset Z": 0.0,
-                                        "padding c15w": 0.0
-                                    }
-                                }
-                            }
-                        }
-                    },
                     "Real_Hair": {
                         "Materials": {
                             "Hair_Transparency": {
@@ -3498,7 +3344,7 @@
                                         ]
                                     },
                                     "Base Color": {
-                                        "Texture Path": "Hair_Transparency_Diffuse_0002.png",
+                                        "Texture Path": "Hair_Transparency_Diffuse_0001.png",
                                         "Strength": 100.0,
                                         "Offset": [
                                             0.0,
@@ -3510,7 +3356,7 @@
                                         ]
                                     },
                                     "Specular": {
-                                        "Texture Path": "Hair_Transparency_Specular_0002.png",
+                                        "Texture Path": "Hair_Transparency_Specular_0001.png",
                                         "Strength": 100.0,
                                         "Offset": [
                                             0.0,
@@ -3534,7 +3380,7 @@
                                         ]
                                     },
                                     "Opacity": {
-                                        "Texture Path": "Hair_Transparency_Opacity_0002.jpg",
+                                        "Texture Path": "Hair_Transparency_Opacity_0001.jpg",
                                         "Strength": 100.0,
                                         "Offset": [
                                             0.0,
@@ -3708,7 +3554,7 @@
                                         ]
                                     },
                                     "Base Color": {
-                                        "Texture Path": "Hair_Transparency_Diffuse_0003.png",
+                                        "Texture Path": "Hair_Transparency_Diffuse_0002.png",
                                         "Strength": 100.0,
                                         "Offset": [
                                             0.0,
@@ -3720,7 +3566,7 @@
                                         ]
                                     },
                                     "Specular": {
-                                        "Texture Path": "Hair_Transparency_Specular_0003.png",
+                                        "Texture Path": "Hair_Transparency_Specular_0002.png",
                                         "Strength": 100.0,
                                         "Offset": [
                                             0.0,
@@ -3744,7 +3590,7 @@
                                         ]
                                     },
                                     "Opacity": {
-                                        "Texture Path": "Hair_Transparency_Opacity_0003.jpg",
+                                        "Texture Path": "Hair_Transparency_Opacity_0002.jpg",
                                         "Strength": 100.0,
                                         "Offset": [
                                             0.0,
@@ -3862,6 +3708,298 @@
                                         "WhiteColor Reflection Offset Y": 0.0,
                                         "WhiteColor Reflection Offset Z": 0.0,
                                         "padding c15w": 0.0
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "Materials": {
+                            "Capri": {
+                                "Material Type": "Pbr",
+                                "MultiUV Index": 0,
+                                "Two Side": true,
+                                "Diffuse Color": [
+                                    204.0,
+                                    204.0,
+                                    204.0
+                                ],
+                                "Ambient Color": [
+                                    255.0,
+                                    255.0,
+                                    255.0
+                                ],
+                                "Specular Color": [
+                                    127.5,
+                                    127.5,
+                                    127.5
+                                ],
+                                "Opacity": 1.0,
+                                "Self Illumination": 0.0,
+                                "Textures": {
+                                    "Metallic": {
+                                        "Texture Path": "./textures/player/default/default/Capri/Capri_metallic.png",
+                                        "Strength": 100.0,
+                                        "Offset": [
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "Tiling": [
+                                            1.0,
+                                            1.0
+                                        ]
+                                    },
+                                    "Roughness": {
+                                        "Texture Path": "./textures/player/default/default/Capri/Capri_roughness.png",
+                                        "Strength": 100.0,
+                                        "Offset": [
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "Tiling": [
+                                            1.0,
+                                            1.0
+                                        ]
+                                    }
+                                }
+                            },
+                            "sock_002": {
+                                "Material Type": "Pbr",
+                                "MultiUV Index": 0,
+                                "Two Side": true,
+                                "Diffuse Color": [
+                                    204.0,
+                                    204.0,
+                                    204.0
+                                ],
+                                "Ambient Color": [
+                                    51.0,
+                                    51.0,
+                                    51.0
+                                ],
+                                "Specular Color": [
+                                    127.5,
+                                    127.5,
+                                    127.5
+                                ],
+                                "Opacity": 1.0,
+                                "Self Illumination": 0.0,
+                                "Textures": {
+                                    "Metallic": {
+                                        "Texture Path": "./textures/player/default/default/Armor_002/Armor_002_metallic.png",
+                                        "Strength": 100.0,
+                                        "Offset": [
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "Tiling": [
+                                            1.0,
+                                            1.0
+                                        ]
+                                    },
+                                    "Roughness": {
+                                        "Texture Path": "./textures/player/default/default/Armor_002/Armor_002_roughness.png",
+                                        "Strength": 100.0,
+                                        "Offset": [
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "Tiling": [
+                                            1.0,
+                                            1.0
+                                        ]
+                                    }
+                                }
+                            },
+                            "leg_armor_002": {
+                                "Material Type": "Pbr",
+                                "MultiUV Index": 0,
+                                "Two Side": true,
+                                "Diffuse Color": [
+                                    204.0,
+                                    204.0,
+                                    204.0
+                                ],
+                                "Ambient Color": [
+                                    51.0,
+                                    51.0,
+                                    51.0
+                                ],
+                                "Specular Color": [
+                                    127.5,
+                                    127.5,
+                                    127.5
+                                ],
+                                "Opacity": 1.0,
+                                "Self Illumination": 0.0,
+                                "Textures": {
+                                    "Metallic": {
+                                        "Texture Path": "./textures/player/default/default/Armor_002/Armor_002_metallic.png",
+                                        "Strength": 100.0,
+                                        "Offset": [
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "Tiling": [
+                                            1.0,
+                                            1.0
+                                        ]
+                                    },
+                                    "Roughness": {
+                                        "Texture Path": "./textures/player/default/default/Armor_002/Armor_002_roughness.png",
+                                        "Strength": 100.0,
+                                        "Offset": [
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "Tiling": [
+                                            1.0,
+                                            1.0
+                                        ]
+                                    }
+                                }
+                            },
+                            "cuirass_002": {
+                                "Material Type": "Pbr",
+                                "MultiUV Index": 0,
+                                "Two Side": true,
+                                "Diffuse Color": [
+                                    204.0,
+                                    204.0,
+                                    204.0
+                                ],
+                                "Ambient Color": [
+                                    51.0,
+                                    51.0,
+                                    51.0
+                                ],
+                                "Specular Color": [
+                                    127.5,
+                                    127.5,
+                                    127.5
+                                ],
+                                "Opacity": 1.0,
+                                "Self Illumination": 0.0,
+                                "Textures": {
+                                    "Metallic": {
+                                        "Texture Path": "./textures/player/default/default/Armor_002/Armor_002_metallic.png",
+                                        "Strength": 100.0,
+                                        "Offset": [
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "Tiling": [
+                                            1.0,
+                                            1.0
+                                        ]
+                                    },
+                                    "Roughness": {
+                                        "Texture Path": "./textures/player/default/default/Armor_002/Armor_002_roughness.png",
+                                        "Strength": 100.0,
+                                        "Offset": [
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "Tiling": [
+                                            1.0,
+                                            1.0
+                                        ]
+                                    }
+                                }
+                            },
+                            "Armor_002": {
+                                "Material Type": "Pbr",
+                                "MultiUV Index": 0,
+                                "Two Side": true,
+                                "Diffuse Color": [
+                                    204.0,
+                                    204.0,
+                                    204.0
+                                ],
+                                "Ambient Color": [
+                                    51.0,
+                                    51.0,
+                                    51.0
+                                ],
+                                "Specular Color": [
+                                    127.5,
+                                    127.5,
+                                    127.5
+                                ],
+                                "Opacity": 1.0,
+                                "Self Illumination": 0.0,
+                                "Textures": {
+                                    "Metallic": {
+                                        "Texture Path": "./textures/player/default/default/Armor_002/Armor_002_metallic.png",
+                                        "Strength": 100.0,
+                                        "Offset": [
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "Tiling": [
+                                            1.0,
+                                            1.0
+                                        ]
+                                    },
+                                    "Roughness": {
+                                        "Texture Path": "./textures/player/default/default/Armor_002/Armor_002_roughness.png",
+                                        "Strength": 100.0,
+                                        "Offset": [
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "Tiling": [
+                                            1.0,
+                                            1.0
+                                        ]
+                                    }
+                                }
+                            },
+                            "Arm_Armor_002": {
+                                "Material Type": "Pbr",
+                                "MultiUV Index": 0,
+                                "Two Side": true,
+                                "Diffuse Color": [
+                                    204.0,
+                                    204.0,
+                                    204.0
+                                ],
+                                "Ambient Color": [
+                                    51.0,
+                                    51.0,
+                                    51.0
+                                ],
+                                "Specular Color": [
+                                    127.5,
+                                    127.5,
+                                    127.5
+                                ],
+                                "Opacity": 1.0,
+                                "Self Illumination": 0.0,
+                                "Textures": {
+                                    "Metallic": {
+                                        "Texture Path": "./textures/player/default/default/Armor_002/Armor_002_metallic.png",
+                                        "Strength": 100.0,
+                                        "Offset": [
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "Tiling": [
+                                            1.0,
+                                            1.0
+                                        ]
+                                    },
+                                    "Roughness": {
+                                        "Texture Path": "./textures/player/default/default/Armor_002/Armor_002_roughness.png",
+                                        "Strength": 100.0,
+                                        "Offset": [
+                                            0.0,
+                                            0.0
+                                        ],
+                                        "Tiling": [
+                                            1.0,
+                                            1.0
+                                        ]
                                     }
                                 }
                             }
