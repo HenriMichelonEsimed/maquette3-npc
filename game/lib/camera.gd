@@ -86,7 +86,7 @@ func _process(_delta):
 		zoom_view(1)
 	#raycast_to_roofs.force_raycast_update()
 	if (raycast_to_roofs.is_colliding()):
-		var collider:Node3D = raycast_to_roofs.get_collider().get_parent().get_parent()
+		var collider:Node3D = raycast_to_roofs.get_collider().get_parent()
 		if (collider != last_collider):
 			_reset_camera_collider()
 		if (collider != null) and (last_collider != collider):
