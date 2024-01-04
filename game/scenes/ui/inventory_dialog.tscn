@@ -127,8 +127,25 @@ grow_horizontal = 2
 grow_vertical = 2
 focus_neighbor_top = NodePath("../..")
 focus_neighbor_bottom = NodePath(".")
-focus_next = NodePath("../../Tools/List")
+focus_next = NodePath("../../Clothes/List")
 focus_previous = NodePath("../../../../../Top/HBoxContainer/ButtonBack")
+allow_search = false
+
+[node name="Clothes" type="Control" parent="Panel/Content/Body/Content/Tabs"]
+visible = false
+layout_mode = 2
+
+[node name="List" type="ItemList" parent="Panel/Content/Body/Content/Tabs/Clothes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_top = NodePath("../..")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../../Tools/List")
+focus_previous = NodePath(".")
 allow_search = false
 
 [node name="Tools" type="Control" parent="Panel/Content/Body/Content/Tabs"]
@@ -145,7 +162,7 @@ grow_vertical = 2
 focus_neighbor_top = NodePath("../..")
 focus_neighbor_bottom = NodePath(".")
 focus_next = NodePath("../../Consumables/List")
-focus_previous = NodePath(".")
+focus_previous = NodePath("../../Clothes/List")
 allow_search = false
 
 [node name="Consumables" type="Control" parent="Panel/Content/Body/Content/Tabs"]
@@ -162,7 +179,7 @@ grow_vertical = 2
 focus_neighbor_top = NodePath("../..")
 focus_neighbor_bottom = NodePath(".")
 focus_next = NodePath("../../Miscellaneous/List")
-focus_previous = NodePath("../../Tools/List")
+focus_previous = NodePath("../../Clothes/List")
 allow_search = false
 
 [node name="Miscellaneous" type="Control" parent="Panel/Content/Body/Content/Tabs"]
@@ -409,6 +426,7 @@ icon_name = "screwdriver-wrench"
 [connection signal="tab_changed" from="Panel/Content/Body/Content/Tabs" to="." method="_on_tabs_tab_changed"]
 [connection signal="tab_selected" from="Panel/Content/Body/Content/Tabs" to="." method="_on_tabs_tab_selected"]
 [connection signal="item_selected" from="Panel/Content/Body/Content/Tabs/Weapons/List" to="." method="_on_list_weapons_item_selected"]
+[connection signal="item_selected" from="Panel/Content/Body/Content/Tabs/Clothes/List" to="." method="_on_list_tools_item_selected"]
 [connection signal="item_selected" from="Panel/Content/Body/Content/Tabs/Tools/List" to="." method="_on_list_tools_item_selected"]
 [connection signal="item_selected" from="Panel/Content/Body/Content/Tabs/Consumables/List" to="." method="_on_list_item_consumable_selected"]
 [connection signal="item_selected" from="Panel/Content/Body/Content/Tabs/Miscellaneous/List" to="." method="_on_list_miscellaneous_item_selected"]

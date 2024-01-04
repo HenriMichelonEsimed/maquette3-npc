@@ -3,10 +3,11 @@ class_name Item extends StaticBody3D
 enum ItemType {
 	ITEM_UNKNOWN		= -1,
 	ITEM_WEAPONS		= 0,
-	ITEM_TOOLS			= 1,
-	ITEM_CONSUMABLES	= 2,
-	ITEM_MISCELLANEOUS	= 3,
-	ITEM_QUEST			= 4
+	ITEM_CLOTHES		= 1,
+	ITEM_TOOLS			= 2,
+	ITEM_CONSUMABLES	= 3,
+	ITEM_MISCELLANEOUS	= 4,
+	ITEM_QUEST			= 5,
 }
 
 @export var key:String

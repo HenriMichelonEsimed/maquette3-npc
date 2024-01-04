@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://addons/fontawesome/FontAwesome.gd" id="2_ur2r2"]
 [ext_resource type="Script" path="res://addons/fontawesome/FontAwesomeButton.gd" id="5_utbrf"]
 [ext_resource type="StyleBox" uid="uid://47euwrbfa4s2" path="res://assets/styles/info_label.tres" id="6_2hh53"]
-[ext_resource type="Shader" path="res://assets/shaders/blur.gdshader" id="7_4jbex"]
+[ext_resource type="Shader" path="res://lib/shaders/blur.gdshader" id="7_4jbex"]
 [ext_resource type="Texture2D" uid="uid://lvtmakauekcr" path="res://assets/textures/ui/label_normal_280.png" id="8_58mqo"]
 [ext_resource type="PackedScene" uid="uid://r3fibn5pmeaq" path="res://scenes/ui/tool_panel.tscn" id="8_qxtma"]
 [ext_resource type="Texture2D" uid="uid://cchdrpgcvbdw2" path="res://assets/textures/compass.png" id="9_sflov"]

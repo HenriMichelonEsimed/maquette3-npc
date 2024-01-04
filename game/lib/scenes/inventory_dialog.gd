@@ -7,6 +7,7 @@ class InventoryScreenState extends State:
 
 @onready var tabs:TabContainer = $Panel/Content/Body/Content/Tabs
 @onready var list_weapons:ItemList = $Panel/Content/Body/Content/Tabs/Weapons/List
+@onready var list_clothes:ItemList = $Panel/Content/Body/Content/Tabs/Clothes/List
 @onready var list_tools:ItemList = $Panel/Content/Body/Content/Tabs/Tools/List
 @onready var list_consumables:ItemList = $Panel/Content/Body/Content/Tabs/Consumables/List
 @onready var list_quest:ItemList = $Panel/Content/Body/Content/Tabs/Quests/List
@@ -32,6 +33,7 @@ class InventoryScreenState extends State:
 
 const tab_order = [ 
 	Item.ItemType.ITEM_WEAPONS, 
+	Item.ItemType.ITEM_CLOTHES, 
 	Item.ItemType.ITEM_TOOLS, 
 	Item.ItemType.ITEM_CONSUMABLES,
 	Item.ItemType.ITEM_MISCELLANEOUS,
@@ -40,6 +42,7 @@ const tab_order = [
 
 @onready var list_content = {
 	Item.ItemType.ITEM_WEAPONS : list_weapons,
+	Item.ItemType.ITEM_CLOTHES : list_clothes,
 	Item.ItemType.ITEM_TOOLS : list_tools,
 	Item.ItemType.ITEM_CONSUMABLES : list_consumables,
 	Item.ItemType.ITEM_MISCELLANEOUS : list_miscellaneous,
@@ -122,17 +125,28 @@ func _on_list_weapons_item_selected(index):
 	list_tools.deselect_all()
 	list_miscellaneous.deselect_all()
 	list_quest.deselect_all()
+	list_clothes.deselect_all()
 	_item_details(GameState.inventory.getone_bytype(index, Item.ItemType.ITEM_WEAPONS), index)
+
+func _on_list_clothes_item_selected(index):
+	list_weapons.deselect_all()
+	list_tools.deselect_all()
+	list_consumables.deselect_all()
+	list_miscellaneous.deselect_all()
+	list_quest.deselect_all()
+	_item_details(GameState.inventory.getone_bytype(index, Item.ItemType.ITEM_CLOTHES), index)
 
 func _on_list_tools_item_selected(index):
 	list_weapons.deselect_all()
+	list_clothes.deselect_all()
 	list_consumables.deselect_all()
 	list_miscellaneous.deselect_all()
 	list_quest.deselect_all()
 	_item_details(GameState.inventory.getone_bytype(index, Item.ItemType.ITEM_TOOLS), index)
-
+	
 func _on_list_miscellaneous_item_selected(index):
 	list_weapons.deselect_all()
+	list_clothes.deselect_all()
 	list_consumables.deselect_all()
 	list_quest.deselect_all()
 	list_tools.deselect_all()
@@ -140,6 +154,7 @@ func _on_list_miscellaneous_item_selected(index):
 
 func _on_list_item_quest_selected(index):
 	list_weapons.deselect_all()
+	list_clothes.deselect_all()
 	list_consumables.deselect_all()
 	list_miscellaneous.deselect_all()
 	list_tools.deselect_all()
@@ -147,6 +162,7 @@ func _on_list_item_quest_selected(index):
 
 func _on_list_item_consumable_selected(index):
 	list_weapons.deselect_all()
+	list_clothes.deselect_all()
 	list_miscellaneous.deselect_all()
 	list_quest.deselect_all()
 	list_tools.deselect_all()
@@ -170,8 +186,8 @@ func _set_tab(diff:int):
 	state.tab = tabs.current_tab
 	state.tab += diff
 	if (state.tab < 0):
-		state.tab = 4
-	elif (state.tab > 4):
+		state.tab = 5
+	elif (state.tab > 5):
 		state.tab = 0
 	tabs.current_tab = state.tab
 
