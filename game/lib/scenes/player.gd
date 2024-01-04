@@ -307,3 +307,11 @@ func update_floor():
 				sound_walking_name = audio_name
 				audio.stream = sound_walking
 				audio.play()
+
+
+func _on_water_detection_body_entered(body):
+	pass # Replace with function body.
+
+
+func _on_water_detection_body_exited(body):
+	pass # Replace with function body.

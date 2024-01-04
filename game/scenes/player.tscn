@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfxsejwlekels"]
+[gd_scene load_steps=8 format=3 uid="uid://cfxsejwlekels"]
 
 [ext_resource type="Script" path="res://lib/scenes/player.gd" id="1_q3dva"]
 [ext_resource type="PackedScene" uid="uid://bygi7i8djxa7k" path="res://scenes/interactions.tscn" id="3_0h8y3"]
@@ -12,6 +12,9 @@ radius = 0.237539
 [sub_resource type="SphereMesh" id="SphereMesh_5np3v"]
 radial_segments = 16
 rings = 4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8yi22"]
+radius = 0.0662279
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0042032, 0)
@@ -52,4 +55,15 @@ mesh = SubResource("SphereMesh_5np3v")
 
 [node name="Character" parent="." instance=ExtResource("4_m1780")]
 
+[node name="WaterDetection" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.147111, 1.48372, 0)
+collision_layer = 0
+collision_mask = 128
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WaterDetection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0631481, -0.116061, 0)
+shape = SubResource("SphereShape3D_8yi22")
+
 [connection signal="timeout" from="TimerUse" to="." method="_on_timer_attack_timeout"]
+[connection signal="body_entered" from="WaterDetection" to="." method="_on_water_detection_body_entered"]
+[connection signal="body_exited" from="WaterDetection" to="." method="_on_water_detection_body_exited"]
