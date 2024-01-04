@@ -2,13 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://r82cvnfpydw7"
+uid="uid://cy4em2la2gdei"
 path.s3tc="res://.godot/imported/player_0_Female_Angled_Base_Transparency_Diffuse.png-8b0e225527176ecce89c32993f14f15a.s3tc.ctex"
 path.etc2="res://.godot/imported/player_0_Female_Angled_Base_Transparency_Diffuse.png-8b0e225527176ecce89c32993f14f15a.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://lib/scenes/player.gd" id="1_q3dva"]
 [ext_resource type="PackedScene" uid="uid://bygi7i8djxa7k" path="res://scenes/interactions.tscn" id="3_0h8y3"]
 [ext_resource type="AnimationLibrary" uid="uid://d35cym7urjrbn" path="res://assets/animations/player/player.res" id="3_ehs3w"]
-[ext_resource type="PackedScene" uid="uid://bgg0t28oyk3lf" path="res://scenes/characters/player_0.tscn" id="4_2y8wt"]
+[ext_resource type="PackedScene" uid="uid://dep7lgrt0diru" path="res://scenes/characters/player_0.tscn" id="4_m1780"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2huph"]
 height = 1.72115
@@ -50,6 +50,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.394128, 0)
 layers = 65536
 mesh = SubResource("SphereMesh_5np3v")
 
-[node name="Character" parent="." instance=ExtResource("4_2y8wt")]
+[node name="Character" parent="." instance=ExtResource("4_m1780")]
 
 [connection signal="timeout" from="TimerUse" to="." method="_on_timer_attack_timeout"]

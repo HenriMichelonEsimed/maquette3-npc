@@ -2,13 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://k8ecckwf5r5n"
+uid="uid://dbos2c4oa6sn2"
 path.s3tc="res://.godot/imported/player_0_Std_Nails_Normal.png-ca1d638ed12dd7f43df8c6bac0546564.s3tc.ctex"
 path.etc2="res://.godot/imported/player_0_Std_Nails_Normal.png-ca1d638ed12dd7f43df8c6bac0546564.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 

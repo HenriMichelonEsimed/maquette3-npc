@@ -2,13 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2xpocf0lyfs3"
+uid="uid://bbbo16d1crbvi"
 path.s3tc="res://.godot/imported/player_0_Std_Eyelash_Diffuse-Std_Eyelash_Opacity.png-c2eaddebcb530e7842c536fd67e407fe.s3tc.ctex"
 path.etc2="res://.godot/imported/player_0_Std_Eyelash_Diffuse-Std_Eyelash_Opacity.png-c2eaddebcb530e7842c536fd67e407fe.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 

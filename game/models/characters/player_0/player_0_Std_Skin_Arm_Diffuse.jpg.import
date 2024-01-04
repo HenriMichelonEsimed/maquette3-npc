@@ -2,13 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q5d0cmbypf4n"
+uid="uid://c62dr2ovo5s1i"
 path.s3tc="res://.godot/imported/player_0_Std_Skin_Arm_Diffuse.jpg-1698db47b93f63ca868e810f61e2fa20.s3tc.ctex"
 path.etc2="res://.godot/imported/player_0_Std_Skin_Arm_Diffuse.jpg-1698db47b93f63ca868e810f61e2fa20.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 

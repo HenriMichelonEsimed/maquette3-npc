@@ -2,11 +2,12 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d36j5grsrd7d1"
+uid="uid://cquu5tcel10ys"
 path="res://.godot/imported/player_0_Female_Angled_Transparency_Specular.png-358338aaee32a90d4b7f814c9642cd33.ctex"
 metadata={
 "vram_texture": false
 }
+generator_parameters={}
 
 [deps]
 
@@ -21,7 +22,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

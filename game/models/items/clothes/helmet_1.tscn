@@ -1,6 +1,5 @@
-[gd_scene load_steps=7 format=3 uid="uid://bnxxolifs7lpi"]
+[gd_scene load_steps=5 format=3 uid="uid://bnxxolifs7lpi"]
 
-[ext_resource type="Script" path="res://lib/nodes/item_clothes.gd" id="1_yanpt"]
 [ext_resource type="Material" uid="uid://06clojeghe5r" path="res://models/items/clothes/helmet_1/helmet_1.res" id="2_e5a7g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f8oup"]
@@ -37,18 +36,10 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_onq30")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_r0vpt"]
-size = Vector3(0.212021, 0.260254, 0.289795)
-
-[node name="helmet_1" type="StaticBody3D"]
-script = ExtResource("1_yanpt")
+[node name="helmet_1" type="Node3D"]
 
 [node name="Object_2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.0173399, 0, 0, 0, -6.01825e-09, 0.0173451, 0, -0.0168282, -6.2031e-09, -0.00177782, 0.251311, 0.0121941)
 mesh = SubResource("ArrayMesh_wdfc3")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_e5a7g")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00324249, 0.134033, 0.00671387)
-shape = SubResource("BoxShape3D_r0vpt")
