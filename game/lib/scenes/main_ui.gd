@@ -58,7 +58,7 @@ func _ready():
 	player.interactions.connect("display_info", _on_display_info)
 	player.interactions.connect("hide_info", hide_info)
 	player.connect("endurance_change", endurance_change)
-	#player.connect("update_oxygen", update_oxygen)
+	player.connect("update_oxygen", update_oxygen)
 	Input.connect("joy_connection_changed", _on_joypad_connection_changed)
 	display_xp()
 	set_shortcuts()

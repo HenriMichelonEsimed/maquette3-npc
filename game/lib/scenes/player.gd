@@ -4,6 +4,7 @@ signal start_moving()
 signal moving()
 signal stop_moving()
 signal endurance_change()
+signal update_oxygen()
 
 const ANIM_STANDING = "idle"
 const ANIM_WALKING = "walk"
@@ -51,6 +52,8 @@ var running:bool = false
 var height:float = 1.7
 # weapon speed animation scale
 var attack_speed_scale:float = 1.0
+# walking under water
+var under_water:bool = false
 
 # movement sounds
 var sound_walking:AudioStream
@@ -80,6 +83,11 @@ func _unhandled_input(_event):
 
 func _physics_process(delta):
 	if (GameState.player_state.hp <= 0): return
+	if (under_water):
+		update_oxygen.emit()
+		GameState.oxygen -= 20.0 * delta
+		if (GameState.oxygen <= 0):
+			GameState.player_state.hp = 0
 	if Input.is_action_pressed("use") and (not attack_cooldown) and (GameState.current_item != null) and (GameState.current_item is ItemWeapon) and (interactions.node_to_use == null):
 		if (not GameState.use_joypad) : 
 			look_to(get_viewport().get_mouse_position())
@@ -104,7 +112,7 @@ func _physics_process(delta):
 			var look_at_target = move_to_target
 			look_at_target.y = position.y
 			look_at(look_at_target)
-			_run_or_walk()
+			_run_or_walk(delta)
 			velocity = -transform.basis.z * speed
 			if (move_to_target.y > position.y):
 				for index in range(get_slide_collision_count()):
@@ -138,7 +146,7 @@ func _physics_process(delta):
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
 		look_at(position + direction, Vector3.UP)
-		_run_or_walk()
+		_run_or_walk(delta)
 		for index in range(get_slide_collision_count()):
 			var collision = get_slide_collision(index)
 			if (collision == null): return
@@ -168,7 +176,7 @@ func _physics_process(delta):
 	if direction != Vector3.ZERO:
 		_update_camera()
 
-func _run_or_walk():
+func _run_or_walk(delta):
 	update_floor()
 	if Input.is_action_pressed("modifier"):
 		GameState.player_state.endurance -= 2
@@ -310,8 +318,9 @@ func update_floor():
 
 
 func _on_water_detection_body_entered(body):
-	pass # Replace with function body.
-
+	under_water = true
 
 func _on_water_detection_body_exited(body):
-	pass # Replace with function body.
+	under_water = false
+	GameState.oxygen = 100.0
+	update_oxygen.emit()
