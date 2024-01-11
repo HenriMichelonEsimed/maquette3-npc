@@ -14,7 +14,7 @@ config/name="Maquette 3 - NPC & Terrain"
 run/main_scene="res://scenes/ui/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 boot_splash/show_image=false
-config/icon="res://icon.svg"
+config/icon="res://assets/icon.png"
 
 [autoload]
 
@@ -33,7 +33,7 @@ shapes/collision/shape_color=Color(0, 0.6, 0.701961, 0.745098)
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
+window/size/mode=4
 window/stretch/mode="viewport"
 window/stretch/aspect="ignore"
 window/vsync/vsync_mode=0
@@ -230,7 +230,7 @@ locale/translations=PackedStringArray("res://assets/i18n/items.fr.translation", 
 [rendering]
 
 textures/vram_compression/import_etc2_astc=true
-anti_aliasing/quality/msaa_3d=2
+anti_aliasing/quality/msaa_3d=1
 anti_aliasing/quality/screen_space_aa=1
 
 [shader_globals]

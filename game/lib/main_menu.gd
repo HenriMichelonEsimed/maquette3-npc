@@ -19,8 +19,6 @@ func _ready():
 		button_new.grab_focus()
 	else:
 		button_continue.grab_focus()
-		
-		
 
 func _on_resized():
 	if (menu != null):
