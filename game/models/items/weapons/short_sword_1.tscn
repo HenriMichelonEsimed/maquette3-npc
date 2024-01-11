@@ -88,3 +88,4 @@ minimum = 2
 
 [node name="Speed" type="Node" parent="."]
 script = ExtResource("5_mxa1g")
+minimum = 2

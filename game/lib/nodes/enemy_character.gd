@@ -476,7 +476,7 @@ func _idle_rotation(angle, time):
 			self, # target
 			"rotation_degrees:y", # target property
 			rotation_degrees.y+angle, # end value
-			time # animation time
+			time # animation time length
 		)
 
 func _stop_idle_rotation():
@@ -501,7 +501,7 @@ func _update_label_info_position():
 	if (label_info == null): return
 	label_info.visible = player_in_info_area and GameState.camera.size < 30
 	progress_hp.visible = label_info.visible
-	icon_info.visible = label_info.visible
+	#icon_info.visible = label_info.visible
 	if (label_info.visible):
 		var pos:Vector3 = position
 		pos.y += height

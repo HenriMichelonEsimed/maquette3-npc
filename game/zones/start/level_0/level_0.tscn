@@ -67,7 +67,7 @@ material = ExtResource("3_j3drh")
 texture_list = ExtResource("4_y06hu")
 
 [node name="SpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 527.995, 0, 518.207)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 536.756, 0, 524.786)
 script = ExtResource("4_t10wc")
 
 [node name="House_4" parent="." instance=ExtResource("6_mymwc")]
@@ -113,7 +113,7 @@ transform = Transform3D(0.783834, 0, 0.62097, 0, 1, 0, -0.62097, 0, 0.783834, -1
 transform = Transform3D(0.999619, 0, 0.0275902, 0, 1, 0, -0.0275902, 0, 0.999619, 1.75787, 0, 1.62506)
 
 [node name="EnemySpawnPoint" type="Node3D" parent="." node_paths=PackedStringArray("count_roll", "spawn_path")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 615.649, 0, 535.175)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 520.674, 0, 495.86)
 script = ExtResource("16_u18of")
 count_roll = NodePath("CountRoll")
 spawn_path = NodePath("SpawnPath")
