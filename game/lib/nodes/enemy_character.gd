@@ -467,7 +467,7 @@ func action_move_to_escape_position(_delta):
 #region Private Methods
 
 func _to_string():
-	return label + " " + name
+	return label
 
 func _idle_rotation(angle, time):
 	if ((idle_rotation_tween == null) or (not idle_rotation_tween.is_valid())) and (randf() < 0.5):

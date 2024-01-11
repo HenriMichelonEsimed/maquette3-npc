@@ -10,11 +10,11 @@ var nickname:String = "Player"
 var sex:bool = true
 #var char:String = "player_0"
 var xp:int = 0
-var xp_next_level = 2000
-var hp:int = 20
-var hp_max:int = 200
+var xp_next_level = 1000
+var hp:int = 100
+var hp_max:int = 100
 var endurance:int = 1000
-var endurance_max:int = 20000
+var endurance_max:int = 1000
 
 func _init():
 	super("player")

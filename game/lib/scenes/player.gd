@@ -121,8 +121,8 @@ func _physics_process(delta):
 					var collider = collision.get_collider()
 					if collider.is_in_group("stairs"):
 						velocity.y = 5
-			elif not on_floor:
-				velocity.y = velocity.y - (fall_acceleration * 2 * delta)
+			if (velocity.y == 0) and not on_floor:
+				velocity.y = velocity.y - (fall_acceleration * delta)
 			move_to_previous_position = position
 			move_and_slide()
 			SimpleGrass.set_player_position(global_position) 
