@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Maquette 3 - NPC & Terrain"
 run/main_scene="res://scenes/ui/main_menu.tscn"
-config/features=PackedStringArray("4.2", "Mobile")
+config/features=PackedStringArray("4.2", "C#", "Mobile")
 boot_splash/show_image=false
 config/icon="res://assets/icon.png"
 
@@ -36,11 +36,14 @@ window/size/viewport_height=1080
 window/size/mode=4
 window/stretch/mode="viewport"
 window/stretch/aspect="ignore"
-window/vsync/vsync_mode=0
+
+[dotnet]
+
+project/assembly_name="Maquette 3 - NPC & Terrain"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/simplegrasstextured/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
+enabled=PackedStringArray("res://addons/assetplacer/plugin.cfg", "res://addons/simplegrasstextured/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
 
 [filesystem]
 
