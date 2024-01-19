@@ -56,12 +56,12 @@ _data = {
 point_count = 6
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yp38m"]
-size = Vector3(1, 100, 200)
+size = Vector3(1, 100, 400)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5fsn2"]
 size = Vector3(200, 0.1, 200)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mo06k"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_otoaf"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("23_hlaix")
@@ -96,7 +96,7 @@ _surfaces = [{
 "format": 34359742495,
 "index_count": 12,
 "index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 3, 0, 1, 0, 0, 0, 4, 0, 5, 0, 6, 0, 7, 0, 5, 0, 4, 0),
-"material": SubResource("ShaderMaterial_mo06k"),
+"material": SubResource("ShaderMaterial_otoaf"),
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 8,
@@ -262,19 +262,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 548.552, 0, 535.267)
 [node name="Limits" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Limits"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 468.411, 0, 539.823)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 366.686, 0, 539.823)
 shape = SubResource("BoxShape3D_yp38m")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Limits"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 666.043, 0, 539.823)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 764.848, 0, 539.823)
 shape = SubResource("BoxShape3D_yp38m")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="Limits"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 566.043, 0, 438.823)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 566.043, 0, 340.505)
 shape = SubResource("BoxShape3D_yp38m")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="Limits"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 568.043, 0, 641.823)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 568.043, 0, 745.425)
 shape = SubResource("BoxShape3D_yp38m")
 
 [node name="Ggrass" type="StaticBody3D" parent="."]
